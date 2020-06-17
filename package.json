@@ -1,0 +1,34 @@
+{
+  "name": "@darabonba/csharp-generator",
+  "version": "1.0.0",
+  "description": "The darabonba generator for CSharp",
+  "main": "lib/generator",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "lint": "eslint --fix lib/",
+    "gen": "node bin/demo.js ./runtime/sdk/",
+    "test": "mocha --reporter spec --timeout 3000 test/*.test.js",
+    "test-cov": "nyc -r=lcov -r=html -r=text -r=json mocha -t 3000 -R spec test/*.test.js",
+    "ci": "npm run lint && npm run test-cov && codecov"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:aliyun/darabonba-csharp-generator.git"
+  },
+  "devDependencies": {
+    "eslint": "^5.12.0",
+    "mocha": "^6.2.2",
+    "nyc": "^15.0.0",
+    "codecov": "^3"
+  },
+  "author": "Jackson Tian",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@darabonba/parser": "^1",
+    "html-entities": "^1.3.1",
+    "uuid": "^7.0.3",
+    "xml2js": "^0.4.23"
+  }
+}
