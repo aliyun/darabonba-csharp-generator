@@ -6,7 +6,7 @@ using System.IO;
 
 using Tea;
 
-namespace AlibabaCloud.Test.Models
+namespace Darabonba.Test.Models
 {
     public class M : TeaModel {
     }

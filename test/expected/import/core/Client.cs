@@ -10,15 +10,15 @@ using Tea;
 using Tea.Utils;
 
 
-namespace AlibabaCloud.Test
+namespace Darabonba.Test
 {
     public class Client 
     {
 
-        public static void Sample(AlibabaCloud.import.Client client)
+        public static void Sample(Darabonba.import.Client client)
         {
-            AlibabaCloud.import.Models.RuntimeObject runtime = new AlibabaCloud.import.Models.RuntimeObject();
-            AlibabaCloud.import.Models.Request request = new AlibabaCloud.import.Models.Request
+            Darabonba.import.Models.RuntimeObject runtime = new Darabonba.import.Models.RuntimeObject();
+            Darabonba.import.Models.Request request = new Darabonba.import.Models.Request
             {
                 Accesskey = "accesskey",
                 Region = "region",
