@@ -20,38 +20,42 @@ English | [简体中文](/README-zh-CN.md)
 
 ## Installation
 
-> Darabonba Code Generator was designed to work in Node.js.
-> The preferred way to install the Generator is to use the [NPM](https://www.npmjs.com/) package manager.
-> Simply type the following into a terminal window:
+Darabonba Code Generator was designed to work in Node.js. The preferred way to install the Generator is to use the [NPM](https://www.npmjs.com/) package manager. Simply type the following into a terminal window:
 ```shell
 npm install @darabonba/csharp-generator
 ```
 
 ## Usage
 
-> Generate CSharp Code
-```javascript
+```js
 'use strict';
 const path = require('path');
 const fs = require('fs');
+
 const Parser = require('@darabonba/parser');
 const CSGenerator = require('@darabonba/csharp-generator');
+
 const sourceDir = "<Darabonda package directory>";
 const outputDir = "<Generate output directory>";
+
 // generate ast data by Parser
 let packageMetaFilePath = path.join(sourceDir, 'Teafile');
 let packageMeta = JSON.parse(fs.readFileSync(packageMetaFilePath, 'utf8'));
 let mainFile = path.join(sourceDir, packageMeta.main);
 let ast = Parser.parse(fs.readFileSync(mainFile, 'utf8'), mainFile);
+
 // initialize generator
 let generatorConfig = {
-      ...packageMeta,
-      pkgDir: sourceDir,
-      outputDir
-    };
+  ...packageMeta,
+  pkgDir: sourceDir,
+  outputDir
+};
+
 let generator = new CSGenerator(generatorConfig);
+
 // generate csharp code by generator
 generator.visit(ast);
+
 // The execution result will be output in the 'outputDir'
 ```
 
