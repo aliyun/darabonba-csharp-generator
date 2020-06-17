@@ -1,6 +1,22 @@
 [English](/README.md) | 简体中文
 
 # Darabonba CSharp 生成器
+[![NPM version][npm-image]][npm-url]
+[![build status][travis-image]][travis-url]
+[![codecov][cov-image]][cov-url]
+[![David deps][david-image]][david-url]
+[![npm download][download-image]][download-url]
+
+[npm-image]: https://img.shields.io/npm/v/@darabonba/csharp-generator.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/@darabonba/csharp-generator
+[travis-image]: https://img.shields.io/travis/aliyun/darabonba-csharp-generator.svg?style=flat-square
+[travis-url]: https://travis-ci.org/github/aliyun/darabonba-csharp-generator
+[cov-image]: https://codecov.io/gh/aliyun/darabonba-csharp-generator/branch/master/graph/badge.svg
+[cov-url]: https://codecov.io/gh/aliyun/darabonba-csharp-generator
+[david-image]: https://img.shields.io/david/aliyun/darabonba-csharp-generator.svg?style=flat-square
+[david-url]: https://david-dm.org/aliyun/darabonba-csharp-generator
+[download-image]: https://img.shields.io/npm/dm/@darabonba/csharp-generator.svg?style=flat-square
+[download-url]: https://npmjs.org/package/@darabonba/csharp-generator
 
 ## 安装
 
@@ -18,24 +34,24 @@ npm install @darabonba/csharp-generator
 'use strict';
 const path = require('path');
 const fs = require('fs');
-const DarabonbaParser = require('@darabonba/parser');
-const DarabonbaCSGenerator = require('@darabonba/csharp-generator');
+const Parser = require('@darabonba/parser');
+const CSGenerator = require('@darabonba/csharp-generator');
 const sourceDir = "<Darabonda package directory>";
 const outputDir = "<Generate output directory>";
-// generate AST data by DarabonbaParser
-let darabonbaPackageMetaFilePath = path.join(sourceDir, 'Teafile');
-let darabonbaMainFile = path.join(sourceDir, darabonbaPackageMeta.main);
-let darabonbaPackageMeta = JSON.parse(fs.readFileSync(darabonbaPackageMetaFilePath, 'utf8'));
-let darabonbaAST = DarabonbaParser.parse(fs.readFileSync(darabonbaMainFile, 'utf8'), darabonbaMainFile);
+// generate ast data by Parser
+let packageMetaFilePath = path.join(sourceDir, 'Teafile');
+let packageMeta = JSON.parse(fs.readFileSync(packageMetaFilePath, 'utf8'));
+let mainFile = path.join(sourceDir, packageMeta.main);
+let ast = Parser.parse(fs.readFileSync(mainFile, 'utf8'), mainFile);
 // initialize generator
 let generatorConfig = {
-      ...darabonbaPackageMeta,
+      ...packageMeta,
       pkgDir: sourceDir,
       outputDir
     };
-let generator = new DarabonbaCSGenerator(generatorConfig);
+let generator = new CSGenerator(generatorConfig);
 // generate csharp code by generator
-generator.visit(darabonbaAST);
+generator.visit(ast);
 // The execution result will be output in the 'outputDir'
 ```
 
