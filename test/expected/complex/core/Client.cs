@@ -9,22 +9,22 @@ using System.Threading.Tasks;
 using Tea;
 using Tea.Utils;
 
-using AlibabaCloud.Test.Models;
+using Darabonba.Test.Models;
 
-namespace AlibabaCloud.Test
+namespace Darabonba.Test
 {
-    public class Client : AlibabaCloud.import.Client
+    public class Client : Darabonba.import.Client
     {
         protected string _protocol;
         protected string _pathname;
         protected Dictionary<string, string> _endpointMap;
 
-        public Client(AlibabaCloud.import.Models.Config config): base(config)
+        public Client(Darabonba.import.Models.Config config): base(config)
         {
             this._protocol = config.Protocol;
         }
 
-        public AlibabaCloud.import.Models.RuntimeObject Complex1(ComplexRequest request, AlibabaCloud.import.Client client)
+        public Darabonba.import.Models.RuntimeObject Complex1(ComplexRequest request, Darabonba.import.Client client)
         {
             request.Validate();
             client.Validate();
@@ -73,7 +73,7 @@ namespace AlibabaCloud.Test
                     }
                     else if (true || false)
                     {
-                        return new AlibabaCloud.import.Models.RuntimeObject();
+                        return new Darabonba.import.Models.RuntimeObject();
                     }
                     client.Print(request.ToMap(), "1");
                     Hello(request.ToMap(), new List<string>
@@ -82,7 +82,7 @@ namespace AlibabaCloud.Test
                         "2"
                     });
                     Hello(null, null);
-                    return TeaModel.ToObject<AlibabaCloud.import.Models.RuntimeObject>(new Dictionary<string, object>(){});
+                    return TeaModel.ToObject<Darabonba.import.Models.RuntimeObject>(new Dictionary<string, object>(){});
                     Complex3(null);
                 }
                 catch (Exception e)
@@ -99,7 +99,7 @@ namespace AlibabaCloud.Test
             throw new TeaUnretryableException(_lastRequest, _lastException);
         }
 
-        public async Task<AlibabaCloud.import.Models.RuntimeObject> Complex1Async(ComplexRequest request, AlibabaCloud.import.Client client)
+        public async Task<Darabonba.import.Models.RuntimeObject> Complex1Async(ComplexRequest request, Darabonba.import.Client client)
         {
             request.Validate();
             client.Validate();
@@ -148,7 +148,7 @@ namespace AlibabaCloud.Test
                     }
                     else if (true || false)
                     {
-                        return new AlibabaCloud.import.Models.RuntimeObject();
+                        return new Darabonba.import.Models.RuntimeObject();
                     }
                     client.Print(request.ToMap(), "1");
                     await HelloAsync(request.ToMap(), new List<string>
@@ -157,7 +157,7 @@ namespace AlibabaCloud.Test
                         "2"
                     });
                     await HelloAsync(null, null);
-                    return TeaModel.ToObject<AlibabaCloud.import.Models.RuntimeObject>(new Dictionary<string, object>(){});
+                    return TeaModel.ToObject<Darabonba.import.Models.RuntimeObject>(new Dictionary<string, object>(){});
                     await Complex3Async(null);
                 }
                 catch (Exception e)
@@ -179,8 +179,8 @@ namespace AlibabaCloud.Test
             request.Validate();
             TeaRequest request_ = new TeaRequest();
             string name = "complex";
-            AlibabaCloud.import.Models.Config config = new AlibabaCloud.import.Models.Config();
-            AlibabaCloud.import.Client client = new AlibabaCloud.import.Client(config);
+            Darabonba.import.Models.Config config = new Darabonba.import.Models.Config();
+            Darabonba.import.Client client = new Darabonba.import.Client(config);
             request_.Protocol = "HTTP";
             request_.Port = 80;
             request_.Method = "GET";
@@ -200,8 +200,8 @@ namespace AlibabaCloud.Test
             request.Validate();
             TeaRequest request_ = new TeaRequest();
             string name = "complex";
-            AlibabaCloud.import.Models.Config config = new AlibabaCloud.import.Models.Config();
-            AlibabaCloud.import.Client client = new AlibabaCloud.import.Client(config);
+            Darabonba.import.Models.Config config = new Darabonba.import.Models.Config();
+            Darabonba.import.Client client = new Darabonba.import.Client(config);
             request_.Protocol = "HTTP";
             request_.Port = 80;
             request_.Method = "GET";
@@ -233,7 +233,7 @@ namespace AlibabaCloud.Test
             TeaResponse response_ = TeaCore.DoAction(request_);
 
             TeaResponse resp = response_;
-            AlibabaCloud.import.Models.Request req = new AlibabaCloud.import.Models.Request
+            Darabonba.import.Models.Request req = new Darabonba.import.Models.Request
             {
                 Accesskey = request.AccessKey,
                 Region = resp.StatusMessage,
@@ -242,7 +242,7 @@ namespace AlibabaCloud.Test
             req.Accesskey = "accesskey";
             req.Accesskey = request.AccessKey;
             Client.PrintNull();
-            AlibabaCloud.import.Common.Array(request.ToMap(), "1");
+            Darabonba.import.Common.Array(request.ToMap(), "1");
             return TeaModel.ToObject<ComplexRequest>(TeaConverter.merge<string>
             (
                 request_.Query
@@ -266,7 +266,7 @@ namespace AlibabaCloud.Test
             TeaResponse response_ = await TeaCore.DoActionAsync(request_);
 
             TeaResponse resp = response_;
-            AlibabaCloud.import.Models.Request req = new AlibabaCloud.import.Models.Request
+            Darabonba.import.Models.Request req = new Darabonba.import.Models.Request
             {
                 Accesskey = request.AccessKey,
                 Region = resp.StatusMessage,
@@ -275,7 +275,7 @@ namespace AlibabaCloud.Test
             req.Accesskey = "accesskey";
             req.Accesskey = request.AccessKey;
             await Client.PrintNullAsync();
-            AlibabaCloud.import.Common.Array(request.ToMap(), "1");
+            Darabonba.import.Common.Array(request.ToMap(), "1");
             return TeaModel.ToObject<ComplexRequest>(TeaConverter.merge<string>
             (
                 request_.Query
@@ -292,11 +292,11 @@ namespace AlibabaCloud.Test
             return Client.Array1();
         }
 
-        public static AlibabaCloud.import.Models.Request Print(TeaRequest reqeust, List<ComplexRequest> reqs, TeaResponse response, Dictionary<string, string> val)
+        public static Darabonba.import.Models.Request Print(TeaRequest reqeust, List<ComplexRequest> reqs, TeaResponse response, Dictionary<string, string> val)
         {
         }
 
-        public static async Task<AlibabaCloud.import.Models.Request> PrintAsync(TeaRequest reqeust, List<ComplexRequest> reqs, TeaResponse response, Dictionary<string, string> val)
+        public static async Task<Darabonba.import.Models.Request> PrintAsync(TeaRequest reqeust, List<ComplexRequest> reqs, TeaResponse response, Dictionary<string, string> val)
         {
         }
 

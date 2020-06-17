@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 using Tea;
 using Tea.Utils;
 
-using AlibabaCloud.Test.Models;
+using Darabonba.Test.Models;
 
-namespace AlibabaCloud.Test
+namespace Darabonba.Test
 {
     public class Client 
     {

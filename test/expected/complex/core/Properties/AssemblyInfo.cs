@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("alibabacloud-title")]
+[assembly: AssemblyTitle("darabonba-title")]
 [assembly: AssemblyDescription("description")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("company")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("5f8645b0-8922-11ea-aee7-77ee2673dc62")]
+[assembly: Guid("8dc55da0-b06c-11ea-b50e-b33f9718d0e2")]
 
 // Version information for an assembly consists of the following four values:
 //

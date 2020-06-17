@@ -10,7 +10,7 @@ using Tea;
 using Tea.Utils;
 
 
-namespace AlibabaCloud.Test
+namespace Darabonba.Test
 {
     public class Client 
     {

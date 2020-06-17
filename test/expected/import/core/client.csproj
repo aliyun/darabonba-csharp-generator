@@ -2,14 +2,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
-    <RootNamespace>AlibabaCloud.Test</RootNamespace>
+    <RootNamespace>Darabonba.Test</RootNamespace>
     <OutputType>Library</OutputType>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <PackageReleaseNotes/>
-    <AssemblyName>AlibabaCloud.Test</AssemblyName>
-    <Version>0.0.1</Version>
+    <AssemblyName>Darabonba.Test</AssemblyName>
+    <Version/>
     <LangVersion>5</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
@@ -36,6 +34,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="AlibabaCloud.import" Version="0.0.1"/>
+    <PackageReference Include="Darabonba.import" Version="0.0.1"/>
   </ItemGroup>
 </Project>

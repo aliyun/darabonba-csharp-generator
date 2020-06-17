@@ -6,7 +6,7 @@ using System.IO;
 
 using Tea;
 
-namespace AlibabaCloud.Test.Models
+namespace Darabonba.Test.Models
 {
     public class ComplexRequest : TeaModel {
         [NameInMap("accessKey")]
@@ -36,7 +36,7 @@ namespace AlibabaCloud.Test.Models
 
         [NameInMap("client")]
         [Validation(Required=true)]
-        public AlibabaCloud.import.Client Client { get; set; }
+        public Darabonba.import.Client Client { get; set; }
 
         [NameInMap("Part")]
         [Validation(Required=false)]
