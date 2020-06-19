@@ -2,10 +2,7 @@
   "scope": "darabonba",
   "name": "main",
   "version": "0.0.1",
-  "main": "./main.tea",
-  "libraries": {
-    "Source": "darabonba:Import:*"
-  },
+  "main": "./main.dara",
   "csharp":{
     "namespace":"Darabonba.Test"
   }

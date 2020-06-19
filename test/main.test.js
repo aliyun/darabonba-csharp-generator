@@ -13,7 +13,7 @@ const fixturesDir = path.join(__dirname, 'fixtures');
 const outputDir = path.join(__dirname, 'output');
 
 function check(moduleName, expectedFiles = [], options = {}) {
-  const mainFilePath = path.join(fixturesDir, moduleName, 'main.tea');
+  const mainFilePath = fs.existsSync(path.join(fixturesDir, moduleName, 'main.tea')) ? path.join(fixturesDir, moduleName, 'main.tea') : path.join(fixturesDir, moduleName, 'main.dara');
   const moduleOutputDir = path.join(outputDir, moduleName);
   const generator = new Generator({
     outputDir: moduleOutputDir,
@@ -42,7 +42,7 @@ describe('new Generator', function () {
   });
 
   it('one model should ok', function () {
-    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/model/Teafile'), 'utf8');
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/model/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
     check('model', ['Client.cs', 'Models/MyModel.cs', 'Models/LowerModel.cs'], {
       pkgDir: path.join(__dirname, 'fixtures/model'),
@@ -51,7 +51,7 @@ describe('new Generator', function () {
   });
 
   it('one api should ok', function () {
-    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/api/Teafile'), 'utf8');
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/api/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
     check('api', ['Client.cs', 'Models/M.cs'], {
       pkgDir: path.join(__dirname, 'fixtures/api'),
@@ -60,7 +60,7 @@ describe('new Generator', function () {
   });
 
   it('one function should ok', function () {
-    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/function/Teafile'), 'utf8');
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/function/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
     check('function', ['Client.cs'], {
       pkgDir: path.join(__dirname, 'fixtures/function'),
@@ -69,7 +69,7 @@ describe('new Generator', function () {
   });
 
   it('statements should ok', function () {
-    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/statements/Teafile'), 'utf8');
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/statements/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
     check('statements', ['Client.cs'], {
       pkgDir: path.join(__dirname, 'fixtures/statements'),
@@ -79,7 +79,7 @@ describe('new Generator', function () {
   });
 
   it('import should ok', function () {
-    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/import/Teafile'), 'utf8');
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/import/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
     check('import', ['Client.cs'], {
       pkgDir: path.join(__dirname, 'fixtures/import'),
@@ -89,7 +89,7 @@ describe('new Generator', function () {
   });
   
   it('complex should ok', function () {
-    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/complex/Teafile'), 'utf8');
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/complex/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
     check('complex', ['Client.cs'], {
       pkgDir: path.join(__dirname, 'fixtures/complex'),
@@ -99,10 +99,20 @@ describe('new Generator', function () {
   });
 
   it('comment should ok', function () {
-    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/comment/Teafile'), 'utf8');
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/comment/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
     check('comment', ['Client.cs'], {
       pkgDir: path.join(__dirname, 'fixtures/comment'),
+      libraries: pkg.libraries,
+      ...pkg.csharp
+    });
+  });
+
+  it('tea should ok', function () {
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/tea/Teafile'), 'utf8');
+    const pkg = JSON.parse(pkgContent);
+    check('tea', ['Client.cs'], {
+      pkgDir: path.join(__dirname, 'fixtures/tea'),
       libraries: pkg.libraries,
       ...pkg.csharp
     });
