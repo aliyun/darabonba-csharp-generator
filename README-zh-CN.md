@@ -39,7 +39,7 @@ const CSGenerator = require('@darabonba/csharp-generator');
 const sourceDir = "<Darabonda package directory>";
 const outputDir = "<Generate output directory>";
 // generate ast data by Parser
-let packageMetaFilePath = path.join(sourceDir, 'Teafile');
+let packageMetaFilePath = path.join(sourceDir, 'Darafile');
 let packageMeta = JSON.parse(fs.readFileSync(packageMetaFilePath, 'utf8'));
 let mainFile = path.join(sourceDir, packageMeta.main);
 let ast = Parser.parse(fs.readFileSync(mainFile, 'utf8'), mainFile);

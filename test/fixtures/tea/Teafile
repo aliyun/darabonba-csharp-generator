@@ -1,0 +1,13 @@
+{
+    "scope": "darabonba",
+    "name": "main",
+    "version": "0.0.1",
+    "main": "./main.tea",
+    "libraries": {
+      "Source": "darabonba:Import:*",
+      "LocalSource": "./localLib"
+    },
+    "csharp":{
+      "namespace":"Darabonba.Test"
+    }
+  }
