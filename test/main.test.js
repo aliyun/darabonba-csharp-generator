@@ -3,6 +3,7 @@
 const path = require('path');
 const fs = require('fs');
 const assert = require('assert');
+const expect = require('expect.js');
 
 const DSL = require('@darabonba/parser');
 
@@ -115,6 +116,30 @@ describe('new Generator', function () {
       pkgDir: path.join(__dirname, 'fixtures/tea'),
       libraries: pkg.libraries,
       ...pkg.csharp
+    });
+  });
+
+  it('noOption should ok', function () {
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/noOption/Darafile'), 'utf8');
+    const pkg = JSON.parse(pkgContent);
+    //const mainFilePath = path.join(fixturesDir, 'noOption', 'main.dara');
+    const moduleOutputDir = path.join(outputDir, 'noOption');
+    expect(() => {
+      new Generator({
+        outputDir: moduleOutputDir,
+        ...{
+          pkgDir: path.join(__dirname, 'fixtures/noOption'),
+          libraries: pkg.libraries,
+          ...pkg.csharp
+        }
+      });
+    }).to.throwException(function (e) { // get the exception object
+      expect(e.message).to.be(`Darafile -> csharp -> namespace should not empty, please add csharp option into Darafile.
+      example:
+        "csharp": {
+          "namespace": "NameSpace",
+          "className": "Client"
+        }`);
     });
   });
 });
