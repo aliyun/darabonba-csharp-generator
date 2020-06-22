@@ -3,15 +3,21 @@ import Source;
 extends Source;
 
 model Config {
-  protocol: string,
+  protocol: string(maxLength= 50, pattern= 'pattern'),
+  importConfig: Source.Config,
+  query: string
 }
 type @protocol = string
 type @pathname = string
 type @endpointMap = map[string]string
+type @source = Source
+type @boolVirtual = boolean;
 
-init(config: Source.Config){
-  super(config);
+init(config: Source.Config, secondParam: string){
+  super(config, secondParam);
   @protocol = config.protocol;
+  @pathname = secondParam;
+  @boolVirtual = true;
 }
 
 model ComplexRequest = {
@@ -19,7 +25,17 @@ model ComplexRequest = {
   body: readable(name='Body', example='Body', description='Body'),
   strs: [ string ](name='Strs', example='Strs', description='Strs'),
   header: {
-    content: string(name='Content', example='Content', signed='true', description='Body')
+    content: string(name='Content', example='Content', signed='true', description='Body'),
+    listSub: [{
+      listSubItem: string,
+      listSubItemSub: Config
+    }],
+    listStr: [string],
+    sourceClient: Source,
+    sourceConfig: Source.Config,
+    subModel: {
+      subModelStr: string
+    }
   }(description='header', name='header'),
   num: number,
   client: Source,
@@ -38,7 +54,9 @@ static async function print(reqeust: $Request, reqs: [ ComplexRequest ], respons
 
 api Complex1(request: ComplexRequest, client: Source): Source.RuntimeObject {
   var name = 'complex';
-  var mapVal = {test="ok"};
+  var mapVal = {
+    test="ok"
+    };
   __request.protocol = @endpointMap[@protocol];
   __request.port = request.num;
   __request.method = 'GET';
@@ -46,11 +64,15 @@ api Complex1(request: ComplexRequest, client: Source): Source.RuntimeObject {
   __request.query = {
     date = '2019',
   };
+  var reqInstance = __request;
+  var boolItem = !@boolVirtual;
 } returns {
   if (true && true){
     return null;
   } else if(true || false){
     return new Source.RuntimeObject{};
+  } else {
+    return null;
   }
   client.print(request, '1');
   hello(request, ["1","2"]);
@@ -64,7 +86,8 @@ api Complex1(request: ComplexRequest, client: Source): Source.RuntimeObject {
 api Complex2(request: ComplexRequest, str: [ string ], val: map[string]string): object {
   var name = 'complex';
   var config = new Source.Config{};
-  var client = new Source(config);
+  var client = new Source(config, 'testSecond');
+  var subModel = new Source.Request.submodel{};
   __request.protocol = 'HTTP';
   __request.port = 80;
   __request.method = 'GET';
@@ -86,6 +109,9 @@ api Complex3(request: ComplexRequest): ComplexRequest {
     date = '2019',
   };
 } returns {
+  if(true){
+    retry;
+  }
   var resp = __response;
   var req = new Source.Request{
     accesskey = request.accessKey,
@@ -94,14 +120,14 @@ api Complex3(request: ComplexRequest): ComplexRequest {
   array0(request);
   req.accesskey = 'accesskey';
   req.accesskey = request.accessKey;
-  printNull();
+  printNull(Config);
   Source.array(request, '1');
   return {
     ...__request.query
   };
 }
 
-static async function printNull(): void {
+static async function printNull(cls: class): void {
   try {
     var str = templateString();
   } catch(e) {
@@ -128,4 +154,8 @@ static function array1(): [ string ] {
 
 async function templateString(): string {
   return `/${@protocol}`;
+}
+
+static function returnObj(): object {
+  return {};
 }

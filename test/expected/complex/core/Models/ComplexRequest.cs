@@ -28,6 +28,31 @@ namespace Darabonba.Test.Models
             [NameInMap("Content")]
             [Validation(Required=true)]
             public string Content { get; set; }
+            [NameInMap("listSub")]
+            [Validation(Required=true)]
+            public List<ComplexRequestHeaderListSub> ListSub { get; set; }
+            public class ComplexRequestHeaderListSub : TeaModel {
+                public string ListSubItem { get; set; }
+                public Config ListSubItemSub { get; set; }
+            }
+            [NameInMap("listStr")]
+            [Validation(Required=true)]
+            public List<string> ListStr { get; set; }
+            [NameInMap("sourceClient")]
+            [Validation(Required=true)]
+            public Word: `Source` SourceClient { get; set; }
+            [NameInMap("sourceConfig")]
+            [Validation(Required=true)]
+            public Darabonba.import.Models.Config SourceConfig { get; set; }
+            [NameInMap("subModel")]
+            [Validation(Required=true)]
+            public ComplexRequestHeaderSubModel SubModel { get; set; }
+            public class ComplexRequestHeaderSubModel : TeaModel {
+                [NameInMap("subModelStr")]
+                [Validation(Required=true)]
+                public string SubModelStr { get; set; }
+
+            }
         };
 
         [NameInMap("num")]
