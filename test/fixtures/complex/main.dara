@@ -131,7 +131,7 @@ static async function printNull(cls: class): void {
   try {
     var str = templateString();
   } catch(e) {
-
+    var errStr = e.message;
   } finally {
     var final = 'ok';
   }

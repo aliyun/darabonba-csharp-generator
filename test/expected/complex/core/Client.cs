@@ -332,8 +332,17 @@ namespace Darabonba.Test
             {
                 string str = TemplateString();
             }
-            catch(Exception e)
+            catch (TeaException e)
             {
+                string errStr = e.Message;
+            }
+            catch (Exception _e)
+            {
+                TeaException e = new TeaException(new Dictionary<string, object>
+                {
+                    { "message", _e.Message }
+                });
+                string errStr = e.Message;
             }
             finally
             {
@@ -355,8 +364,17 @@ namespace Darabonba.Test
             {
                 string str = await TemplateStringAsync();
             }
-            catch(Exception e)
+            catch (TeaException e)
             {
+                string errStr = e.Message;
+            }
+            catch (Exception _e)
+            {
+                TeaException e = new TeaException(new Dictionary<string, object>
+                {
+                    { "message", _e.Message }
+                });
+                string errStr = e.Message;
             }
             finally
             {
