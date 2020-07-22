@@ -21,6 +21,10 @@ namespace Darabonba.Test.Models
         [Validation(Required=true)]
         public string Query { get; set; }
 
+        [NameInMap("complexList")]
+        [Validation(Required=true)]
+        public List<List<string>> ComplexList { get; set; }
+
     }
 
 }
