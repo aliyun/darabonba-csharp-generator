@@ -5,7 +5,8 @@ extends Source;
 model Config {
   protocol: string(maxLength= 50, pattern= 'pattern'),
   importConfig: Source.Config,
-  query: string
+  query: string,
+  complexList: [[string]]
 }
 type @protocol = string
 type @pathname = string
@@ -83,11 +84,12 @@ api Complex1(request: ComplexRequest, client: Source): Source.RuntimeObject {
   timeouted = 'retry'
 } 
 
-api Complex2(request: ComplexRequest, str: [ string ], val: map[string]string): object {
+api Complex2(request: ComplexRequest, str: [ string ], val: map[string]string, complexList: [[[string]]]): object {
   var name = 'complex';
   var config = new Source.Config{};
   var client = new Source(config, 'testSecond');
   var subModel = new Source.Request.submodel{};
+  var nestingList = [[[['test']]]];
   __request.protocol = 'HTTP';
   __request.port = 80;
   __request.method = 'GET';

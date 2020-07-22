@@ -190,7 +190,7 @@ namespace Darabonba.Test
             throw new TeaUnretryableException(_lastRequest, _lastException);
         }
 
-        public Dictionary<string, object> Complex2(ComplexRequest request, List<string> str, Dictionary<string, string> val)
+        public Dictionary<string, object> Complex2(ComplexRequest request, List<string> str, Dictionary<string, string> val, List<List<List<string>>> complexList)
         {
             request.Validate();
             TeaRequest request_ = new TeaRequest();
@@ -198,6 +198,19 @@ namespace Darabonba.Test
             Darabonba.import.Models.Config config = new Darabonba.import.Models.Config();
             Darabonba.import.Client client = new Darabonba.import.Client(config, "testSecond");
             Darabonba.import.Models.Request.RequestSubmodel subModel = new Darabonba.import.Models.Request.RequestSubmodel();
+            List<List<List<List<string>>>> nestingList = new List<List<List<List<string>>>>
+            {
+                new List<List<List<string>>>
+                {
+                    new List<List<string>>
+                    {
+                        new List<string>
+                        {
+                            "test"
+                        }
+                    }
+                }
+            };
             request_.Protocol = "HTTP";
             request_.Port = 80;
             request_.Method = "GET";
@@ -212,7 +225,7 @@ namespace Darabonba.Test
             return;
         }
 
-        public async Task<Dictionary<string, object>> Complex2Async(ComplexRequest request, List<string> str, Dictionary<string, string> val)
+        public async Task<Dictionary<string, object>> Complex2Async(ComplexRequest request, List<string> str, Dictionary<string, string> val, List<List<List<string>>> complexList)
         {
             request.Validate();
             TeaRequest request_ = new TeaRequest();
@@ -220,6 +233,19 @@ namespace Darabonba.Test
             Darabonba.import.Models.Config config = new Darabonba.import.Models.Config();
             Darabonba.import.Client client = new Darabonba.import.Client(config, "testSecond");
             Darabonba.import.Models.Request.RequestSubmodel subModel = new Darabonba.import.Models.Request.RequestSubmodel();
+            List<List<List<List<string>>>> nestingList = new List<List<List<List<string>>>>
+            {
+                new List<List<List<string>>>
+                {
+                    new List<List<string>>
+                    {
+                        new List<string>
+                        {
+                            "test"
+                        }
+                    }
+                }
+            };
             request_.Protocol = "HTTP";
             request_.Port = 80;
             request_.Method = "GET";
