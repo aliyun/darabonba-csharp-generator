@@ -13,14 +13,23 @@ namespace Darabonba.Test.Models
         [Validation(Required=true)]
         public string AccessKey { get; set; }
 
+        /// <summary>
+        /// Body
+        /// </summary>
         [NameInMap("Body")]
         [Validation(Required=true)]
         public Stream Body { get; set; }
 
+        /// <summary>
+        /// Strs
+        /// </summary>
         [NameInMap("Strs")]
         [Validation(Required=true)]
         public List<string> Strs { get; set; }
 
+        /// <summary>
+        /// header
+        /// </summary>
         [NameInMap("header")]
         [Validation(Required=true)]
         public ComplexRequestHeader Header { get; set; }
@@ -40,7 +49,7 @@ namespace Darabonba.Test.Models
             public List<string> ListStr { get; set; }
             [NameInMap("sourceClient")]
             [Validation(Required=true)]
-            public Word: `Source` SourceClient { get; set; }
+            public Darabonba.import.Client SourceClient { get; set; }
             [NameInMap("sourceConfig")]
             [Validation(Required=true)]
             public Darabonba.import.Models.Config SourceConfig { get; set; }
@@ -63,11 +72,17 @@ namespace Darabonba.Test.Models
         [Validation(Required=true)]
         public Darabonba.import.Client Client { get; set; }
 
+        /// <summary>
+        /// Part
+        /// </summary>
         [NameInMap("Part")]
         [Validation(Required=false)]
         [Obsolete]
         public List<ComplexRequestPart> Part { get; set; }
         public class ComplexRequestPart : TeaModel {
+            /// <summary>
+            /// PartNumber
+            /// </summary>
             [NameInMap("PartNumber")]
             [Validation(Required=false)]
             public string PartNumber { get; set; }
