@@ -25,6 +25,10 @@ namespace Darabonba.Test.Models
         [Validation(Required=true)]
         public List<List<string>> ComplexList { get; set; }
 
+        [NameInMap("floatNum")]
+        [Validation(Required=true)]
+        public float? FloatNum { get; set; }
+
     }
 
 }
