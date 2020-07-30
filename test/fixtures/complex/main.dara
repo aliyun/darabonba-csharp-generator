@@ -6,7 +6,8 @@ model Config {
   protocol: string(maxLength= 50, pattern= 'pattern'),
   importConfig: Source.Config,
   query: string,
-  complexList: [[string]]
+  complexList: [[string]],
+  floatNum: float
 }
 type @protocol = string
 type @pathname = string
@@ -55,6 +56,8 @@ static async function print(reqeust: $Request, reqs: [ ComplexRequest ], respons
 
 api Complex1(request: ComplexRequest, client: Source): Source.RuntimeObject {
   var name = 'complex';
+  var conf = new Config{ floatNum = 0.1 };
+  conf.floatNum = 1.1;
   var mapVal = {
     test="ok"
     };

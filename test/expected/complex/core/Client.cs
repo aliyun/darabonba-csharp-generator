@@ -56,6 +56,11 @@ namespace Darabonba.Test
                 {
                     TeaRequest request_ = new TeaRequest();
                     string name = "complex";
+                    Config conf = new Config
+                    {
+                        FloatNum = 0.1f,
+                    };
+                    conf.FloatNum = 1.1f;
                     Dictionary<string, string> mapVal = new Dictionary<string, string>
                     {
                         {"test", "ok"},
@@ -137,6 +142,11 @@ namespace Darabonba.Test
                 {
                     TeaRequest request_ = new TeaRequest();
                     string name = "complex";
+                    Config conf = new Config
+                    {
+                        FloatNum = 0.1f,
+                    };
+                    conf.FloatNum = 1.1f;
                     Dictionary<string, string> mapVal = new Dictionary<string, string>
                     {
                         {"test", "ok"},
