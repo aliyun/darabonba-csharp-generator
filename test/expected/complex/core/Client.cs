@@ -20,12 +20,14 @@ namespace Darabonba.Test
         protected Dictionary<string, string> _endpointMap;
         protected Darabonba.import.Client _source;
         protected bool? _boolVirtual;
+        protected List<Darabonba.import.Models.Config> _configs;
 
         public Client(Darabonba.import.Models.Config config, string secondParam): base(config, secondParam)
         {
             this._protocol = config.Protocol;
             this._pathname = secondParam;
             this._boolVirtual = true;
+            this._configs[0] = config;
         }
 
         public Darabonba.import.Models.RuntimeObject Complex1(ComplexRequest request, Darabonba.import.Client client)
@@ -332,6 +334,103 @@ namespace Darabonba.Test
             (
                 request_.Query
             ));
+        }
+
+        public static void ArrayAssign3(ComplexRequest request, string config)
+        {
+            request.Configs.Value[0] = config;
+        }
+
+        public static string MapAccess(ComplexRequest request)
+        {
+            string configInfo = request.Configs.Extra.Get("name");
+            return configInfo;
+        }
+
+        public static string MapAccess2(Darabonba.import.Models.Request request)
+        {
+            string configInfo = request.Configs.Extra.Get("name");
+            return configInfo;
+        }
+
+        public static string MapAccess3()
+        {
+            Dictionary<string, Dictionary<string, Dictionary<string, string>>> data = new Dictionary<string, Dictionary<string, Dictionary<string, string>>>
+            {
+                {"mapAcc", new Dictionary<string, Dictionary<string, string>>
+                {
+                    {"map2", new Dictionary<string, string>
+                    {
+                        {"value", "string"},
+                    }},
+                }},
+            };
+            return data["mapAcc"]["map2"].Get("value");
+        }
+
+        public static void MapAssign(ComplexRequest request, string name)
+        {
+            request.Configs.Extra["name"] = name;
+        }
+
+        public static List<string> ArrayAssign2(string config)
+        {
+            Dictionary<string, List<string>> data = new Dictionary<string, List<string>>
+            {
+                {"configs", new List<string>
+                {
+                    "a",
+                    "b",
+                    "c"
+                }},
+            };
+            data["configs"][3] = config;
+            return data.Get("configs");
+        }
+
+        public static List<string> ArrayAssign(string config)
+        {
+            List<string> configs = new List<string>
+            {
+                "a",
+                "b",
+                "c"
+            };
+            configs[3] = config;
+            return configs;
+        }
+
+        public static string ArrayAccess3(ComplexRequest request)
+        {
+            string configVal = request.Configs.Value[0];
+            return configVal;
+        }
+
+        public static string ArrayAccess2()
+        {
+            Dictionary<string, List<string>> data = new Dictionary<string, List<string>>
+            {
+                {"configs", new List<string>
+                {
+                    "a",
+                    "b",
+                    "c"
+                }},
+            };
+            string config = data["configs"][0];
+            return config;
+        }
+
+        public static string ArrayAccess()
+        {
+            List<string> configs = new List<string>
+            {
+                "a",
+                "b",
+                "c"
+            };
+            string config = configs[0];
+            return config;
         }
 
         public List<string> Hello(Dictionary<string, object> request, List<string> strs)
