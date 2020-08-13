@@ -1,5 +1,10 @@
 # ChangeLog
 
+## 1.0.2 - 2020-08-13
+
+> Supported arrayAccess
+> fixed float assign
+
 ## 1.0.1 - 2020-06-19
 
 > Improve Darabonba CSharp generator to be compatible with darafile.
