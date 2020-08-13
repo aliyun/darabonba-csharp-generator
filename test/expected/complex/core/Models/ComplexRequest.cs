@@ -89,6 +89,21 @@ namespace Darabonba.Test.Models
 
         }
 
+        [NameInMap("configs")]
+        [Validation(Required=true)]
+        public ComplexRequestConfigs Configs { get; set; }
+        public class ComplexRequestConfigs : TeaModel {
+            [NameInMap("key")]
+            [Validation(Required=true)]
+            public string Key { get; set; }
+            [NameInMap("value")]
+            [Validation(Required=true)]
+            public List<string> Value { get; set; }
+            [NameInMap("extra")]
+            [Validation(Required=true)]
+            public Dictionary<string, string> Extra { get; set; }
+        };
+
     }
 
 }

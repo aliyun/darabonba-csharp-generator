@@ -14,6 +14,11 @@ model Request = {
     submodel: {
     stringfield: string,
   },
+  configs: {
+    key: string,
+    value: [ string ],
+    extra: map[string] string
+  },
 }
 
 static function array(request: object, str: string): [ any ];
