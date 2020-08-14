@@ -53,6 +53,7 @@ model ComplexRequest = {
     value: [ string ],
     extra: map[string] string
   },
+  dict: map[string]any
 }
 
 static function arrayAssign3(request: ComplexRequest, config: string): void {

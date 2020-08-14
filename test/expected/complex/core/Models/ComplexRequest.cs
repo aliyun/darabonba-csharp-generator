@@ -104,6 +104,10 @@ namespace Darabonba.Test.Models
             public Dictionary<string, string> Extra { get; set; }
         };
 
+        [NameInMap("dict")]
+        [Validation(Required=true)]
+        public Dictionary<string, object> Dict { get; set; }
+
     }
 
 }
