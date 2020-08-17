@@ -9,7 +9,9 @@ model MyModel = {
   object: object,
   numberfield: integer,
   readable: readable,
-  request: $Request
+  request: $Request,
+  mapModel: map[string]lowerModel,
+  submodelMap: map[string]MyModel.submodel
 };
 
 model lowerModel = {

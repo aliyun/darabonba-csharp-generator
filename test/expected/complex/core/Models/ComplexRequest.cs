@@ -108,6 +108,10 @@ namespace Darabonba.Test.Models
         [Validation(Required=true)]
         public Dictionary<string, object> Dict { get; set; }
 
+        [NameInMap("submodelMap")]
+        [Validation(Required=true)]
+        public Dictionary<string, Darabonba.import.Models.Config> SubmodelMap { get; set; }
+
     }
 
 }

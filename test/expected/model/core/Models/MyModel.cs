@@ -50,6 +50,14 @@ namespace Darabonba.Test.Models
         [Validation(Required=true)]
         public TeaRequest Request { get; set; }
 
+        [NameInMap("mapModel")]
+        [Validation(Required=true)]
+        public Dictionary<string, lowerModel> MapModel { get; set; }
+
+        [NameInMap("submodelMap")]
+        [Validation(Required=true)]
+        public Dictionary<string, MyModel.MyModelSubmodel> SubmodelMap { get; set; }
+
     }
 
 }

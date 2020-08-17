@@ -53,7 +53,8 @@ model ComplexRequest = {
     value: [ string ],
     extra: map[string] string
   },
-  dict: map[string]any
+  dict: map[string]any,
+  submodelMap: map[string]Source.Config
 }
 
 static function arrayAssign3(request: ComplexRequest, config: string): void {
