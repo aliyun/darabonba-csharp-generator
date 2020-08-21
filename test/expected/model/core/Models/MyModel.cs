@@ -52,7 +52,7 @@ namespace Darabonba.Test.Models
 
         [NameInMap("mapModel")]
         [Validation(Required=true)]
-        public Dictionary<string, lowerModel> MapModel { get; set; }
+        public Dictionary<string, LowerModel> MapModel { get; set; }
 
         [NameInMap("submodelMap")]
         [Validation(Required=true)]
