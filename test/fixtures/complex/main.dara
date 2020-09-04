@@ -84,6 +84,8 @@ static function mapAccess3(): string {
 
 static function mapAssign(request: ComplexRequest, name: string): void {
   request.configs.extra['name'] = name;
+  var data = {};
+  data.header = null;
 }
 
 static function arrayAssign2(config: string): [ string ] {
@@ -220,7 +222,8 @@ static async function printNull(cls: class): void {
 }
 
 static function array0(req: object): [ any ] {
-
+  var temp = new Source.Config{};
+  var anyArr : [Source.Config] = [temp];
   return [];
 }
 
