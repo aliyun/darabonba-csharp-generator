@@ -15,7 +15,8 @@
       "name" : "test",
       "title" : "darabonba-title",
       "description" : "description",
-      "company" : "company"
+      "company" : "company",
+      "interface": true
     }
   }
 }

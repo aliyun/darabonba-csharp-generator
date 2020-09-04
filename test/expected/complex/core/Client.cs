@@ -381,6 +381,8 @@ namespace Darabonba.Test
         public static void MapAssign(ComplexRequest request, string name)
         {
             request.Configs.Extra["name"] = name;
+            Dictionary<string, object> data = new Dictionary<string, object>(){};
+            data["header"] = null;
         }
 
         public static List<string> ArrayAssign2(string config)
@@ -527,6 +529,11 @@ namespace Darabonba.Test
 
         public static List<object> Array0(Dictionary<string, object> req)
         {
+            Darabonba.import.Models.Config temp = new Darabonba.import.Models.Config();
+            List<Darabonba.import.Models.Config> anyArr = new List<Darabonba.import.Models.Config>
+            {
+                temp
+            };
             return new List<object>
             {
             };

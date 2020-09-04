@@ -205,7 +205,7 @@ namespace Darabonba.Test
                     Test3 modelInstance = new Test3();
                     // boolean declare comment
                     bool? bool_ = true;
-                    if (bool_)
+                    if (bool_.Value)
                     {
                         //empty if
                     }
@@ -268,7 +268,7 @@ namespace Darabonba.Test
                     Test3 modelInstance = new Test3();
                     // boolean declare comment
                     bool? bool_ = true;
-                    if (bool_)
+                    if (bool_.Value)
                     {
                         //empty if
                     }
