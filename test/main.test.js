@@ -92,7 +92,7 @@ describe('new Generator', function () {
   it('complex should ok', function () {
     const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/complex/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
-    check('complex', ['Client.cs', 'Models/Config.cs', 'Models/ComplexRequest.cs'], {
+    check('complex', ['Client.cs', 'Models/Config.cs', 'Models/ComplexRequest.cs', 'IClient.cs'], {
       pkgDir: path.join(__dirname, 'fixtures/complex'),
       libraries: pkg.libraries,
       ...pkg.csharp
