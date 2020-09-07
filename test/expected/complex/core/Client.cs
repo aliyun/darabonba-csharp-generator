@@ -13,7 +13,7 @@ using Darabonba.Test.Models;
 
 namespace Darabonba.Test
 {
-    public class Client : Darabonba.import.Client
+    public class Client : Darabonba.import.Client, IClient
     {
         protected string _protocol;
         protected string _pathname;

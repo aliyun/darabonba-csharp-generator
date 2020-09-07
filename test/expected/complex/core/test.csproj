@@ -35,5 +35,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Darabonba.import" Version="0.0.2"/>
+    <PackageReference Include="Tea" Version="1.0.2"/>
   </ItemGroup>
 </Project>
