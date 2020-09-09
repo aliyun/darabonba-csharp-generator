@@ -1,5 +1,8 @@
 # ChangeLog
 
+## 1.0.4 - 2020-09-09
+> supported generate `interface`
+
 ## 1.0.3 - 2020-09-04
 
 > fixed `visitIf` if type is variable
