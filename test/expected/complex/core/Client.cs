@@ -99,8 +99,8 @@ namespace Darabonba.Test
                         "2"
                     });
                     Hello(null, null);
-                    return TeaModel.ToObject<Darabonba.import.Models.RuntimeObject>(new Dictionary<string, object>(){});
                     Complex3(null);
+                    return TeaModel.ToObject<Darabonba.import.Models.RuntimeObject>(new Dictionary<string, object>(){});
                 }
                 catch (Exception e)
                 {
@@ -185,8 +185,8 @@ namespace Darabonba.Test
                         "2"
                     });
                     await HelloAsync(null, null);
-                    return TeaModel.ToObject<Darabonba.import.Models.RuntimeObject>(new Dictionary<string, object>(){});
                     await Complex3Async(null);
+                    return TeaModel.ToObject<Darabonba.import.Models.RuntimeObject>(new Dictionary<string, object>(){});
                 }
                 catch (Exception e)
                 {
@@ -232,6 +232,7 @@ namespace Darabonba.Test
                 {"date", "2019"},
                 {"protocol", request_.Protocol},
             };
+            return new Dictionary<string, object>(){};
             TeaResponse response_ = TeaCore.DoAction(request_);
 
             return;
@@ -267,6 +268,7 @@ namespace Darabonba.Test
                 {"date", "2019"},
                 {"protocol", request_.Protocol},
             };
+            return new Dictionary<string, object>(){};
             TeaResponse response_ = await TeaCore.DoActionAsync(request_);
 
             return;
@@ -457,10 +459,12 @@ namespace Darabonba.Test
 
         public static Darabonba.import.Models.Request Print(TeaRequest reqeust, List<ComplexRequest> reqs, TeaResponse response, Dictionary<string, string> val)
         {
+            return new Darabonba.import.Models.Request();
         }
 
         public static async Task<Darabonba.import.Models.Request> PrintAsync(TeaRequest reqeust, List<ComplexRequest> reqs, TeaResponse response, Dictionary<string, string> val)
         {
+            return new Darabonba.import.Models.Request();
         }
 
         public static void PrintNull(Type cls)
