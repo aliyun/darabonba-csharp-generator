@@ -385,6 +385,10 @@ namespace Darabonba.Test
             request.Configs.Extra["name"] = name;
             Dictionary<string, object> data = new Dictionary<string, object>(){};
             data["header"] = null;
+            request.Dict = new Dictionary<string, object>
+            {
+                {"test", "demo"},
+            };
         }
 
         public static List<string> ArrayAssign2(string config)
