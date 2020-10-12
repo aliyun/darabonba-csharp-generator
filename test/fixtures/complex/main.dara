@@ -86,6 +86,9 @@ static function mapAssign(request: ComplexRequest, name: string): void {
   request.configs.extra['name'] = name;
   var data = {};
   data.header = null;
+  request.dict = {
+    test = "demo",
+  };
 }
 
 static function arrayAssign2(config: string): [ string ] {
