@@ -1,5 +1,8 @@
 # ChangeLog
 
+## 1.0.5 - 2020-10-13
+> change map assign expr inferred for paser error
+
 ## 1.0.4 - 2020-09-09
 > supported generate `interface`
 
