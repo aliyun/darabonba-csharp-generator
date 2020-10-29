@@ -1,5 +1,8 @@
 # ChangeLog
 
+## 1.0.6 - 2020-10-29
+> Improved tea-core package version to 1.0.4
+
 ## 1.0.5 - 2020-10-13
 > change map assign expr inferred for paser error
 
