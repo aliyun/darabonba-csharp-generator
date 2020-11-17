@@ -142,4 +142,15 @@ describe('new Generator', function () {
         }`);
     });
   });
+
+  it('console should ok', function () {
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/console/Darafile'), 'utf8');
+    const pkg = JSON.parse(pkgContent);
+    check('console', ['Client.cs'], {
+      pkgDir: path.join(__dirname, 'fixtures/tea'),
+      libraries: pkg.libraries,
+      exec: true,
+      ...pkg.csharp
+    });
+  });
 });
