@@ -1,5 +1,8 @@
 # ChangeLog
 
+## 1.0.8 - 2020-11-25
+> Fixed `method_call`
+
 ## 1.0.7 - 2020-11-18
 > Supported generator exec
 
