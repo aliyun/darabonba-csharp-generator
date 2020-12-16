@@ -244,3 +244,7 @@ async function templateString(): string {
 static function returnObj(): object {
   return {};
 }
+
+static function returnConfig(): Config {
+  return new Config{};
+}
