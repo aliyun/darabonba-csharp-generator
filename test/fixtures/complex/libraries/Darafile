@@ -7,6 +7,7 @@
     "csharp": "Darabonba.import:0.0.2"
   },
   "csharp": {
+    "className": "Common",
     "namespace": "Darabonba.import"
   }
 }

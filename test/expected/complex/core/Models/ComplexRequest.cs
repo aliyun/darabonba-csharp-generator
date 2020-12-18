@@ -49,7 +49,7 @@ namespace Darabonba.Test.Models
             public List<string> ListStr { get; set; }
             [NameInMap("sourceClient")]
             [Validation(Required=true)]
-            public Darabonba.import.Client SourceClient { get; set; }
+            public Darabonba.import.Common SourceClient { get; set; }
             [NameInMap("sourceConfig")]
             [Validation(Required=true)]
             public Darabonba.import.Models.Config SourceConfig { get; set; }
@@ -70,7 +70,7 @@ namespace Darabonba.Test.Models
 
         [NameInMap("client")]
         [Validation(Required=true)]
-        public Darabonba.import.Client Client { get; set; }
+        public Darabonba.import.Common Client { get; set; }
 
         /// <summary>
         /// Part

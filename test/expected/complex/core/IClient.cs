@@ -15,7 +15,7 @@ namespace Darabonba.Test
 {
     public interface IClient 
     {
-        Darabonba.import.Models.RuntimeObject Complex1(ComplexRequest request, Darabonba.import.Client client);
+        RuntimeObject Complex1(ComplexRequest request, Darabonba.import.Common client);
 
         Dictionary<string, object> Complex2(ComplexRequest request, List<string> str, Dictionary<string, string> val, List<List<List<string>>> complexList);
 

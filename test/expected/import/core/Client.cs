@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 using Tea;
 using Tea.Utils;
 
+using Darabonba.import;
+using Darabonba.import.Models;
+using AlibabaCloud.import;
+using AlibabaCloud.import.Models;
 
 namespace Darabonba.Test
 {
@@ -17,8 +21,8 @@ namespace Darabonba.Test
 
         public static void Sample(Darabonba.import.Client client)
         {
-            Darabonba.import.Models.RuntimeObject runtime = new Darabonba.import.Models.RuntimeObject();
-            AlibabaCloud.import.Models.Request request = new AlibabaCloud.import.Models.Request
+            RuntimeObject runtime = new RuntimeObject();
+            Request request = new Request
             {
                 Accesskey = "accesskey",
                 Region = "region",
