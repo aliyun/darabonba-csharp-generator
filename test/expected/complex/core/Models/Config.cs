@@ -29,6 +29,10 @@ namespace Darabonba.Test.Models
         [Validation(Required=true)]
         public float? FloatNum { get; set; }
 
+        [NameInMap("longNum")]
+        [Validation(Required=true)]
+        public long? LongNum { get; set; }
+
     }
 
 }

@@ -7,7 +7,8 @@ model Config {
   importConfig: Source.Config,
   query: string,
   complexList: [[string]],
-  floatNum: float
+  floatNum: float, 
+  longNum: long
 }
 type @protocol = string
 type @pathname = string
