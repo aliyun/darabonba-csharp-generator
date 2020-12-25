@@ -1,5 +1,8 @@
 # ChangeLog
 
+## 1.0.9 - 2020-12-25
+> Supported type `long` and `ulong`
+
 ## 1.0.8 - 2020-11-25
 > Fixed `method_call`
 
