@@ -1,6 +1,6 @@
 {
   "name": "@darabonba/csharp-generator",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "The darabonba generator for CSharp",
   "main": "lib/generator",
   "directories": {
