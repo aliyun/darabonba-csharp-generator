@@ -36,7 +36,7 @@ namespace Darabonba.Test
             }
             TeaResponse response_ = TeaCore.DoAction(request_);
 
-            Client.HelloIf();
+            HelloIf();
             return ;
         }
 
@@ -56,7 +56,7 @@ namespace Darabonba.Test
             }
             TeaResponse response_ = await TeaCore.DoActionAsync(request_);
 
-            Client.HelloIf();
+            HelloIf();
             return ;
         }
 

@@ -85,12 +85,12 @@ namespace Darabonba.Test
                     // number declare comment
                     int? num = 123;
                     // static function call comment
-                    Client.StaticFunc();
+                    StaticFunc();
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     // static async function call
-                    Client.TestFunc();
+                    TestFunc();
                     // return comment
                     return ;
                 }
@@ -149,12 +149,12 @@ namespace Darabonba.Test
                     // number declare comment
                     int? num = 123;
                     // static function call comment
-                    Client.StaticFunc();
+                    StaticFunc();
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     // static async function call
-                    await Client.TestFuncAsync();
+                    await TestFuncAsync();
                     // return comment
                     return ;
                 }

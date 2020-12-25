@@ -300,10 +300,10 @@ namespace Darabonba.Test
                 Accesskey = request.AccessKey,
                 Region = resp.StatusMessage,
             };
-            Client.Array0(request.ToMap());
+            Array0(request.ToMap());
             req.Accesskey = "accesskey";
             req.Accesskey = request.AccessKey;
-            Client.PrintNull(typeof(Config));
+            PrintNull(typeof(Config));
             Darabonba.import.Common.Array(request.ToMap(), "1");
             return TeaModel.ToObject<ComplexRequest>(TeaConverter.merge<string>
             (
@@ -337,10 +337,10 @@ namespace Darabonba.Test
                 Accesskey = request.AccessKey,
                 Region = resp.StatusMessage,
             };
-            Client.Array0(request.ToMap());
+            Array0(request.ToMap());
             req.Accesskey = "accesskey";
             req.Accesskey = request.AccessKey;
-            await Client.PrintNullAsync(typeof(Config));
+            await PrintNullAsync(typeof(Config));
             Darabonba.import.Common.Array(request.ToMap(), "1");
             return TeaModel.ToObject<ComplexRequest>(TeaConverter.merge<string>
             (
@@ -453,12 +453,12 @@ namespace Darabonba.Test
 
         public List<string> Hello(Dictionary<string, object> request, List<string> strs)
         {
-            return Client.Array1();
+            return Array1();
         }
 
         public async Task<List<string>> HelloAsync(Dictionary<string, object> request, List<string> strs)
         {
-            return Client.Array1();
+            return Array1();
         }
 
         public static Darabonba.import.Models.Request Print(TeaRequest reqeust, List<ComplexRequest> reqs, TeaResponse response, Dictionary<string, string> val)
