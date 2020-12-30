@@ -1,5 +1,8 @@
 # ChangeLog
 
+## 1.0.10 - 2020-12-30
+> Upgrade `Tea` reference 1.0.5
+
 ## 1.0.9 - 2020-12-25
 > Supported type `long` and `ulong`
 
