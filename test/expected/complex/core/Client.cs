@@ -565,8 +565,9 @@ namespace Darabonba.Test
             return "/" + _protocol;
         }
 
-        public static Dictionary<string, object> ReturnObj()
+        public static Dictionary<string, object> ReturnObj(string params_)
         {
+            params_ = "test";
             return new Dictionary<string, object>(){};
         }
 
