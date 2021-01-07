@@ -242,6 +242,7 @@ async function templateString(): string {
   return `/${@protocol}`;
 }
 
-static function returnObj(): object {
+static function returnObj(params: string): object {
+  params = "test";
   return {};
 }
