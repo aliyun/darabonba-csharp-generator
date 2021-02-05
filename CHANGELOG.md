@@ -1,5 +1,8 @@
 # ChangeLog
 
+## 1.0.14 - 2021-02-05
+> Upgrade `Tea` reference 1.0.9
+
 ## 1.0.13 - 2021-01-25
 > Upgrade `Tea` reference 1.0.8
 
