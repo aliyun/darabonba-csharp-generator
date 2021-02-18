@@ -557,12 +557,12 @@ namespace Darabonba.Test
 
         public string TemplateString()
         {
-            return "/" + _protocol;
+            return "" + _protocol;
         }
 
         public async Task<string> TemplateStringAsync()
         {
-            return "/" + _protocol;
+            return "" + _protocol;
         }
 
         public static Dictionary<string, object> ReturnObj(string params_)
