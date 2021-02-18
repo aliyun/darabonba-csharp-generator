@@ -239,7 +239,7 @@ static function array1(): [ string ] {
 }
 
 async function templateString(): string {
-  return `/${@protocol}`;
+  return `${@protocol}`;
 }
 
 static function returnObj(params: string): object {
