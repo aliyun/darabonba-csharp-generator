@@ -45,7 +45,7 @@ describe('new Generator', function () {
   it('one model should ok', function () {
     const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/model/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
-    check('model', ['Client.cs', 'Models/MyModel.cs', 'Models/LowerModel.cs'], {
+    check('model', ['Client.cs', 'Models/MyModel.cs', 'Models/LowerModel.cs', 'Models/MultiLayerModel.cs'], {
       pkgDir: path.join(__dirname, 'fixtures/model'),
       ...pkg.csharp
     });
