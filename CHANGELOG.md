@@ -1,7 +1,10 @@
 # ChangeLog
 
+## 1.0.16 - 2021-03-04
+> Fix bug when emit multi-layer Model
+
 ## 1.0.15 - 2021-02-18
-> Improved codegen `template_string` 
+> Improved codegen `template_string`
 
 ## 1.0.14 - 2021-02-05
 > Upgrade `Tea` reference 1.0.9
