@@ -18,3 +18,20 @@ model lowerModel = {
   stringfield: string
 };
 
+model multiLayerModel = {
+  data?: {
+    results?: [ 
+      {
+        textRectangles?: {
+          top?: int32(name='Top'),
+          width?: int32(name='Width'),
+          height?: int32(name='Height'),
+          angle?: int32(name='Angle'),
+          left?: int32(name='Left'),
+        }(name='TextRectangles'),
+        text?: string(name='Text'),
+        probability?: float(name='Probability'),
+      }
+    ](name='Results'),
+  }(name='Data'),
+}
