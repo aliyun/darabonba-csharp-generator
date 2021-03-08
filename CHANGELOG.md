@@ -1,5 +1,8 @@
 # ChangeLog
 
+## 1.0.17 - 2021-03-08
+> Upgrade `Tea` reference 1.0.10
+
 ## 1.0.16 - 2021-03-04
 > Fix bug when emit multi-layer Model
 
