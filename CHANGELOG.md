@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.0.19 - 2021-03-18
+
+> Use TeaCore's dependency version ranges
+
 ## 1.0.18 - 2021-03-12
 > Upgrade `Tea` reference 1.0.11
 
