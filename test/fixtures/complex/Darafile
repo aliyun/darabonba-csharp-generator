@@ -16,13 +16,7 @@
       "title" : "darabonba-title",
       "description" : "description",
       "company" : "company",
-      "interface": true,
-      "property": {
-        "PackageTags": "PackageTags",
-        "Copyright": "Copyright",
-        "PackageProjectUrl": "https://PackageProjectUrl",
-        "PackageIconUrl": "https://PackageIconUrl/favicon.ico"
-      }
+      "interface": true
     }
   }
 }
