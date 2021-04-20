@@ -9,6 +9,7 @@
     <AssemblyName>Darabonba.Test</AssemblyName>
     <Version/>
     <LangVersion>5</LangVersion>
+    <Authors>company</Authors>
     <Description>description</Description>
     <PackageTags>PackageTags</PackageTags>
     <Copyright>Copyright</Copyright>
