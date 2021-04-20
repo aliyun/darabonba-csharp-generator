@@ -1,5 +1,8 @@
 # ChangeLog
 
+## 1.0.19 - 2021-04-20
+> Supported emit properties to csproj file
+
 ## 1.0.18 - 2021-03-12
 > Upgrade `Tea` reference 1.0.11
 
