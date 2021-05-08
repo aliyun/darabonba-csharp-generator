@@ -1,5 +1,8 @@
 # ChangeLog
 
+## 1.0.20 - 2021-05-08
+> Supported $Model
+
 ## 1.0.19 - 2021-04-20
 > Supported emit properties to csproj file
 
