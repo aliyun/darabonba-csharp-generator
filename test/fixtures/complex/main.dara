@@ -55,7 +55,15 @@ model ComplexRequest = {
     extra: map[string] string
   },
   dict: map[string]any,
-  submodelMap: map[string]Source.Config
+  submodelMap: map[string]Source.Config,
+  array?: [[ 
+    {
+      type?: string(name='type'),
+      link?: string(name='link'),
+      text?: string(name='text'),
+    }
+  ]  ](name='array'),
+  array1?: [[string]](name='array1'),
 }
 
 static function arrayAssign3(request: ComplexRequest, config: string): void {
