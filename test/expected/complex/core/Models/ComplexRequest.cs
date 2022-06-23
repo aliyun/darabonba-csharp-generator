@@ -112,6 +112,28 @@ namespace Darabonba.Test.Models
         [Validation(Required=true)]
         public Dictionary<string, Darabonba.import.Models.Config> SubmodelMap { get; set; }
 
+        [NameInMap("array")]
+        [Validation(Required=false)]
+        public List<List<ComplexRequestArray>> Array { get; set; }
+        public class ComplexRequestArray : TeaModel {
+            [NameInMap("type")]
+            [Validation(Required=false)]
+            public string Type { get; set; }
+
+            [NameInMap("link")]
+            [Validation(Required=false)]
+            public string Link { get; set; }
+
+            [NameInMap("text")]
+            [Validation(Required=false)]
+            public string Text { get; set; }
+
+        }
+
+        [NameInMap("array1")]
+        [Validation(Required=false)]
+        public List<List<string>> Array1 { get; set; }
+
     }
 
 }
