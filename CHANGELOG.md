@@ -1,5 +1,8 @@
 # ChangeLog
 
+## 1.0.21 - 2022-06-24
+> Supported array-array style
+
 ## 1.0.20 - 2021-05-08
 > Supported $Model
 
