@@ -1,5 +1,8 @@
 # ChangeLog
 
+## 1.0.22 - 2022-08-09
+> Supported complex `array` in model
+
 ## 1.0.21 - 2022-06-24
 > Supported array-array style
 
