@@ -62,6 +62,12 @@ namespace Darabonba.Test.Models
                 public string SubModelStr { get; set; }
 
             }
+            [NameInMap("subArray")]
+            [Validation(Required=true)]
+            public List<Config> SubArray { get; set; }
+            [NameInMap("subMutiArray")]
+            [Validation(Required=true)]
+            public List<List<Config>> SubMutiArray { get; set; }
         };
 
         [NameInMap("num")]
@@ -133,6 +139,10 @@ namespace Darabonba.Test.Models
         [NameInMap("array1")]
         [Validation(Required=false)]
         public List<List<string>> Array1 { get; set; }
+
+        [NameInMap("array2")]
+        [Validation(Required=false)]
+        public List<Config> Array2 { get; set; }
 
     }
 

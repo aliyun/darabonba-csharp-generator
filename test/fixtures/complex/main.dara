@@ -40,7 +40,13 @@ model ComplexRequest = {
     sourceConfig: Source.Config,
     subModel: {
       subModelStr: string
-    }
+    },
+    subArray: [
+      Config
+    ](name='subArray'),
+    subMutiArray: [[
+      Config
+    ]](name='subMutiArray'),
   }(description='header', name='header'),
   num: number,
   client: Source,
@@ -64,6 +70,7 @@ model ComplexRequest = {
     }
   ]  ](name='array'),
   array1?: [[string]](name='array1'),
+  array2?: [Config](name='array2'),
 }
 
 static function arrayAssign3(request: ComplexRequest, config: string): void {
