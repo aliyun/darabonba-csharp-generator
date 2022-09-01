@@ -32,7 +32,8 @@ namespace Darabonba.Test.Models
             [NameInMap("stringfield")]
             [Validation(Required=true)]
             public string Stringfield { get; set; }
-        };
+
+        }
 
         [NameInMap("object")]
         [Validation(Required=true)]
