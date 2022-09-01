@@ -34,25 +34,39 @@ namespace Darabonba.Test.Models
         [Validation(Required=true)]
         public ComplexRequestHeader Header { get; set; }
         public class ComplexRequestHeader : TeaModel {
+            /// <summary>
+            /// Body
+            /// </summary>
             [NameInMap("Content")]
             [Validation(Required=true)]
             public string Content { get; set; }
+
             [NameInMap("listSub")]
             [Validation(Required=true)]
             public List<ComplexRequestHeaderListSub> ListSub { get; set; }
             public class ComplexRequestHeaderListSub : TeaModel {
+                [NameInMap("listSubItemName")]
+                [Validation(Required=true)]
                 public string ListSubItem { get; set; }
+
+                [NameInMap("listSubItemSubName")]
+                [Validation(Required=true)]
                 public Config ListSubItemSub { get; set; }
+
             }
+
             [NameInMap("listStr")]
             [Validation(Required=true)]
             public List<string> ListStr { get; set; }
+
             [NameInMap("sourceClient")]
             [Validation(Required=true)]
             public Darabonba.import.Client SourceClient { get; set; }
+
             [NameInMap("sourceConfig")]
             [Validation(Required=true)]
             public Darabonba.import.Models.Config SourceConfig { get; set; }
+
             [NameInMap("subModel")]
             [Validation(Required=true)]
             public ComplexRequestHeaderSubModel SubModel { get; set; }
@@ -62,13 +76,16 @@ namespace Darabonba.Test.Models
                 public string SubModelStr { get; set; }
 
             }
+
             [NameInMap("subArray")]
             [Validation(Required=true)]
             public List<Config> SubArray { get; set; }
+
             [NameInMap("subMutiArray")]
             [Validation(Required=true)]
             public List<List<Config>> SubMutiArray { get; set; }
-        };
+
+        }
 
         [NameInMap("num")]
         [Validation(Required=true)]
@@ -102,13 +119,16 @@ namespace Darabonba.Test.Models
             [NameInMap("key")]
             [Validation(Required=true)]
             public string Key { get; set; }
+
             [NameInMap("value")]
             [Validation(Required=true)]
             public List<string> Value { get; set; }
+
             [NameInMap("extra")]
             [Validation(Required=true)]
             public Dictionary<string, string> Extra { get; set; }
-        };
+
+        }
 
         [NameInMap("dict")]
         [Validation(Required=true)]

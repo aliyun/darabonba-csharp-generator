@@ -17,6 +17,8 @@ namespace Darabonba.Test.Models
             [Validation(Required=false)]
             public List<MultiLayerModelDataResults> Results { get; set; }
             public class MultiLayerModelDataResults : TeaModel {
+                [NameInMap("TextRectangles")]
+                [Validation(Required=false)]
                 public MultiLayerModelDataResultsTextRectangles TextRectangles { get; set; }
                 public class MultiLayerModelDataResultsTextRectangles : TeaModel {
                     [NameInMap("Top")]
@@ -40,10 +42,18 @@ namespace Darabonba.Test.Models
                     public int? Left { get; set; }
 
                 }
+
+                [NameInMap("Text")]
+                [Validation(Required=false)]
                 public string Text { get; set; }
+
+                [NameInMap("Probability")]
+                [Validation(Required=false)]
                 public float? Probability { get; set; }
+
             }
-        };
+
+        }
 
     }
 

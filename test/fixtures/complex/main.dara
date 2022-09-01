@@ -26,21 +26,21 @@ init(config: Source.Config, secondParam: string){
 }
 
 model ComplexRequest = {
-  accessKey: string,
+  accessKey: string(name='accessKey'),
   body: readable(name='Body', example='Body', description='Body'),
   strs: [ string ](name='Strs', example='Strs', description='Strs'),
   header: {
     content: string(name='Content', example='Content', signed='true', description='Body'),
     listSub: [{
-      listSubItem: string,
-      listSubItemSub: Config
+      listSubItem: string(name='listSubItemName'),
+      listSubItemSub: Config(name='listSubItemSubName')
     }],
-    listStr: [string],
-    sourceClient: Source,
-    sourceConfig: Source.Config,
+    listStr: [string](name='listStr'),
+    sourceClient: Source(name='sourceClient'),
+    sourceConfig: Source.Config(name='sourceConfig'),
     subModel: {
       subModelStr: string
-    },
+    }(name='subModel'),
     subArray: [
       Config
     ](name='subArray'),
@@ -48,20 +48,20 @@ model ComplexRequest = {
       Config
     ]](name='subMutiArray'),
   }(description='header', name='header'),
-  num: number,
-  client: Source,
+  num: number(name='num'),
+  client: Source(name='client'),
   part?: [
     {
       partNumber?: string(description='PartNumber', name='PartNumber')
     }
   ](description='Part', name='Part', deprecated=true),
   configs: {
-    key: string,
-    value: [ string ],
-    extra: map[string] string
-  },
-  dict: map[string]any,
-  submodelMap: map[string]Source.Config,
+    key: string(name='key'),
+    value: [ string ](name='value'),
+    extra: map[string] string(name='extra')
+  }(name='configs'),
+  dict: map[string]any(name='dict'),
+  submodelMap: map[string]Source.Config(name='submodelMap'),
   array?: [[ 
     {
       type?: string(name='type'),
