@@ -1,5 +1,8 @@
 # ChangeLog
 
+## 1.0.23 - 2022-09-01
+> Fix `NameInMap` for subModel
+
 ## 1.0.22 - 2022-08-09
 > Supported complex `array` in model
 
