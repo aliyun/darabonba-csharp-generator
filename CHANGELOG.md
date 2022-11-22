@@ -1,5 +1,8 @@
 # ChangeLog
 
+## 1.1.0 - 2022-11-22
+> Fix array access with variable key
+
 ## 1.0.23 - 2022-09-01
 > Fix `NameInMap` for subModel
 
