@@ -351,6 +351,8 @@ namespace Darabonba.Test
         public static void ArrayAssign3(ComplexRequest request, string config)
         {
             request.Configs.Value[0] = config;
+            int? i = 0;
+            request.Configs.Value[i.Value] = config;
         }
 
         public static string MapAccess(ComplexRequest request)
@@ -403,6 +405,8 @@ namespace Darabonba.Test
                 }},
             };
             data["configs"][3] = config;
+            int? i = 3;
+            data["configs"][i.Value] = config;
             return data.Get("configs");
         }
 
@@ -415,12 +419,22 @@ namespace Darabonba.Test
                 "c"
             };
             configs[3] = config;
+            int? i = 3;
+            configs[i.Value] = config;
+            int? i32 = 3;
+            configs[i32.Value] = config;
+            long? i64 = 3;
+            configs[i64.Value] = config;
+            int? num = 3;
+            configs[num.Value] = config;
             return configs;
         }
 
         public static string ArrayAccess3(ComplexRequest request)
         {
             string configVal = request.Configs.Value[0];
+            int? i = 0;
+            configVal = request.Configs.Value[i.Value];
             return configVal;
         }
 
@@ -436,6 +450,8 @@ namespace Darabonba.Test
                 }},
             };
             string config = data["configs"][0];
+            int? i = 0;
+            config = data["configs"][i.Value];
             return config;
         }
 
@@ -448,6 +464,14 @@ namespace Darabonba.Test
                 "c"
             };
             string config = configs[0];
+            int? i = 0;
+            config = configs[i.Value];
+            int? i32 = 3;
+            config = configs[i32.Value];
+            long? i64 = 3;
+            config = configs[i64.Value];
+            int? num = 3;
+            config = configs[num.Value];
             return config;
         }
 
