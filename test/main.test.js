@@ -24,14 +24,12 @@ function check(moduleName, expectedFiles = [], options = {}) {
   const dsl = fs.readFileSync(mainFilePath, 'utf8');
   const ast = DSL.parse(dsl, mainFilePath);
   generator.visit(ast);
-  setTimeout(function () {
-    expectedFiles.forEach(element => {
-      const outputFilePath = path.join(outputDir, moduleName, 'core', element);
-      const expectedFilePath = path.join(expectedDir, moduleName, 'core', element);
-      const expected = fs.readFileSync(expectedFilePath, 'utf8');
-      assert.deepStrictEqual(fs.readFileSync(outputFilePath, 'utf8'), expected);
-    });
-  }, 2000);
+  expectedFiles.forEach(element => {
+    const outputFilePath = path.join(outputDir, moduleName, 'core', element);
+    const expectedFilePath = path.join(expectedDir, moduleName, 'core', element);
+    const expected = fs.readFileSync(expectedFilePath, 'utf8');
+    assert.deepStrictEqual(fs.readFileSync(outputFilePath, 'utf8'), expected);
+  });
 }
 
 describe('new Generator', function () {
