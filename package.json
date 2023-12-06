@@ -11,7 +11,7 @@
     "gen": "node bin/demo.js ./runtime/sdk/",
     "test": "mocha --reporter spec --timeout 3000 test/*.test.js",
     "test-cov": "nyc -r=lcov -r=html -r=text -r=json mocha -t 3000 -R spec test/*.test.js",
-    "ci": "npm run lint && npm run test-cov && codecov"
+    "ci": "npm run lint && npm run test-cov"
   },
   "repository": {
     "type": "git",
@@ -21,7 +21,6 @@
     "eslint": "^5.12.0",
     "mocha": "^6.2.2",
     "nyc": "^15.0.0",
-    "codecov": "^3",
     "expect.js": "^0.3.1"
   },
   "author": "Jackson Tian",
