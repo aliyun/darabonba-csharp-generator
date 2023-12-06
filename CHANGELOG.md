@@ -1,5 +1,10 @@
 # ChangeLog
 
+## 1.1.1 - 2023-12-06
+> Improve xml2js usage
+> Use Object.hasOwn instead of hasOwnProperty
+> Remove duplicate condition branch
+
 ## 1.1.0 - 2022-11-22
 > Fix array access with variable key
 
