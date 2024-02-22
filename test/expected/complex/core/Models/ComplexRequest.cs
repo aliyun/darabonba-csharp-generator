@@ -14,28 +14,54 @@ namespace Darabonba.Test.Models
         public string AccessKey { get; set; }
 
         /// <summary>
-        /// Body
+        /// <para>Body</para>
+        /// 
+        /// <b>Example:</b>
+        /// <para>Body</para>
         /// </summary>
         [NameInMap("Body")]
         [Validation(Required=true)]
         public Stream Body { get; set; }
 
         /// <summary>
-        /// Strs
+        /// <para>Strs</para>
+        /// 
+        /// <b>Example:</b>
+        /// <para>Strs</para>
         /// </summary>
         [NameInMap("Strs")]
         [Validation(Required=true)]
         public List<string> Strs { get; set; }
 
         /// <summary>
-        /// header
+        /// <para>header</para>
         /// </summary>
         [NameInMap("header")]
         [Validation(Required=true)]
         public ComplexRequestHeader Header { get; set; }
         public class ComplexRequestHeader : TeaModel {
             /// <summary>
-            /// Body
+            /// <para>The ID of the security group to which you want to assign the instance. Instances in the same security group can communicate with each other. The maximum number of instances that a security group can contain depends on the type of the security group. For more information, see the &quot;Security group limits&quot; section in <a href="https://help.aliyun.com/document_detail/25412.html#SecurityGroupQuota">Limits</a>.</para>
+            /// <remarks>
+            /// <para>Notice:  The network type of the new instance must be the same as that of the security group specified by the <c>SecurityGroupId</c> parameter. For example, if the specified security group is of the VPC type, the new instance is also of the VPC type and you must specify <c>VSwitchId</c>.</para>
+            /// </remarks>
+            /// <para>If you do not use <c>LaunchTemplateId</c> or <c>LaunchTemplateName</c> to specify a launch template, you must specify SecurityGroupId. Take note of the following items:</para>
+            /// <list type="bullet">
+            /// <item><description>You can set <c>SecurityGroupId</c> to specify a single security group or set <c>SecurityGroupIds.N</c> to specify one or more security groups. However, you cannot specify both <c>SecurityGroupId</c> and <c>SecurityGroupIds.N</c>.</description></item>
+            /// <item><description>If <c>NetworkInterface.N.InstanceType</c> is set to <c>Primary</c>, you cannot specify <c>SecurityGroupId</c> or <c>SecurityGroupIds.N</c> but can specify <c>NetworkInterface.N.SecurityGroupId</c> or <c>NetworkInterface.N.SecurityGroupIds.N</c>.</description></item>
+            /// </list>
+            /// 
+            /// <b>Example:</b>
+            /// <para>The name of the region.</para>
+            /// 
+            /// <b>check if is blank:</b>
+            /// <c>true</c>
+            /// 
+            /// <b>if can be null:</b>
+            /// <c>true</c>
+            /// 
+            /// <b>if is sensitive:</b>
+            /// <c>true</c>
             /// </summary>
             [NameInMap("Content")]
             [Validation(Required=true)]
@@ -95,8 +121,10 @@ namespace Darabonba.Test.Models
         [Validation(Required=true)]
         public Darabonba.import.Client Client { get; set; }
 
+        /// <term><b>Obsolete</b></term>
+        /// 
         /// <summary>
-        /// Part
+        /// <para>Part</para>
         /// </summary>
         [NameInMap("Part")]
         [Validation(Required=false)]
@@ -104,7 +132,7 @@ namespace Darabonba.Test.Models
         public List<ComplexRequestPart> Part { get; set; }
         public class ComplexRequestPart : TeaModel {
             /// <summary>
-            /// PartNumber
+            /// <para>PartNumber</para>
             /// </summary>
             [NameInMap("PartNumber")]
             [Validation(Required=false)]

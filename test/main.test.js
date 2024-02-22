@@ -85,7 +85,8 @@ describe('new Generator', function () {
     check('import', ['Client.cs'], {
       pkgDir: path.join(__dirname, 'fixtures/import'),
       libraries: pkg.libraries,
-      ...pkg.csharp
+      ...pkg.csharp,
+      editable: false
     });
   });
 
@@ -101,17 +102,19 @@ describe('new Generator', function () {
     ], {
       pkgDir: path.join(__dirname, 'fixtures/complex'),
       libraries: pkg.libraries,
-      ...pkg.csharp
+      ...pkg.csharp,
+      editable: 1
     });
   });
 
   it('comment should ok', function () {
     const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/comment/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
-    check('comment', ['Client.cs'], {
+    check('comment', ['Client.cs', 'Models/Test1.cs', 'Models/Test2.cs', 'Models/Test3.cs'], {
       pkgDir: path.join(__dirname, 'fixtures/comment'),
       libraries: pkg.libraries,
-      ...pkg.csharp
+      ...pkg.csharp,
+      editable: 'test-other'
     });
   });
 
@@ -121,7 +124,8 @@ describe('new Generator', function () {
     check('tea', ['Client.cs'], {
       pkgDir: path.join(__dirname, 'fixtures/tea'),
       libraries: pkg.libraries,
-      ...pkg.csharp
+      ...pkg.csharp,
+      editable: 'true'
     });
   });
 
@@ -156,7 +160,8 @@ describe('new Generator', function () {
       pkgDir: path.join(__dirname, 'fixtures/tea'),
       libraries: pkg.libraries,
       exec: true,
-      ...pkg.csharp
+      ...pkg.csharp,
+      editable: true
     });
   });
 });
