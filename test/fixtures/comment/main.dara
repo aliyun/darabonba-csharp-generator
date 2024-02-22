@@ -11,7 +11,14 @@ type @a = [ string  ]
   TestModel
 */
 model Test1{
-  test: string(description='test desc', name='test'), //model的test back comment
+  test: string(description='test desc', name='test', description='The ID of the security group to which you want to assign the instance. Instances in the same security group can communicate with each other. The maximum number of instances that a security group can contain depends on the type of the security group. For more information, see the "Security group limits" section in [Limits](https://help.aliyun.com/document_detail/25412.html#SecurityGroupQuota).
+
+>Notice:  The network type of the new instance must be the same as that of the security group specified by the `SecurityGroupId` parameter. For example, if the specified security group is of the VPC type, the new instance is also of the VPC type and you must specify `VSwitchId`.
+
+If you do not use `LaunchTemplateId` or `LaunchTemplateName` to specify a launch template, you must specify SecurityGroupId. Take note of the following items:
+
+*   You can set `SecurityGroupId` to specify a single security group or set `SecurityGroupIds.N` to specify one or more security groups. However, you cannot specify both `SecurityGroupId` and `SecurityGroupIds.N`.
+*   If `NetworkInterface.N.InstanceType` is set to `Primary`, you cannot specify `SecurityGroupId` or `SecurityGroupIds.N` but can specify `NetworkInterface.N.SecurityGroupId` or `NetworkInterface.N.SecurityGroupIds.N`.', nullable=true, checkBlank=true, sensitive=true, deprecated=true), //model的test back comment
   test2: string(description='test2 desc', name='test2'), //model的test2 back comment
 }
 
@@ -117,6 +124,39 @@ static function staticFunc(): void{
   testFunc
 */
 static async function testFunc(): void {
+    // empty comment1
+    // empty comment2
+}
+
+/**
+ * @description annotation test description
+ * * description1 test for md2Xml
+ * * description2 test for md2Xml
+ * @summary annotation test summary
+ *
+ * @param test string param1
+ * @param _test string param2
+ * @return void
+ * @throws InternalError Server error. 500 服务器端出现未知异常。
+ * @throws StackNotFound The Stack (%(stack_name)s) could not be found.  404 资源栈不存在。
+*/
+static async function testFuncWithAnnotation1(test: string, _test: string): void {
+    // empty comment1
+    // empty comment2
+}
+
+/**
+ * @summary annotation test summary
+ *
+ * @deprecated this is deprecated, use new xx instead.
+ * 
+ * @param test string param1
+ * @param _test string param2
+ * @return void
+ * @throws InternalError Server error. 500 服务器端出现未知异常。
+ * @throws StackNotFound The Stack (%(stack_name)s) could not be found.  404 资源栈不存在。
+*/
+static async function testFuncWithAnnotation2(test: string, _test: string): void {
     // empty comment1
     // empty comment2
 }

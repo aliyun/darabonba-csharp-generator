@@ -18,9 +18,10 @@ namespace Darabonba.Test
         // type's comment
         protected List<string> _a;
 
-        /**
-          Init Func
-        */
+        /// <term><b>Description:</b></term>
+        /// <description>
+        /// <para>Init Func</para>
+        /// </description>
         // comment between init and annotation
         public Client()
         {
@@ -44,9 +45,10 @@ namespace Darabonba.Test
             };
         }
 
-        /**
-          testAPI
-        */
+        /// <term><b>Description:</b></term>
+        /// <description>
+        /// <para>testAPI</para>
+        /// </description>
         //testAPI comment one
         //testAPI comment two
         public void TestAPI()
@@ -108,9 +110,10 @@ namespace Darabonba.Test
             throw new TeaUnretryableException(_lastRequest, _lastException);
         }
 
-        /**
-          testAPI
-        */
+        /// <term><b>Description:</b></term>
+        /// <description>
+        /// <para>testAPI</para>
+        /// </description>
         //testAPI comment one
         //testAPI comment two
         public async Task TestAPIAsync()
@@ -305,19 +308,157 @@ namespace Darabonba.Test
             };
         }
 
-        /**
-          testFunc
-        */
+        /// <term><b>Description:</b></term>
+        /// <description>
+        /// <para>testFunc</para>
+        /// </description>
         public static void TestFunc()
         {
             // empty comment1
             // empty comment2
         }
 
-        /**
-          testFunc
-        */
+        /// <term><b>Description:</b></term>
+        /// <description>
+        /// <para>testFunc</para>
+        /// </description>
         public static async Task TestFuncAsync()
+        {
+            // empty comment1
+            // empty comment2
+        }
+
+        /// <term><b>Summary:</b></term>
+        /// <summary>
+        /// <para>annotation test summary</para>
+        /// </summary>
+        /// 
+        /// <term><b>Description:</b></term>
+        /// <description>
+        /// <para>annotation test description</para>
+        /// <list type="bullet">
+        /// <item><description>description1 test for md2Xml</description></item>
+        /// <item><description>description2 test for md2Xml</description></item>
+        /// </list>
+        /// </description>
+        /// 
+        /// <param name="test">
+        /// string param1
+        /// </param>
+        /// <param name="_test">
+        /// string param2
+        /// </param>
+        /// 
+        /// <returns>
+        /// void
+        /// </returns>
+        /// 
+        /// <term><b>Exception:</b></term>
+        /// InternalError Server error. 500 服务器端出现未知异常。
+        /// 
+        /// <term><b>Exception:</b></term>
+        /// StackNotFound The Stack (%(stack_name)s) could not be found.  404 资源栈不存在。
+        public static void TestFuncWithAnnotation1(string test, string _test)
+        {
+            // empty comment1
+            // empty comment2
+        }
+
+        /// <term><b>Summary:</b></term>
+        /// <summary>
+        /// <para>annotation test summary</para>
+        /// </summary>
+        /// 
+        /// <term><b>Description:</b></term>
+        /// <description>
+        /// <para>annotation test description</para>
+        /// <list type="bullet">
+        /// <item><description>description1 test for md2Xml</description></item>
+        /// <item><description>description2 test for md2Xml</description></item>
+        /// </list>
+        /// </description>
+        /// 
+        /// <param name="test">
+        /// string param1
+        /// </param>
+        /// <param name="_test">
+        /// string param2
+        /// </param>
+        /// 
+        /// <returns>
+        /// void
+        /// </returns>
+        /// 
+        /// <term><b>Exception:</b></term>
+        /// InternalError Server error. 500 服务器端出现未知异常。
+        /// 
+        /// <term><b>Exception:</b></term>
+        /// StackNotFound The Stack (%(stack_name)s) could not be found.  404 资源栈不存在。
+        public static async Task TestFuncWithAnnotation1Async(string test, string _test)
+        {
+            // empty comment1
+            // empty comment2
+        }
+
+        /// <term><b>Deprecated</b></term>
+        /// 
+        /// this is deprecated, use new xx instead.
+        /// 
+        /// <term><b>Summary:</b></term>
+        /// <summary>
+        /// <para>annotation test summary</para>
+        /// </summary>
+        /// 
+        /// <param name="test">
+        /// string param1
+        /// </param>
+        /// <param name="_test">
+        /// string param2
+        /// </param>
+        /// 
+        /// <returns>
+        /// void
+        /// </returns>
+        /// 
+        /// <term><b>Exception:</b></term>
+        /// InternalError Server error. 500 服务器端出现未知异常。
+        /// 
+        /// <term><b>Exception:</b></term>
+        /// StackNotFound The Stack (%(stack_name)s) could not be found.  404 资源栈不存在。
+        [Obsolete("this is deprecated, use new xx instead.")]
+        public static void TestFuncWithAnnotation2(string test, string _test)
+        {
+            // empty comment1
+            // empty comment2
+        }
+
+        /// <term><b>Deprecated</b></term>
+        /// 
+        /// this is deprecated, use new xx instead.
+        /// 
+        /// <term><b>Summary:</b></term>
+        /// <summary>
+        /// <para>annotation test summary</para>
+        /// </summary>
+        /// 
+        /// <param name="test">
+        /// string param1
+        /// </param>
+        /// <param name="_test">
+        /// string param2
+        /// </param>
+        /// 
+        /// <returns>
+        /// void
+        /// </returns>
+        /// 
+        /// <term><b>Exception:</b></term>
+        /// InternalError Server error. 500 服务器端出现未知异常。
+        /// 
+        /// <term><b>Exception:</b></term>
+        /// StackNotFound The Stack (%(stack_name)s) could not be found.  404 资源栈不存在。
+        [Obsolete("this is deprecated, use new xx instead.")]
+        public static async Task TestFuncWithAnnotation2Async(string test, string _test)
         {
             // empty comment1
             // empty comment2

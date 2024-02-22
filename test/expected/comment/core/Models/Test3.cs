@@ -8,9 +8,10 @@ using Tea;
 
 namespace Darabonba.Test.Models
 {
-    /**
-      TestModel3
-    */
+    /// <term><b>Description:</b></term>
+    /// <description>
+    /// <para>TestModel3</para>
+    /// </description>
     public class Test3 : TeaModel {
         // empty comment1
         // empy comment2
