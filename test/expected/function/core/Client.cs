@@ -1,14 +1,12 @@
 // This file is auto-generated, don't edit it. Thanks.
 
 using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
-
 using Tea;
 using Tea.Utils;
-
 
 namespace Darabonba.Test
 {
@@ -47,19 +45,36 @@ namespace Darabonba.Test
 
         public static void HelloParams(string a, string b)
         {
-            return ;
+            bool? x = false;
+            bool? y = true;
+            bool? z = false;
+            if (x && y || !z)
+            {
+            }
         }
 
         public static async Task HelloParamsAsync(string a, string b)
         {
-            return ;
+            bool? x = false;
+            bool? y = true;
+            bool? z = false;
+            if (x && y || !z)
+            {
+            }
         }
 
-        public static void Main(string[] args)
+        // interface mode
+        public static void HelloInterface()
         {
-            return ;
+            throw new NotImplementedException();
         }
 
+        // interface mode
+        public static async Task HelloInterfaceAsync()
+        {
+            throw new NotImplementedException();
+        }
 
     }
 }
+

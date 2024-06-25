@@ -1,24 +1,24 @@
 // This file is auto-generated, don't edit it. Thanks.
 
 using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
-
 using Tea;
 using Tea.Utils;
-
+using SourceClient = Darabonba.import.Client;
+using Darabonba.import.Models;
 using Darabonba.Test.Models;
 
 namespace Darabonba.Test
 {
-    public class Client : Darabonba.import.Client, IClient
+    public class Client : SourceClient, IClient
     {
         protected string _protocol;
         protected string _pathname;
         protected Dictionary<string, string> _endpointMap;
-        protected Darabonba.import.Client _source;
+        protected SourceClient _source;
         protected bool? _boolVirtual;
         protected List<Darabonba.import.Models.Config> _configs;
 
@@ -30,13 +30,17 @@ namespace Darabonba.Test
             this._configs[0] = config;
         }
 
-        public Darabonba.import.Models.RuntimeObject Complex1(ComplexRequest request, Darabonba.import.Client client)
+        public RuntimeObject Complex1(Darabonba.Test.Models.ComplexRequest request, SourceClient client)
         {
             request.Validate();
             client.Validate();
-            Dictionary<string, string> runtime_ = new Dictionary<string, string>
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
+                {"retry", new Dictionary<string, string>
+                {
+                    {"retryable", "xxx"},
+                }},
             };
 
             TeaRequest _lastRequest = null;
@@ -58,7 +62,7 @@ namespace Darabonba.Test
                 {
                     TeaRequest request_ = new TeaRequest();
                     string name = "complex";
-                    Config conf = new Config
+                    Darabonba.Test.Models.Config conf = new Darabonba.Test.Models.Config
                     {
                         FloatNum = 0.1f,
                     };
@@ -86,7 +90,7 @@ namespace Darabonba.Test
                     }
                     else if (true || false)
                     {
-                        return new Darabonba.import.Models.RuntimeObject();
+                        return new RuntimeObject();
                     }
                     else
                     {
@@ -100,7 +104,7 @@ namespace Darabonba.Test
                     });
                     Hello(null, null);
                     Complex3(null);
-                    return TeaModel.ToObject<Darabonba.import.Models.RuntimeObject>(new Dictionary<string, object>(){});
+                    return TeaModel.ToObject<RuntimeObject>(new Dictionary<string, object>(){});
                 }
                 catch (Exception e)
                 {
@@ -116,13 +120,17 @@ namespace Darabonba.Test
             throw new TeaUnretryableException(_lastRequest, _lastException);
         }
 
-        public async Task<Darabonba.import.Models.RuntimeObject> Complex1Async(ComplexRequest request, Darabonba.import.Client client)
+        public async Task<RuntimeObject> Complex1Async(Darabonba.Test.Models.ComplexRequest request, SourceClient client)
         {
             request.Validate();
             client.Validate();
-            Dictionary<string, string> runtime_ = new Dictionary<string, string>
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
+                {"retry", new Dictionary<string, string>
+                {
+                    {"retryable", "xxx"},
+                }},
             };
 
             TeaRequest _lastRequest = null;
@@ -144,7 +152,7 @@ namespace Darabonba.Test
                 {
                     TeaRequest request_ = new TeaRequest();
                     string name = "complex";
-                    Config conf = new Config
+                    Darabonba.Test.Models.Config conf = new Darabonba.Test.Models.Config
                     {
                         FloatNum = 0.1f,
                     };
@@ -172,7 +180,7 @@ namespace Darabonba.Test
                     }
                     else if (true || false)
                     {
-                        return new Darabonba.import.Models.RuntimeObject();
+                        return new RuntimeObject();
                     }
                     else
                     {
@@ -186,7 +194,7 @@ namespace Darabonba.Test
                     });
                     await HelloAsync(null, null);
                     await Complex3Async(null);
-                    return TeaModel.ToObject<Darabonba.import.Models.RuntimeObject>(new Dictionary<string, object>(){});
+                    return TeaModel.ToObject<RuntimeObject>(new Dictionary<string, object>(){});
                 }
                 catch (Exception e)
                 {
@@ -202,14 +210,14 @@ namespace Darabonba.Test
             throw new TeaUnretryableException(_lastRequest, _lastException);
         }
 
-        public Dictionary<string, object> Complex2(ComplexRequest request, List<string> str, Dictionary<string, string> val, List<List<List<string>>> complexList)
+        public Dictionary<string, object> Complex2(Darabonba.Test.Models.ComplexRequest request, List<string> str, Dictionary<string, string> val, List<List<List<string>>> complexList)
         {
             request.Validate();
             TeaRequest request_ = new TeaRequest();
             string name = "complex";
             Darabonba.import.Models.Config config = new Darabonba.import.Models.Config();
-            Darabonba.import.Client client = new Darabonba.import.Client(config, "testSecond");
-            Darabonba.import.Models.Request.RequestSubmodel subModel = new Darabonba.import.Models.Request.RequestSubmodel();
+            SourceClient client = new SourceClient(config, "testSecond");
+            Request.RequestSubmodel subModel = new Request.RequestSubmodel();
             List<List<List<List<string>>>> nestingList = new List<List<List<List<string>>>>
             {
                 new List<List<List<string>>>
@@ -238,14 +246,14 @@ namespace Darabonba.Test
             return;
         }
 
-        public async Task<Dictionary<string, object>> Complex2Async(ComplexRequest request, List<string> str, Dictionary<string, string> val, List<List<List<string>>> complexList)
+        public async Task<Dictionary<string, object>> Complex2Async(Darabonba.Test.Models.ComplexRequest request, List<string> str, Dictionary<string, string> val, List<List<List<string>>> complexList)
         {
             request.Validate();
             TeaRequest request_ = new TeaRequest();
             string name = "complex";
             Darabonba.import.Models.Config config = new Darabonba.import.Models.Config();
-            Darabonba.import.Client client = new Darabonba.import.Client(config, "testSecond");
-            Darabonba.import.Models.Request.RequestSubmodel subModel = new Darabonba.import.Models.Request.RequestSubmodel();
+            SourceClient client = new SourceClient(config, "testSecond");
+            Request.RequestSubmodel subModel = new Request.RequestSubmodel();
             List<List<List<List<string>>>> nestingList = new List<List<List<List<string>>>>
             {
                 new List<List<List<string>>>
@@ -274,7 +282,7 @@ namespace Darabonba.Test
             return;
         }
 
-        public ComplexRequest Complex3(ComplexRequest request)
+        public Darabonba.Test.Models.ComplexRequest Complex3(Darabonba.Test.Models.ComplexRequest request)
         {
             request.Validate();
             TeaRequest request_ = new TeaRequest();
@@ -295,7 +303,7 @@ namespace Darabonba.Test
                 throw new TeaRetryableException(request_, response_);
             }
             TeaResponse resp = response_;
-            Darabonba.import.Models.Request req = new Darabonba.import.Models.Request
+            Request req = new Request
             {
                 Accesskey = request.AccessKey,
                 Region = resp.StatusMessage,
@@ -304,14 +312,14 @@ namespace Darabonba.Test
             req.Accesskey = "accesskey";
             req.Accesskey = request.AccessKey;
             PrintNull(typeof(Config));
-            Darabonba.import.Common.Array(request.ToMap(), "1");
-            return TeaModel.ToObject<ComplexRequest>(TeaConverter.merge<string>
+            SourceClient.Array(request.ToMap(), "1");
+            return TeaModel.ToObject<Darabonba.Test.Models.ComplexRequest>(TeaConverter.merge<string>
             (
                 request_.Query
             ));
         }
 
-        public async Task<ComplexRequest> Complex3Async(ComplexRequest request)
+        public async Task<Darabonba.Test.Models.ComplexRequest> Complex3Async(Darabonba.Test.Models.ComplexRequest request)
         {
             request.Validate();
             TeaRequest request_ = new TeaRequest();
@@ -332,7 +340,7 @@ namespace Darabonba.Test
                 throw new TeaRetryableException(request_, response_);
             }
             TeaResponse resp = response_;
-            Darabonba.import.Models.Request req = new Darabonba.import.Models.Request
+            Request req = new Request
             {
                 Accesskey = request.AccessKey,
                 Region = resp.StatusMessage,
@@ -341,27 +349,27 @@ namespace Darabonba.Test
             req.Accesskey = "accesskey";
             req.Accesskey = request.AccessKey;
             await PrintNullAsync(typeof(Config));
-            Darabonba.import.Common.Array(request.ToMap(), "1");
-            return TeaModel.ToObject<ComplexRequest>(TeaConverter.merge<string>
+            SourceClient.Array(request.ToMap(), "1");
+            return TeaModel.ToObject<Darabonba.Test.Models.ComplexRequest>(TeaConverter.merge<string>
             (
                 request_.Query
             ));
         }
 
-        public static void ArrayAssign3(ComplexRequest request, string config)
+        public static void ArrayAssign3(Darabonba.Test.Models.ComplexRequest request, string config)
         {
             request.Configs.Value[0] = config;
             int? i = 0;
             request.Configs.Value[i.Value] = config;
         }
 
-        public static string MapAccess(ComplexRequest request)
+        public static string MapAccess(Darabonba.Test.Models.ComplexRequest request)
         {
             string configInfo = request.Configs.Extra.Get("name");
             return configInfo;
         }
 
-        public static string MapAccess2(Darabonba.import.Models.Request request)
+        public static string MapAccess2(Request request)
         {
             string configInfo = request.Configs.Extra.Get("name");
             return configInfo;
@@ -382,7 +390,7 @@ namespace Darabonba.Test
             return data["mapAcc"]["map2"].Get("value");
         }
 
-        public static void MapAssign(ComplexRequest request, string name)
+        public static void MapAssign(Darabonba.Test.Models.ComplexRequest request, string name)
         {
             request.Configs.Extra["name"] = name;
             Dictionary<string, object> data = new Dictionary<string, object>(){};
@@ -430,7 +438,7 @@ namespace Darabonba.Test
             return configs;
         }
 
-        public static string ArrayAccess3(ComplexRequest request)
+        public static string ArrayAccess3(Darabonba.Test.Models.ComplexRequest request)
         {
             string configVal = request.Configs.Value[0];
             int? i = 0;
@@ -485,14 +493,14 @@ namespace Darabonba.Test
             return Array1();
         }
 
-        public static Darabonba.import.Models.Request Print(TeaRequest reqeust, List<ComplexRequest> reqs, TeaResponse response, Dictionary<string, string> val)
+        public static Request Print(TeaRequest reqeust, List<Darabonba.Test.Models.ComplexRequest> reqs, TeaResponse response, Dictionary<string, string> val)
         {
-            return new Darabonba.import.Models.Request();
+            return new Request();
         }
 
-        public static async Task<Darabonba.import.Models.Request> PrintAsync(TeaRequest reqeust, List<ComplexRequest> reqs, TeaResponse response, Dictionary<string, string> val)
+        public static async Task<Request> PrintAsync(TeaRequest reqeust, List<Darabonba.Test.Models.ComplexRequest> reqs, TeaResponse response, Dictionary<string, string> val)
         {
-            return new Darabonba.import.Models.Request();
+            return new Request();
         }
 
         public static void PrintNull(Type cls)
@@ -503,14 +511,6 @@ namespace Darabonba.Test
             }
             catch (TeaException e)
             {
-                string errStr = e.Message;
-            }
-            catch (Exception _e)
-            {
-                TeaException e = new TeaException(new Dictionary<string, object>
-                {
-                    { "message", _e.Message }
-                });
                 string errStr = e.Message;
             }
             finally
@@ -535,14 +535,6 @@ namespace Darabonba.Test
             }
             catch (TeaException e)
             {
-                string errStr = e.Message;
-            }
-            catch (Exception _e)
-            {
-                TeaException e = new TeaException(new Dictionary<string, object>
-                {
-                    { "message", _e.Message }
-                });
                 string errStr = e.Message;
             }
             finally
@@ -597,3 +589,4 @@ namespace Darabonba.Test
 
     }
 }
+
