@@ -6,7 +6,7 @@ static function helloMap(): map[string]string {
   var m: map[string]string = {};
   return {
     key = 'value',
-    key-1 = 'value-1',
+    'key-1' = 'value-1',
     ...m,
   };
 }
@@ -20,10 +20,13 @@ static function helloArrayMap(): [map[string]string] {
 }
 
 static async function helloParams(a: string, b: string): void {
-  return;
+  var x = false;
+  var y = true;
+  var z = false;
+  if (x && y || !z) {
+    
+  }
 }
 
-static async function Main(): void {
-  return;
-}
-
+// interface mode
+static async function helloInterface(): void;
