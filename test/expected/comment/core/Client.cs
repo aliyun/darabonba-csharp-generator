@@ -1,14 +1,12 @@
 // This file is auto-generated, don't edit it. Thanks.
 
 using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
-
 using Tea;
 using Tea.Utils;
-
 using Darabonba.Test.Models;
 
 namespace Darabonba.Test
@@ -51,10 +49,11 @@ namespace Darabonba.Test
         /// </description>
         //testAPI comment one
         //testAPI comment two
-        public void TestAPI()
+        public string TestAPI()
         {
             Dictionary<string, object> runtime_ = new Dictionary<string, object>()
-            {                // empty runtime comment
+            {
+                // empty runtime comment
                 // another runtime comment
             };
 
@@ -94,7 +93,7 @@ namespace Darabonba.Test
                     // static async function call
                     TestFunc();
                     // return comment
-                    return ;
+                    return "test";
                 }
                 catch (Exception e)
                 {
@@ -116,10 +115,11 @@ namespace Darabonba.Test
         /// </description>
         //testAPI comment one
         //testAPI comment two
-        public async Task TestAPIAsync()
+        public async Task<string> TestAPIAsync()
         {
             Dictionary<string, object> runtime_ = new Dictionary<string, object>()
-            {                // empty runtime comment
+            {
+                // empty runtime comment
                 // another runtime comment
             };
 
@@ -159,7 +159,7 @@ namespace Darabonba.Test
                     // static async function call
                     await TestFuncAsync();
                     // return comment
-                    return ;
+                    return "test";
                 }
                 catch (Exception e)
                 {
@@ -176,7 +176,7 @@ namespace Darabonba.Test
         }
 
         // testAPI2 comment
-        public void TestAPI2()
+        public string TestAPI2()
         {
             Dictionary<string, bool?> runtime_ = new Dictionary<string, bool?>
             {
@@ -223,6 +223,7 @@ namespace Darabonba.Test
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     // empty return comment
+                    return "test";
                 }
                 catch (Exception e)
                 {
@@ -239,7 +240,7 @@ namespace Darabonba.Test
         }
 
         // testAPI2 comment
-        public async Task TestAPI2Async()
+        public async Task<string> TestAPI2Async()
         {
             Dictionary<string, bool?> runtime_ = new Dictionary<string, bool?>
             {
@@ -286,6 +287,7 @@ namespace Darabonba.Test
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     // empty return comment
+                    return "test";
                 }
                 catch (Exception e)
                 {
@@ -578,3 +580,4 @@ namespace Darabonba.Test
 
     }
 }
+
