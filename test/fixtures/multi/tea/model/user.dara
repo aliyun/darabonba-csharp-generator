@@ -1,0 +1,20 @@
+@clientName("UserModel");
+import DARAUtil;
+import "../lib/util" Util;
+import "../repeat/common" Common;
+
+model Info {
+    name: string,
+    age: integer,
+}
+
+
+static async function test(): asyncIterator[string] {
+    var a = DARAUtil.getNonce();
+    yield a;
+    var it:iterator[string] = Util.test1();
+    var it1:iterator[string] = Common.test2();
+    for(var test : it) {
+        yield test;
+    }
+}

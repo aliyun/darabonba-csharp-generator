@@ -36,3 +36,11 @@ model multiLayerModel = {
     ](name='Results'),
   }(name='Data'),
 }
+
+model Parent = {
+  name: string
+};
+
+model Extend extends Parent = {
+  size: integer
+};

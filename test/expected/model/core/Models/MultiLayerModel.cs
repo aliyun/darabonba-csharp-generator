@@ -1,9 +1,9 @@
 // This file is auto-generated, don't edit it. Thanks.
 
 using System;
-using System.Collections.Generic;
 using System.IO;
-
+using System.Collections;
+using System.Collections.Generic;
 using Tea;
 
 namespace Darabonba.Test.Models
@@ -41,6 +41,84 @@ namespace Darabonba.Test.Models
                     [Validation(Required=false)]
                     public int? Left { get; set; }
 
+                    public new MultiLayerModelDataResultsTextRectangles Copy()
+                    {
+                        MultiLayerModelDataResultsTextRectangles copy = FromMap(ToMap());
+                        return copy;
+                    }
+
+                    public new MultiLayerModelDataResultsTextRectangles CopyWithoutStream()
+                    {
+                        MultiLayerModelDataResultsTextRectangles copy = FromMap(ToMap(true));
+                        return copy;
+                    }
+
+                    public new void Validate()
+                    {
+                        base.Validate();
+                    }
+
+                    public new Dictionary<string, object> ToMap(bool noStream = false)
+                    {
+                        var map = new Dictionary<string, object>();
+                        if (Top != null)
+                        {
+                            map["Top"] = Top;
+                        }
+
+                        if (Width != null)
+                        {
+                            map["Width"] = Width;
+                        }
+
+                        if (Height != null)
+                        {
+                            map["Height"] = Height;
+                        }
+
+                        if (Angle != null)
+                        {
+                            map["Angle"] = Angle;
+                        }
+
+                        if (Left != null)
+                        {
+                            map["Left"] = Left;
+                        }
+
+                        return map;
+                    }
+
+                    public static new MultiLayerModelDataResultsTextRectangles FromMap(Dictionary<string, object> map)
+                    {
+                        var model = new MultiLayerModelDataResultsTextRectangles();
+                        if (map.ContainsKey("Top"))
+                        {
+                            model.Top = (int?)map["Top"];
+                        }
+
+                        if (map.ContainsKey("Width"))
+                        {
+                            model.Width = (int?)map["Width"];
+                        }
+
+                        if (map.ContainsKey("Height"))
+                        {
+                            model.Height = (int?)map["Height"];
+                        }
+
+                        if (map.ContainsKey("Angle"))
+                        {
+                            model.Angle = (int?)map["Angle"];
+                        }
+
+                        if (map.ContainsKey("Left"))
+                        {
+                            model.Left = (int?)map["Left"];
+                        }
+
+                        return model;
+                    }
                 }
 
                 [NameInMap("Text")]
@@ -51,10 +129,182 @@ namespace Darabonba.Test.Models
                 [Validation(Required=false)]
                 public float? Probability { get; set; }
 
+                public new MultiLayerModelDataResults Copy()
+                {
+                    MultiLayerModelDataResults copy = FromMap(ToMap());
+                    return copy;
+                }
+
+                public new MultiLayerModelDataResults CopyWithoutStream()
+                {
+                    MultiLayerModelDataResults copy = FromMap(ToMap(true));
+                    return copy;
+                }
+
+                public new void Validate()
+                {
+                    if(TextRectangles != null) {
+                        TextRectangles.Validate();
+                    }
+                    base.Validate();
+                }
+
+                public new Dictionary<string, object> ToMap(bool noStream = false)
+                {
+                    var map = new Dictionary<string, object>();
+                    if (TextRectangles != null)
+                    {
+                        map["TextRectangles"] = TextRectangles != null ? TextRectangles.ToMap(noStream) : null;
+                    }
+
+                    if (Text != null)
+                    {
+                        map["Text"] = Text;
+                    }
+
+                    if (Probability != null)
+                    {
+                        map["Probability"] = Probability;
+                    }
+
+                    return map;
+                }
+
+                public static new MultiLayerModelDataResults FromMap(Dictionary<string, object> map)
+                {
+                    var model = new MultiLayerModelDataResults();
+                    if (map.ContainsKey("TextRectangles"))
+                    {
+                        if (map["TextRectangles"] != null)
+                        {
+                            var temp = (Dictionary<string, object>)map["TextRectangles"];
+                            model.TextRectangles = MultiLayerModelDataResultsTextRectangles.FromMap(temp);
+                        }
+                    }
+
+                    if (map.ContainsKey("Text"))
+                    {
+                        model.Text = (string)map["Text"];
+                    }
+
+                    if (map.ContainsKey("Probability"))
+                    {
+                        model.Probability = (float?)map["Probability"];
+                    }
+
+                    return model;
+                }
             }
 
+            public new MultiLayerModelData Copy()
+            {
+                MultiLayerModelData copy = FromMap(ToMap());
+                return copy;
+            }
+
+            public new MultiLayerModelData CopyWithoutStream()
+            {
+                MultiLayerModelData copy = FromMap(ToMap(true));
+                return copy;
+            }
+
+            public new void Validate()
+            {
+                if(Results is IList) {
+                    TeaModel.ValidateArray(Results);
+                }
+                base.Validate();
+            }
+
+            public new Dictionary<string, object> ToMap(bool noStream = false)
+            {
+                var map = new Dictionary<string, object>();
+                if (Results != null)
+                {
+                    var list1 = new List<Dictionary<string, object>>();
+                    int n1 = 0;
+                    foreach (var item1 in Results) 
+                    {
+                        list1[n1++] = item1 != null ? item1.ToMap(noStream) : null;
+                    }
+                    map["Results"] = list1;
+                }
+
+                return map;
+            }
+
+            public static new MultiLayerModelData FromMap(Dictionary<string, object> map)
+            {
+                var model = new MultiLayerModelData();
+                if (map.ContainsKey("Results"))
+                {
+                    var list1 = map["Results"] as List<Dictionary<string, object>>;
+                    if (list1 != null && list1.Count > 0)
+                    {
+                        int n1 = 0;
+                        var modelList1 = new List<MultiLayerModelDataResults>();
+                        foreach(var item1 in list1)
+                        {
+                            if (item1 != null)
+                            {
+                                var temp = (Dictionary<string, object>)item1;
+                                modelList1[n1++] = MultiLayerModelDataResults.FromMap(temp);
+                            }
+                        }
+                        model.Results = modelList1;
+                    }
+                }
+
+                return model;
+            }
         }
 
+        public new MultiLayerModel Copy()
+        {
+            MultiLayerModel copy = FromMap(ToMap());
+            return copy;
+        }
+
+        public new MultiLayerModel CopyWithoutStream()
+        {
+            MultiLayerModel copy = FromMap(ToMap(true));
+            return copy;
+        }
+
+        public new void Validate()
+        {
+            if(Data != null) {
+                Data.Validate();
+            }
+            base.Validate();
+        }
+
+        public new Dictionary<string, object> ToMap(bool noStream = false)
+        {
+            var map = new Dictionary<string, object>();
+            if (Data != null)
+            {
+                map["Data"] = Data != null ? Data.ToMap(noStream) : null;
+            }
+
+            return map;
+        }
+
+        public static new MultiLayerModel FromMap(Dictionary<string, object> map)
+        {
+            var model = new MultiLayerModel();
+            if (map.ContainsKey("Data"))
+            {
+                if (map["Data"] != null)
+                {
+                    var temp = (Dictionary<string, object>)map["Data"];
+                    model.Data = MultiLayerModelData.FromMap(temp);
+                }
+            }
+
+            return model;
+        }
     }
 
 }
+

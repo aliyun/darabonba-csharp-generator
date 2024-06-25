@@ -1,0 +1,34 @@
+{
+  "scope": "darabonba",
+  "name": "main",
+  "version": "0.0.1",
+  "main": "./main.dara",
+  "libraries": {
+    "OSS": "alibabacloud:OSS:*"
+  },
+  "csharp": {
+    "namespace": "Darabonba.Test",
+    "typedef": {
+      "HttpResponse": {
+        "import": "System.Net.Http",
+        "type": "HttpResponseMessage",
+        "package": "System.Net.Http:4.3.4"
+      },
+      "HttpHeader": {
+        "import": "System.Net.Http.Headers",
+        "type": "HttpRequestHeaders",
+        "package": "System.Net.Http:4.3.4"
+      },
+      "TeaModel": {
+        "import": "Tea",
+        "type": "TeaModel",
+        "package": "Tea:1.0.11"
+      },
+      "Guzzle": {
+        "import": "System",
+        "type": "Uri",
+        "package": "System.Runtime:4.3.1"
+      }
+    }
+  }
+}

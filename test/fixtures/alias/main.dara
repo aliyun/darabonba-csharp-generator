@@ -1,0 +1,9 @@
+import Source;
+import Import;
+
+static async function emptyModel(): void {
+  var m1 = new Source.M{};
+  var m2 = new Import.M{};
+  Import.test(m2);
+  Source.test(m1);
+}
