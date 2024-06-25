@@ -1,0 +1,2 @@
+@clientName("TeaString");
+static function testRepeatBultin(): string;

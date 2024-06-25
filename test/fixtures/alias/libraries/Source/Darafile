@@ -1,0 +1,12 @@
+{
+  "scope": "darabonba",
+  "name": "source",
+  "version": "0.0.1",
+  "main": "./source.dara",
+  "releases": {
+    "csharp": "Darabonba.source:0.0.2"
+  },
+  "csharp": {
+    "namespace": "Darabonba.Source"
+  }
+}

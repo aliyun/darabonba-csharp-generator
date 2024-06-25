@@ -13,14 +13,14 @@ api hello(): void {
   return;
 }
 
-api helloRuntime(): void {
+api helloRuntime(): string {
   __request.method = 'GET';
   __request.pathname = '/';
   __request.headers = {
     host = 'www.test.com',
   };
 } returns {
-  return;
+  return 'test';
 } runtime {
 
 }

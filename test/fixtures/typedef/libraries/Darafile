@@ -1,0 +1,27 @@
+{
+    "scope": "darabonba",
+    "name": "OSS",
+    "version": "0.0.1",
+    "main": "./oss.dara",
+    "csharp": {
+        "namespace": "Darabonba.import",
+        "className": "Client",
+        "typedef": {
+            "HttpResponse": {
+                "import": "System.Net.Http",
+                "type": "HttpResponseMessage",
+                "package": "System.Net.Http:4.3.4"
+            },
+            "HttpRequest": {
+                "import": "System.Net.Http",
+                "type": "HttpRequestMessage",
+                "package": "System.Net.Http:4.3.4"
+            },
+            "TeaModel": {
+                "import": "Tea",
+                "type": "TeaModel",
+                "package": "Tea:1.0.11"
+            }
+        }
+    }
+}

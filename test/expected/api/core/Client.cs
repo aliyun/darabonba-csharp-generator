@@ -1,14 +1,12 @@
 // This file is auto-generated, don't edit it. Thanks.
 
 using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
-
 using Tea;
 using Tea.Utils;
-
 using Darabonba.Test.Models;
 
 namespace Darabonba.Test
@@ -48,7 +46,7 @@ namespace Darabonba.Test
             return ;
         }
 
-        public void HelloRuntime()
+        public string HelloRuntime()
         {
             Dictionary<string, object> runtime_ = new Dictionary<string, object>(){};
 
@@ -79,7 +77,7 @@ namespace Darabonba.Test
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
-                    return ;
+                    return "test";
                 }
                 catch (Exception e)
                 {
@@ -95,7 +93,7 @@ namespace Darabonba.Test
             throw new TeaUnretryableException(_lastRequest, _lastException);
         }
 
-        public async Task HelloRuntimeAsync()
+        public async Task<string> HelloRuntimeAsync()
         {
             Dictionary<string, object> runtime_ = new Dictionary<string, object>(){};
 
@@ -126,7 +124,7 @@ namespace Darabonba.Test
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
-                    return ;
+                    return "test";
                 }
                 catch (Exception e)
                 {
@@ -184,3 +182,4 @@ namespace Darabonba.Test
 
     }
 }
+
