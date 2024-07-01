@@ -21,4 +21,8 @@ model Request = {
   },
 }
 
+model ComplexRequest = {
+
+}
+
 static function array(request: object, str: string): [ any ];

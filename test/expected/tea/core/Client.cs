@@ -1,24 +1,25 @@
 // This file is auto-generated, don't edit it. Thanks.
 
 using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
-
 using Tea;
 using Tea.Utils;
-
+using SourceClient = Darabonba.import.Client;
+using Darabonba.import.Models;
+using AlibabaCloud.import.Models;
 
 namespace Darabonba.Test
 {
     public class Client 
     {
 
-        public static void Sample(Darabonba.import.Client client)
+        public static void Sample(SourceClient client)
         {
-            Darabonba.import.Models.RuntimeObject runtime = new Darabonba.import.Models.RuntimeObject();
-            AlibabaCloud.import.Models.Request request = new AlibabaCloud.import.Models.Request
+            RuntimeObject runtime = new RuntimeObject();
+            Request request = new Request
             {
                 Accesskey = "accesskey",
                 Region = "region",
@@ -28,3 +29,4 @@ namespace Darabonba.Test
 
     }
 }
+
