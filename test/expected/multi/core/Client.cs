@@ -3,11 +3,11 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Tea;
-using Tea.Utils;
+using Darabonba;
+using Darabonba.Utils;
 using Darabonba.Test.Model.Models;
 using System.Linq;
-using TeaTeaString = Tea.TeaString;
+using DarabonbaStringUtil = Darabonba.Utils.StringUtil;
 using Darabonba.Test.Repeat;
 using Darabonba.Test.Lib;
 using TestCommonClient = Darabonba.Test.Lib.Test.CommonClient;
@@ -34,9 +34,9 @@ namespace Darabonba.Test
             args = fullStr.Split(",").ToList();
             if ((fullStr.Length > 0) && fullStr.Contains("hangzhou"))
             {
-                string newStr1 = TeaTeaString.Replace(fullStr, "/hangzhou/g", "beijing");
+                string newStr1 = DarabonbaStringUtil.Replace(fullStr, "/hangzhou/g", "beijing");
             }
-            TeaString.TestRepeatBultin();
+            StringUtil.TestRepeatBultin();
         }
 
         public static async Task StringTestAsync(List<string> args)
@@ -45,9 +45,9 @@ namespace Darabonba.Test
             args = fullStr.Split(",").ToList();
             if ((fullStr.Length > 0) && fullStr.Contains("hangzhou"))
             {
-                string newStr1 = TeaTeaString.Replace(fullStr, "/hangzhou/g", "beijing");
+                string newStr1 = DarabonbaStringUtil.Replace(fullStr, "/hangzhou/g", "beijing");
             }
-            TeaString.TestRepeatBultin();
+            StringUtil.TestRepeatBultin();
         }
 
         public IAsyncEnumerable<string> Test3()

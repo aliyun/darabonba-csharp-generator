@@ -97,7 +97,7 @@ static async function xmlTest(args: [string]): void {
     var respMap : map[string]any = $XML.parseXml(xml, null);
 }
 
-static async function logerTest(args: [string]): void {
+static async function loggerTest(args: [string]): void {
     $Logger.log("test");
     $Logger.info("test");
     $Logger.warning("test");

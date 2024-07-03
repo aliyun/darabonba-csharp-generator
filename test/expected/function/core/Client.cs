@@ -5,8 +5,8 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Tea;
-using Tea.Utils;
+using Darabonba;
+using Darabonba.Utils;
 
 namespace Darabonba.Test
 {
@@ -21,7 +21,7 @@ namespace Darabonba.Test
         public static Dictionary<string, string> HelloMap()
         {
             Dictionary<string, string> m = new Dictionary<string, string>(){};
-            return TeaConverter.merge<string>
+            return ConverterUtil.Merge<string>
             (
                 new Dictionary<string, string>()
                 {

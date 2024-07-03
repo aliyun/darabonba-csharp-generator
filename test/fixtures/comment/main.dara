@@ -136,8 +136,10 @@ static async function testFunc(): void {
  * @summary annotation test summary
  *
  * @param test string param1
+ * param description1
  * @param _test string param2
  * @return void
+ * return description1
  * @throws InternalError Server error. 500 服务器端出现未知异常。
  * @throws StackNotFound The Stack (%(stack_name)s) could not be found.  404 资源栈不存在。
 */
@@ -150,6 +152,8 @@ static async function testFuncWithAnnotation1(test: string, _test: string): void
  * @summary annotation test summary
  *
  * @deprecated this is deprecated, use new xx instead.
+ * deprecated description 1
+ * deprecated description 2
  * 
  * @param test string param1
  * @param _test string param2

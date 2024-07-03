@@ -5,9 +5,10 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Tea;
-using Tea.Utils;
+using Darabonba;
+using Darabonba.Utils;
 using Darabonba.Test.Models;
+using Darabonba.Exceptions;
 
 namespace Darabonba.Test
 {
@@ -20,7 +21,7 @@ namespace Darabonba.Test
 
         public void Hello()
         {
-            TeaRequest request_ = new TeaRequest();
+            DaraRequest request_ = new DaraRequest();
             request_.Method = "GET";
             request_.Pathname = "/";
             request_.Headers = new Dictionary<string, string>
@@ -32,7 +33,7 @@ namespace Darabonba.Test
             {
                 request_.Headers["host"] = "www.test2.com";
             }
-            TeaResponse response_ = TeaCore.DoAction(request_);
+            DaraResponse response_ = DaraCore.DoAction(request_);
 
             HelloIf();
             return ;
@@ -40,7 +41,7 @@ namespace Darabonba.Test
 
         public async Task HelloAsync()
         {
-            TeaRequest request_ = new TeaRequest();
+            DaraRequest request_ = new DaraRequest();
             request_.Method = "GET";
             request_.Pathname = "/";
             request_.Headers = new Dictionary<string, string>
@@ -52,7 +53,7 @@ namespace Darabonba.Test
             {
                 request_.Headers["host"] = "www.test2.com";
             }
-            TeaResponse response_ = await TeaCore.DoActionAsync(request_);
+            DaraResponse response_ = await DaraCore.DoActionAsync(request_);
 
             HelloIf();
             return ;
@@ -76,7 +77,7 @@ namespace Darabonba.Test
 
         public static void HelloThrow()
         {
-            throw new TeaException(new Dictionary<string, object>(){});
+            throw new DaraException(new Dictionary<string, object>(){});
         }
 
         public static void HelloForBreak()

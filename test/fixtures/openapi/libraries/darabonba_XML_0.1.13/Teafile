@@ -1,0 +1,53 @@
+{
+	"scope": "darabonba",
+	"name": "XML",
+	"version": "0.1.13",
+	"main": "./main.tea",
+	"releases": {
+		"go": "github.com/alibabacloud-go/tea-xml/service:v1.1.3",
+		"java": "com.aliyun:tea-xml:0.1.6",
+		"ts": "@alicloud/tea-xml:0.0.3",
+		"php": "alibabacloud/tea-xml:^0.2",
+		"csharp": "AlibabaCloud.TeaXML:0.0.5",
+		"python": "alibabacloud_tea_xml:0.0.2",
+		"python2": "alibabacloud_tea_xml_py2:0.0.2",
+		"swift": "alibabacloud-sdk-swift/tea-xml:1.0.1"
+	},
+	"java": {
+		"package": "com.aliyun.teaxml"
+	},
+	"csharp": {
+		"namespace": "AlibabaCloud.TeaXML",
+		"className": "Client"
+	},
+	"php": {
+		"package": "AlibabaCloud.Tea.XML",
+		"clientName": "XML"
+	},
+	"python": {
+		"package": "alibabacloud_tea_xml",
+		"clientName": "client"
+	},
+	"python2": {
+		"package": "alibabacloud_tea_xml",
+		"clientName": "client"
+	},
+	"cpp": {
+		"packageInfo": {
+			"git": {
+				"scope": "alibabacloud-sdk-cpp",
+				"project": "dara-xml"
+			}
+		}
+	},
+	"swift": {
+		"clientName": "Client",
+		"packageInfo": {
+		  "name": "DarabonbaXML",
+		  "desc": "Darabonba XML for Swift",
+		  "github": "https://github.com/alibabacloud-sdk-swift/tea-xml",
+		  "author": "Alibaba Cloud SDK",
+		  "email": "sdk-team@alibabacloud.com"
+		}
+	  }
+}

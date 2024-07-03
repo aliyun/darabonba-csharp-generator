@@ -4,18 +4,18 @@ using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using Tea;
+using Darabonba;
 
 namespace Darabonba.Test.Models
 {
-    public class Class : TeaModel {
-        public new Class Copy()
+    public class Class : DaraModel {
+        public Class Copy()
         {
             Class copy = FromMap(ToMap());
             return copy;
         }
 
-        public new Class CopyWithoutStream()
+        public Class CopyWithoutStream()
         {
             Class copy = FromMap(ToMap(true));
             return copy;
@@ -26,13 +26,13 @@ namespace Darabonba.Test.Models
             base.Validate();
         }
 
-        public new Dictionary<string, object> ToMap(bool noStream = false)
+        public Dictionary<string, object> ToMap(bool noStream = false)
         {
             var map = new Dictionary<string, object>();
             return map;
         }
 
-        public static new Class FromMap(Dictionary<string, object> map)
+        public static Class FromMap(Dictionary<string, object> map)
         {
             var model = new Class();
             return model;

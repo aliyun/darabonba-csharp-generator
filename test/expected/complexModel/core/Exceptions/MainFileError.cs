@@ -4,16 +4,16 @@ using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using Tea;
+using Darabonba.Exceptions;
 using Darabonba.Test.Models;
 
 namespace Darabonba.Test.Exceptions
 {
-    public class MainFileError : TeaException {
+    public class MainFileError : DaraException {
         public int? Size { get; set; }
-        public new Dictionary<string, Model> Data { get; set; }
+        public Dictionary<string, Model> Data { get; set; }
         public MainFileErrorModel Model { get; set; }
-        public class MainFileErrorModel : TeaModel
+        public class MainFileErrorModel : DaraModel
         {
             [NameInMap("str")]
             [Validation(Required=true)]
@@ -22,18 +22,18 @@ namespace Darabonba.Test.Exceptions
             [NameInMap("model")]
             [Validation(Required=true)]
             public MainFileErrorModelModel Model { get; set; }
-            public class MainFileErrorModelModel : TeaModel {
+            public class MainFileErrorModelModel : DaraModel {
                 [NameInMap("str")]
                 [Validation(Required=true)]
                 public string Str { get; set; }
 
-                public new MainFileErrorModelModel Copy()
+                public MainFileErrorModelModel Copy()
                 {
                     MainFileErrorModelModel copy = FromMap(ToMap());
                     return copy;
                 }
 
-                public new MainFileErrorModelModel CopyWithoutStream()
+                public MainFileErrorModelModel CopyWithoutStream()
                 {
                     MainFileErrorModelModel copy = FromMap(ToMap(true));
                     return copy;
@@ -41,11 +41,11 @@ namespace Darabonba.Test.Exceptions
 
                 public new void Validate()
                 {
-                    TeaModel.ValidateRequired("Str", Str, true);
+                    DaraModel.ValidateRequired("str", Str, true);
                     base.Validate();
                 }
 
-                public new Dictionary<string, object> ToMap(bool noStream = false)
+                public Dictionary<string, object> ToMap(bool noStream = false)
                 {
                     var map = new Dictionary<string, object>();
                     if (Str != null)
@@ -56,7 +56,7 @@ namespace Darabonba.Test.Exceptions
                     return map;
                 }
 
-                public static new MainFileErrorModelModel FromMap(Dictionary<string, object> map)
+                public static MainFileErrorModelModel FromMap(Dictionary<string, object> map)
                 {
                     var model = new MainFileErrorModelModel();
                     if (map.ContainsKey("str"))
@@ -68,13 +68,13 @@ namespace Darabonba.Test.Exceptions
                 }
             }
 
-            public new MainFileErrorModel Copy()
+            public MainFileErrorModel Copy()
             {
                 MainFileErrorModel copy = FromMap(ToMap());
                 return copy;
             }
 
-            public new MainFileErrorModel CopyWithoutStream()
+            public MainFileErrorModel CopyWithoutStream()
             {
                 MainFileErrorModel copy = FromMap(ToMap(true));
                 return copy;
@@ -82,15 +82,15 @@ namespace Darabonba.Test.Exceptions
 
             public new void Validate()
             {
-                TeaModel.ValidateRequired("Str", Str, true);
+                DaraModel.ValidateRequired("str", Str, true);
                 if (Model != null) {
                     Model.Validate();
                 }
-                TeaModel.ValidateRequired("Model", Model, true);
+                DaraModel.ValidateRequired("model", Model, true);
                 base.Validate();
             }
 
-            public new Dictionary<string, object> ToMap(bool noStream = false)
+            public Dictionary<string, object> ToMap(bool noStream = false)
             {
                 var map = new Dictionary<string, object>();
                 if (Str != null)
@@ -106,7 +106,7 @@ namespace Darabonba.Test.Exceptions
                 return map;
             }
 
-            public static new MainFileErrorModel FromMap(Dictionary<string, object> map)
+            public static MainFileErrorModel FromMap(Dictionary<string, object> map)
             {
                 var model = new MainFileErrorModel();
                 if (map.ContainsKey("str"))
@@ -127,19 +127,19 @@ namespace Darabonba.Test.Exceptions
             }
         }
         public MainFileErrorModel1 Model1 { get; set; }
-        public class MainFileErrorModel1 : TeaModel
+        public class MainFileErrorModel1 : DaraModel
         {
             [NameInMap("code")]
             [Validation(Required=true)]
             public int? Code { get; set; }
 
-            public new MainFileErrorModel1 Copy()
+            public MainFileErrorModel1 Copy()
             {
                 MainFileErrorModel1 copy = FromMap(ToMap());
                 return copy;
             }
 
-            public new MainFileErrorModel1 CopyWithoutStream()
+            public MainFileErrorModel1 CopyWithoutStream()
             {
                 MainFileErrorModel1 copy = FromMap(ToMap(true));
                 return copy;
@@ -147,11 +147,11 @@ namespace Darabonba.Test.Exceptions
 
             public new void Validate()
             {
-                TeaModel.ValidateRequired("Code", Code, true);
+                DaraModel.ValidateRequired("code", Code, true);
                 base.Validate();
             }
 
-            public new Dictionary<string, object> ToMap(bool noStream = false)
+            public Dictionary<string, object> ToMap(bool noStream = false)
             {
                 var map = new Dictionary<string, object>();
                 if (Code != null)
@@ -162,7 +162,7 @@ namespace Darabonba.Test.Exceptions
                 return map;
             }
 
-            public static new MainFileErrorModel1 FromMap(Dictionary<string, object> map)
+            public static MainFileErrorModel1 FromMap(Dictionary<string, object> map)
             {
                 var model = new MainFileErrorModel1();
                 if (map.ContainsKey("code"))
@@ -174,7 +174,7 @@ namespace Darabonba.Test.Exceptions
             }
         }
 
-        public class MainFileErrorModel : TeaModel
+        public class MainFileErrorModel : DaraModel
         {
             [NameInMap("str")]
             [Validation(Required=true)]
@@ -183,18 +183,18 @@ namespace Darabonba.Test.Exceptions
             [NameInMap("model")]
             [Validation(Required=true)]
             public MainFileErrorModelModel Model { get; set; }
-            public class MainFileErrorModelModel : TeaModel {
+            public class MainFileErrorModelModel : DaraModel {
                 [NameInMap("str")]
                 [Validation(Required=true)]
                 public string Str { get; set; }
 
-                public new MainFileErrorModelModel Copy()
+                public MainFileErrorModelModel Copy()
                 {
                     MainFileErrorModelModel copy = FromMap(ToMap());
                     return copy;
                 }
 
-                public new MainFileErrorModelModel CopyWithoutStream()
+                public MainFileErrorModelModel CopyWithoutStream()
                 {
                     MainFileErrorModelModel copy = FromMap(ToMap(true));
                     return copy;
@@ -202,11 +202,11 @@ namespace Darabonba.Test.Exceptions
 
                 public new void Validate()
                 {
-                    TeaModel.ValidateRequired("Str", Str, true);
+                    DaraModel.ValidateRequired("str", Str, true);
                     base.Validate();
                 }
 
-                public new Dictionary<string, object> ToMap(bool noStream = false)
+                public Dictionary<string, object> ToMap(bool noStream = false)
                 {
                     var map = new Dictionary<string, object>();
                     if (Str != null)
@@ -217,7 +217,7 @@ namespace Darabonba.Test.Exceptions
                     return map;
                 }
 
-                public static new MainFileErrorModelModel FromMap(Dictionary<string, object> map)
+                public static MainFileErrorModelModel FromMap(Dictionary<string, object> map)
                 {
                     var model = new MainFileErrorModelModel();
                     if (map.ContainsKey("str"))
@@ -229,13 +229,13 @@ namespace Darabonba.Test.Exceptions
                 }
             }
 
-            public new MainFileErrorModel Copy()
+            public MainFileErrorModel Copy()
             {
                 MainFileErrorModel copy = FromMap(ToMap());
                 return copy;
             }
 
-            public new MainFileErrorModel CopyWithoutStream()
+            public MainFileErrorModel CopyWithoutStream()
             {
                 MainFileErrorModel copy = FromMap(ToMap(true));
                 return copy;
@@ -243,15 +243,15 @@ namespace Darabonba.Test.Exceptions
 
             public new void Validate()
             {
-                TeaModel.ValidateRequired("Str", Str, true);
+                DaraModel.ValidateRequired("str", Str, true);
                 if (Model != null) {
                     Model.Validate();
                 }
-                TeaModel.ValidateRequired("Model", Model, true);
+                DaraModel.ValidateRequired("model", Model, true);
                 base.Validate();
             }
 
-            public new Dictionary<string, object> ToMap(bool noStream = false)
+            public Dictionary<string, object> ToMap(bool noStream = false)
             {
                 var map = new Dictionary<string, object>();
                 if (Str != null)
@@ -267,7 +267,7 @@ namespace Darabonba.Test.Exceptions
                 return map;
             }
 
-            public static new MainFileErrorModel FromMap(Dictionary<string, object> map)
+            public static MainFileErrorModel FromMap(Dictionary<string, object> map)
             {
                 var model = new MainFileErrorModel();
                 if (map.ContainsKey("str"))
@@ -287,19 +287,19 @@ namespace Darabonba.Test.Exceptions
                 return model;
             }
         }
-        public class MainFileErrorModel1 : TeaModel
+        public class MainFileErrorModel1 : DaraModel
         {
             [NameInMap("code")]
             [Validation(Required=true)]
             public int? Code { get; set; }
 
-            public new MainFileErrorModel1 Copy()
+            public MainFileErrorModel1 Copy()
             {
                 MainFileErrorModel1 copy = FromMap(ToMap());
                 return copy;
             }
 
-            public new MainFileErrorModel1 CopyWithoutStream()
+            public MainFileErrorModel1 CopyWithoutStream()
             {
                 MainFileErrorModel1 copy = FromMap(ToMap(true));
                 return copy;
@@ -307,11 +307,11 @@ namespace Darabonba.Test.Exceptions
 
             public new void Validate()
             {
-                TeaModel.ValidateRequired("Code", Code, true);
+                DaraModel.ValidateRequired("code", Code, true);
                 base.Validate();
             }
 
-            public new Dictionary<string, object> ToMap(bool noStream = false)
+            public Dictionary<string, object> ToMap(bool noStream = false)
             {
                 var map = new Dictionary<string, object>();
                 if (Code != null)
@@ -322,7 +322,7 @@ namespace Darabonba.Test.Exceptions
                 return map;
             }
 
-            public static new MainFileErrorModel1 FromMap(Dictionary<string, object> map)
+            public static MainFileErrorModel1 FromMap(Dictionary<string, object> map)
             {
                 var model = new MainFileErrorModel1();
                 if (map.ContainsKey("code"))

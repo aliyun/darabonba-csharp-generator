@@ -1,13 +1,12 @@
 // This file is auto-generated, don't edit it. Thanks.
 
-using Darabonba.Test.Models;
 using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Tea;
-using Tea.Utils;
+using Darabonba;
+using Darabonba.Utils;
 using Darabonba.import.Models;
 using SourceClient = Darabonba.import.Client;
 

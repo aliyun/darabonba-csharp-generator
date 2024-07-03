@@ -4,12 +4,12 @@ using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using Tea;
+using Darabonba.Exceptions;
 
 namespace Darabonba.Test.Exceptions
 {
-    public class Err1 : TeaException {
-        public new Dictionary<string, string> Data { get; set; }
+    public class Err1 : DaraException {
+        public Dictionary<string, string> Data { get; set; }
 
         public Err1() : base()
         {

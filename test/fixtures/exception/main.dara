@@ -19,6 +19,11 @@ exception Err2 = {
   accessErrMessage: string
 }
 
+@aliasName("TestException")
+exception TestError extends FileException {
+  retryAfter: long(description="Retry After(ms)"),
+}
+
 static async function exceptionTest(args: [string]): void {
   if (args.length() < 0) {
       throw new ExtendFileException{
