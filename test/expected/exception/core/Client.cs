@@ -5,10 +5,11 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Tea;
-using Tea.Utils;
+using Darabonba;
+using Darabonba.Utils;
 using Darabonba.Test.Exceptions;
 using Darabonba.import.Exceptions;
+using Darabonba.Exceptions;
 
 namespace Darabonba.Test
 {
@@ -84,7 +85,7 @@ namespace Darabonba.Test
                 }
                 else
                 {
-                    throw new TeaException
+                    throw new DaraException
                     {
                         Name = "str",
                         Code = "str",
@@ -103,7 +104,7 @@ namespace Darabonba.Test
             {
                 Console.WriteLine(err.Name);
             }
-            catch (Tea.TeaException err)
+            catch (DaraException err)
             {
                 Console.WriteLine(err.Name);
             }
@@ -148,7 +149,7 @@ namespace Darabonba.Test
                 }
                 else
                 {
-                    throw new TeaException
+                    throw new DaraException
                     {
                         Name = "str",
                         Code = "str",
@@ -167,7 +168,7 @@ namespace Darabonba.Test
             {
                 Console.WriteLine(err.Name);
             }
-            catch (Tea.TeaException err)
+            catch (DaraException err)
             {
                 Console.WriteLine(err.Name);
             }

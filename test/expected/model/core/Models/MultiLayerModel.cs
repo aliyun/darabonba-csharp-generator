@@ -4,23 +4,23 @@ using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using Tea;
+using Darabonba;
 
 namespace Darabonba.Test.Models
 {
-    public class MultiLayerModel : TeaModel {
+    public class MultiLayerModel : DaraModel {
         [NameInMap("Data")]
         [Validation(Required=false)]
         public MultiLayerModelData Data { get; set; }
-        public class MultiLayerModelData : TeaModel {
+        public class MultiLayerModelData : DaraModel {
             [NameInMap("Results")]
             [Validation(Required=false)]
             public List<MultiLayerModelDataResults> Results { get; set; }
-            public class MultiLayerModelDataResults : TeaModel {
+            public class MultiLayerModelDataResults : DaraModel {
                 [NameInMap("TextRectangles")]
                 [Validation(Required=false)]
                 public MultiLayerModelDataResultsTextRectangles TextRectangles { get; set; }
-                public class MultiLayerModelDataResultsTextRectangles : TeaModel {
+                public class MultiLayerModelDataResultsTextRectangles : DaraModel {
                     [NameInMap("Top")]
                     [Validation(Required=false)]
                     public int? Top { get; set; }
@@ -41,24 +41,19 @@ namespace Darabonba.Test.Models
                     [Validation(Required=false)]
                     public int? Left { get; set; }
 
-                    public new MultiLayerModelDataResultsTextRectangles Copy()
+                    public MultiLayerModelDataResultsTextRectangles Copy()
                     {
                         MultiLayerModelDataResultsTextRectangles copy = FromMap(ToMap());
                         return copy;
                     }
 
-                    public new MultiLayerModelDataResultsTextRectangles CopyWithoutStream()
+                    public MultiLayerModelDataResultsTextRectangles CopyWithoutStream()
                     {
                         MultiLayerModelDataResultsTextRectangles copy = FromMap(ToMap(true));
                         return copy;
                     }
 
-                    public new void Validate()
-                    {
-                        base.Validate();
-                    }
-
-                    public new Dictionary<string, object> ToMap(bool noStream = false)
+                    public Dictionary<string, object> ToMap(bool noStream = false)
                     {
                         var map = new Dictionary<string, object>();
                         if (Top != null)
@@ -89,7 +84,7 @@ namespace Darabonba.Test.Models
                         return map;
                     }
 
-                    public static new MultiLayerModelDataResultsTextRectangles FromMap(Dictionary<string, object> map)
+                    public static MultiLayerModelDataResultsTextRectangles FromMap(Dictionary<string, object> map)
                     {
                         var model = new MultiLayerModelDataResultsTextRectangles();
                         if (map.ContainsKey("Top"))
@@ -129,27 +124,19 @@ namespace Darabonba.Test.Models
                 [Validation(Required=false)]
                 public float? Probability { get; set; }
 
-                public new MultiLayerModelDataResults Copy()
+                public MultiLayerModelDataResults Copy()
                 {
                     MultiLayerModelDataResults copy = FromMap(ToMap());
                     return copy;
                 }
 
-                public new MultiLayerModelDataResults CopyWithoutStream()
+                public MultiLayerModelDataResults CopyWithoutStream()
                 {
                     MultiLayerModelDataResults copy = FromMap(ToMap(true));
                     return copy;
                 }
 
-                public new void Validate()
-                {
-                    if (TextRectangles != null) {
-                        TextRectangles.Validate();
-                    }
-                    base.Validate();
-                }
-
-                public new Dictionary<string, object> ToMap(bool noStream = false)
+                public Dictionary<string, object> ToMap(bool noStream = false)
                 {
                     var map = new Dictionary<string, object>();
                     if (TextRectangles != null)
@@ -170,7 +157,7 @@ namespace Darabonba.Test.Models
                     return map;
                 }
 
-                public static new MultiLayerModelDataResults FromMap(Dictionary<string, object> map)
+                public static MultiLayerModelDataResults FromMap(Dictionary<string, object> map)
                 {
                     var model = new MultiLayerModelDataResults();
                     if (map.ContainsKey("TextRectangles"))
@@ -196,27 +183,19 @@ namespace Darabonba.Test.Models
                 }
             }
 
-            public new MultiLayerModelData Copy()
+            public MultiLayerModelData Copy()
             {
                 MultiLayerModelData copy = FromMap(ToMap());
                 return copy;
             }
 
-            public new MultiLayerModelData CopyWithoutStream()
+            public MultiLayerModelData CopyWithoutStream()
             {
                 MultiLayerModelData copy = FromMap(ToMap(true));
                 return copy;
             }
 
-            public new void Validate()
-            {
-                if (Results is IList) {
-                    TeaModel.ValidateArray(Results);
-                }
-                base.Validate();
-            }
-
-            public new Dictionary<string, object> ToMap(bool noStream = false)
+            public Dictionary<string, object> ToMap(bool noStream = false)
             {
                 var map = new Dictionary<string, object>();
                 if (Results != null)
@@ -233,7 +212,7 @@ namespace Darabonba.Test.Models
                 return map;
             }
 
-            public static new MultiLayerModelData FromMap(Dictionary<string, object> map)
+            public static MultiLayerModelData FromMap(Dictionary<string, object> map)
             {
                 var model = new MultiLayerModelData();
                 if (map.ContainsKey("Results"))
@@ -259,27 +238,19 @@ namespace Darabonba.Test.Models
             }
         }
 
-        public new MultiLayerModel Copy()
+        public MultiLayerModel Copy()
         {
             MultiLayerModel copy = FromMap(ToMap());
             return copy;
         }
 
-        public new MultiLayerModel CopyWithoutStream()
+        public MultiLayerModel CopyWithoutStream()
         {
             MultiLayerModel copy = FromMap(ToMap(true));
             return copy;
         }
 
-        public new void Validate()
-        {
-            if (Data != null) {
-                Data.Validate();
-            }
-            base.Validate();
-        }
-
-        public new Dictionary<string, object> ToMap(bool noStream = false)
+        public Dictionary<string, object> ToMap(bool noStream = false)
         {
             var map = new Dictionary<string, object>();
             if (Data != null)
@@ -290,7 +261,7 @@ namespace Darabonba.Test.Models
             return map;
         }
 
-        public static new MultiLayerModel FromMap(Dictionary<string, object> map)
+        public static MultiLayerModel FromMap(Dictionary<string, object> map)
         {
             var model = new MultiLayerModel();
             if (map.ContainsKey("Data"))

@@ -2,12 +2,12 @@ using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using Tea;
+using Darabonba;
 using AlibabaCloud.TeaUtil.Models;
 
 namespace Darabonba.Test.Model.Models
 {
-    public class Info : TeaModel {
+    public class Info : DaraModel {
         [NameInMap("name")]
         [Validation(Required=true)]
         public string Name { get; set; }
@@ -20,30 +20,19 @@ namespace Darabonba.Test.Model.Models
         [Validation(Required=true)]
         public RuntimeOptions Runtime { get; set; }
 
-        public new Info Copy()
+        public Info Copy()
         {
             Info copy = FromMap(ToMap());
             return copy;
         }
 
-        public new Info CopyWithoutStream()
+        public Info CopyWithoutStream()
         {
             Info copy = FromMap(ToMap(true));
             return copy;
         }
 
-        public new void Validate()
-        {
-            TeaModel.ValidateRequired("Name", Name, true);
-            TeaModel.ValidateRequired("Age", Age, true);
-            if (Runtime != null) {
-                Runtime.Validate();
-            }
-            TeaModel.ValidateRequired("Runtime", Runtime, true);
-            base.Validate();
-        }
-
-        public new Dictionary<string, object> ToMap(bool noStream = false)
+        public Dictionary<string, object> ToMap(bool noStream = false)
         {
             var map = new Dictionary<string, object>();
             if (Name != null)
@@ -64,7 +53,7 @@ namespace Darabonba.Test.Model.Models
             return map;
         }
 
-        public static new Info FromMap(Dictionary<string, object> map)
+        public static Info FromMap(Dictionary<string, object> map)
         {
             var model = new Info();
             if (map.ContainsKey("name"))

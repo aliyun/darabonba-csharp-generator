@@ -3,6 +3,9 @@
   "name": "main",
   "version": "0.0.1",
   "main": "./main.dara",
+  "libraries": {
+    "Util": "darabonba:Util:*"
+  },
   "csharp": {
     "namespace": "Darabonba.Test"
   }

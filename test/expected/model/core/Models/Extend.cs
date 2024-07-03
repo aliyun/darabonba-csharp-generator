@@ -4,7 +4,7 @@ using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using Tea;
+using Darabonba;
 
 namespace Darabonba.Test.Models
 {
@@ -13,25 +13,19 @@ namespace Darabonba.Test.Models
         [Validation(Required=true)]
         public int? Size { get; set; }
 
-        public new Extend Copy()
+        public Extend Copy()
         {
             Extend copy = FromMap(ToMap());
             return copy;
         }
 
-        public new Extend CopyWithoutStream()
+        public Extend CopyWithoutStream()
         {
             Extend copy = FromMap(ToMap(true));
             return copy;
         }
 
-        public new void Validate()
-        {
-            TeaModel.ValidateRequired("Size", Size, true);
-            base.Validate();
-        }
-
-        public new Dictionary<string, object> ToMap(bool noStream = false)
+        public Dictionary<string, object> ToMap(bool noStream = false)
         {
             var map = new Dictionary<string, object>();
             if (Size != null)
@@ -42,7 +36,7 @@ namespace Darabonba.Test.Models
             return map;
         }
 
-        public static new Extend FromMap(Dictionary<string, object> map)
+        public static Extend FromMap(Dictionary<string, object> map)
         {
             var model = new Extend();
             if (map.ContainsKey("size"))

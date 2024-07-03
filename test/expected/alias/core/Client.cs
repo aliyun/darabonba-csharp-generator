@@ -5,10 +5,10 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Tea;
-using Tea.Utils;
-using ImportClient = Darabonba.Import.Client;
-using SourceClient = Darabonba.Source.Client;
+using Darabonba;
+using Darabonba.Utils;
+using _ImportClient = Darabonba.ImportClient.Client;
+using SourceClient = Darabonba.ImportClientClient.Client;
 
 namespace Darabonba.Test
 {
@@ -17,17 +17,17 @@ namespace Darabonba.Test
 
         public static void EmptyModel()
         {
-            Darabonba.Source.Models.M m1 = new Darabonba.Source.Models.M();
-            Darabonba.Import.Models.M m2 = new Darabonba.Import.Models.M();
-            ImportClient.Test(m2);
+            Darabonba.ImportClientClient.Models.M m1 = new Darabonba.ImportClientClient.Models.M();
+            Darabonba.ImportClient.Models.M m2 = new Darabonba.ImportClient.Models.M();
+            _ImportClient.Test(m2);
             SourceClient.Test(m1);
         }
 
         public static async Task EmptyModelAsync()
         {
-            Darabonba.Source.Models.M m1 = new Darabonba.Source.Models.M();
-            Darabonba.Import.Models.M m2 = new Darabonba.Import.Models.M();
-            ImportClient.Test(m2);
+            Darabonba.ImportClientClient.Models.M m1 = new Darabonba.ImportClientClient.Models.M();
+            Darabonba.ImportClient.Models.M m2 = new Darabonba.ImportClient.Models.M();
+            _ImportClient.Test(m2);
             SourceClient.Test(m1);
         }
 

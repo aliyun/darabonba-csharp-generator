@@ -4,11 +4,11 @@ using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using Tea;
+using Darabonba;
 
 namespace Darabonba.Test.Models
 {
-    public class MyModel : TeaModel {
+    public class MyModel : DaraModel {
         [NameInMap("stringfield")]
         [Validation(Required=true)]
         public string Stringfield { get; set; }
@@ -28,30 +28,24 @@ namespace Darabonba.Test.Models
         [NameInMap("submodel")]
         [Validation(Required=true)]
         public MyModelSubmodel Submodel { get; set; }
-        public class MyModelSubmodel : TeaModel {
+        public class MyModelSubmodel : DaraModel {
             [NameInMap("stringfield")]
             [Validation(Required=true)]
             public string Stringfield { get; set; }
 
-            public new MyModelSubmodel Copy()
+            public MyModelSubmodel Copy()
             {
                 MyModelSubmodel copy = FromMap(ToMap());
                 return copy;
             }
 
-            public new MyModelSubmodel CopyWithoutStream()
+            public MyModelSubmodel CopyWithoutStream()
             {
                 MyModelSubmodel copy = FromMap(ToMap(true));
                 return copy;
             }
 
-            public new void Validate()
-            {
-                TeaModel.ValidateRequired("Stringfield", Stringfield, true);
-                base.Validate();
-            }
-
-            public new Dictionary<string, object> ToMap(bool noStream = false)
+            public Dictionary<string, object> ToMap(bool noStream = false)
             {
                 var map = new Dictionary<string, object>();
                 if (Stringfield != null)
@@ -62,7 +56,7 @@ namespace Darabonba.Test.Models
                 return map;
             }
 
-            public static new MyModelSubmodel FromMap(Dictionary<string, object> map)
+            public static MyModelSubmodel FromMap(Dictionary<string, object> map)
             {
                 var model = new MyModelSubmodel();
                 if (map.ContainsKey("stringfield"))
@@ -88,11 +82,11 @@ namespace Darabonba.Test.Models
 
         [NameInMap("request")]
         [Validation(Required=true)]
-        public TeaRequest Request { get; set; }
+        public DaraRequest Request { get; set; }
 
         [NameInMap("m")]
         [Validation(Required=true)]
-        public TeaModel M { get; set; }
+        public DaraModel M { get; set; }
 
         [NameInMap("mapModel")]
         [Validation(Required=true)]
@@ -102,51 +96,19 @@ namespace Darabonba.Test.Models
         [Validation(Required=true)]
         public Dictionary<string, MyModel.MyModelSubmodel> SubmodelMap { get; set; }
 
-        public new MyModel Copy()
+        public MyModel Copy()
         {
             MyModel copy = FromMap(ToMap());
             return copy;
         }
 
-        public new MyModel CopyWithoutStream()
+        public MyModel CopyWithoutStream()
         {
             MyModel copy = FromMap(ToMap(true));
             return copy;
         }
 
-        public new void Validate()
-        {
-            TeaModel.ValidateRequired("Stringfield", Stringfield, true);
-            if (Stringarrayfield is IList) {
-                TeaModel.ValidateArray(Stringarrayfield);
-            }
-            TeaModel.ValidateRequired("Stringarrayfield", Stringarrayfield, true);
-            if (Mapfield is IDictionary) {
-                TeaModel.ValidateMap(Mapfield);
-            }
-            TeaModel.ValidateRequired("Mapfield", Mapfield, true);
-            TeaModel.ValidateRequired("Name", Name, true);
-            if (Submodel != null) {
-                Submodel.Validate();
-            }
-            TeaModel.ValidateRequired("Submodel", Submodel, true);
-            TeaModel.ValidateRequired("Object", Object, true);
-            TeaModel.ValidateRequired("Numberfield", Numberfield, true);
-            TeaModel.ValidateRequired("Readable", Readable, true);
-            TeaModel.ValidateRequired("Request", Request, true);
-            TeaModel.ValidateRequired("M", M, true);
-            if (MapModel is IDictionary) {
-                TeaModel.ValidateMap(MapModel);
-            }
-            TeaModel.ValidateRequired("MapModel", MapModel, true);
-            if (SubmodelMap is IDictionary) {
-                TeaModel.ValidateMap(SubmodelMap);
-            }
-            TeaModel.ValidateRequired("SubmodelMap", SubmodelMap, true);
-            base.Validate();
-        }
-
-        public new Dictionary<string, object> ToMap(bool noStream = false)
+        public Dictionary<string, object> ToMap(bool noStream = false)
         {
             var map = new Dictionary<string, object>();
             if (Stringfield != null)
@@ -233,7 +195,7 @@ namespace Darabonba.Test.Models
             return map;
         }
 
-        public static new MyModel FromMap(Dictionary<string, object> map)
+        public static MyModel FromMap(Dictionary<string, object> map)
         {
             var model = new MyModel();
             if (map.ContainsKey("stringfield"))
@@ -301,12 +263,12 @@ namespace Darabonba.Test.Models
 
             if (map.ContainsKey("request"))
             {
-                model.Request = TeaRequest.FromMap(map["request"]);
+                model.Request = DaraRequest.FromMap(map["request"]);
             }
 
             if (map.ContainsKey("m"))
             {
-                model.M = TeaModel.FromMap(map["m"]);
+                model.M = DaraModel.FromMap(map["m"]);
             }
 
             if (map.ContainsKey("mapModel"))

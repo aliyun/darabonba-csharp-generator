@@ -4,11 +4,11 @@ using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using Tea;
+using Darabonba;
 
 namespace Darabonba.Test.Models
 {
-    public class Config : TeaModel {
+    public class Config : DaraModel {
         [NameInMap("protocol")]
         [Validation(Required=true, MaxLength=50, Pattern="pattern")]
         public string Protocol { get; set; }
@@ -33,38 +33,19 @@ namespace Darabonba.Test.Models
         [Validation(Required=true)]
         public long? LongNum { get; set; }
 
-        public new Config Copy()
+        public Config Copy()
         {
             Config copy = FromMap(ToMap());
             return copy;
         }
 
-        public new Config CopyWithoutStream()
+        public Config CopyWithoutStream()
         {
             Config copy = FromMap(ToMap(true));
             return copy;
         }
 
-        public new void Validate()
-        {
-            TeaModel.ValidateRequired("Protocol", Protocol, true);
-            TeaModel.ValidatePattern("Protocol", Protocol, "pattern");
-            TeaModel.ValidateMaxLength("Protocol", Protocol, 50);
-            if (ImportConfig != null) {
-                ImportConfig.Validate();
-            }
-            TeaModel.ValidateRequired("ImportConfig", ImportConfig, true);
-            TeaModel.ValidateRequired("Query", Query, true);
-            if (ComplexList is IList) {
-                TeaModel.ValidateArray(ComplexList);
-            }
-            TeaModel.ValidateRequired("ComplexList", ComplexList, true);
-            TeaModel.ValidateRequired("FloatNum", FloatNum, true);
-            TeaModel.ValidateRequired("LongNum", LongNum, true);
-            base.Validate();
-        }
-
-        public new Dictionary<string, object> ToMap(bool noStream = false)
+        public Dictionary<string, object> ToMap(bool noStream = false)
         {
             var map = new Dictionary<string, object>();
             if (Protocol != null)
@@ -112,7 +93,7 @@ namespace Darabonba.Test.Models
             return map;
         }
 
-        public static new Config FromMap(Dictionary<string, object> map)
+        public static Config FromMap(Dictionary<string, object> map)
         {
             var model = new Config();
             if (map.ContainsKey("protocol"))

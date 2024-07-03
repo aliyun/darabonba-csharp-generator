@@ -4,34 +4,28 @@ using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using Tea;
+using Darabonba;
 
 namespace Darabonba.Test.Models
 {
-    public class Parent : TeaModel {
+    public class Parent : DaraModel {
         [NameInMap("name")]
         [Validation(Required=true)]
         public string Name { get; set; }
 
-        public new Parent Copy()
+        public Parent Copy()
         {
             Parent copy = FromMap(ToMap());
             return copy;
         }
 
-        public new Parent CopyWithoutStream()
+        public Parent CopyWithoutStream()
         {
             Parent copy = FromMap(ToMap(true));
             return copy;
         }
 
-        public new void Validate()
-        {
-            TeaModel.ValidateRequired("Name", Name, true);
-            base.Validate();
-        }
-
-        public new Dictionary<string, object> ToMap(bool noStream = false)
+        public Dictionary<string, object> ToMap(bool noStream = false)
         {
             var map = new Dictionary<string, object>();
             if (Name != null)
@@ -42,7 +36,7 @@ namespace Darabonba.Test.Models
             return map;
         }
 
-        public static new Parent FromMap(Dictionary<string, object> map)
+        public static Parent FromMap(Dictionary<string, object> map)
         {
             var model = new Parent();
             if (map.ContainsKey("name"))

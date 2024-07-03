@@ -4,17 +4,17 @@ using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using Tea;
+using Darabonba;
 using SourceClient = Darabonba.import.Client;
 using Darabonba.import.Models;
 
 namespace Darabonba.Test.Models
 {
-    public class MyModel : TeaModel {
+    public class MyModel : DaraModel {
         [NameInMap("model")]
         [Validation(Required=true)]
         public MyModelModel Model { get; set; }
-        public class MyModelModel : TeaModel {
+        public class MyModelModel : DaraModel {
             [NameInMap("str")]
             [Validation(Required=true)]
             public string Str { get; set; }
@@ -22,30 +22,24 @@ namespace Darabonba.Test.Models
             [NameInMap("model")]
             [Validation(Required=true)]
             public MyModelModelModel Model { get; set; }
-            public class MyModelModelModel : TeaModel {
+            public class MyModelModelModel : DaraModel {
                 [NameInMap("str")]
                 [Validation(Required=true)]
                 public string Str { get; set; }
 
-                public new MyModelModelModel Copy()
+                public MyModelModelModel Copy()
                 {
                     MyModelModelModel copy = FromMap(ToMap());
                     return copy;
                 }
 
-                public new MyModelModelModel CopyWithoutStream()
+                public MyModelModelModel CopyWithoutStream()
                 {
                     MyModelModelModel copy = FromMap(ToMap(true));
                     return copy;
                 }
 
-                public new void Validate()
-                {
-                    TeaModel.ValidateRequired("Str", Str, true);
-                    base.Validate();
-                }
-
-                public new Dictionary<string, object> ToMap(bool noStream = false)
+                public Dictionary<string, object> ToMap(bool noStream = false)
                 {
                     var map = new Dictionary<string, object>();
                     if (Str != null)
@@ -56,7 +50,7 @@ namespace Darabonba.Test.Models
                     return map;
                 }
 
-                public static new MyModelModelModel FromMap(Dictionary<string, object> map)
+                public static MyModelModelModel FromMap(Dictionary<string, object> map)
                 {
                     var model = new MyModelModelModel();
                     if (map.ContainsKey("str"))
@@ -68,29 +62,19 @@ namespace Darabonba.Test.Models
                 }
             }
 
-            public new MyModelModel Copy()
+            public MyModelModel Copy()
             {
                 MyModelModel copy = FromMap(ToMap());
                 return copy;
             }
 
-            public new MyModelModel CopyWithoutStream()
+            public MyModelModel CopyWithoutStream()
             {
                 MyModelModel copy = FromMap(ToMap(true));
                 return copy;
             }
 
-            public new void Validate()
-            {
-                TeaModel.ValidateRequired("Str", Str, true);
-                if (Model != null) {
-                    Model.Validate();
-                }
-                TeaModel.ValidateRequired("Model", Model, true);
-                base.Validate();
-            }
-
-            public new Dictionary<string, object> ToMap(bool noStream = false)
+            public Dictionary<string, object> ToMap(bool noStream = false)
             {
                 var map = new Dictionary<string, object>();
                 if (Str != null)
@@ -106,7 +90,7 @@ namespace Darabonba.Test.Models
                 return map;
             }
 
-            public static new MyModelModel FromMap(Dictionary<string, object> map)
+            public static MyModelModel FromMap(Dictionary<string, object> map)
             {
                 var model = new MyModelModel();
                 if (map.ContainsKey("str"))
@@ -150,7 +134,7 @@ namespace Darabonba.Test.Models
         [NameInMap("submodel")]
         [Validation(Required=true)]
         public MyModelSubmodel Submodel { get; set; }
-        public class MyModelSubmodel : TeaModel {
+        public class MyModelSubmodel : DaraModel {
             [NameInMap("stringfield")]
             [Validation(Required=true)]
             public string Stringfield { get; set; }
@@ -158,30 +142,24 @@ namespace Darabonba.Test.Models
             [NameInMap("model")]
             [Validation(Required=true)]
             public MyModelSubmodelModel Model { get; set; }
-            public class MyModelSubmodelModel : TeaModel {
+            public class MyModelSubmodelModel : DaraModel {
                 [NameInMap("str")]
                 [Validation(Required=true)]
                 public string Str { get; set; }
 
-                public new MyModelSubmodelModel Copy()
+                public MyModelSubmodelModel Copy()
                 {
                     MyModelSubmodelModel copy = FromMap(ToMap());
                     return copy;
                 }
 
-                public new MyModelSubmodelModel CopyWithoutStream()
+                public MyModelSubmodelModel CopyWithoutStream()
                 {
                     MyModelSubmodelModel copy = FromMap(ToMap(true));
                     return copy;
                 }
 
-                public new void Validate()
-                {
-                    TeaModel.ValidateRequired("Str", Str, true);
-                    base.Validate();
-                }
-
-                public new Dictionary<string, object> ToMap(bool noStream = false)
+                public Dictionary<string, object> ToMap(bool noStream = false)
                 {
                     var map = new Dictionary<string, object>();
                     if (Str != null)
@@ -192,7 +170,7 @@ namespace Darabonba.Test.Models
                     return map;
                 }
 
-                public static new MyModelSubmodelModel FromMap(Dictionary<string, object> map)
+                public static MyModelSubmodelModel FromMap(Dictionary<string, object> map)
                 {
                     var model = new MyModelSubmodelModel();
                     if (map.ContainsKey("str"))
@@ -204,29 +182,19 @@ namespace Darabonba.Test.Models
                 }
             }
 
-            public new MyModelSubmodel Copy()
+            public MyModelSubmodel Copy()
             {
                 MyModelSubmodel copy = FromMap(ToMap());
                 return copy;
             }
 
-            public new MyModelSubmodel CopyWithoutStream()
+            public MyModelSubmodel CopyWithoutStream()
             {
                 MyModelSubmodel copy = FromMap(ToMap(true));
                 return copy;
             }
 
-            public new void Validate()
-            {
-                TeaModel.ValidateRequired("Stringfield", Stringfield, true);
-                if (Model != null) {
-                    Model.Validate();
-                }
-                TeaModel.ValidateRequired("Model", Model, true);
-                base.Validate();
-            }
-
-            public new Dictionary<string, object> ToMap(bool noStream = false)
+            public Dictionary<string, object> ToMap(bool noStream = false)
             {
                 var map = new Dictionary<string, object>();
                 if (Stringfield != null)
@@ -242,7 +210,7 @@ namespace Darabonba.Test.Models
                 return map;
             }
 
-            public static new MyModelSubmodel FromMap(Dictionary<string, object> map)
+            public static MyModelSubmodel FromMap(Dictionary<string, object> map)
             {
                 var model = new MyModelSubmodel();
                 if (map.ContainsKey("stringfield"))
@@ -274,31 +242,26 @@ namespace Darabonba.Test.Models
         [NameInMap("subarraymodel")]
         [Validation(Required=true)]
         public List<MyModelSubarraymodel> Subarraymodel { get; set; }
-        public class MyModelSubarraymodel : TeaModel {
-            public new MyModelSubarraymodel Copy()
+        public class MyModelSubarraymodel : DaraModel {
+            public MyModelSubarraymodel Copy()
             {
                 MyModelSubarraymodel copy = FromMap(ToMap());
                 return copy;
             }
 
-            public new MyModelSubarraymodel CopyWithoutStream()
+            public MyModelSubarraymodel CopyWithoutStream()
             {
                 MyModelSubarraymodel copy = FromMap(ToMap(true));
                 return copy;
             }
 
-            public new void Validate()
-            {
-                base.Validate();
-            }
-
-            public new Dictionary<string, object> ToMap(bool noStream = false)
+            public Dictionary<string, object> ToMap(bool noStream = false)
             {
                 var map = new Dictionary<string, object>();
                 return map;
             }
 
-            public static new MyModelSubarraymodel FromMap(Dictionary<string, object> map)
+            public static MyModelSubarraymodel FromMap(Dictionary<string, object> map)
             {
                 var model = new MyModelSubarraymodel();
                 return model;
@@ -363,7 +326,7 @@ namespace Darabonba.Test.Models
 
         [NameInMap("request")]
         [Validation(Required=true)]
-        public TeaRequest Request { get; set; }
+        public DaraRequest Request { get; set; }
 
         [NameInMap("complexList")]
         [Validation(Required=true)]
@@ -433,121 +396,19 @@ namespace Darabonba.Test.Models
         [Validation(Required=false)]
         public string Link { get; set; }
 
-        public new MyModel Copy()
+        public MyModel Copy()
         {
             MyModel copy = FromMap(ToMap());
             return copy;
         }
 
-        public new MyModel CopyWithoutStream()
+        public MyModel CopyWithoutStream()
         {
             MyModel copy = FromMap(ToMap(true));
             return copy;
         }
 
-        public new void Validate()
-        {
-            if (Model != null) {
-                Model.Validate();
-            }
-            TeaModel.ValidateRequired("Model", Model, true);
-            TeaModel.ValidateRequired("Stringfield", Stringfield, true);
-            TeaModel.ValidateRequired("Bytesfield", Bytesfield, true);
-            if (Stringarrayfield is IList) {
-                TeaModel.ValidateArray(Stringarrayfield);
-            }
-            TeaModel.ValidateRequired("Stringarrayfield", Stringarrayfield, true);
-            if (Mapfield is IDictionary) {
-                TeaModel.ValidateMap(Mapfield);
-            }
-            TeaModel.ValidateRequired("Mapfield", Mapfield, true);
-            TeaModel.ValidateRequired("Name", Name, true);
-            if (Submodel != null) {
-                Submodel.Validate();
-            }
-            TeaModel.ValidateRequired("Submodel", Submodel, true);
-            if (SubmodelMap is IDictionary) {
-                TeaModel.ValidateMap(SubmodelMap);
-            }
-            TeaModel.ValidateRequired("SubmodelMap", SubmodelMap, true);
-            if (MapModel is IDictionary) {
-                TeaModel.ValidateMap(MapModel);
-            }
-            TeaModel.ValidateRequired("MapModel", MapModel, true);
-            if (Subarraymodel is IList) {
-                TeaModel.ValidateArray(Subarraymodel);
-            }
-            TeaModel.ValidateRequired("Subarraymodel", Subarraymodel, true);
-            if (Subarray is IList) {
-                TeaModel.ValidateArray(Subarray);
-            }
-            TeaModel.ValidateRequired("Subarray", Subarray, true);
-            if (Ssubarray is IList) {
-                TeaModel.ValidateArray(Ssubarray);
-            }
-            TeaModel.ValidateRequired("Ssubarray", Ssubarray, true);
-            if (Ssubmarray is IList) {
-                TeaModel.ValidateArray(Ssubmarray);
-            }
-            TeaModel.ValidateRequired("Ssubmarray", Ssubmarray, true);
-            if (Ssubmmarray is IList) {
-                TeaModel.ValidateArray(Ssubmmarray);
-            }
-            TeaModel.ValidateRequired("Ssubmmarray", Ssubmmarray, true);
-            if (Maparray is IList) {
-                TeaModel.ValidateArray(Maparray);
-            }
-            TeaModel.ValidateRequired("Maparray", Maparray, true);
-            if (Mapsubmarray is IList) {
-                TeaModel.ValidateArray(Mapsubmarray);
-            }
-            TeaModel.ValidateRequired("Mapsubmarray", Mapsubmarray, true);
-            if (ModuleModelMap is IDictionary) {
-                TeaModel.ValidateMap(ModuleModelMap);
-            }
-            TeaModel.ValidateRequired("ModuleModelMap", ModuleModelMap, true);
-            if (SubModelMap is IDictionary) {
-                TeaModel.ValidateMap(SubModelMap);
-            }
-            TeaModel.ValidateRequired("SubModelMap", SubModelMap, true);
-            if (ModelMap is IDictionary) {
-                TeaModel.ValidateMap(ModelMap);
-            }
-            TeaModel.ValidateRequired("ModelMap", ModelMap, true);
-            if (ModuleMap is IDictionary) {
-                TeaModel.ValidateMap(ModuleMap);
-            }
-            TeaModel.ValidateRequired("ModuleMap", ModuleMap, true);
-            TeaModel.ValidateRequired("Object", Object, true);
-            TeaModel.ValidateRequired("Readable", Readable, true);
-            TeaModel.ValidateRequired("Writable", Writable, true);
-            if (ExistModel != null) {
-                ExistModel.Validate();
-            }
-            TeaModel.ValidateRequired("ExistModel", ExistModel, true);
-            TeaModel.ValidateRequired("Request", Request, true);
-            if (ComplexList is IList) {
-                TeaModel.ValidateArray(ComplexList);
-            }
-            TeaModel.ValidateRequired("ComplexList", ComplexList, true);
-            TeaModel.ValidateRequired("Numberfield", Numberfield, true);
-            TeaModel.ValidateRequired("IntegerField", IntegerField, true);
-            TeaModel.ValidateRequired("FloatField", FloatField, true);
-            TeaModel.ValidateRequired("DoubleField", DoubleField, true);
-            TeaModel.ValidateRequired("LongField", LongField, true);
-            TeaModel.ValidateRequired("UlongField", UlongField, true);
-            TeaModel.ValidateRequired("Int8Field", Int8Field, true);
-            TeaModel.ValidateRequired("Int16Field", Int16Field, true);
-            TeaModel.ValidateRequired("Int32Field", Int32Field, true);
-            TeaModel.ValidateRequired("Int64Field", Int64Field, true);
-            TeaModel.ValidateRequired("Uint8Field", Uint8Field, true);
-            TeaModel.ValidateRequired("Uint16Field", Uint16Field, true);
-            TeaModel.ValidateRequired("Uint32Field", Uint32Field, true);
-            TeaModel.ValidateRequired("Uint64Field", Uint64Field, true);
-            base.Validate();
-        }
-
-        public new Dictionary<string, object> ToMap(bool noStream = false)
+        public Dictionary<string, object> ToMap(bool noStream = false)
         {
             var map = new Dictionary<string, object>();
             if (Model != null)
@@ -887,7 +748,7 @@ namespace Darabonba.Test.Models
             return map;
         }
 
-        public static new MyModel FromMap(Dictionary<string, object> map)
+        public static MyModel FromMap(Dictionary<string, object> map)
         {
             var model = new MyModel();
             if (map.ContainsKey("model"))
@@ -1226,7 +1087,7 @@ namespace Darabonba.Test.Models
 
             if (map.ContainsKey("request"))
             {
-                model.Request = TeaRequest.FromMap(map["request"]);
+                model.Request = DaraRequest.FromMap(map["request"]);
             }
 
             if (map.ContainsKey("complexList"))

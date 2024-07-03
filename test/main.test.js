@@ -8,7 +8,6 @@ const expect = require('expect.js');
 const DSL = require('@darabonba/parser');
 
 let Generator = require('../lib/generator');
-const { release } = require('os');
 
 const fixturesDir = path.join(__dirname, 'fixtures');
 const outputDir = path.join(__dirname, 'output');
@@ -60,45 +59,6 @@ function check(moduleName, options = {}) {
 }
 
 describe('new Generator', function () {
-  it('one api should ok', function () {
-    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/api/Darafile'), 'utf8');
-    const pkg = JSON.parse(pkgContent);
-    check('api', {
-      pkgDir: path.join(__dirname, 'fixtures/api'),
-      ...pkg.csharp,
-    });
-  });
-
-  it('comment should ok', function () {
-    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/comment/Darafile'), 'utf8');
-    const pkg = JSON.parse(pkgContent);
-    check('comment', {
-      pkgDir: path.join(__dirname, 'fixtures/comment'),
-      libraries: pkg.libraries,
-      ...pkg.csharp,
-      editable: 'test-other'
-    });
-  });
-
-  it('statements should ok', function () {
-    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/statements/Darafile'), 'utf8');
-    const pkg = JSON.parse(pkgContent);
-    check('statements', {
-      pkgDir: path.join(__dirname, 'fixtures/statements'),
-      libraries: pkg.libraries,
-      ...pkg.csharp
-    });
-  });
-
-  it('one function should ok', function () {
-    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/function/Darafile'), 'utf8');
-    const pkg = JSON.parse(pkgContent);
-    check('function', {
-      pkgDir: path.join(__dirname, 'fixtures/function'),
-      ...pkg.csharp
-    });
-  });
-
   it('add builtin should ok', function () {
     const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/builtin/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
@@ -191,6 +151,35 @@ describe('new Generator', function () {
     });
   });
 
+  it('one api should ok', function () {
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/api/Darafile'), 'utf8');
+    const pkg = JSON.parse(pkgContent);
+    check('api', {
+      libraries: pkg.libraries,
+      pkgDir: path.join(__dirname, 'fixtures/api'),
+      ...pkg.csharp,
+    });
+  });
+
+  it('one function should ok', function () {
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/function/Darafile'), 'utf8');
+    const pkg = JSON.parse(pkgContent);
+    check('function', {
+      pkgDir: path.join(__dirname, 'fixtures/function'),
+      ...pkg.csharp
+    });
+  });
+
+  it('statements should ok', function () {
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/statements/Darafile'), 'utf8');
+    const pkg = JSON.parse(pkgContent);
+    check('statements', {
+      pkgDir: path.join(__dirname, 'fixtures/statements'),
+      libraries: pkg.libraries,
+      ...pkg.csharp
+    });
+  });
+
   it('import should ok', function () {
     const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/import/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
@@ -210,6 +199,17 @@ describe('new Generator', function () {
       libraries: pkg.libraries,
       ...pkg.csharp,
       editable: 1
+    });
+  });
+
+  it('comment should ok', function () {
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/comment/Darafile'), 'utf8');
+    const pkg = JSON.parse(pkgContent);
+    check('comment', {
+      pkgDir: path.join(__dirname, 'fixtures/comment'),
+      libraries: pkg.libraries,
+      ...pkg.csharp,
+      editable: 'test-other'
     });
   });
 
@@ -263,7 +263,7 @@ describe('new Generator', function () {
   it('csporj should ok', function () {
     const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/csproj/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
-    check('csproj', ['Client.cs', 'client.csproj'], {
+    check('csproj', {
       pkgDir: path.join(__dirname, 'fixtures/csproj'),
       libraries: pkg.libraries,
       exec: true,

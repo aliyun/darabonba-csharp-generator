@@ -3,9 +3,10 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Tea;
-using Tea.Utils;
+using Darabonba;
+using Darabonba.Utils;
 using Darabonba.Test.Lib;
+using Tea;
 
 namespace Darabonba.Test
 {
@@ -18,29 +19,35 @@ namespace Darabonba.Test
 
         public int? Test3()
         {
-            Dictionary<string, string> runtime_ = new Dictionary<string, string>
+            Darabonba.Models.RuntimeOptions runtime_ = new Dictionary<string, string>
             {
                 {"timeouted", "retry"},
             };
 
-            TeaRequest _lastRequest = null;
+            RetryPolicyContext retryPolicyContext = null;
+            DaraRequest _lastRequest = null;
+            DaraResponse _lastResponse = null;
             Exception _lastException = null;
             long _now = System.DateTime.Now.Millisecond;
-            int _retryTimes = 0;
-            while (TeaCore.AllowRetry((IDictionary) runtime_["retry"], _retryTimes, _now))
+            int _retriesAttempted = 0;
+            retryPolicyContext = new RetryPolicyContext
             {
-                if (_retryTimes > 0)
+                RetriesAttempted = _retriesAttempted
+            };
+            while (DaraCore.ShouldRetry(runtime_["retryOptions"], retryPolicyContext))
+            {
+                if (_retriesAttempted > 0)
                 {
-                    int backoffTime = TeaCore.GetBackoffTime((IDictionary)runtime_["backoff"], _retryTimes);
+                    int backoffTime = DaraCore.GetBackoffDelay(runtime_["retryOptions"], retryPolicyContext);
                     if (backoffTime > 0)
                     {
-                        TeaCore.Sleep(backoffTime);
+                        DaraCore.Sleep(backoffTime);
                     }
                 }
-                _retryTimes = _retryTimes + 1;
+                _retriesAttempted = _retriesAttempted + 1;
                 try
                 {
-                    TeaRequest request_ = new TeaRequest();
+                    DaraRequest request_ = new DaraRequest();
                     request_.Protocol = "https";
                     request_.Method = "DELETE";
                     request_.Pathname = "/";
@@ -51,18 +58,20 @@ namespace Darabonba.Test
                     };
                     request_.Query = UtilClient.GetQuery();
                     _lastRequest = request_;
-                    TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
+                    DaraResponse response_ = DaraCore.DoAction(request_, runtime_);
 
                     return response_.StatusCode;
                 }
                 catch (Exception e)
                 {
-                    if (TeaCore.IsRetryable(e))
+                    _retriesAttempted++;
+                    retryPolicyContext = new RetryPolicyContext
                     {
-                        _lastException = e;
-                        continue;
-                    }
-                    throw e;
+                        RetriesAttempted = _retriesAttempted,
+                        Request = _lastRequest,
+                        Response = _lastResponse,
+                        Exception = _lastException
+                    };
                 }
             }
 
@@ -71,29 +80,35 @@ namespace Darabonba.Test
 
         public async Task<int?> Test3Async()
         {
-            Dictionary<string, string> runtime_ = new Dictionary<string, string>
+            Darabonba.Models.RuntimeOptions runtime_ = new Dictionary<string, string>
             {
                 {"timeouted", "retry"},
             };
 
-            TeaRequest _lastRequest = null;
+            RetryPolicyContext retryPolicyContext = null;
+            DaraRequest _lastRequest = null;
+            DaraResponse _lastResponse = null;
             Exception _lastException = null;
             long _now = System.DateTime.Now.Millisecond;
-            int _retryTimes = 0;
-            while (TeaCore.AllowRetry((IDictionary) runtime_["retry"], _retryTimes, _now))
+            int _retriesAttempted = 0;
+            retryPolicyContext = new RetryPolicyContext
             {
-                if (_retryTimes > 0)
+                RetriesAttempted = _retriesAttempted
+            };
+            while (DaraCore.ShouldRetry(runtime_["retryOptions"], retryPolicyContext))
+            {
+                if (_retriesAttempted > 0)
                 {
-                    int backoffTime = TeaCore.GetBackoffTime((IDictionary)runtime_["backoff"], _retryTimes);
+                    int backoffTime = DaraCore.GetBackoffDelay(runtime_["retryOptions"], retryPolicyContext);
                     if (backoffTime > 0)
                     {
-                        TeaCore.Sleep(backoffTime);
+                        DaraCore.Sleep(backoffTime);
                     }
                 }
-                _retryTimes = _retryTimes + 1;
+                _retriesAttempted = _retriesAttempted + 1;
                 try
                 {
-                    TeaRequest request_ = new TeaRequest();
+                    DaraRequest request_ = new DaraRequest();
                     request_.Protocol = "https";
                     request_.Method = "DELETE";
                     request_.Pathname = "/";
@@ -104,18 +119,20 @@ namespace Darabonba.Test
                     };
                     request_.Query = UtilClient.GetQuery();
                     _lastRequest = request_;
-                    TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
+                    DaraResponse response_ = await DaraCore.DoActionAsync(request_, runtime_);
 
                     return response_.StatusCode;
                 }
                 catch (Exception e)
                 {
-                    if (TeaCore.IsRetryable(e))
+                    _retriesAttempted++;
+                    retryPolicyContext = new RetryPolicyContext
                     {
-                        _lastException = e;
-                        continue;
-                    }
-                    throw e;
+                        RetriesAttempted = _retriesAttempted,
+                        Request = _lastRequest,
+                        Response = _lastResponse,
+                        Exception = _lastException
+                    };
                 }
             }
 

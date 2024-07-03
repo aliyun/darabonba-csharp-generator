@@ -2,13 +2,14 @@ using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using Tea;
+using Darabonba;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using Tea;
 
 namespace Darabonba.Test.Models
 {
-    public class M : TeaModel {
+    public class M : DaraModel {
         [NameInMap("a")]
         [Validation(Required=false)]
         public HttpRequestMessage A { get; set; }
@@ -21,24 +22,19 @@ namespace Darabonba.Test.Models
         [Validation(Required=false)]
         public TeaModel C { get; set; }
 
-        public new M Copy()
+        public M Copy()
         {
             M copy = FromMap(ToMap());
             return copy;
         }
 
-        public new M CopyWithoutStream()
+        public M CopyWithoutStream()
         {
             M copy = FromMap(ToMap(true));
             return copy;
         }
 
-        public new void Validate()
-        {
-            base.Validate();
-        }
-
-        public new Dictionary<string, object> ToMap(bool noStream = false)
+        public Dictionary<string, object> ToMap(bool noStream = false)
         {
             var map = new Dictionary<string, object>();
             if (A != null)
@@ -59,7 +55,7 @@ namespace Darabonba.Test.Models
             return map;
         }
 
-        public static new M FromMap(Dictionary<string, object> map)
+        public static M FromMap(Dictionary<string, object> map)
         {
             var model = new M();
             if (map.ContainsKey("a"))

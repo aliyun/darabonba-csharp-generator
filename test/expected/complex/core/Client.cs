@@ -5,11 +5,13 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Tea;
-using Tea.Utils;
+using Darabonba;
+using Darabonba.Utils;
 using SourceClient = Darabonba.import.Client;
 using Darabonba.import.Models;
 using Darabonba.Test.Models;
+using Tea;
+using Darabonba.Exceptions;
 
 namespace Darabonba.Test
 {
@@ -34,7 +36,7 @@ namespace Darabonba.Test
         {
             request.Validate();
             client.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>
+            Darabonba.Models.RuntimeOptions runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"retry", new Dictionary<string, string>
@@ -43,24 +45,30 @@ namespace Darabonba.Test
                 }},
             };
 
-            TeaRequest _lastRequest = null;
+            RetryPolicyContext retryPolicyContext = null;
+            DaraRequest _lastRequest = null;
+            DaraResponse _lastResponse = null;
             Exception _lastException = null;
             long _now = System.DateTime.Now.Millisecond;
-            int _retryTimes = 0;
-            while (TeaCore.AllowRetry((IDictionary) runtime_["retry"], _retryTimes, _now))
+            int _retriesAttempted = 0;
+            retryPolicyContext = new RetryPolicyContext
             {
-                if (_retryTimes > 0)
+                RetriesAttempted = _retriesAttempted
+            };
+            while (DaraCore.ShouldRetry(runtime_["retryOptions"], retryPolicyContext))
+            {
+                if (_retriesAttempted > 0)
                 {
-                    int backoffTime = TeaCore.GetBackoffTime((IDictionary)runtime_["backoff"], _retryTimes);
+                    int backoffTime = DaraCore.GetBackoffDelay(runtime_["retryOptions"], retryPolicyContext);
                     if (backoffTime > 0)
                     {
-                        TeaCore.Sleep(backoffTime);
+                        DaraCore.Sleep(backoffTime);
                     }
                 }
-                _retryTimes = _retryTimes + 1;
+                _retriesAttempted = _retriesAttempted + 1;
                 try
                 {
-                    TeaRequest request_ = new TeaRequest();
+                    DaraRequest request_ = new DaraRequest();
                     string name = "complex";
                     Darabonba.Test.Models.Config conf = new Darabonba.Test.Models.Config
                     {
@@ -79,10 +87,10 @@ namespace Darabonba.Test
                     {
                         {"date", "2019"},
                     };
-                    TeaRequest reqInstance = request_;
+                    DaraRequest reqInstance = request_;
                     bool? boolItem = !_boolVirtual.Value;
                     _lastRequest = request_;
-                    TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
+                    DaraResponse response_ = DaraCore.DoAction(request_, runtime_);
 
                     if (true && true)
                     {
@@ -104,16 +112,18 @@ namespace Darabonba.Test
                     });
                     Hello(null, null);
                     Complex3(null);
-                    return TeaModel.ToObject<RuntimeObject>(new Dictionary<string, object>(){});
+                    return DaraModel.ToObject<RuntimeObject>(new Dictionary<string, object>(){});
                 }
                 catch (Exception e)
                 {
-                    if (TeaCore.IsRetryable(e))
+                    _retriesAttempted++;
+                    retryPolicyContext = new RetryPolicyContext
                     {
-                        _lastException = e;
-                        continue;
-                    }
-                    throw e;
+                        RetriesAttempted = _retriesAttempted,
+                        Request = _lastRequest,
+                        Response = _lastResponse,
+                        Exception = _lastException
+                    };
                 }
             }
 
@@ -124,7 +134,7 @@ namespace Darabonba.Test
         {
             request.Validate();
             client.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>
+            Darabonba.Models.RuntimeOptions runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"retry", new Dictionary<string, string>
@@ -133,24 +143,30 @@ namespace Darabonba.Test
                 }},
             };
 
-            TeaRequest _lastRequest = null;
+            RetryPolicyContext retryPolicyContext = null;
+            DaraRequest _lastRequest = null;
+            DaraResponse _lastResponse = null;
             Exception _lastException = null;
             long _now = System.DateTime.Now.Millisecond;
-            int _retryTimes = 0;
-            while (TeaCore.AllowRetry((IDictionary) runtime_["retry"], _retryTimes, _now))
+            int _retriesAttempted = 0;
+            retryPolicyContext = new RetryPolicyContext
             {
-                if (_retryTimes > 0)
+                RetriesAttempted = _retriesAttempted
+            };
+            while (DaraCore.ShouldRetry(runtime_["retryOptions"], retryPolicyContext))
+            {
+                if (_retriesAttempted > 0)
                 {
-                    int backoffTime = TeaCore.GetBackoffTime((IDictionary)runtime_["backoff"], _retryTimes);
+                    int backoffTime = DaraCore.GetBackoffDelay(runtime_["retryOptions"], retryPolicyContext);
                     if (backoffTime > 0)
                     {
-                        TeaCore.Sleep(backoffTime);
+                        DaraCore.Sleep(backoffTime);
                     }
                 }
-                _retryTimes = _retryTimes + 1;
+                _retriesAttempted = _retriesAttempted + 1;
                 try
                 {
-                    TeaRequest request_ = new TeaRequest();
+                    DaraRequest request_ = new DaraRequest();
                     string name = "complex";
                     Darabonba.Test.Models.Config conf = new Darabonba.Test.Models.Config
                     {
@@ -169,10 +185,10 @@ namespace Darabonba.Test
                     {
                         {"date", "2019"},
                     };
-                    TeaRequest reqInstance = request_;
+                    DaraRequest reqInstance = request_;
                     bool? boolItem = !_boolVirtual.Value;
                     _lastRequest = request_;
-                    TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
+                    DaraResponse response_ = await DaraCore.DoActionAsync(request_, runtime_);
 
                     if (true && true)
                     {
@@ -194,16 +210,18 @@ namespace Darabonba.Test
                     });
                     await HelloAsync(null, null);
                     await Complex3Async(null);
-                    return TeaModel.ToObject<RuntimeObject>(new Dictionary<string, object>(){});
+                    return DaraModel.ToObject<RuntimeObject>(new Dictionary<string, object>(){});
                 }
                 catch (Exception e)
                 {
-                    if (TeaCore.IsRetryable(e))
+                    _retriesAttempted++;
+                    retryPolicyContext = new RetryPolicyContext
                     {
-                        _lastException = e;
-                        continue;
-                    }
-                    throw e;
+                        RetriesAttempted = _retriesAttempted,
+                        Request = _lastRequest,
+                        Response = _lastResponse,
+                        Exception = _lastException
+                    };
                 }
             }
 
@@ -213,7 +231,7 @@ namespace Darabonba.Test
         public Dictionary<string, object> Complex2(Darabonba.Test.Models.ComplexRequest request, List<string> str, Dictionary<string, string> val, List<List<List<string>>> complexList)
         {
             request.Validate();
-            TeaRequest request_ = new TeaRequest();
+            DaraRequest request_ = new DaraRequest();
             string name = "complex";
             Darabonba.import.Models.Config config = new Darabonba.import.Models.Config();
             SourceClient client = new SourceClient(config, "testSecond");
@@ -241,7 +259,7 @@ namespace Darabonba.Test
                 {"protocol", request_.Protocol},
             };
             return new Dictionary<string, object>(){};
-            TeaResponse response_ = TeaCore.DoAction(request_);
+            DaraResponse response_ = DaraCore.DoAction(request_);
 
             return;
         }
@@ -249,7 +267,7 @@ namespace Darabonba.Test
         public async Task<Dictionary<string, object>> Complex2Async(Darabonba.Test.Models.ComplexRequest request, List<string> str, Dictionary<string, string> val, List<List<List<string>>> complexList)
         {
             request.Validate();
-            TeaRequest request_ = new TeaRequest();
+            DaraRequest request_ = new DaraRequest();
             string name = "complex";
             Darabonba.import.Models.Config config = new Darabonba.import.Models.Config();
             SourceClient client = new SourceClient(config, "testSecond");
@@ -277,7 +295,7 @@ namespace Darabonba.Test
                 {"protocol", request_.Protocol},
             };
             return new Dictionary<string, object>(){};
-            TeaResponse response_ = await TeaCore.DoActionAsync(request_);
+            DaraResponse response_ = await DaraCore.DoActionAsync(request_);
 
             return;
         }
@@ -285,24 +303,24 @@ namespace Darabonba.Test
         public Darabonba.Test.Models.ComplexRequest Complex3(Darabonba.Test.Models.ComplexRequest request)
         {
             request.Validate();
-            TeaRequest request_ = new TeaRequest();
+            DaraRequest request_ = new DaraRequest();
             string name = "complex";
             request_.Protocol = TemplateString();
             request_.Port = 80;
             request_.Method = "GET";
             request_.Pathname = "/";
-            request_.Body = TeaCore.BytesReadable("body");
+            request_.Body = DaraCore.BytesReadable("body");
             request_.Query = new Dictionary<string, string>
             {
                 {"date", "2019"},
             };
-            TeaResponse response_ = TeaCore.DoAction(request_);
+            DaraResponse response_ = DaraCore.DoAction(request_);
 
             if (true)
             {
-                throw new TeaRetryableException(request_, response_);
+                throw new DaraRetryableException(request_, response_);
             }
-            TeaResponse resp = response_;
+            DaraResponse resp = response_;
             Request req = new Request
             {
                 Accesskey = request.AccessKey,
@@ -313,7 +331,7 @@ namespace Darabonba.Test
             req.Accesskey = request.AccessKey;
             PrintNull(typeof(Config));
             SourceClient.Array(request.ToMap(), "1");
-            return TeaModel.ToObject<Darabonba.Test.Models.ComplexRequest>(TeaConverter.merge<string>
+            return DaraModel.ToObject<Darabonba.Test.Models.ComplexRequest>(ConverterUtil.Merge<string>
             (
                 request_.Query
             ));
@@ -322,24 +340,24 @@ namespace Darabonba.Test
         public async Task<Darabonba.Test.Models.ComplexRequest> Complex3Async(Darabonba.Test.Models.ComplexRequest request)
         {
             request.Validate();
-            TeaRequest request_ = new TeaRequest();
+            DaraRequest request_ = new DaraRequest();
             string name = "complex";
             request_.Protocol = await TemplateStringAsync();
             request_.Port = 80;
             request_.Method = "GET";
             request_.Pathname = "/";
-            request_.Body = TeaCore.BytesReadable("body");
+            request_.Body = DaraCore.BytesReadable("body");
             request_.Query = new Dictionary<string, string>
             {
                 {"date", "2019"},
             };
-            TeaResponse response_ = await TeaCore.DoActionAsync(request_);
+            DaraResponse response_ = await DaraCore.DoActionAsync(request_);
 
             if (true)
             {
-                throw new TeaRetryableException(request_, response_);
+                throw new DaraRetryableException(request_, response_);
             }
-            TeaResponse resp = response_;
+            DaraResponse resp = response_;
             Request req = new Request
             {
                 Accesskey = request.AccessKey,
@@ -350,7 +368,7 @@ namespace Darabonba.Test
             req.Accesskey = request.AccessKey;
             await PrintNullAsync(typeof(Config));
             SourceClient.Array(request.ToMap(), "1");
-            return TeaModel.ToObject<Darabonba.Test.Models.ComplexRequest>(TeaConverter.merge<string>
+            return DaraModel.ToObject<Darabonba.Test.Models.ComplexRequest>(ConverterUtil.Merge<string>
             (
                 request_.Query
             ));
@@ -493,12 +511,12 @@ namespace Darabonba.Test
             return Array1();
         }
 
-        public static Request Print(TeaRequest reqeust, List<Darabonba.Test.Models.ComplexRequest> reqs, TeaResponse response, Dictionary<string, string> val)
+        public static Request Print(DaraRequest reqeust, List<Darabonba.Test.Models.ComplexRequest> reqs, DaraResponse response, Dictionary<string, string> val)
         {
             return new Request();
         }
 
-        public static async Task<Request> PrintAsync(TeaRequest reqeust, List<Darabonba.Test.Models.ComplexRequest> reqs, TeaResponse response, Dictionary<string, string> val)
+        public static async Task<Request> PrintAsync(DaraRequest reqeust, List<Darabonba.Test.Models.ComplexRequest> reqs, DaraResponse response, Dictionary<string, string> val)
         {
             return new Request();
         }
@@ -509,7 +527,7 @@ namespace Darabonba.Test
             {
                 string str = TemplateString();
             }
-            catch (TeaException e)
+            catch (DaraException e)
             {
                 string errStr = e.Message;
             }
@@ -533,7 +551,7 @@ namespace Darabonba.Test
             {
                 string str = await TemplateStringAsync();
             }
-            catch (TeaException e)
+            catch (DaraException e)
             {
                 string errStr = e.Message;
             }
