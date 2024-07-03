@@ -4,12 +4,12 @@ using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using Tea;
+using Darabonba;
 using SourceClient = Darabonba.import.Client;
 
 namespace Darabonba.Test.Models
 {
-    public class ComplexRequest : TeaModel {
+    public class ComplexRequest : DaraModel {
         [NameInMap("duplicatName")]
         [Validation(Required=true)]
         public Darabonba.import.Models.ComplexRequest DuplicatName { get; set; }
@@ -44,7 +44,7 @@ namespace Darabonba.Test.Models
         [NameInMap("header")]
         [Validation(Required=true)]
         public ComplexRequestHeader Header { get; set; }
-        public class ComplexRequestHeader : TeaModel {
+        public class ComplexRequestHeader : DaraModel {
             /// <summary>
             /// <para>The ID of the security group to which you want to assign the instance. Instances in the same security group can communicate with each other. The maximum number of instances that a security group can contain depends on the type of the security group. For more information, see the &quot;Security group limits&quot; section in <a href="https://help.aliyun.com/document_detail/25412.html#SecurityGroupQuota">Limits</a>.</para>
             /// <remarks>
@@ -75,7 +75,7 @@ namespace Darabonba.Test.Models
             [NameInMap("listSub")]
             [Validation(Required=true)]
             public List<ComplexRequestHeaderListSub> ListSub { get; set; }
-            public class ComplexRequestHeaderListSub : TeaModel {
+            public class ComplexRequestHeaderListSub : DaraModel {
                 [NameInMap("listSubItemName")]
                 [Validation(Required=true)]
                 public string ListSubItem { get; set; }
@@ -84,29 +84,19 @@ namespace Darabonba.Test.Models
                 [Validation(Required=true)]
                 public Darabonba.Test.Models.Config ListSubItemSub { get; set; }
 
-                public new ComplexRequestHeaderListSub Copy()
+                public ComplexRequestHeaderListSub Copy()
                 {
                     ComplexRequestHeaderListSub copy = FromMap(ToMap());
                     return copy;
                 }
 
-                public new ComplexRequestHeaderListSub CopyWithoutStream()
+                public ComplexRequestHeaderListSub CopyWithoutStream()
                 {
                     ComplexRequestHeaderListSub copy = FromMap(ToMap(true));
                     return copy;
                 }
 
-                public new void Validate()
-                {
-                    TeaModel.ValidateRequired("ListSubItem", ListSubItem, true);
-                    if (ListSubItemSub != null) {
-                        ListSubItemSub.Validate();
-                    }
-                    TeaModel.ValidateRequired("ListSubItemSub", ListSubItemSub, true);
-                    base.Validate();
-                }
-
-                public new Dictionary<string, object> ToMap(bool noStream = false)
+                public Dictionary<string, object> ToMap(bool noStream = false)
                 {
                     var map = new Dictionary<string, object>();
                     if (ListSubItem != null)
@@ -122,7 +112,7 @@ namespace Darabonba.Test.Models
                     return map;
                 }
 
-                public static new ComplexRequestHeaderListSub FromMap(Dictionary<string, object> map)
+                public static ComplexRequestHeaderListSub FromMap(Dictionary<string, object> map)
                 {
                     var model = new ComplexRequestHeaderListSub();
                     if (map.ContainsKey("listSubItemName"))
@@ -155,30 +145,24 @@ namespace Darabonba.Test.Models
             [NameInMap("subModel")]
             [Validation(Required=true)]
             public ComplexRequestHeaderSubModel SubModel { get; set; }
-            public class ComplexRequestHeaderSubModel : TeaModel {
+            public class ComplexRequestHeaderSubModel : DaraModel {
                 [NameInMap("subModelStr")]
                 [Validation(Required=true)]
                 public string SubModelStr { get; set; }
 
-                public new ComplexRequestHeaderSubModel Copy()
+                public ComplexRequestHeaderSubModel Copy()
                 {
                     ComplexRequestHeaderSubModel copy = FromMap(ToMap());
                     return copy;
                 }
 
-                public new ComplexRequestHeaderSubModel CopyWithoutStream()
+                public ComplexRequestHeaderSubModel CopyWithoutStream()
                 {
                     ComplexRequestHeaderSubModel copy = FromMap(ToMap(true));
                     return copy;
                 }
 
-                public new void Validate()
-                {
-                    TeaModel.ValidateRequired("SubModelStr", SubModelStr, true);
-                    base.Validate();
-                }
-
-                public new Dictionary<string, object> ToMap(bool noStream = false)
+                public Dictionary<string, object> ToMap(bool noStream = false)
                 {
                     var map = new Dictionary<string, object>();
                     if (SubModelStr != null)
@@ -189,7 +173,7 @@ namespace Darabonba.Test.Models
                     return map;
                 }
 
-                public static new ComplexRequestHeaderSubModel FromMap(Dictionary<string, object> map)
+                public static ComplexRequestHeaderSubModel FromMap(Dictionary<string, object> map)
                 {
                     var model = new ComplexRequestHeaderSubModel();
                     if (map.ContainsKey("subModelStr"))
@@ -209,53 +193,19 @@ namespace Darabonba.Test.Models
             [Validation(Required=true)]
             public List<List<Darabonba.Test.Models.Config>> SubMutiArray { get; set; }
 
-            public new ComplexRequestHeader Copy()
+            public ComplexRequestHeader Copy()
             {
                 ComplexRequestHeader copy = FromMap(ToMap());
                 return copy;
             }
 
-            public new ComplexRequestHeader CopyWithoutStream()
+            public ComplexRequestHeader CopyWithoutStream()
             {
                 ComplexRequestHeader copy = FromMap(ToMap(true));
                 return copy;
             }
 
-            public new void Validate()
-            {
-                TeaModel.ValidateRequired("Content", Content, true);
-                if (ListSub is IList) {
-                    TeaModel.ValidateArray(ListSub);
-                }
-                TeaModel.ValidateRequired("ListSub", ListSub, true);
-                if (ListStr is IList) {
-                    TeaModel.ValidateArray(ListStr);
-                }
-                TeaModel.ValidateRequired("ListStr", ListStr, true);
-                if (SourceClient != null) {
-                    SourceClient.Validate();
-                }
-                TeaModel.ValidateRequired("SourceClient", SourceClient, true);
-                if (SourceConfig != null) {
-                    SourceConfig.Validate();
-                }
-                TeaModel.ValidateRequired("SourceConfig", SourceConfig, true);
-                if (SubModel != null) {
-                    SubModel.Validate();
-                }
-                TeaModel.ValidateRequired("SubModel", SubModel, true);
-                if (SubArray is IList) {
-                    TeaModel.ValidateArray(SubArray);
-                }
-                TeaModel.ValidateRequired("SubArray", SubArray, true);
-                if (SubMutiArray is IList) {
-                    TeaModel.ValidateArray(SubMutiArray);
-                }
-                TeaModel.ValidateRequired("SubMutiArray", SubMutiArray, true);
-                base.Validate();
-            }
-
-            public new Dictionary<string, object> ToMap(bool noStream = false)
+            public Dictionary<string, object> ToMap(bool noStream = false)
             {
                 var map = new Dictionary<string, object>();
                 if (Content != null)
@@ -331,7 +281,7 @@ namespace Darabonba.Test.Models
                 return map;
             }
 
-            public static new ComplexRequestHeader FromMap(Dictionary<string, object> map)
+            public static ComplexRequestHeader FromMap(Dictionary<string, object> map)
             {
                 var model = new ComplexRequestHeader();
                 if (map.ContainsKey("Content"))
@@ -453,7 +403,7 @@ namespace Darabonba.Test.Models
         [Validation(Required=false)]
         [Obsolete]
         public List<ComplexRequestPart> Part { get; set; }
-        public class ComplexRequestPart : TeaModel {
+        public class ComplexRequestPart : DaraModel {
             /// <summary>
             /// <para>PartNumber</para>
             /// </summary>
@@ -461,24 +411,19 @@ namespace Darabonba.Test.Models
             [Validation(Required=false)]
             public string PartNumber { get; set; }
 
-            public new ComplexRequestPart Copy()
+            public ComplexRequestPart Copy()
             {
                 ComplexRequestPart copy = FromMap(ToMap());
                 return copy;
             }
 
-            public new ComplexRequestPart CopyWithoutStream()
+            public ComplexRequestPart CopyWithoutStream()
             {
                 ComplexRequestPart copy = FromMap(ToMap(true));
                 return copy;
             }
 
-            public new void Validate()
-            {
-                base.Validate();
-            }
-
-            public new Dictionary<string, object> ToMap(bool noStream = false)
+            public Dictionary<string, object> ToMap(bool noStream = false)
             {
                 var map = new Dictionary<string, object>();
                 if (PartNumber != null)
@@ -489,7 +434,7 @@ namespace Darabonba.Test.Models
                 return map;
             }
 
-            public static new ComplexRequestPart FromMap(Dictionary<string, object> map)
+            public static ComplexRequestPart FromMap(Dictionary<string, object> map)
             {
                 var model = new ComplexRequestPart();
                 if (map.ContainsKey("PartNumber"))
@@ -504,7 +449,7 @@ namespace Darabonba.Test.Models
         [NameInMap("configs")]
         [Validation(Required=true)]
         public ComplexRequestConfigs Configs { get; set; }
-        public class ComplexRequestConfigs : TeaModel {
+        public class ComplexRequestConfigs : DaraModel {
             [NameInMap("key")]
             [Validation(Required=true)]
             public string Key { get; set; }
@@ -517,33 +462,19 @@ namespace Darabonba.Test.Models
             [Validation(Required=true)]
             public Dictionary<string, string> Extra { get; set; }
 
-            public new ComplexRequestConfigs Copy()
+            public ComplexRequestConfigs Copy()
             {
                 ComplexRequestConfigs copy = FromMap(ToMap());
                 return copy;
             }
 
-            public new ComplexRequestConfigs CopyWithoutStream()
+            public ComplexRequestConfigs CopyWithoutStream()
             {
                 ComplexRequestConfigs copy = FromMap(ToMap(true));
                 return copy;
             }
 
-            public new void Validate()
-            {
-                TeaModel.ValidateRequired("Key", Key, true);
-                if (Value is IList) {
-                    TeaModel.ValidateArray(Value);
-                }
-                TeaModel.ValidateRequired("Value", Value, true);
-                if (Extra is IDictionary) {
-                    TeaModel.ValidateMap(Extra);
-                }
-                TeaModel.ValidateRequired("Extra", Extra, true);
-                base.Validate();
-            }
-
-            public new Dictionary<string, object> ToMap(bool noStream = false)
+            public Dictionary<string, object> ToMap(bool noStream = false)
             {
                 var map = new Dictionary<string, object>();
                 if (Key != null)
@@ -575,7 +506,7 @@ namespace Darabonba.Test.Models
                 return map;
             }
 
-            public static new ComplexRequestConfigs FromMap(Dictionary<string, object> map)
+            public static ComplexRequestConfigs FromMap(Dictionary<string, object> map)
             {
                 var model = new ComplexRequestConfigs();
                 if (map.ContainsKey("key"))
@@ -627,7 +558,7 @@ namespace Darabonba.Test.Models
         [NameInMap("array")]
         [Validation(Required=false)]
         public List<List<ComplexRequestArray>> Array { get; set; }
-        public class ComplexRequestArray : TeaModel {
+        public class ComplexRequestArray : DaraModel {
             [NameInMap("type")]
             [Validation(Required=false)]
             public string Type { get; set; }
@@ -640,24 +571,19 @@ namespace Darabonba.Test.Models
             [Validation(Required=false)]
             public string Text { get; set; }
 
-            public new ComplexRequestArray Copy()
+            public ComplexRequestArray Copy()
             {
                 ComplexRequestArray copy = FromMap(ToMap());
                 return copy;
             }
 
-            public new ComplexRequestArray CopyWithoutStream()
+            public ComplexRequestArray CopyWithoutStream()
             {
                 ComplexRequestArray copy = FromMap(ToMap(true));
                 return copy;
             }
 
-            public new void Validate()
-            {
-                base.Validate();
-            }
-
-            public new Dictionary<string, object> ToMap(bool noStream = false)
+            public Dictionary<string, object> ToMap(bool noStream = false)
             {
                 var map = new Dictionary<string, object>();
                 if (Type != null)
@@ -678,7 +604,7 @@ namespace Darabonba.Test.Models
                 return map;
             }
 
-            public static new ComplexRequestArray FromMap(Dictionary<string, object> map)
+            public static ComplexRequestArray FromMap(Dictionary<string, object> map)
             {
                 var model = new ComplexRequestArray();
                 if (map.ContainsKey("type"))
@@ -708,67 +634,19 @@ namespace Darabonba.Test.Models
         [Validation(Required=false)]
         public List<Darabonba.Test.Models.Config> Array2 { get; set; }
 
-        public new ComplexRequest Copy()
+        public ComplexRequest Copy()
         {
             ComplexRequest copy = FromMap(ToMap());
             return copy;
         }
 
-        public new ComplexRequest CopyWithoutStream()
+        public ComplexRequest CopyWithoutStream()
         {
             ComplexRequest copy = FromMap(ToMap(true));
             return copy;
         }
 
-        public new void Validate()
-        {
-            if (DuplicatName != null) {
-                DuplicatName.Validate();
-            }
-            TeaModel.ValidateRequired("DuplicatName", DuplicatName, true);
-            TeaModel.ValidateRequired("AccessKey", AccessKey, true);
-            TeaModel.ValidateRequired("Body", Body, true);
-            if (Strs is IList) {
-                TeaModel.ValidateArray(Strs);
-            }
-            TeaModel.ValidateRequired("Strs", Strs, true);
-            if (Header != null) {
-                Header.Validate();
-            }
-            TeaModel.ValidateRequired("Header", Header, true);
-            TeaModel.ValidateRequired("Num", Num, true);
-            if (Client != null) {
-                Client.Validate();
-            }
-            TeaModel.ValidateRequired("Client", Client, true);
-            if (Part is IList) {
-                TeaModel.ValidateArray(Part);
-            }
-            if (Configs != null) {
-                Configs.Validate();
-            }
-            TeaModel.ValidateRequired("Configs", Configs, true);
-            if (Dict is IDictionary) {
-                TeaModel.ValidateMap(Dict);
-            }
-            TeaModel.ValidateRequired("Dict", Dict, true);
-            if (SubmodelMap is IDictionary) {
-                TeaModel.ValidateMap(SubmodelMap);
-            }
-            TeaModel.ValidateRequired("SubmodelMap", SubmodelMap, true);
-            if (Array is IList) {
-                TeaModel.ValidateArray(Array);
-            }
-            if (Array1 is IList) {
-                TeaModel.ValidateArray(Array1);
-            }
-            if (Array2 is IList) {
-                TeaModel.ValidateArray(Array2);
-            }
-            base.Validate();
-        }
-
-        public new Dictionary<string, object> ToMap(bool noStream = false)
+        public Dictionary<string, object> ToMap(bool noStream = false)
         {
             var map = new Dictionary<string, object>();
             if (DuplicatName != null)
@@ -896,7 +774,7 @@ namespace Darabonba.Test.Models
             return map;
         }
 
-        public static new ComplexRequest FromMap(Dictionary<string, object> map)
+        public static ComplexRequest FromMap(Dictionary<string, object> map)
         {
             var model = new ComplexRequest();
             if (map.ContainsKey("duplicatName"))

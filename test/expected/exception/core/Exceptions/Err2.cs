@@ -4,11 +4,11 @@ using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using Tea;
+using Darabonba.Exceptions;
 
 namespace Darabonba.Test.Exceptions
 {
-    public class Err2 : TeaException {
+    public class Err2 : DaraException {
         public string AccessErrMessage { get; set; }
 
         public Err2() : base()

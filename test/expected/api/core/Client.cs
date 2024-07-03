@@ -5,14 +5,29 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Tea;
-using Tea.Utils;
+using Darabonba;
+using Darabonba.Utils;
 using Darabonba.Test.Models;
+using AlibabaCloud.TeaUtil.Models;
+using AlibabaCloud.TeaUtil;
+using Tea;
 
 namespace Darabonba.Test
 {
     public class Client 
     {
+        protected string _httpProxy;
+        protected string _httpsProxy;
+        protected string _socks5Proxy;
+        protected string _socks5NetWork;
+        protected int? _maxIdleConns;
+        protected int? _readTimeout;
+        protected int? _connectTimeout;
+        protected string _noProxy;
+        protected string _key;
+        protected string _cert;
+        protected string _ca;
+        protected RetryOptions _retryOptions;
 
         public Client(Config config)
         {
@@ -20,54 +35,75 @@ namespace Darabonba.Test
 
         public void Hello()
         {
-            TeaRequest request_ = new TeaRequest();
+            DaraRequest request_ = new DaraRequest();
             request_.Method = "GET";
             request_.Pathname = "/";
             request_.Headers = new Dictionary<string, string>
             {
                 {"host", "www.test.com"},
             };
-            TeaResponse response_ = TeaCore.DoAction(request_);
+            DaraResponse response_ = DaraCore.DoAction(request_);
 
             return ;
         }
 
         public async Task HelloAsync()
         {
-            TeaRequest request_ = new TeaRequest();
+            DaraRequest request_ = new DaraRequest();
             request_.Method = "GET";
             request_.Pathname = "/";
             request_.Headers = new Dictionary<string, string>
             {
                 {"host", "www.test.com"},
             };
-            TeaResponse response_ = await TeaCore.DoActionAsync(request_);
+            DaraResponse response_ = await DaraCore.DoActionAsync(request_);
 
             return ;
         }
 
-        public string HelloRuntime()
+        public string HelloRuntime(string bodyType, RuntimeOptions runtime)
         {
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>(){};
+            Darabonba.Models.RuntimeOptions runtime_ = new Dictionary<string, object>
+            {
+                {"key", Common.DefaultString(runtime.Key, _key)},
+                {"cert", Common.DefaultString(runtime.Cert, _cert)},
+                {"ca", Common.DefaultString(runtime.Ca, _ca)},
+                {"readTimeout", Common.DefaultNumber(runtime.ReadTimeout, _readTimeout)},
+                {"connectTimeout", Common.DefaultNumber(runtime.ConnectTimeout, _connectTimeout)},
+                {"httpProxy", Common.DefaultString(runtime.HttpProxy, _httpProxy)},
+                {"httpsProxy", Common.DefaultString(runtime.HttpsProxy, _httpsProxy)},
+                {"noProxy", Common.DefaultString(runtime.NoProxy, _noProxy)},
+                {"socks5Proxy", Common.DefaultString(runtime.Socks5Proxy, _socks5Proxy)},
+                {"socks5NetWork", Common.DefaultString(runtime.Socks5NetWork, _socks5NetWork)},
+                {"maxIdleConns", Common.DefaultNumber(runtime.MaxIdleConns, _maxIdleConns)},
+                {"retryOptions", _retryOptions},
+                {"ignoreSSL", runtime.IgnoreSSL},
+            };
 
-            TeaRequest _lastRequest = null;
+            RetryPolicyContext retryPolicyContext = null;
+            DaraRequest _lastRequest = null;
+            DaraResponse _lastResponse = null;
             Exception _lastException = null;
             long _now = System.DateTime.Now.Millisecond;
-            int _retryTimes = 0;
-            while (TeaCore.AllowRetry((IDictionary) runtime_["retry"], _retryTimes, _now))
+            int _retriesAttempted = 0;
+            retryPolicyContext = new RetryPolicyContext
             {
-                if (_retryTimes > 0)
+                RetriesAttempted = _retriesAttempted
+            };
+            while (DaraCore.ShouldRetry(runtime_["retryOptions"], retryPolicyContext))
+            {
+                if (_retriesAttempted > 0)
                 {
-                    int backoffTime = TeaCore.GetBackoffTime((IDictionary)runtime_["backoff"], _retryTimes);
+                    int backoffTime = DaraCore.GetBackoffDelay(runtime_["retryOptions"], retryPolicyContext);
                     if (backoffTime > 0)
                     {
-                        TeaCore.Sleep(backoffTime);
+                        DaraCore.Sleep(backoffTime);
                     }
                 }
-                _retryTimes = _retryTimes + 1;
+                _retriesAttempted = _retriesAttempted + 1;
                 try
                 {
-                    TeaRequest request_ = new TeaRequest();
+                    DaraRequest request_ = new DaraRequest();
                     request_.Method = "GET";
                     request_.Pathname = "/";
                     request_.Headers = new Dictionary<string, string>
@@ -75,46 +111,69 @@ namespace Darabonba.Test
                         {"host", "www.test.com"},
                     };
                     _lastRequest = request_;
-                    TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
+                    DaraResponse response_ = DaraCore.DoAction(request_, runtime_);
 
                     return "test";
                 }
                 catch (Exception e)
                 {
-                    if (TeaCore.IsRetryable(e))
+                    _retriesAttempted++;
+                    retryPolicyContext = new RetryPolicyContext
                     {
-                        _lastException = e;
-                        continue;
-                    }
-                    throw e;
+                        RetriesAttempted = _retriesAttempted,
+                        Request = _lastRequest,
+                        Response = _lastResponse,
+                        Exception = _lastException
+                    };
                 }
             }
 
             throw new TeaUnretryableException(_lastRequest, _lastException);
         }
 
-        public async Task<string> HelloRuntimeAsync()
+        public async Task<string> HelloRuntimeAsync(string bodyType, RuntimeOptions runtime)
         {
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>(){};
+            Darabonba.Models.RuntimeOptions runtime_ = new Dictionary<string, object>
+            {
+                {"key", Common.DefaultString(runtime.Key, _key)},
+                {"cert", Common.DefaultString(runtime.Cert, _cert)},
+                {"ca", Common.DefaultString(runtime.Ca, _ca)},
+                {"readTimeout", Common.DefaultNumber(runtime.ReadTimeout, _readTimeout)},
+                {"connectTimeout", Common.DefaultNumber(runtime.ConnectTimeout, _connectTimeout)},
+                {"httpProxy", Common.DefaultString(runtime.HttpProxy, _httpProxy)},
+                {"httpsProxy", Common.DefaultString(runtime.HttpsProxy, _httpsProxy)},
+                {"noProxy", Common.DefaultString(runtime.NoProxy, _noProxy)},
+                {"socks5Proxy", Common.DefaultString(runtime.Socks5Proxy, _socks5Proxy)},
+                {"socks5NetWork", Common.DefaultString(runtime.Socks5NetWork, _socks5NetWork)},
+                {"maxIdleConns", Common.DefaultNumber(runtime.MaxIdleConns, _maxIdleConns)},
+                {"retryOptions", _retryOptions},
+                {"ignoreSSL", runtime.IgnoreSSL},
+            };
 
-            TeaRequest _lastRequest = null;
+            RetryPolicyContext retryPolicyContext = null;
+            DaraRequest _lastRequest = null;
+            DaraResponse _lastResponse = null;
             Exception _lastException = null;
             long _now = System.DateTime.Now.Millisecond;
-            int _retryTimes = 0;
-            while (TeaCore.AllowRetry((IDictionary) runtime_["retry"], _retryTimes, _now))
+            int _retriesAttempted = 0;
+            retryPolicyContext = new RetryPolicyContext
             {
-                if (_retryTimes > 0)
+                RetriesAttempted = _retriesAttempted
+            };
+            while (DaraCore.ShouldRetry(runtime_["retryOptions"], retryPolicyContext))
+            {
+                if (_retriesAttempted > 0)
                 {
-                    int backoffTime = TeaCore.GetBackoffTime((IDictionary)runtime_["backoff"], _retryTimes);
+                    int backoffTime = DaraCore.GetBackoffDelay(runtime_["retryOptions"], retryPolicyContext);
                     if (backoffTime > 0)
                     {
-                        TeaCore.Sleep(backoffTime);
+                        DaraCore.Sleep(backoffTime);
                     }
                 }
-                _retryTimes = _retryTimes + 1;
+                _retriesAttempted = _retriesAttempted + 1;
                 try
                 {
-                    TeaRequest request_ = new TeaRequest();
+                    DaraRequest request_ = new DaraRequest();
                     request_.Method = "GET";
                     request_.Pathname = "/";
                     request_.Headers = new Dictionary<string, string>
@@ -122,18 +181,20 @@ namespace Darabonba.Test
                         {"host", "www.test.com"},
                     };
                     _lastRequest = request_;
-                    TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
+                    DaraResponse response_ = await DaraCore.DoActionAsync(request_, runtime_);
 
                     return "test";
                 }
                 catch (Exception e)
                 {
-                    if (TeaCore.IsRetryable(e))
+                    _retriesAttempted++;
+                    retryPolicyContext = new RetryPolicyContext
                     {
-                        _lastException = e;
-                        continue;
-                    }
-                    throw e;
+                        RetriesAttempted = _retriesAttempted,
+                        Request = _lastRequest,
+                        Response = _lastResponse,
+                        Exception = _lastException
+                    };
                 }
             }
 
@@ -143,14 +204,14 @@ namespace Darabonba.Test
         public void HelloVirtualCall(M m)
         {
             m.Validate();
-            TeaRequest request_ = new TeaRequest();
+            DaraRequest request_ = new DaraRequest();
             request_.Method = "GET";
             request_.Pathname = "/";
             request_.Headers = new Dictionary<string, string>
             {
                 {"key", ""},
             };
-            TeaResponse response_ = TeaCore.DoAction(request_);
+            DaraResponse response_ = DaraCore.DoAction(request_);
 
             return ;
         }
@@ -158,14 +219,14 @@ namespace Darabonba.Test
         public async Task HelloVirtualCallAsync(M m)
         {
             m.Validate();
-            TeaRequest request_ = new TeaRequest();
+            DaraRequest request_ = new DaraRequest();
             request_.Method = "GET";
             request_.Pathname = "/";
             request_.Headers = new Dictionary<string, string>
             {
                 {"key", ""},
             };
-            TeaResponse response_ = await TeaCore.DoActionAsync(request_);
+            DaraResponse response_ = await DaraCore.DoActionAsync(request_);
 
             return ;
         }

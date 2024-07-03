@@ -4,7 +4,7 @@ using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using Tea;
+using Darabonba;
 
 namespace Darabonba.Test.Models
 {
@@ -17,7 +17,7 @@ namespace Darabonba.Test.Models
     /// <description>
     /// <para>TestModel</para>
     /// </description>
-    public class Test1 : TeaModel {
+    public class Test1 : DaraModel {
         /// <term><b>Obsolete</b></term>
         /// 
         /// <summary>
@@ -46,26 +46,19 @@ namespace Darabonba.Test.Models
         public string Test2 { get; set; }
 
         //model的test2 back comment
-        public new Test1 Copy()
+        public Test1 Copy()
         {
             Test1 copy = FromMap(ToMap());
             return copy;
         }
 
-        public new Test1 CopyWithoutStream()
+        public Test1 CopyWithoutStream()
         {
             Test1 copy = FromMap(ToMap(true));
             return copy;
         }
 
-        public new void Validate()
-        {
-            TeaModel.ValidateRequired("Test", Test, true);
-            TeaModel.ValidateRequired("Test2", Test2, true);
-            base.Validate();
-        }
-
-        public new Dictionary<string, object> ToMap(bool noStream = false)
+        public Dictionary<string, object> ToMap(bool noStream = false)
         {
             var map = new Dictionary<string, object>();
             if (Test != null)
@@ -81,7 +74,7 @@ namespace Darabonba.Test.Models
             return map;
         }
 
-        public static new Test1 FromMap(Dictionary<string, object> map)
+        public static Test1 FromMap(Dictionary<string, object> map)
         {
             var model = new Test1();
             if (map.ContainsKey("test"))

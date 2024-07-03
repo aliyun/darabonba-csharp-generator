@@ -42,7 +42,7 @@ static async function dateTest(args: [string]): void {
     var second = date.second();
     var dayOfMonth = date.dayOfMonth();
     var dayOfWeek = date.dayOfWeek();
-    var weekOfMonth = date.weekOfMonth();
+    // var weekOfMonth = date.weekOfMonth();
     var weekOfYear = date.weekOfYear();
     var month = date.month();
     var year = date.year();
@@ -97,7 +97,7 @@ static async function xmlTest(args: [string]): void {
     var respMap : map[string]any = $XML.parseXml(xml, null);
 }
 
-static async function logerTest(args: [string]): void {
+static async function loggerTest(args: [string]): void {
     $Logger.log("test");
     $Logger.info("test");
     $Logger.warning("test");
@@ -143,8 +143,8 @@ static async function numberTest(args: [string]): void {
     var randomNum = $Number.random();
     inum = $Number.floor(inum);
     inum = $Number.round(inum);
-    var min = $Number.min(inum, fnum);
-    var max = $Number.max(inum, fnum);
+    // var min = $Number.min(inum, fnum);
+    // var max = $Number.max(inum, fnum);
 }
 
 static async function stringTest(args: [string]): void {
