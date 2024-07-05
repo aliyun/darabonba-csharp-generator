@@ -425,7 +425,7 @@ namespace Darabonba.Test
         /// 
         /// <term><b>Exception:</b></term>
         /// StackNotFound The Stack (%(stack_name)s) could not be found.  404 资源栈不存在。
-        [Obsolete("this is deprecated, use new xx instead.")]
+        [Obsolete("this is deprecated, use new xx instead.\n")]
         public static void TestFuncWithAnnotation2(string test, string _test)
         {
             // empty comment1
@@ -457,11 +457,123 @@ namespace Darabonba.Test
         /// 
         /// <term><b>Exception:</b></term>
         /// StackNotFound The Stack (%(stack_name)s) could not be found.  404 资源栈不存在。
-        [Obsolete("this is deprecated, use new xx instead.")]
+        [Obsolete("this is deprecated, use new xx instead.\n")]
         public static async Task TestFuncWithAnnotation2Async(string test, string _test)
         {
             // empty comment1
             // empty comment2
+        }
+
+        /// <term><b>Deprecated</b></term>
+        /// 
+        /// test is deprecated, use xxx instead.
+        /// deprecated description1
+        /// deprecated description2
+        /// 
+        /// <term><b>Summary:</b></term>
+        /// <summary>
+        /// <para>annotation test summary
+        /// summary description1
+        /// summary description2</para>
+        /// </summary>
+        /// 
+        /// <param name="test">
+        /// string param1
+        /// </param>
+        /// <param name="_test">
+        /// string param2
+        /// </param>
+        /// 
+        /// <returns>
+        /// void
+        /// </returns>
+        /// 
+        /// <term><b>Exception:</b></term>
+        /// InternalError Server error. 500 服务器端出现未知异常。
+        [Obsolete("test is deprecated, use xxx instead.\ndeprecated description1\ndeprecated description2\n")]
+        public static void MultiLineAnnotation(string test, string _test)
+        {
+        }
+
+        /// <term><b>Deprecated</b></term>
+        /// 
+        /// test is deprecated, use xxx instead.
+        /// deprecated description1
+        /// deprecated description2
+        /// 
+        /// <term><b>Summary:</b></term>
+        /// <summary>
+        /// <para>annotation test summary
+        /// summary description1
+        /// summary description2</para>
+        /// </summary>
+        /// 
+        /// <param name="test">
+        /// string param1
+        /// </param>
+        /// <param name="_test">
+        /// string param2
+        /// </param>
+        /// 
+        /// <returns>
+        /// void
+        /// </returns>
+        /// 
+        /// <term><b>Exception:</b></term>
+        /// InternalError Server error. 500 服务器端出现未知异常。
+        [Obsolete("test is deprecated, use xxx instead.\ndeprecated description1\ndeprecated description2\n")]
+        public static async Task MultiLineAnnotationAsync(string test, string _test)
+        {
+        }
+
+        /// <term><b>Deprecated</b></term>
+        /// 
+        /// deprecated test for line break.
+        /// 
+        /// <param name="test">
+        /// string param1
+        /// param test for line break.
+        /// </param>
+        /// <param name="_test">
+        /// string param2
+        /// </param>
+        /// 
+        /// <returns>
+        /// void
+        /// return test for line break.
+        /// </returns>
+        /// 
+        /// <term><b>Exception:</b></term>
+        /// InternalError Server error. 500 服务器端出现未知异常。
+        /// throws test for line break.
+        [Obsolete("deprecated test for line break.\n")]
+        public static void LineBreakAnnotation(string test, string _test)
+        {
+        }
+
+        /// <term><b>Deprecated</b></term>
+        /// 
+        /// deprecated test for line break.
+        /// 
+        /// <param name="test">
+        /// string param1
+        /// param test for line break.
+        /// </param>
+        /// <param name="_test">
+        /// string param2
+        /// </param>
+        /// 
+        /// <returns>
+        /// void
+        /// return test for line break.
+        /// </returns>
+        /// 
+        /// <term><b>Exception:</b></term>
+        /// InternalError Server error. 500 服务器端出现未知异常。
+        /// throws test for line break.
+        [Obsolete("deprecated test for line break.\n")]
+        public static async Task LineBreakAnnotationAsync(string test, string _test)
+        {
         }
 
     }
