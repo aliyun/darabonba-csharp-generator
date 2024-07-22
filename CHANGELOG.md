@@ -1,5 +1,8 @@
 # ChangeLog
 
+## 1.2.0 - 2024-07-22
+> Pretty api reference doc
+
 ## 1.1.1 - 2023-12-06
 > Improve xml2js usage
 > Use Object.hasOwn instead of hasOwnProperty
