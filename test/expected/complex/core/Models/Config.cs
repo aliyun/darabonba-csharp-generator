@@ -1,14 +1,14 @@
 // This file is auto-generated, don't edit it. Thanks.
 
 using System;
-using System.Collections.Generic;
 using System.IO;
-
-using Tea;
+using System.Collections;
+using System.Collections.Generic;
+using Darabonba;
 
 namespace Darabonba.Test.Models
 {
-    public class Config : TeaModel {
+    public class Config : DaraModel {
         [NameInMap("protocol")]
         [Validation(Required=true, MaxLength=50, Pattern="pattern")]
         public string Protocol { get; set; }
@@ -33,6 +33,141 @@ namespace Darabonba.Test.Models
         [Validation(Required=true)]
         public long? LongNum { get; set; }
 
+        public Config Copy()
+        {
+            Config copy = FromMap(ToMap());
+            return copy;
+        }
+
+        public Config CopyWithoutStream()
+        {
+            Config copy = FromMap(ToMap(true));
+            return copy;
+        }
+
+        public new void Validate()
+        {
+            DaraModel.ValidateRequired("protocol", Protocol, true);
+            DaraModel.ValidatePattern("protocol", Protocol, "pattern");
+            DaraModel.ValidateMaxLength("protocol", Protocol, 50);
+            if (ImportConfig != null) {
+                ImportConfig.Validate();
+            }
+            DaraModel.ValidateRequired("importConfig", ImportConfig, true);
+            DaraModel.ValidateRequired("query", Query, true);
+            if (ComplexList is IList) {
+                DaraModel.ValidateArray(ComplexList);
+            }
+            DaraModel.ValidateRequired("complexList", ComplexList, true);
+            DaraModel.ValidateRequired("floatNum", FloatNum, true);
+            DaraModel.ValidateRequired("longNum", LongNum, true);
+            base.Validate();
+        }
+
+        public Dictionary<string, object> ToMap(bool noStream = false)
+        {
+            var map = new Dictionary<string, object>();
+            if (Protocol != null)
+            {
+                map["protocol"] = Protocol;
+            }
+
+            if (ImportConfig != null)
+            {
+                map["importConfig"] = ImportConfig != null ? ImportConfig.ToMap(noStream) : null;
+            }
+
+            if (Query != null)
+            {
+                map["query"] = Query;
+            }
+
+            if (ComplexList != null)
+            {
+                var list1 = new List<List<string>>();
+                int n1 = 0;
+                foreach (var item1 in ComplexList) 
+                {
+                    var list2 = new List<string>();
+                    int n2 = 0;
+                    foreach (var item2 in item1) 
+                    {
+                        list2[n2++] = item2;
+                    }
+                    list1[n1++] = list2;
+                }
+                map["complexList"] = list1;
+            }
+
+            if (FloatNum != null)
+            {
+                map["floatNum"] = FloatNum;
+            }
+
+            if (LongNum != null)
+            {
+                map["longNum"] = LongNum;
+            }
+
+            return map;
+        }
+
+        public static Config FromMap(Dictionary<string, object> map)
+        {
+            var model = new Config();
+            if (map.ContainsKey("protocol"))
+            {
+                model.Protocol = (string)map["protocol"];
+            }
+
+            if (map.ContainsKey("importConfig"))
+            {
+                model.ImportConfig = Darabonba.import.Models.Config.FromMap(map["importConfig"]);
+            }
+
+            if (map.ContainsKey("query"))
+            {
+                model.Query = (string)map["query"];
+            }
+
+            if (map.ContainsKey("complexList"))
+            {
+                var list1 = map["complexList"] as List<List<string>>;
+                if (list1 != null && list1.Count > 0)
+                {
+                    int n1 = 0;
+                    var modelList1 = new List<List<string>>();
+                    foreach(var item1 in list1)
+                    {
+                        var list2 = item1;
+                        if (list2 != null && list2.Count > 0)
+                        {
+                            int n2 = 0;
+                            var modelList2 = new List<string>();
+                            foreach(var item2 in list2)
+                            {
+                                modelList2[n2++] = (string)item2;
+                            }
+                            modelList1[n1++] = modelList2;
+                        }
+                    }
+                    model.ComplexList = modelList1;
+                }
+            }
+
+            if (map.ContainsKey("floatNum"))
+            {
+                model.FloatNum = (float?)map["floatNum"];
+            }
+
+            if (map.ContainsKey("longNum"))
+            {
+                model.LongNum = (long?)map["longNum"];
+            }
+
+            return model;
+        }
     }
 
 }
+

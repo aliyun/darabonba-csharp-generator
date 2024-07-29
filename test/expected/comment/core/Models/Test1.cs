@@ -1,23 +1,23 @@
-// top comment
-/// <term><b>Description:</b></term>
-/// <description>
-/// <para>top annotation</para>
-/// </description>
 // This file is auto-generated, don't edit it. Thanks.
 
 using System;
-using System.Collections.Generic;
 using System.IO;
-
-using Tea;
+using System.Collections;
+using System.Collections.Generic;
+using Darabonba;
 
 namespace Darabonba.Test.Models
 {
+    // top comment
+    /// <term><b>Description:</b></term>
+    /// <description>
+    /// <para>top annotation</para>
+    /// </description>
     /// <term><b>Description:</b></term>
     /// <description>
     /// <para>TestModel</para>
     /// </description>
-    public class Test1 : TeaModel {
+    public class Test1 : DaraModel {
         /// <term><b>Obsolete</b></term>
         /// 
         /// <summary>
@@ -46,6 +46,57 @@ namespace Darabonba.Test.Models
         public string Test2 { get; set; }
 
         //model的test2 back comment
+        public Test1 Copy()
+        {
+            Test1 copy = FromMap(ToMap());
+            return copy;
+        }
+
+        public Test1 CopyWithoutStream()
+        {
+            Test1 copy = FromMap(ToMap(true));
+            return copy;
+        }
+
+        public new void Validate()
+        {
+            DaraModel.ValidateRequired("test", Test, true);
+            DaraModel.ValidateRequired("test2", Test2, true);
+            base.Validate();
+        }
+
+        public Dictionary<string, object> ToMap(bool noStream = false)
+        {
+            var map = new Dictionary<string, object>();
+            if (Test != null)
+            {
+                map["test"] = Test;
+            }
+
+            if (Test2 != null)
+            {
+                map["test2"] = Test2;
+            }
+
+            return map;
+        }
+
+        public static Test1 FromMap(Dictionary<string, object> map)
+        {
+            var model = new Test1();
+            if (map.ContainsKey("test"))
+            {
+                model.Test = (string)map["test"];
+            }
+
+            if (map.ContainsKey("test2"))
+            {
+                model.Test2 = (string)map["test2"];
+            }
+
+            return model;
+        }
     }
 
 }
+
