@@ -425,7 +425,7 @@ namespace Darabonba.Test
         /// 
         /// <term><b>Exception:</b></term>
         /// StackNotFound The Stack (%(stack_name)s) could not be found.  404 资源栈不存在。
-        [Obsolete("this is deprecated, use new xx instead.\n")]
+        [Obsolete("this is deprecated, use new xx instead.")]
         public static void TestFuncWithAnnotation2(string test, string _test)
         {
             // empty comment1
@@ -457,7 +457,7 @@ namespace Darabonba.Test
         /// 
         /// <term><b>Exception:</b></term>
         /// StackNotFound The Stack (%(stack_name)s) could not be found.  404 资源栈不存在。
-        [Obsolete("this is deprecated, use new xx instead.\n")]
+        [Obsolete("this is deprecated, use new xx instead.")]
         public static async Task TestFuncWithAnnotation2Async(string test, string _test)
         {
             // empty comment1
@@ -490,7 +490,7 @@ namespace Darabonba.Test
         /// 
         /// <term><b>Exception:</b></term>
         /// InternalError Server error. 500 服务器端出现未知异常。
-        [Obsolete("test is deprecated, use xxx instead.\ndeprecated description1\ndeprecated description2\n")]
+        [Obsolete("test is deprecated, use xxx instead.\ndeprecated description1\ndeprecated description2")]
         public static void MultiLineAnnotation(string test, string _test)
         {
         }
@@ -521,7 +521,7 @@ namespace Darabonba.Test
         /// 
         /// <term><b>Exception:</b></term>
         /// InternalError Server error. 500 服务器端出现未知异常。
-        [Obsolete("test is deprecated, use xxx instead.\ndeprecated description1\ndeprecated description2\n")]
+        [Obsolete("test is deprecated, use xxx instead.\ndeprecated description1\ndeprecated description2")]
         public static async Task MultiLineAnnotationAsync(string test, string _test)
         {
         }
@@ -546,7 +546,7 @@ namespace Darabonba.Test
         /// <term><b>Exception:</b></term>
         /// InternalError Server error. 500 服务器端出现未知异常。
         /// throws test for line break.
-        [Obsolete("deprecated test for line break.\n")]
+        [Obsolete("deprecated test for line break.")]
         public static void LineBreakAnnotation(string test, string _test)
         {
         }
@@ -571,7 +571,7 @@ namespace Darabonba.Test
         /// <term><b>Exception:</b></term>
         /// InternalError Server error. 500 服务器端出现未知异常。
         /// throws test for line break.
-        [Obsolete("deprecated test for line break.\n")]
+        [Obsolete("deprecated test for line break.")]
         public static async Task LineBreakAnnotationAsync(string test, string _test)
         {
         }
