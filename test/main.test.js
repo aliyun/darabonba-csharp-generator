@@ -164,4 +164,16 @@ describe('new Generator', function () {
       editable: true
     });
   });
+
+  it('csporj should ok', function () {
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/csproj/Darafile'), 'utf8');
+    const pkg = JSON.parse(pkgContent);
+    check('csproj', ['Client.cs', 'client.csproj'], {
+      pkgDir: path.join(__dirname, 'fixtures/csproj'),
+      libraries: pkg.libraries,
+      exec: true,
+      ...pkg.csharp,
+      editable: true
+    });
+  });
 });

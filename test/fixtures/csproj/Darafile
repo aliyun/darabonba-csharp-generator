@@ -1,0 +1,60 @@
+{
+  "scope": "alibabacloud",
+  "name": "OpenApi",
+  "version": "0.3.10",
+  "main": "./main.tea",
+  "maintainers": [
+    {
+      "name": "Alibaba Cloud SDK",
+      "email": "sdk-team@alibabacloud.com"
+    }
+  ],
+  "libraries": {
+    "Util": "darabonba:Util:*",
+    "OpenApiUtil": "alibabacloud:OpenApiUtil:*",
+    "Credential": "alibabacloud:Credential:*",
+    "SPI": "alibabacloud:GatewaySPI:*",
+    "XML": "darabonba:XML:*"
+  },
+  "releases": {
+    "ts": "@alicloud/openapi-client:^0.4.8",
+    "go": "github.com/alibabacloud-go/darabonba-openapi/v2/client:v2.0.6",
+    "csharp": "AlibabaCloud.OpenApiClient:0.1.8",
+    "java": "com.aliyun:tea-openapi:0.3.2",
+    "php": "alibabacloud/darabonba-openapi:^0.2.10",
+    "python": "alibabacloud_tea_openapi:0.3.8",
+    "python2": "alibabacloud_tea_openapi_py2:0.1.8",
+    "cpp": "alibabacloud-sdk-cpp/dara-openapi:master",
+    "swift": "alibabacloud-sdk-swift/darabonba-openapi:1.0.3"
+  },
+  "csharp": {
+    "namespace": "AlibabaCloud.OpenApiClient",
+    "packageInfo": {
+      "description": "Alibaba Cloud OpenApi SDK Library for .NET",
+      "company": "Alibaba Cloud",
+      "property": {
+        "PackageTags": "Alibaba Aliyun OpenApi SDK",
+        "Copyright": "©2009-present Alibaba Cloud",
+        "PackageProjectUrl": "https://github.com/aliyun/darabonba-openapi",
+        "PackageIconUrl": "https://www.alibabacloud.com/favicon.ico"
+      }
+    },
+    "packageManager": {
+      "Tea": "1.1.3",
+      "Something-need-to-add": "[0.0.1, 1.0.0)"
+    },
+    "typedef": {
+      "HttpResponse": {
+        "import": "Darabonba.RetryPolicy",
+        "type": "RetryOptions",
+        "package": "Darabonba:0.0.1"
+      }
+    }
+  },
+  "releaselog": {
+    "changelog": [
+      "[golang]support extends parameters."
+    ],
+    "compatible": true
+  }
+}

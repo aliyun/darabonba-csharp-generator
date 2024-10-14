@@ -1,0 +1,4 @@
+init(){
+  // string declate comment
+  var str = 'sss';
+}
