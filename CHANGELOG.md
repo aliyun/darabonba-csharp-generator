@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.2.1 - 2024-10-18
+> Support manage package in Darafile
+> Solve line-break in deprecated annotation
+
 ## 1.2.0 - 2024-07-22
 > Pretty api reference doc
 
