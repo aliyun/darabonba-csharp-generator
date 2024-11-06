@@ -1,5 +1,4 @@
 import Util;
-typedef RetryOptions;
 
 type @httpProxy = string
 type @httpsProxy = string
@@ -12,7 +11,7 @@ type @noProxy = string
 type @key = string
 type @cert = string
 type @ca = string
-type @retryOptions = RetryOptions
+type @retryOptions = $RetryOptions
 
 model Config {
 }

@@ -531,7 +531,7 @@ namespace Darabonba.Test.Models
 
                 if (map.ContainsKey("extra"))
                 {
-                    var dict = map["Extra"] as Dictionary<string, string>;
+                    var dict = map["extra"] as Dictionary<string, string>;
                     if (dict != null && dict.Count > 0)
                     {
                         var modelMap1 = new Dictionary<string, string>();
@@ -856,7 +856,7 @@ namespace Darabonba.Test.Models
 
             if (map.ContainsKey("dict"))
             {
-                var dict = map["Dict"] as Dictionary<string, object>;
+                var dict = map["dict"] as Dictionary<string, object>;
                 if (dict != null && dict.Count > 0)
                 {
                     var modelMap1 = new Dictionary<string, object>();
@@ -870,7 +870,7 @@ namespace Darabonba.Test.Models
 
             if (map.ContainsKey("submodelMap"))
             {
-                var dict = map["SubmodelMap"] as Dictionary<string, Dictionary<string, object>>;
+                var dict = map["submodelMap"] as Dictionary<string, Dictionary<string, object>>;
                 if (dict != null && dict.Count > 0)
                 {
                     var modelMap1 = new Dictionary<string, Darabonba.import.Models.Config>();

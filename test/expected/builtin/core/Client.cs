@@ -510,7 +510,7 @@ namespace Darabonba.Test
         public static void Main(string[] args)
         {
             int? a = ConverterUtil.ParseInt(args[0]) + 10;
-            string b = a.ToString() + args[1] + ReturnAny().ToString();
+            string b = (string)a + args[1] + (string)ReturnAny();
             int? c = ConverterUtil.ParseInt(b) + ConverterUtil.ParseInt(a) + ConverterUtil.ParseInt(ReturnAny());
             int? d = ConverterUtil.ParseInt(b) + ConverterUtil.ParseInt(a) + ConverterUtil.ParseInt(ReturnAny());
             int? e = ConverterUtil.ParseInt(b) + ConverterUtil.ParseInt(a) + ConverterUtil.ParseInt(ReturnAny());
@@ -524,17 +524,17 @@ namespace Darabonba.Test
             ulong? m = ConverterUtil.ParseLong(b) + ConverterUtil.ParseLong(a) + ConverterUtil.ParseLong(ReturnAny());
             float? n = ConverterUtil.ParseFloat(b) + ConverterUtil.ParseFloat(a) + ConverterUtil.ParseFloat(ReturnAny());
             double? o = Double.Parse(b.ToString()) + Double.Parse(a.ToString()) + Double.Parse(ReturnAny().ToString());
-            if (bool.Parse(args[2]))
+            if ((bool)(args[2]))
             {
                 // bytes 强转只允许传字符串
-                byte[] data = Encoding.UTF8.GetBytes(b);
+                byte[] data = (byte[])(b);
                 int? length = data.Length;
                 object test = data;
                 Dictionary<string, string> maps = new Dictionary<string, string>
                 {
                     {"key", "value"},
                 };
-                Dictionary<string, object> obj = maps.ToDictionary(kvp => kvp.Key, kvp => (object)kvp.Value);
+                Dictionary<string, object> obj = DaraCore.ToObject(maps);
                 Stream ws = (Stream)obj;
                 Stream rs = ConverterUtil.ToStream(maps);
                 data = StreamUtil.Read(rs, 30);
@@ -544,7 +544,7 @@ namespace Darabonba.Test
                 }
             }
             DaraCore.Sleep(a.Value);
-            string defaultVal = !String.IsNullOrEmpty(args[0]) ? args[0] : args[1].ToString();
+            string defaultVal = (string)(args[0] ?? args[1]);
             if (defaultVal == b)
             {
                 return ;

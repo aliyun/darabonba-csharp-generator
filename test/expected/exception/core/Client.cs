@@ -56,7 +56,7 @@ namespace Darabonba.Test
             {
                 if (a > 0)
                 {
-                    throw new Err1
+                    throw new Err1Exception
                     {
                         Name = "str",
                         Code = "str",
@@ -68,7 +68,7 @@ namespace Darabonba.Test
                 }
                 else if (a == 0)
                 {
-                    throw new Err2
+                    throw new Err2Exception
                     {
                         Name = "str",
                         Code = "str",
@@ -77,7 +77,7 @@ namespace Darabonba.Test
                 }
                 else if (a == -10)
                 {
-                    throw new Err3
+                    throw new Err3Exception
                     {
                         Name = "str",
                         Code = "str",
@@ -92,15 +92,15 @@ namespace Darabonba.Test
                     };
                 }
             }
-            catch (Err1 err)
+            catch (Err1Exception err)
             {
                 Console.WriteLine(err.Name);
             }
-            catch (Err2 err)
+            catch (Err2Exception err)
             {
                 Console.WriteLine(err.Name);
             }
-            catch (Err3 err)
+            catch (Err3Exception err)
             {
                 Console.WriteLine(err.Name);
             }
@@ -120,7 +120,7 @@ namespace Darabonba.Test
             {
                 if (a > 0)
                 {
-                    throw new Err1
+                    throw new Err1Exception
                     {
                         Name = "str",
                         Code = "str",
@@ -132,7 +132,7 @@ namespace Darabonba.Test
                 }
                 else if (a == 0)
                 {
-                    throw new Err2
+                    throw new Err2Exception
                     {
                         Name = "str",
                         Code = "str",
@@ -141,7 +141,7 @@ namespace Darabonba.Test
                 }
                 else if (a == -10)
                 {
-                    throw new Err3
+                    throw new Err3Exception
                     {
                         Name = "str",
                         Code = "str",
@@ -156,15 +156,15 @@ namespace Darabonba.Test
                     };
                 }
             }
-            catch (Err1 err)
+            catch (Err1Exception err)
             {
                 Console.WriteLine(err.Name);
             }
-            catch (Err2 err)
+            catch (Err2Exception err)
             {
                 Console.WriteLine(err.Name);
             }
-            catch (Err3 err)
+            catch (Err3Exception err)
             {
                 Console.WriteLine(err.Name);
             }
