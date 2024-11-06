@@ -220,7 +220,7 @@ namespace Darabonba.Test.Models
 
             if (map.ContainsKey("mapfield"))
             {
-                var dict = map["Mapfield"] as Dictionary<string, string>;
+                var dict = map["mapfield"] as Dictionary<string, string>;
                 if (dict != null && dict.Count > 0)
                 {
                     var modelMap1 = new Dictionary<string, string>();
@@ -263,17 +263,19 @@ namespace Darabonba.Test.Models
 
             if (map.ContainsKey("request"))
             {
-                model.Request = DaraRequest.FromMap(map["request"]);
+                var temp = (Dictionary<string, object>)map["request"];
+                model.Request = DaraRequest.FromMap(temp);
             }
 
             if (map.ContainsKey("m"))
             {
-                model.M = DaraModel.FromMap(map["m"]);
+                var temp = (Dictionary<string, object>)map["m"];
+                model.M = DaraModel.FromMap(temp);
             }
 
             if (map.ContainsKey("mapModel"))
             {
-                var dict = map["MapModel"] as Dictionary<string, Dictionary<string, object>>;
+                var dict = map["mapModel"] as Dictionary<string, Dictionary<string, object>>;
                 if (dict != null && dict.Count > 0)
                 {
                     var modelMap1 = new Dictionary<string, LowerModel>();
@@ -287,7 +289,7 @@ namespace Darabonba.Test.Models
 
             if (map.ContainsKey("submodelMap"))
             {
-                var dict = map["SubmodelMap"] as Dictionary<string, Dictionary<string, object>>;
+                var dict = map["submodelMap"] as Dictionary<string, Dictionary<string, object>>;
                 if (dict != null && dict.Count > 0)
                 {
                     var modelMap1 = new Dictionary<string, MyModelSubmodel>();

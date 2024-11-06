@@ -8,10 +8,10 @@ using Darabonba.Exceptions;
 
 namespace Darabonba.Test.Exceptions
 {
-    public class Err1 : DaraException {
+    public class Err1Exception : DaraException {
         public Dictionary<string, string> Data { get; set; }
 
-        public Err1() : base()
+        public Err1Exception() : base()
         {
         }
     }

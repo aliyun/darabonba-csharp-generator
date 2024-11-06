@@ -1,12 +1,12 @@
 import Source;
 
-exception FileException = {
+exception File = {
     code: string,
     data: map[string]any,
     key1: string
 }
 
-exception ExtendFileException extends FileException {
+exception ExtendFile extends File {
   key1: string,
   key2: string
 }
@@ -19,14 +19,13 @@ exception Err2 = {
   accessErrMessage: string
 }
 
-@aliasName("TestException")
-exception TestError extends FileException {
+exception Test extends File {
   retryAfter: long(description="Retry After(ms)"),
 }
 
 static async function exceptionTest(args: [string]): void {
   if (args.length() < 0) {
-      throw new ExtendFileException{
+      throw new ExtendFile{
           code = 'name',
           key2 = 'value2',
           data = {

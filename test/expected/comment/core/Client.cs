@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Darabonba;
 using Darabonba.Utils;
 using Darabonba.Test.Models;
-using Tea;
+using Darabonba.RetryPolicy;
 
 namespace Darabonba.Test
 {
@@ -52,33 +52,32 @@ namespace Darabonba.Test
         //testAPI comment two
         public string TestAPI()
         {
-            Darabonba.Models.RuntimeOptions runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
             {
                 // empty runtime comment
                 // another runtime comment
             };
 
-            RetryPolicyContext retryPolicyContext = null;
+            RetryPolicyContext _retryPolicyContext = null;
             DaraRequest _lastRequest = null;
             DaraResponse _lastResponse = null;
             Exception _lastException = null;
             long _now = System.DateTime.Now.Millisecond;
             int _retriesAttempted = 0;
-            retryPolicyContext = new RetryPolicyContext
+            _retryPolicyContext = new RetryPolicyContext
             {
                 RetriesAttempted = _retriesAttempted
             };
-            while (DaraCore.ShouldRetry(runtime_["retryOptions"], retryPolicyContext))
+            while (DaraCore.ShouldRetry((RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
             {
                 if (_retriesAttempted > 0)
                 {
-                    int backoffTime = DaraCore.GetBackoffDelay(runtime_["retryOptions"], retryPolicyContext);
+                    int backoffTime = DaraCore.GetBackoffDelay((RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
                     if (backoffTime > 0)
                     {
                         DaraCore.Sleep(backoffTime);
                     }
                 }
-                _retriesAttempted = _retriesAttempted + 1;
                 try
                 {
                     DaraRequest request_ = new DaraRequest();
@@ -105,7 +104,8 @@ namespace Darabonba.Test
                 catch (Exception e)
                 {
                     _retriesAttempted++;
-                    retryPolicyContext = new RetryPolicyContext
+                    _lastException = e;
+                    _retryPolicyContext = new RetryPolicyContext
                     {
                         RetriesAttempted = _retriesAttempted,
                         Request = _lastRequest,
@@ -115,7 +115,7 @@ namespace Darabonba.Test
                 }
             }
 
-            throw new TeaUnretryableException(_lastRequest, _lastException);
+            throw _lastException;
         }
 
         /// <term><b>Description:</b></term>
@@ -126,33 +126,32 @@ namespace Darabonba.Test
         //testAPI comment two
         public async Task<string> TestAPIAsync()
         {
-            Darabonba.Models.RuntimeOptions runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
             {
                 // empty runtime comment
                 // another runtime comment
             };
 
-            RetryPolicyContext retryPolicyContext = null;
+            RetryPolicyContext _retryPolicyContext = null;
             DaraRequest _lastRequest = null;
             DaraResponse _lastResponse = null;
             Exception _lastException = null;
             long _now = System.DateTime.Now.Millisecond;
             int _retriesAttempted = 0;
-            retryPolicyContext = new RetryPolicyContext
+            _retryPolicyContext = new RetryPolicyContext
             {
                 RetriesAttempted = _retriesAttempted
             };
-            while (DaraCore.ShouldRetry(runtime_["retryOptions"], retryPolicyContext))
+            while (DaraCore.ShouldRetry((RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
             {
                 if (_retriesAttempted > 0)
                 {
-                    int backoffTime = DaraCore.GetBackoffDelay(runtime_["retryOptions"], retryPolicyContext);
+                    int backoffTime = DaraCore.GetBackoffDelay((RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
                     if (backoffTime > 0)
                     {
                         DaraCore.Sleep(backoffTime);
                     }
                 }
-                _retriesAttempted = _retriesAttempted + 1;
                 try
                 {
                     DaraRequest request_ = new DaraRequest();
@@ -179,7 +178,8 @@ namespace Darabonba.Test
                 catch (Exception e)
                 {
                     _retriesAttempted++;
-                    retryPolicyContext = new RetryPolicyContext
+                    _lastException = e;
+                    _retryPolicyContext = new RetryPolicyContext
                     {
                         RetriesAttempted = _retriesAttempted,
                         Request = _lastRequest,
@@ -189,13 +189,13 @@ namespace Darabonba.Test
                 }
             }
 
-            throw new TeaUnretryableException(_lastRequest, _lastException);
+            throw _lastException;
         }
 
         // testAPI2 comment
         public string TestAPI2()
         {
-            Darabonba.Models.RuntimeOptions runtime_ = new Dictionary<string, bool?>
+            Dictionary<string, object> runtime_ = new Dictionary<string, bool?>
             {
                 // runtime retry comment
                 {"retry", true},
@@ -203,27 +203,26 @@ namespace Darabonba.Test
                 // runtime back comment two
             };
 
-            RetryPolicyContext retryPolicyContext = null;
+            RetryPolicyContext _retryPolicyContext = null;
             DaraRequest _lastRequest = null;
             DaraResponse _lastResponse = null;
             Exception _lastException = null;
             long _now = System.DateTime.Now.Millisecond;
             int _retriesAttempted = 0;
-            retryPolicyContext = new RetryPolicyContext
+            _retryPolicyContext = new RetryPolicyContext
             {
                 RetriesAttempted = _retriesAttempted
             };
-            while (DaraCore.ShouldRetry(runtime_["retryOptions"], retryPolicyContext))
+            while (DaraCore.ShouldRetry((RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
             {
                 if (_retriesAttempted > 0)
                 {
-                    int backoffTime = DaraCore.GetBackoffDelay(runtime_["retryOptions"], retryPolicyContext);
+                    int backoffTime = DaraCore.GetBackoffDelay((RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
                     if (backoffTime > 0)
                     {
                         DaraCore.Sleep(backoffTime);
                     }
                 }
-                _retriesAttempted = _retriesAttempted + 1;
                 try
                 {
                     DaraRequest request_ = new DaraRequest();
@@ -251,7 +250,8 @@ namespace Darabonba.Test
                 catch (Exception e)
                 {
                     _retriesAttempted++;
-                    retryPolicyContext = new RetryPolicyContext
+                    _lastException = e;
+                    _retryPolicyContext = new RetryPolicyContext
                     {
                         RetriesAttempted = _retriesAttempted,
                         Request = _lastRequest,
@@ -261,13 +261,13 @@ namespace Darabonba.Test
                 }
             }
 
-            throw new TeaUnretryableException(_lastRequest, _lastException);
+            throw _lastException;
         }
 
         // testAPI2 comment
         public async Task<string> TestAPI2Async()
         {
-            Darabonba.Models.RuntimeOptions runtime_ = new Dictionary<string, bool?>
+            Dictionary<string, object> runtime_ = new Dictionary<string, bool?>
             {
                 // runtime retry comment
                 {"retry", true},
@@ -275,27 +275,26 @@ namespace Darabonba.Test
                 // runtime back comment two
             };
 
-            RetryPolicyContext retryPolicyContext = null;
+            RetryPolicyContext _retryPolicyContext = null;
             DaraRequest _lastRequest = null;
             DaraResponse _lastResponse = null;
             Exception _lastException = null;
             long _now = System.DateTime.Now.Millisecond;
             int _retriesAttempted = 0;
-            retryPolicyContext = new RetryPolicyContext
+            _retryPolicyContext = new RetryPolicyContext
             {
                 RetriesAttempted = _retriesAttempted
             };
-            while (DaraCore.ShouldRetry(runtime_["retryOptions"], retryPolicyContext))
+            while (DaraCore.ShouldRetry((RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
             {
                 if (_retriesAttempted > 0)
                 {
-                    int backoffTime = DaraCore.GetBackoffDelay(runtime_["retryOptions"], retryPolicyContext);
+                    int backoffTime = DaraCore.GetBackoffDelay((RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
                     if (backoffTime > 0)
                     {
                         DaraCore.Sleep(backoffTime);
                     }
                 }
-                _retriesAttempted = _retriesAttempted + 1;
                 try
                 {
                     DaraRequest request_ = new DaraRequest();
@@ -323,7 +322,8 @@ namespace Darabonba.Test
                 catch (Exception e)
                 {
                     _retriesAttempted++;
-                    retryPolicyContext = new RetryPolicyContext
+                    _lastException = e;
+                    _retryPolicyContext = new RetryPolicyContext
                     {
                         RetriesAttempted = _retriesAttempted,
                         Request = _lastRequest,
@@ -333,7 +333,7 @@ namespace Darabonba.Test
                 }
             }
 
-            throw new TeaUnretryableException(_lastRequest, _lastException);
+            throw _lastException;
         }
 
         public static void StaticFunc()

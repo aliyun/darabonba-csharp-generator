@@ -7,10 +7,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Darabonba;
 using Darabonba.Utils;
+using Darabonba.RetryPolicy;
 using Darabonba.Test.Models;
 using AlibabaCloud.TeaUtil.Models;
 using AlibabaCloud.TeaUtil;
-using Tea;
 
 namespace Darabonba.Test
 {
@@ -63,7 +63,7 @@ namespace Darabonba.Test
 
         public string HelloRuntime(string bodyType, RuntimeOptions runtime)
         {
-            Darabonba.Models.RuntimeOptions runtime_ = new Dictionary<string, object>
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"key", Common.DefaultString(runtime.Key, _key)},
                 {"cert", Common.DefaultString(runtime.Cert, _cert)},
@@ -80,27 +80,26 @@ namespace Darabonba.Test
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
 
-            RetryPolicyContext retryPolicyContext = null;
+            RetryPolicyContext _retryPolicyContext = null;
             DaraRequest _lastRequest = null;
             DaraResponse _lastResponse = null;
             Exception _lastException = null;
             long _now = System.DateTime.Now.Millisecond;
             int _retriesAttempted = 0;
-            retryPolicyContext = new RetryPolicyContext
+            _retryPolicyContext = new RetryPolicyContext
             {
                 RetriesAttempted = _retriesAttempted
             };
-            while (DaraCore.ShouldRetry(runtime_["retryOptions"], retryPolicyContext))
+            while (DaraCore.ShouldRetry((RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
             {
                 if (_retriesAttempted > 0)
                 {
-                    int backoffTime = DaraCore.GetBackoffDelay(runtime_["retryOptions"], retryPolicyContext);
+                    int backoffTime = DaraCore.GetBackoffDelay((RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
                     if (backoffTime > 0)
                     {
                         DaraCore.Sleep(backoffTime);
                     }
                 }
-                _retriesAttempted = _retriesAttempted + 1;
                 try
                 {
                     DaraRequest request_ = new DaraRequest();
@@ -118,7 +117,8 @@ namespace Darabonba.Test
                 catch (Exception e)
                 {
                     _retriesAttempted++;
-                    retryPolicyContext = new RetryPolicyContext
+                    _lastException = e;
+                    _retryPolicyContext = new RetryPolicyContext
                     {
                         RetriesAttempted = _retriesAttempted,
                         Request = _lastRequest,
@@ -128,12 +128,12 @@ namespace Darabonba.Test
                 }
             }
 
-            throw new TeaUnretryableException(_lastRequest, _lastException);
+            throw _lastException;
         }
 
         public async Task<string> HelloRuntimeAsync(string bodyType, RuntimeOptions runtime)
         {
-            Darabonba.Models.RuntimeOptions runtime_ = new Dictionary<string, object>
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"key", Common.DefaultString(runtime.Key, _key)},
                 {"cert", Common.DefaultString(runtime.Cert, _cert)},
@@ -150,27 +150,26 @@ namespace Darabonba.Test
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
 
-            RetryPolicyContext retryPolicyContext = null;
+            RetryPolicyContext _retryPolicyContext = null;
             DaraRequest _lastRequest = null;
             DaraResponse _lastResponse = null;
             Exception _lastException = null;
             long _now = System.DateTime.Now.Millisecond;
             int _retriesAttempted = 0;
-            retryPolicyContext = new RetryPolicyContext
+            _retryPolicyContext = new RetryPolicyContext
             {
                 RetriesAttempted = _retriesAttempted
             };
-            while (DaraCore.ShouldRetry(runtime_["retryOptions"], retryPolicyContext))
+            while (DaraCore.ShouldRetry((RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
             {
                 if (_retriesAttempted > 0)
                 {
-                    int backoffTime = DaraCore.GetBackoffDelay(runtime_["retryOptions"], retryPolicyContext);
+                    int backoffTime = DaraCore.GetBackoffDelay((RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
                     if (backoffTime > 0)
                     {
                         DaraCore.Sleep(backoffTime);
                     }
                 }
-                _retriesAttempted = _retriesAttempted + 1;
                 try
                 {
                     DaraRequest request_ = new DaraRequest();
@@ -188,7 +187,8 @@ namespace Darabonba.Test
                 catch (Exception e)
                 {
                     _retriesAttempted++;
-                    retryPolicyContext = new RetryPolicyContext
+                    _lastException = e;
+                    _retryPolicyContext = new RetryPolicyContext
                     {
                         RetriesAttempted = _retriesAttempted,
                         Request = _lastRequest,
@@ -198,12 +198,11 @@ namespace Darabonba.Test
                 }
             }
 
-            throw new TeaUnretryableException(_lastRequest, _lastException);
+            throw _lastException;
         }
 
         public void HelloVirtualCall(M m)
         {
-            m.Validate();
             DaraRequest request_ = new DaraRequest();
             request_.Method = "GET";
             request_.Pathname = "/";
@@ -218,7 +217,6 @@ namespace Darabonba.Test
 
         public async Task HelloVirtualCallAsync(M m)
         {
-            m.Validate();
             DaraRequest request_ = new DaraRequest();
             request_.Method = "GET";
             request_.Pathname = "/";

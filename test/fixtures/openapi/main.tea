@@ -47,8 +47,7 @@ model GlobalParameters {
   queries?: map[string]string,
 }
 
-@aliasName("AlibabaCloudException")
-exception AlibabaCloudError extends $Error {
+exception AlibabaCloud extends $Error {
   statusCode?: number(description='HTTP Status Code'),
   code?: string(description="Error Code"),
   message?: string(description="Error Message"),
@@ -56,17 +55,14 @@ exception AlibabaCloudError extends $Error {
   requestId?: string(description="Request ID"),
 }
 
-@aliasName("ClientException")
-exception ClientError extends AlibabaCloudError {
+exception Client extends AlibabaCloud {
   accessDeniedDetail?: map[string]any(description="Access Denied Detail"),
 }
 
-@aliasName("ServerException")
-exception ServerError extends AlibabaCloudError {
+exception Server extends AlibabaCloud {
 }
 
-@aliasName("ThrottlingException")
-exception ThrottlingError extends AlibabaCloudError {
+exception Throttling extends AlibabaCloud {
   retryAfter?: long(description="Retry After(ms)"),
 }
 

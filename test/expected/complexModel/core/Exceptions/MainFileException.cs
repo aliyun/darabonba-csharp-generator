@@ -9,11 +9,11 @@ using Darabonba.Test.Models;
 
 namespace Darabonba.Test.Exceptions
 {
-    public class MainFileError : DaraException {
+    public class MainFileException : DaraException {
         public int? Size { get; set; }
         public Dictionary<string, Model> Data { get; set; }
-        public MainFileErrorModel Model { get; set; }
-        public class MainFileErrorModel : DaraModel
+        public MainFileExceptionModel Model { get; set; }
+        public class MainFileExceptionModel : DaraModel
         {
             [NameInMap("str")]
             [Validation(Required=true)]
@@ -21,21 +21,21 @@ namespace Darabonba.Test.Exceptions
 
             [NameInMap("model")]
             [Validation(Required=true)]
-            public MainFileErrorModelModel Model { get; set; }
-            public class MainFileErrorModelModel : DaraModel {
+            public MainFileExceptionModelModel Model { get; set; }
+            public class MainFileExceptionModelModel : DaraModel {
                 [NameInMap("str")]
                 [Validation(Required=true)]
                 public string Str { get; set; }
 
-                public MainFileErrorModelModel Copy()
+                public MainFileExceptionModelModel Copy()
                 {
-                    MainFileErrorModelModel copy = FromMap(ToMap());
+                    MainFileExceptionModelModel copy = FromMap(ToMap());
                     return copy;
                 }
 
-                public MainFileErrorModelModel CopyWithoutStream()
+                public MainFileExceptionModelModel CopyWithoutStream()
                 {
-                    MainFileErrorModelModel copy = FromMap(ToMap(true));
+                    MainFileExceptionModelModel copy = FromMap(ToMap(true));
                     return copy;
                 }
 
@@ -50,9 +50,9 @@ namespace Darabonba.Test.Exceptions
                     return map;
                 }
 
-                public static MainFileErrorModelModel FromMap(Dictionary<string, object> map)
+                public static MainFileExceptionModelModel FromMap(Dictionary<string, object> map)
                 {
-                    var model = new MainFileErrorModelModel();
+                    var model = new MainFileExceptionModelModel();
                     if (map.ContainsKey("str"))
                     {
                         model.Str = (string)map["str"];
@@ -62,15 +62,15 @@ namespace Darabonba.Test.Exceptions
                 }
             }
 
-            public MainFileErrorModel Copy()
+            public MainFileExceptionModel Copy()
             {
-                MainFileErrorModel copy = FromMap(ToMap());
+                MainFileExceptionModel copy = FromMap(ToMap());
                 return copy;
             }
 
-            public MainFileErrorModel CopyWithoutStream()
+            public MainFileExceptionModel CopyWithoutStream()
             {
-                MainFileErrorModel copy = FromMap(ToMap(true));
+                MainFileExceptionModel copy = FromMap(ToMap(true));
                 return copy;
             }
 
@@ -90,9 +90,9 @@ namespace Darabonba.Test.Exceptions
                 return map;
             }
 
-            public static MainFileErrorModel FromMap(Dictionary<string, object> map)
+            public static MainFileExceptionModel FromMap(Dictionary<string, object> map)
             {
-                var model = new MainFileErrorModel();
+                var model = new MainFileExceptionModel();
                 if (map.ContainsKey("str"))
                 {
                     model.Str = (string)map["str"];
@@ -103,29 +103,29 @@ namespace Darabonba.Test.Exceptions
                     if (map["model"] != null)
                     {
                         var temp = (Dictionary<string, object>)map["model"];
-                        model.Model = MainFileErrorModelModel.FromMap(temp);
+                        model.Model = MainFileExceptionModelModel.FromMap(temp);
                     }
                 }
 
                 return model;
             }
         }
-        public MainFileErrorModel1 Model1 { get; set; }
-        public class MainFileErrorModel1 : DaraModel
+        public MainFileExceptionModel1 Model1 { get; set; }
+        public class MainFileExceptionModel1 : DaraModel
         {
             [NameInMap("code")]
             [Validation(Required=true)]
             public int? Code { get; set; }
 
-            public MainFileErrorModel1 Copy()
+            public MainFileExceptionModel1 Copy()
             {
-                MainFileErrorModel1 copy = FromMap(ToMap());
+                MainFileExceptionModel1 copy = FromMap(ToMap());
                 return copy;
             }
 
-            public MainFileErrorModel1 CopyWithoutStream()
+            public MainFileExceptionModel1 CopyWithoutStream()
             {
-                MainFileErrorModel1 copy = FromMap(ToMap(true));
+                MainFileExceptionModel1 copy = FromMap(ToMap(true));
                 return copy;
             }
 
@@ -140,9 +140,9 @@ namespace Darabonba.Test.Exceptions
                 return map;
             }
 
-            public static MainFileErrorModel1 FromMap(Dictionary<string, object> map)
+            public static MainFileExceptionModel1 FromMap(Dictionary<string, object> map)
             {
-                var model = new MainFileErrorModel1();
+                var model = new MainFileExceptionModel1();
                 if (map.ContainsKey("code"))
                 {
                     model.Code = (int?)map["code"];
@@ -152,7 +152,7 @@ namespace Darabonba.Test.Exceptions
             }
         }
 
-        public class MainFileErrorModel : DaraModel
+        public class MainFileExceptionModel : DaraModel
         {
             [NameInMap("str")]
             [Validation(Required=true)]
@@ -160,21 +160,21 @@ namespace Darabonba.Test.Exceptions
 
             [NameInMap("model")]
             [Validation(Required=true)]
-            public MainFileErrorModelModel Model { get; set; }
-            public class MainFileErrorModelModel : DaraModel {
+            public MainFileExceptionModelModel Model { get; set; }
+            public class MainFileExceptionModelModel : DaraModel {
                 [NameInMap("str")]
                 [Validation(Required=true)]
                 public string Str { get; set; }
 
-                public MainFileErrorModelModel Copy()
+                public MainFileExceptionModelModel Copy()
                 {
-                    MainFileErrorModelModel copy = FromMap(ToMap());
+                    MainFileExceptionModelModel copy = FromMap(ToMap());
                     return copy;
                 }
 
-                public MainFileErrorModelModel CopyWithoutStream()
+                public MainFileExceptionModelModel CopyWithoutStream()
                 {
-                    MainFileErrorModelModel copy = FromMap(ToMap(true));
+                    MainFileExceptionModelModel copy = FromMap(ToMap(true));
                     return copy;
                 }
 
@@ -189,9 +189,9 @@ namespace Darabonba.Test.Exceptions
                     return map;
                 }
 
-                public static MainFileErrorModelModel FromMap(Dictionary<string, object> map)
+                public static MainFileExceptionModelModel FromMap(Dictionary<string, object> map)
                 {
-                    var model = new MainFileErrorModelModel();
+                    var model = new MainFileExceptionModelModel();
                     if (map.ContainsKey("str"))
                     {
                         model.Str = (string)map["str"];
@@ -201,15 +201,15 @@ namespace Darabonba.Test.Exceptions
                 }
             }
 
-            public MainFileErrorModel Copy()
+            public MainFileExceptionModel Copy()
             {
-                MainFileErrorModel copy = FromMap(ToMap());
+                MainFileExceptionModel copy = FromMap(ToMap());
                 return copy;
             }
 
-            public MainFileErrorModel CopyWithoutStream()
+            public MainFileExceptionModel CopyWithoutStream()
             {
-                MainFileErrorModel copy = FromMap(ToMap(true));
+                MainFileExceptionModel copy = FromMap(ToMap(true));
                 return copy;
             }
 
@@ -229,9 +229,9 @@ namespace Darabonba.Test.Exceptions
                 return map;
             }
 
-            public static MainFileErrorModel FromMap(Dictionary<string, object> map)
+            public static MainFileExceptionModel FromMap(Dictionary<string, object> map)
             {
-                var model = new MainFileErrorModel();
+                var model = new MainFileExceptionModel();
                 if (map.ContainsKey("str"))
                 {
                     model.Str = (string)map["str"];
@@ -242,28 +242,28 @@ namespace Darabonba.Test.Exceptions
                     if (map["model"] != null)
                     {
                         var temp = (Dictionary<string, object>)map["model"];
-                        model.Model = MainFileErrorModelModel.FromMap(temp);
+                        model.Model = MainFileExceptionModelModel.FromMap(temp);
                     }
                 }
 
                 return model;
             }
         }
-        public class MainFileErrorModel1 : DaraModel
+        public class MainFileExceptionModel1 : DaraModel
         {
             [NameInMap("code")]
             [Validation(Required=true)]
             public int? Code { get; set; }
 
-            public MainFileErrorModel1 Copy()
+            public MainFileExceptionModel1 Copy()
             {
-                MainFileErrorModel1 copy = FromMap(ToMap());
+                MainFileExceptionModel1 copy = FromMap(ToMap());
                 return copy;
             }
 
-            public MainFileErrorModel1 CopyWithoutStream()
+            public MainFileExceptionModel1 CopyWithoutStream()
             {
-                MainFileErrorModel1 copy = FromMap(ToMap(true));
+                MainFileExceptionModel1 copy = FromMap(ToMap(true));
                 return copy;
             }
 
@@ -278,9 +278,9 @@ namespace Darabonba.Test.Exceptions
                 return map;
             }
 
-            public static MainFileErrorModel1 FromMap(Dictionary<string, object> map)
+            public static MainFileExceptionModel1 FromMap(Dictionary<string, object> map)
             {
-                var model = new MainFileErrorModel1();
+                var model = new MainFileExceptionModel1();
                 if (map.ContainsKey("code"))
                 {
                     model.Code = (int?)map["code"];
@@ -289,7 +289,7 @@ namespace Darabonba.Test.Exceptions
                 return model;
             }
         }
-        public MainFileError() : base()
+        public MainFileException() : base()
         {
         }
     }

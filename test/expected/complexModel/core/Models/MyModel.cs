@@ -787,7 +787,7 @@ namespace Darabonba.Test.Models
 
             if (map.ContainsKey("mapfield"))
             {
-                var dict = map["Mapfield"] as Dictionary<string, string>;
+                var dict = map["mapfield"] as Dictionary<string, string>;
                 if (dict != null && dict.Count > 0)
                 {
                     var modelMap1 = new Dictionary<string, string>();
@@ -815,7 +815,7 @@ namespace Darabonba.Test.Models
 
             if (map.ContainsKey("submodelMap"))
             {
-                var dict = map["SubmodelMap"] as Dictionary<string, Dictionary<string, object>>;
+                var dict = map["submodelMap"] as Dictionary<string, Dictionary<string, object>>;
                 if (dict != null && dict.Count > 0)
                 {
                     var modelMap1 = new Dictionary<string, MyModelSubmodel>();
@@ -829,7 +829,7 @@ namespace Darabonba.Test.Models
 
             if (map.ContainsKey("mapModel"))
             {
-                var dict = map["MapModel"] as Dictionary<string, Dictionary<string, object>>;
+                var dict = map["mapModel"] as Dictionary<string, Dictionary<string, object>>;
                 if (dict != null && dict.Count > 0)
                 {
                     var modelMap1 = new Dictionary<string, M>();
@@ -969,7 +969,7 @@ namespace Darabonba.Test.Models
                     var modelList1 = new List<Dictionary<string, object>>();
                     foreach(var item1 in list1)
                     {
-                        var dict = map["Maparray"] as Dictionary<string, object>;
+                        var dict = item1 as Dictionary<string, object>;
                         if (dict != null && dict.Count > 0)
                         {
                             var modelMap2 = new Dictionary<string, object>();
@@ -993,7 +993,7 @@ namespace Darabonba.Test.Models
                     var modelList1 = new List<Dictionary<string, SourceClient>>();
                     foreach(var item1 in list1)
                     {
-                        var dict = map["Mapsubmarray"] as Dictionary<string, SourceClient>;
+                        var dict = item1 as Dictionary<string, SourceClient>;
                         if (dict != null && dict.Count > 0)
                         {
                             var modelMap2 = new Dictionary<string, SourceClient>();
@@ -1010,7 +1010,7 @@ namespace Darabonba.Test.Models
 
             if (map.ContainsKey("moduleModelMap"))
             {
-                var dict = map["ModuleModelMap"] as Dictionary<string, Dictionary<string, object>>;
+                var dict = map["moduleModelMap"] as Dictionary<string, Dictionary<string, object>>;
                 if (dict != null && dict.Count > 0)
                 {
                     var modelMap1 = new Dictionary<string, Request>();
@@ -1024,7 +1024,7 @@ namespace Darabonba.Test.Models
 
             if (map.ContainsKey("subModelMap"))
             {
-                var dict = map["SubModelMap"] as Dictionary<string, Dictionary<string, object>>;
+                var dict = map["subModelMap"] as Dictionary<string, Dictionary<string, object>>;
                 if (dict != null && dict.Count > 0)
                 {
                     var modelMap1 = new Dictionary<string, MyModelSubM>();
@@ -1038,7 +1038,7 @@ namespace Darabonba.Test.Models
 
             if (map.ContainsKey("modelMap"))
             {
-                var dict = map["ModelMap"] as Dictionary<string, Dictionary<string, object>>;
+                var dict = map["modelMap"] as Dictionary<string, Dictionary<string, object>>;
                 if (dict != null && dict.Count > 0)
                 {
                     var modelMap1 = new Dictionary<string, M>();
@@ -1052,7 +1052,7 @@ namespace Darabonba.Test.Models
 
             if (map.ContainsKey("moduleMap"))
             {
-                var dict = map["ModuleMap"] as Dictionary<string, SourceClient>;
+                var dict = map["moduleMap"] as Dictionary<string, SourceClient>;
                 if (dict != null && dict.Count > 0)
                 {
                     var modelMap1 = new Dictionary<string, SourceClient>();
@@ -1087,7 +1087,8 @@ namespace Darabonba.Test.Models
 
             if (map.ContainsKey("request"))
             {
-                model.Request = DaraRequest.FromMap(map["request"]);
+                var temp = (Dictionary<string, object>)map["request"];
+                model.Request = DaraRequest.FromMap(temp);
             }
 
             if (map.ContainsKey("complexList"))
