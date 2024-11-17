@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Darabonba;
 using Darabonba.Utils;
+using ConsoleClient = AlibabaCloud.TeaConsole.Client;
 using AlibabaCloud.TeaUtil;
 using Darabonba.Test.Lib;
 using CommonCommonClient = Darabonba.Test.Repeat.CommonClient;
@@ -16,6 +17,7 @@ namespace Darabonba.Test.Model
 
         public static IAsyncEnumerable<string> Test()
         {
+            ConsoleClient.Log("test");
             string a = CommonClient.GetNonce();
             yield return a;
             IEnumerable<string> it = UtilClient.Test1();
@@ -28,6 +30,7 @@ namespace Darabonba.Test.Model
 
         public static async IAsyncEnumerable<string> TestAsync()
         {
+            ConsoleClient.Log("test");
             string a = CommonClient.GetNonce();
             yield return a;
             IEnumerable<string> it = UtilClient.Test1();

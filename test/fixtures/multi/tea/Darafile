@@ -4,7 +4,8 @@
 	"version": "0.2.10",
 	"main": "./sdk.dara",
 	"libraries": {
-		"DARAUtil": "darabonba:Util:*"
+		"DARAUtil": "darabonba:Util:*",
+		"Console": "darabonba:Console:*"
 	},
 	"csharp": {
 		"namespace": "Darabonba.Test"
