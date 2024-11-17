@@ -7,6 +7,7 @@ using Darabonba;
 using Darabonba.Utils;
 using Darabonba.RetryPolicy;
 using Darabonba.Test.Lib;
+using ConsoleClient = AlibabaCloud.TeaConsole.Client;
 
 namespace Darabonba.Test
 {
@@ -56,6 +57,7 @@ namespace Darabonba.Test
                         {"accept", "application/json"},
                     };
                     request_.Query = UtilClient.GetQuery();
+                    ConsoleClient.Log("test");
                     _lastRequest = request_;
                     DaraResponse response_ = DaraCore.DoAction(request_, runtime_);
 
@@ -117,6 +119,7 @@ namespace Darabonba.Test
                         {"accept", "application/json"},
                     };
                     request_.Query = UtilClient.GetQuery();
+                    ConsoleClient.Log("test");
                     _lastRequest = request_;
                     DaraResponse response_ = await DaraCore.DoActionAsync(request_, runtime_);
 
