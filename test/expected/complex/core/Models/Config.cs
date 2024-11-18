@@ -8,7 +8,7 @@ using Darabonba;
 
 namespace Darabonba.Test.Models
 {
-    public class Config : DaraModel {
+    public class Config : Model {
         [NameInMap("protocol")]
         [Validation(Required=true, MaxLength=50, Pattern="pattern")]
         public string Protocol { get; set; }

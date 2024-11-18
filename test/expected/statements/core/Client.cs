@@ -21,7 +21,7 @@ namespace Darabonba.Test
 
         public void Hello()
         {
-            DaraRequest request_ = new DaraRequest();
+            Request request_ = new Request();
             request_.Method = "GET";
             request_.Pathname = "/";
             request_.Headers = new Dictionary<string, string>
@@ -33,7 +33,7 @@ namespace Darabonba.Test
             {
                 request_.Headers["host"] = "www.test2.com";
             }
-            DaraResponse response_ = DaraCore.DoAction(request_);
+            Response response_ = Core.DoAction(request_);
 
             HelloIf();
             return ;
@@ -41,7 +41,7 @@ namespace Darabonba.Test
 
         public async Task HelloAsync()
         {
-            DaraRequest request_ = new DaraRequest();
+            Request request_ = new Request();
             request_.Method = "GET";
             request_.Pathname = "/";
             request_.Headers = new Dictionary<string, string>
@@ -53,7 +53,7 @@ namespace Darabonba.Test
             {
                 request_.Headers["host"] = "www.test2.com";
             }
-            DaraResponse response_ = await DaraCore.DoActionAsync(request_);
+            Response response_ = await Core.DoActionAsync(request_);
 
             HelloIf();
             return ;

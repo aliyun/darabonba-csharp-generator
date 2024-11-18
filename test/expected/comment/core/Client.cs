@@ -59,8 +59,8 @@ namespace Darabonba.Test
             };
 
             RetryPolicyContext _retryPolicyContext = null;
-            DaraRequest _lastRequest = null;
-            DaraResponse _lastResponse = null;
+            Request _lastRequest = null;
+            Response _lastResponse = null;
             Exception _lastException = null;
             long _now = System.DateTime.Now.Millisecond;
             int _retriesAttempted = 0;
@@ -68,19 +68,19 @@ namespace Darabonba.Test
             {
                 RetriesAttempted = _retriesAttempted
             };
-            while (DaraCore.ShouldRetry((RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
+            while (Core.ShouldRetry((RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
             {
                 if (_retriesAttempted > 0)
                 {
-                    int backoffTime = DaraCore.GetBackoffDelay((RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
+                    long backoffTime = Core.GetBackoffDelay((RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
                     if (backoffTime > 0)
                     {
-                        DaraCore.Sleep(backoffTime);
+                        Core.Sleep(backoffTime);
                     }
                 }
                 try
                 {
-                    DaraRequest request_ = new DaraRequest();
+                    Request request_ = new Request();
                     // new model instance comment
                     Test1 modelInstance = new Test1
                     {
@@ -94,7 +94,7 @@ namespace Darabonba.Test
                     // static function call comment
                     StaticFunc();
                     _lastRequest = request_;
-                    DaraResponse response_ = DaraCore.DoAction(request_, runtime_);
+                    Response response_ = Core.DoAction(request_, runtime_);
 
                     // static async function call
                     TestFunc();
@@ -133,8 +133,8 @@ namespace Darabonba.Test
             };
 
             RetryPolicyContext _retryPolicyContext = null;
-            DaraRequest _lastRequest = null;
-            DaraResponse _lastResponse = null;
+            Request _lastRequest = null;
+            Response _lastResponse = null;
             Exception _lastException = null;
             long _now = System.DateTime.Now.Millisecond;
             int _retriesAttempted = 0;
@@ -142,19 +142,19 @@ namespace Darabonba.Test
             {
                 RetriesAttempted = _retriesAttempted
             };
-            while (DaraCore.ShouldRetry((RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
+            while (Core.ShouldRetry((RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
             {
                 if (_retriesAttempted > 0)
                 {
-                    int backoffTime = DaraCore.GetBackoffDelay((RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
+                    long backoffTime = Core.GetBackoffDelay((RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
                     if (backoffTime > 0)
                     {
-                        DaraCore.Sleep(backoffTime);
+                        Core.Sleep(backoffTime);
                     }
                 }
                 try
                 {
-                    DaraRequest request_ = new DaraRequest();
+                    Request request_ = new Request();
                     // new model instance comment
                     Test1 modelInstance = new Test1
                     {
@@ -168,7 +168,7 @@ namespace Darabonba.Test
                     // static function call comment
                     StaticFunc();
                     _lastRequest = request_;
-                    DaraResponse response_ = await DaraCore.DoActionAsync(request_, runtime_);
+                    Response response_ = await Core.DoActionAsync(request_, runtime_);
 
                     // static async function call
                     await TestFuncAsync();
@@ -204,8 +204,8 @@ namespace Darabonba.Test
             };
 
             RetryPolicyContext _retryPolicyContext = null;
-            DaraRequest _lastRequest = null;
-            DaraResponse _lastResponse = null;
+            Request _lastRequest = null;
+            Response _lastResponse = null;
             Exception _lastException = null;
             long _now = System.DateTime.Now.Millisecond;
             int _retriesAttempted = 0;
@@ -213,19 +213,19 @@ namespace Darabonba.Test
             {
                 RetriesAttempted = _retriesAttempted
             };
-            while (DaraCore.ShouldRetry((RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
+            while (Core.ShouldRetry((RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
             {
                 if (_retriesAttempted > 0)
                 {
-                    int backoffTime = DaraCore.GetBackoffDelay((RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
+                    long backoffTime = Core.GetBackoffDelay((RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
                     if (backoffTime > 0)
                     {
-                        DaraCore.Sleep(backoffTime);
+                        Core.Sleep(backoffTime);
                     }
                 }
                 try
                 {
-                    DaraRequest request_ = new DaraRequest();
+                    Request request_ = new Request();
                     // new model instance comment
                     Test3 modelInstance = new Test3();
                     // boolean declare comment
@@ -242,7 +242,7 @@ namespace Darabonba.Test
                     TestAPI();
                     // back comment
                     _lastRequest = request_;
-                    DaraResponse response_ = DaraCore.DoAction(request_, runtime_);
+                    Response response_ = Core.DoAction(request_, runtime_);
 
                     // empty return comment
                     return "test";
@@ -276,8 +276,8 @@ namespace Darabonba.Test
             };
 
             RetryPolicyContext _retryPolicyContext = null;
-            DaraRequest _lastRequest = null;
-            DaraResponse _lastResponse = null;
+            Request _lastRequest = null;
+            Response _lastResponse = null;
             Exception _lastException = null;
             long _now = System.DateTime.Now.Millisecond;
             int _retriesAttempted = 0;
@@ -285,19 +285,19 @@ namespace Darabonba.Test
             {
                 RetriesAttempted = _retriesAttempted
             };
-            while (DaraCore.ShouldRetry((RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
+            while (Core.ShouldRetry((RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
             {
                 if (_retriesAttempted > 0)
                 {
-                    int backoffTime = DaraCore.GetBackoffDelay((RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
+                    long backoffTime = Core.GetBackoffDelay((RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
                     if (backoffTime > 0)
                     {
-                        DaraCore.Sleep(backoffTime);
+                        Core.Sleep(backoffTime);
                     }
                 }
                 try
                 {
-                    DaraRequest request_ = new DaraRequest();
+                    Request request_ = new Request();
                     // new model instance comment
                     Test3 modelInstance = new Test3();
                     // boolean declare comment
@@ -314,7 +314,7 @@ namespace Darabonba.Test
                     await TestAPIAsync();
                     // back comment
                     _lastRequest = request_;
-                    DaraResponse response_ = await DaraCore.DoActionAsync(request_, runtime_);
+                    Response response_ = await Core.DoActionAsync(request_, runtime_);
 
                     // empty return comment
                     return "test";

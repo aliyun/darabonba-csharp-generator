@@ -7,7 +7,7 @@ using AlibabaCloud.TeaUtil.Models;
 
 namespace Darabonba.Test.Model.Models
 {
-    public class Info : DaraModel {
+    public class Info : Model {
         [NameInMap("name")]
         [Validation(Required=true)]
         public string Name { get; set; }

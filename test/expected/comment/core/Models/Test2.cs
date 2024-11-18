@@ -12,7 +12,7 @@ namespace Darabonba.Test.Models
     /// <description>
     /// <para>TestModel2</para>
     /// </description>
-    public class Test2 : DaraModel {
+    public class Test2 : Model {
         // model的test front comment
         /// <summary>
         /// <para>test desc</para>

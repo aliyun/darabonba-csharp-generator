@@ -26,8 +26,8 @@ namespace Darabonba.Test
             };
 
             RetryPolicyContext _retryPolicyContext = null;
-            DaraRequest _lastRequest = null;
-            DaraResponse _lastResponse = null;
+            Request _lastRequest = null;
+            Response _lastResponse = null;
             Exception _lastException = null;
             long _now = System.DateTime.Now.Millisecond;
             int _retriesAttempted = 0;
@@ -35,19 +35,19 @@ namespace Darabonba.Test
             {
                 RetriesAttempted = _retriesAttempted
             };
-            while (DaraCore.ShouldRetry((RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
+            while (Core.ShouldRetry((RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
             {
                 if (_retriesAttempted > 0)
                 {
-                    int backoffTime = DaraCore.GetBackoffDelay((RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
+                    long backoffTime = Core.GetBackoffDelay((RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
                     if (backoffTime > 0)
                     {
-                        DaraCore.Sleep(backoffTime);
+                        Core.Sleep(backoffTime);
                     }
                 }
                 try
                 {
-                    DaraRequest request_ = new DaraRequest();
+                    Request request_ = new Request();
                     request_.Protocol = "https";
                     request_.Method = "DELETE";
                     request_.Pathname = "/";
@@ -59,7 +59,7 @@ namespace Darabonba.Test
                     request_.Query = UtilClient.GetQuery();
                     ConsoleClient.Log("test");
                     _lastRequest = request_;
-                    DaraResponse response_ = DaraCore.DoAction(request_, runtime_);
+                    Response response_ = Core.DoAction(request_, runtime_);
 
                     return response_.StatusCode;
                 }
@@ -88,8 +88,8 @@ namespace Darabonba.Test
             };
 
             RetryPolicyContext _retryPolicyContext = null;
-            DaraRequest _lastRequest = null;
-            DaraResponse _lastResponse = null;
+            Request _lastRequest = null;
+            Response _lastResponse = null;
             Exception _lastException = null;
             long _now = System.DateTime.Now.Millisecond;
             int _retriesAttempted = 0;
@@ -97,19 +97,19 @@ namespace Darabonba.Test
             {
                 RetriesAttempted = _retriesAttempted
             };
-            while (DaraCore.ShouldRetry((RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
+            while (Core.ShouldRetry((RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
             {
                 if (_retriesAttempted > 0)
                 {
-                    int backoffTime = DaraCore.GetBackoffDelay((RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
+                    long backoffTime = Core.GetBackoffDelay((RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
                     if (backoffTime > 0)
                     {
-                        DaraCore.Sleep(backoffTime);
+                        Core.Sleep(backoffTime);
                     }
                 }
                 try
                 {
-                    DaraRequest request_ = new DaraRequest();
+                    Request request_ = new Request();
                     request_.Protocol = "https";
                     request_.Method = "DELETE";
                     request_.Pathname = "/";
@@ -121,7 +121,7 @@ namespace Darabonba.Test
                     request_.Query = UtilClient.GetQuery();
                     ConsoleClient.Log("test");
                     _lastRequest = request_;
-                    DaraResponse response_ = await DaraCore.DoActionAsync(request_, runtime_);
+                    Response response_ = await Core.DoActionAsync(request_, runtime_);
 
                     return response_.StatusCode;
                 }

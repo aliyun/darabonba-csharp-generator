@@ -12,7 +12,7 @@ namespace Darabonba.Test.Models
     /// <description>
     /// <para>TestModel3</para>
     /// </description>
-    public class Test3 : DaraModel {
+    public class Test3 : Model {
         // empty comment1
         // empy comment2
         public Test3 Copy()

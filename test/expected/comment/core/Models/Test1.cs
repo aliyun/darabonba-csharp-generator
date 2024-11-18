@@ -17,7 +17,7 @@ namespace Darabonba.Test.Models
     /// <description>
     /// <para>TestModel</para>
     /// </description>
-    public class Test1 : DaraModel {
+    public class Test1 : Model {
         /// <term><b>Obsolete</b></term>
         /// 
         /// <summary>

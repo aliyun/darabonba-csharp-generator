@@ -8,7 +8,7 @@ using Darabonba;
 
 namespace Darabonba.Test.Models
 {
-    public class LowerModel : DaraModel {
+    public class LowerModel : Model {
         [NameInMap("stringfield")]
         [Validation(Required=true)]
         public string Stringfield { get; set; }

@@ -13,7 +13,7 @@ namespace Darabonba.Test.Exceptions
         public int? Size { get; set; }
         public Dictionary<string, Model> Data { get; set; }
         public MainFileExceptionModel Model { get; set; }
-        public class MainFileExceptionModel : DaraModel
+        public class MainFileExceptionModel : Model
         {
             [NameInMap("str")]
             [Validation(Required=true)]
@@ -22,7 +22,7 @@ namespace Darabonba.Test.Exceptions
             [NameInMap("model")]
             [Validation(Required=true)]
             public MainFileExceptionModelModel Model { get; set; }
-            public class MainFileExceptionModelModel : DaraModel {
+            public class MainFileExceptionModelModel : Model {
                 [NameInMap("str")]
                 [Validation(Required=true)]
                 public string Str { get; set; }
@@ -111,7 +111,7 @@ namespace Darabonba.Test.Exceptions
             }
         }
         public MainFileExceptionModel1 Model1 { get; set; }
-        public class MainFileExceptionModel1 : DaraModel
+        public class MainFileExceptionModel1 : Model
         {
             [NameInMap("code")]
             [Validation(Required=true)]
@@ -152,7 +152,7 @@ namespace Darabonba.Test.Exceptions
             }
         }
 
-        public class MainFileExceptionModel : DaraModel
+        public class MainFileExceptionModel : Model
         {
             [NameInMap("str")]
             [Validation(Required=true)]
@@ -161,7 +161,7 @@ namespace Darabonba.Test.Exceptions
             [NameInMap("model")]
             [Validation(Required=true)]
             public MainFileExceptionModelModel Model { get; set; }
-            public class MainFileExceptionModelModel : DaraModel {
+            public class MainFileExceptionModelModel : Model {
                 [NameInMap("str")]
                 [Validation(Required=true)]
                 public string Str { get; set; }
@@ -249,7 +249,7 @@ namespace Darabonba.Test.Exceptions
                 return model;
             }
         }
-        public class MainFileExceptionModel1 : DaraModel
+        public class MainFileExceptionModel1 : Model
         {
             [NameInMap("code")]
             [Validation(Required=true)]

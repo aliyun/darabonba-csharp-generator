@@ -10,11 +10,11 @@ using Darabonba.import.Models;
 
 namespace Darabonba.Test.Models
 {
-    public class MyModel : DaraModel {
+    public class MyModel : Model {
         [NameInMap("model")]
         [Validation(Required=true)]
         public MyModelModel Model { get; set; }
-        public class MyModelModel : DaraModel {
+        public class MyModelModel : Model {
             [NameInMap("str")]
             [Validation(Required=true)]
             public string Str { get; set; }
@@ -22,7 +22,7 @@ namespace Darabonba.Test.Models
             [NameInMap("model")]
             [Validation(Required=true)]
             public MyModelModelModel Model { get; set; }
-            public class MyModelModelModel : DaraModel {
+            public class MyModelModelModel : Model {
                 [NameInMap("str")]
                 [Validation(Required=true)]
                 public string Str { get; set; }
@@ -134,7 +134,7 @@ namespace Darabonba.Test.Models
         [NameInMap("submodel")]
         [Validation(Required=true)]
         public MyModelSubmodel Submodel { get; set; }
-        public class MyModelSubmodel : DaraModel {
+        public class MyModelSubmodel : Model {
             [NameInMap("stringfield")]
             [Validation(Required=true)]
             public string Stringfield { get; set; }
@@ -142,7 +142,7 @@ namespace Darabonba.Test.Models
             [NameInMap("model")]
             [Validation(Required=true)]
             public MyModelSubmodelModel Model { get; set; }
-            public class MyModelSubmodelModel : DaraModel {
+            public class MyModelSubmodelModel : Model {
                 [NameInMap("str")]
                 [Validation(Required=true)]
                 public string Str { get; set; }
@@ -242,7 +242,7 @@ namespace Darabonba.Test.Models
         [NameInMap("subarraymodel")]
         [Validation(Required=true)]
         public List<MyModelSubarraymodel> Subarraymodel { get; set; }
-        public class MyModelSubarraymodel : DaraModel {
+        public class MyModelSubarraymodel : Model {
             public MyModelSubarraymodel Copy()
             {
                 MyModelSubarraymodel copy = FromMap(ToMap());
@@ -326,7 +326,7 @@ namespace Darabonba.Test.Models
 
         [NameInMap("request")]
         [Validation(Required=true)]
-        public DaraRequest Request { get; set; }
+        public Request Request { get; set; }
 
         [NameInMap("complexList")]
         [Validation(Required=true)]
@@ -1088,7 +1088,7 @@ namespace Darabonba.Test.Models
             if (map.ContainsKey("request"))
             {
                 var temp = (Dictionary<string, object>)map["request"];
-                model.Request = DaraRequest.FromMap(temp);
+                model.Request = Request.FromMap(temp);
             }
 
             if (map.ContainsKey("complexList"))
