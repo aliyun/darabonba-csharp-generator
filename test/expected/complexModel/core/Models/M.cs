@@ -8,11 +8,11 @@ using Darabonba;
 
 namespace Darabonba.Test.Models
 {
-    public class M : DaraModel {
+    public class M : Model {
         [NameInMap("subM")]
         [Validation(Required=true)]
         public MSubM SubM { get; set; }
-        public class MSubM : DaraModel {
+        public class MSubM : Model {
             public MSubM Copy()
             {
                 MSubM copy = FromMap(ToMap());

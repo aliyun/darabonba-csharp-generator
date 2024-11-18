@@ -8,7 +8,7 @@ using Darabonba;
 
 namespace Darabonba.Test.Models
 {
-    public class Vno : DaraModel {
+    public class Vno : Model {
         public Vno Copy()
         {
             Vno copy = FromMap(ToMap());

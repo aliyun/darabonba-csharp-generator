@@ -8,7 +8,7 @@ using Darabonba;
 
 namespace Darabonba.Test.Models
 {
-    public class MyModel : DaraModel {
+    public class MyModel : Model {
         [NameInMap("stringfield")]
         [Validation(Required=true)]
         public string Stringfield { get; set; }
@@ -28,7 +28,7 @@ namespace Darabonba.Test.Models
         [NameInMap("submodel")]
         [Validation(Required=true)]
         public MyModelSubmodel Submodel { get; set; }
-        public class MyModelSubmodel : DaraModel {
+        public class MyModelSubmodel : Model {
             [NameInMap("stringfield")]
             [Validation(Required=true)]
             public string Stringfield { get; set; }
@@ -82,11 +82,11 @@ namespace Darabonba.Test.Models
 
         [NameInMap("request")]
         [Validation(Required=true)]
-        public DaraRequest Request { get; set; }
+        public Request Request { get; set; }
 
         [NameInMap("m")]
         [Validation(Required=true)]
-        public DaraModel M { get; set; }
+        public Model M { get; set; }
 
         [NameInMap("mapModel")]
         [Validation(Required=true)]
@@ -264,13 +264,13 @@ namespace Darabonba.Test.Models
             if (map.ContainsKey("request"))
             {
                 var temp = (Dictionary<string, object>)map["request"];
-                model.Request = DaraRequest.FromMap(temp);
+                model.Request = Request.FromMap(temp);
             }
 
             if (map.ContainsKey("m"))
             {
                 var temp = (Dictionary<string, object>)map["m"];
-                model.M = DaraModel.FromMap(temp);
+                model.M = Model.FromMap(temp);
             }
 
             if (map.ContainsKey("mapModel"))

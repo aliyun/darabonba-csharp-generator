@@ -9,7 +9,7 @@ using Tea;
 
 namespace Darabonba.Test.Models
 {
-    public class M : DaraModel {
+    public class M : Model {
         [NameInMap("a")]
         [Validation(Required=false)]
         public HttpRequestMessage A { get; set; }

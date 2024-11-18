@@ -8,19 +8,19 @@ using Darabonba;
 
 namespace Darabonba.Test.Models
 {
-    public class MultiLayerModel : DaraModel {
+    public class MultiLayerModel : Model {
         [NameInMap("Data")]
         [Validation(Required=false)]
         public MultiLayerModelData Data { get; set; }
-        public class MultiLayerModelData : DaraModel {
+        public class MultiLayerModelData : Model {
             [NameInMap("Results")]
             [Validation(Required=false)]
             public List<MultiLayerModelDataResults> Results { get; set; }
-            public class MultiLayerModelDataResults : DaraModel {
+            public class MultiLayerModelDataResults : Model {
                 [NameInMap("TextRectangles")]
                 [Validation(Required=false)]
                 public MultiLayerModelDataResultsTextRectangles TextRectangles { get; set; }
-                public class MultiLayerModelDataResultsTextRectangles : DaraModel {
+                public class MultiLayerModelDataResultsTextRectangles : Model {
                     [NameInMap("Top")]
                     [Validation(Required=false)]
                     public int? Top { get; set; }

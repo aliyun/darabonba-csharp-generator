@@ -54,46 +54,46 @@ namespace Darabonba.Test
 
         public static void FileTest(List<string> args)
         {
-            if (DaraFile.Exists("/tmp/test"))
+            if (File.Exists("/tmp/test"))
             {
-                DaraFile file = new DaraFile("/tmp/test");
+                File file = new File("/tmp/test");
                 string path = file.Path();
                 int? length = file.Length() + 10;
-                DaraDate createTime = file.CreateTime();
-                DaraDate modifyTime = file.ModifyTime();
+                Date createTime = file.CreateTime();
+                Date modifyTime = file.ModifyTime();
                 int? timeLong = modifyTime.Diff("minute", createTime);
                 byte[] data = file.Read(300);
                 file.Write(BytesUtil.From("test", "utf8"));
-                Stream rs = DaraFile.CreateReadStream("/tmp/test");
-                Stream ws = DaraFile.CreateWriteStream("/tmp/test");
+                Stream rs = File.CreateReadStream("/tmp/test");
+                Stream ws = File.CreateWriteStream("/tmp/test");
             }
         }
 
         public static async Task FileTestAsync(List<string> args)
         {
-            if (DaraFile.Exists("/tmp/test"))
+            if (File.Exists("/tmp/test"))
             {
-                DaraFile file = new DaraFile("/tmp/test");
+                File file = new File("/tmp/test");
                 string path = file.Path();
                 int? length = await file.LengthAsync() + 10;
-                DaraDate createTime = await file.CreateTimeAsync();
-                DaraDate modifyTime = await file.ModifyTimeAsync();
+                Date createTime = await file.CreateTimeAsync();
+                Date modifyTime = await file.ModifyTimeAsync();
                 int? timeLong = modifyTime.Diff("minute", createTime);
                 byte[] data = await file.ReadAsync(300);
                 await file.WriteAsync(BytesUtil.From("test", "utf8"));
-                Stream rs = DaraFile.CreateReadStream("/tmp/test");
-                Stream ws = DaraFile.CreateWriteStream("/tmp/test");
+                Stream rs = File.CreateReadStream("/tmp/test");
+                Stream ws = File.CreateWriteStream("/tmp/test");
             }
         }
 
         public static void DateTest(List<string> args)
         {
-            DaraDate date = new DaraDate("2023-09-12 17:47:31.916000 +0800 UTC");
+            Date date = new Date("2023-09-12 17:47:31.916000 +0800 UTC");
             string dateStr = date.Format("YYYY-MM-DD HH:mm:ss");
             int? timestamp = date.Unix();
-            DaraDate yesterday = date.Sub("day", 1);
+            Date yesterday = date.Sub("day", 1);
             int? oneDay = date.Diff("day", yesterday);
-            DaraDate tomorrow = date.Add("day", 1);
+            Date tomorrow = date.Add("day", 1);
             int? twoDay = tomorrow.Diff("day", date) + oneDay;
             int? hour = date.Hour();
             int? minute = date.Minute();
@@ -108,12 +108,12 @@ namespace Darabonba.Test
 
         public static async Task DateTestAsync(List<string> args)
         {
-            DaraDate date = new DaraDate("2023-09-12 17:47:31.916000 +0800 UTC");
+            Date date = new Date("2023-09-12 17:47:31.916000 +0800 UTC");
             string dateStr = date.Format("YYYY-MM-DD HH:mm:ss");
             int? timestamp = date.Unix();
-            DaraDate yesterday = date.Sub("day", 1);
+            Date yesterday = date.Sub("day", 1);
             int? oneDay = date.Diff("day", yesterday);
-            DaraDate tomorrow = date.Add("day", 1);
+            Date tomorrow = date.Add("day", 1);
             int? twoDay = tomorrow.Diff("day", date) + oneDay;
             int? hour = date.Hour();
             int? minute = date.Minute();
@@ -128,7 +128,7 @@ namespace Darabonba.Test
 
         public static void UrlTest(List<string> args)
         {
-            DaraURL url = new DaraURL(args[0]);
+            URL url = new URL(args[0]);
             string path = url.Path();
             string pathname = url.Pathname();
             string protocol = url.Protocol();
@@ -139,17 +139,17 @@ namespace Darabonba.Test
             string search = url.Search();
             string href = url.Href();
             string auth = url.Auth();
-            DaraURL url2 = DaraURL.Parse(args[1]);
+            URL url2 = URL.Parse(args[1]);
             path = url2.Path();
-            string newUrl = DaraURL.UrlEncode(args[2]);
-            string newSearch = DaraURL.PercentEncode(search);
-            string newPath = DaraURL.PathEncode(pathname);
+            string newUrl = URL.UrlEncode(args[2]);
+            string newSearch = URL.PercentEncode(search);
+            string newPath = URL.PathEncode(pathname);
             string all = "test" + path + protocol + hostname + hash + search + href + auth + newUrl + newSearch + newPath;
         }
 
         public static async Task UrlTestAsync(List<string> args)
         {
-            DaraURL url = new DaraURL(args[0]);
+            URL url = new URL(args[0]);
             string path = url.Path();
             string pathname = url.Pathname();
             string protocol = url.Protocol();
@@ -160,20 +160,20 @@ namespace Darabonba.Test
             string search = url.Search();
             string href = url.Href();
             string auth = url.Auth();
-            DaraURL url2 = DaraURL.Parse(args[1]);
+            URL url2 = URL.Parse(args[1]);
             path = url2.Path();
-            string newUrl = DaraURL.UrlEncode(args[2]);
-            string newSearch = DaraURL.PercentEncode(search);
-            string newPath = DaraURL.PathEncode(pathname);
+            string newUrl = URL.UrlEncode(args[2]);
+            string newSearch = URL.PercentEncode(search);
+            string newPath = URL.PathEncode(pathname);
             string all = "test" + path + protocol + hostname + hash + search + href + auth + newUrl + newSearch + newPath;
         }
 
         public static void StreamTest(List<string> args)
         {
-            if (DaraFile.Exists("/tmp/test"))
+            if (File.Exists("/tmp/test"))
             {
-                Stream rs = DaraFile.CreateReadStream("/tmp/test");
-                Stream ws = DaraFile.CreateWriteStream("/tmp/test");
+                Stream rs = File.CreateReadStream("/tmp/test");
+                Stream ws = File.CreateWriteStream("/tmp/test");
                 byte[] data = StreamUtil.Read(rs, 30);
                 ws.Write(data, 0, data.Length);
                 StreamUtil.Pipe(rs, ws);
@@ -185,10 +185,10 @@ namespace Darabonba.Test
 
         public static async Task StreamTestAsync(List<string> args)
         {
-            if (DaraFile.Exists("/tmp/test"))
+            if (File.Exists("/tmp/test"))
             {
-                Stream rs = DaraFile.CreateReadStream("/tmp/test");
-                Stream ws = DaraFile.CreateWriteStream("/tmp/test");
+                Stream rs = File.CreateReadStream("/tmp/test");
+                Stream ws = File.CreateWriteStream("/tmp/test");
                 byte[] data = StreamUtil.Read(rs, 30);
                 ws.Write(data, 0, data.Length);
                 StreamUtil.Pipe(rs, ws);
@@ -475,7 +475,7 @@ namespace Darabonba.Test
                     {"key6", "321"},
                 }},
             };
-            DaraCore.Sleep(10);
+            Core.Sleep(10);
             string ms = JSONUtil.SerializeObject(m);
             object ma = JsonConvert.DeserializeObject(ms);
             string arrStr = "[1,2,3,4]";
@@ -495,7 +495,7 @@ namespace Darabonba.Test
                     {"key6", "321"},
                 }},
             };
-            await DaraCore.SleepAsync(10);
+            await Core.SleepAsync(10);
             string ms = JSONUtil.SerializeObject(m);
             object ma = JsonConvert.DeserializeObject(ms);
             string arrStr = "[1,2,3,4]";
@@ -534,7 +534,7 @@ namespace Darabonba.Test
                 {
                     {"key", "value"},
                 };
-                Dictionary<string, object> obj = DaraCore.ToObject(maps);
+                Dictionary<string, object> obj = Core.ToObject(maps);
                 Stream ws = (Stream)obj;
                 Stream rs = ConverterUtil.ToStream(maps);
                 data = StreamUtil.Read(rs, 30);
@@ -543,7 +543,7 @@ namespace Darabonba.Test
                     ws.Write(data, 0, data.Length);
                 }
             }
-            DaraCore.Sleep(a.Value);
+            Core.Sleep(a.Value);
             string defaultVal = (string)(args[0] ?? args[1]);
             if (defaultVal == b)
             {
