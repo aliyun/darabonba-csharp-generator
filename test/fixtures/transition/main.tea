@@ -1,0 +1,269 @@
+import Ecs20140526
+import OpenApi
+import Util
+
+
+/**
+* Initialization Initialize the Client with the AccessKey of the account
+*/
+static async function Initialization(regionId: string)throws : Ecs20140526{
+    // The project code leakage may result in the leakage of AccessKey, posing a threat to the security of all resources under the account. The following code examples are for reference only.
+    // It is recommended to use the more secure STS credential. For more credentials, please refer to: https://www.alibabacloud.com/help/en/alibaba-cloud-sdk-262060/latest/credentials-settings-2.
+    var config = new OpenApi.Config{
+      // Required, please ensure that the environment variables ALIBABA_CLOUD_ACCESS_KEY_ID is set.
+      accessKeyId = $Env.get('ALIBABA_CLOUD_ACCESS_KEY_ID'),
+      // Required, please ensure that the environment variables ALIBABA_CLOUD_ACCESS_KEY_SECRET is set.
+      accessKeySecret = $Env.get('ALIBABA_CLOUD_ACCESS_KEY_SECRET'),
+      regionId = regionId
+    };
+
+    return new Ecs20140526(config);
+}
+
+
+static async function main(args: [ string ]) throws : void {
+  var client = Initialization("cn-hangzhou");
+
+
+  $Logger.info("CreateSecurityGroup");
+  var createSecurityGroupResponseBody = createSecurityGroup(client);
+  if (createSecurityGroupResponseBody == null) {
+    $Logger.info("Failed to complete the task 'CreateSecurityGroup'.");
+    return;
+  }
+  var securityGroupId = createSecurityGroupResponseBody.securityGroupId;
+
+
+  $Logger.info("AuthorizeSecurityGroup");
+  var authorizeSecurityGroupResponseBody = authorizeSecurityGroup(client, securityGroupId);
+  if (authorizeSecurityGroupResponseBody == null) {
+    $Logger.info("Failed to complete the task 'AuthorizeSecurityGroup'.");
+    return;
+  }
+  
+
+
+  $Logger.info("RunInstances");
+  var runInstancesResponseBody = createInstance(client, securityGroupId);
+  if (runInstancesResponseBody == null) {
+    $Logger.info("Failed to complete the task 'RunInstances'.");
+    return;
+  }
+  var instanceIds = runInstancesResponseBody.instanceIdSets.instanceIdSet;
+
+
+	$Logger.info("DescribeInstances");
+  var isWaitForInstancesRunningSuccess = waitForInstancesRunning(client, instanceIds);
+
+	if (!isWaitForInstancesRunningSuccess) {
+		$Logger.info(`Failed to complete the task 'DescribeInstances' after 5 polling attempts.`);
+		return;
+	}
+
+
+  $Logger.info("log instances info");
+  var describeInstancesResponseBody = logInstancesInfo(client, instanceIds);
+  if (describeInstancesResponseBody == null) {
+    $Logger.info("Failed to complete the task 'log instances info'.");
+    return;
+  }
+  
+
+}
+
+/**
+ * CreateSecurityGroup
+ * @param client Ecs20140526
+ * @return The response body of CreateSecurityGroup
+ */
+static async function createSecurityGroup(client: Ecs20140526) throws: Ecs20140526.CreateSecurityGroupResponseBody {
+  try {
+    
+      var request = new Ecs20140526.CreateSecurityGroupRequest{
+              regionId = "cn-hangzhou",
+      // The name of the security group
+      securityGroupName = "MySecurityGroup",
+
+      // The description of the security group
+      description = "sgDescription",
+
+
+      };
+      var response = client.createSecurityGroup(request);
+      
+      
+    
+    return response.body;
+  } catch (error) {
+    $Logger.info(error.message);
+		return null;
+  }
+}
+
+/**
+ * AuthorizeSecurityGroup
+ * @param client Ecs20140526
+ * @param securityGroupId The ID of the security group
+ * @return The response body of AuthorizeSecurityGroup
+ */
+static async function authorizeSecurityGroup(client: Ecs20140526, securityGroupId: string) throws: Ecs20140526.AuthorizeSecurityGroupResponseBody {
+  try {
+    
+      var request = new Ecs20140526.AuthorizeSecurityGroupRequest{
+              regionId = "cn-hangzhou",
+      // The security group rules
+      permissions =       [
+                      new Ecs20140526.AuthorizeSecurityGroupRequest.permissions {
+                      ipProtocol = "tcp",
+                      portRange = "22/22",
+                      sourceCidrIp = "0.0.0.0/0",
+                      priority = "1"
+                    },
+                    new Ecs20140526.AuthorizeSecurityGroupRequest.permissions {
+                      ipProtocol = "tcp",
+                      portRange = "22/22",
+                      sourceCidrIp = "0.0.0.0/0",
+                      priority = "1"
+                    }
+            ],
+
+            // The ID of the security group
+            
+      securityGroupId = securityGroupId,
+      };
+      var response = client.authorizeSecurityGroup(request);
+      
+      
+    
+    return response.body;
+  } catch (error) {
+    $Logger.info(error.message);
+		return null;
+  }
+}
+
+/**
+ * RunInstances
+ * @param client Ecs20140526
+ * @param securityGroupId The ID of the security group to which you want to assign the instance
+ * @return The response body of RunInstances
+ */
+static async function createInstance(client: Ecs20140526, securityGroupId: string) throws: Ecs20140526.RunInstancesResponseBody {
+  try {
+    
+      var request = new Ecs20140526.RunInstancesRequest{
+              regionId = "cn-hangzhou",
+      // The ID of the image
+      imageId = "ubuntu_18_04_64_20G_alibase_20210702.vhd",
+
+      // The instance type
+      instanceType = "ecs.g5.large",
+
+      // Details about the image options
+      imageOptions =       new Ecs20140526.RunInstancesRequest.imageOptions {
+              loginAsNonRoot = true
+            },
+
+      // The desired number of ECS instances that you want to create
+      amount = 1,
+
+            // The ID of the security group to which you want to assign the instance
+            
+      securityGroupId = securityGroupId,
+      };
+      var response = client.runInstances(request);
+      
+      
+    
+    return response.body;
+  } catch (error) {
+    $Logger.info(error.message);
+		return null;
+  }
+}
+
+/**
+ * DescribeInstances
+ * @param client Ecs20140526
+ * @param instanceIds The ID of the instance
+ * @return Whether the operation was successful
+ */
+static async function waitForInstancesRunning(client: Ecs20140526, instanceIds: [string]) throws: boolean {
+  var MAX_RETRY_TIMES: long = 5;
+  var retryCount: long = 0;
+
+  while (retryCount < MAX_RETRY_TIMES) {
+    try {
+	    
+      var request = new Ecs20140526.DescribeInstancesRequest{
+              regionId = "cn-hangzhou",
+            // The ID of the instance
+            
+    //   instanceIds = $JSON.stringify(instanceIds),
+      instanceIds = Util.toJSONString(instanceIds),
+      };
+      var response = client.describeInstances(request);
+      var instances = response.body.instances.instance;
+      
+    
+
+      if (checkInstancesRunning(instances)) {
+        
+        return true;
+      }
+
+      $sleep(3);
+      retryCount++;
+    } catch (error) {
+      $Logger.info(error.message);
+      return false;
+    }
+  }
+  return false;
+}
+
+/**
+ * log instances info
+ * @param client Ecs20140526
+ * @param instanceIds The ID of the instance
+ * @return The response body of DescribeInstances
+ */
+static async function logInstancesInfo(client: Ecs20140526, instanceIds: [string]) throws: Ecs20140526.DescribeInstancesResponseBody {
+  try {
+    
+      var request = new Ecs20140526.DescribeInstancesRequest{
+              regionId = "cn-hangzhou",
+            // The ID of the instance
+            
+    //   instanceIds = $JSON.stringify(instanceIds),
+      instanceIds = Util.toJSONString(instanceIds),
+      };
+      var response = client.describeInstances(request);
+      var instances = response.body.instances.instance;
+      for (var instance: instances) {
+        $Logger.info(`Instance ID:${instance.instanceId}`);
+$Logger.info(`Status:${instance.status}`);
+$Logger.info(`CPU:${instance.cpu}`);
+$Logger.info(`Memory:${instance.memory}MB`);
+$Logger.info(`Instance Type:${instance.instanceType}`);
+$Logger.info(`OS:${instance.OSType}(${instance.OSName})`);
+      }
+    
+    return response.body;
+  } catch (error) {
+    $Logger.info(error.message);
+		return null;
+  }
+}
+
+static function checkInstancesRunning(targets: [Ecs20140526.DescribeInstancesResponseBody.instances.instance]) throws: boolean {
+  for (var target: targets) {
+    var status = target.status;
+    if (status.equals("Running")) {
+      $Logger.info(`   test ${status}`);
+      return false;
+    }
+  }
+  return true;
+}
+    

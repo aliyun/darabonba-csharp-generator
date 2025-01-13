@@ -233,7 +233,7 @@ static async function jsonTest(args: [string]): void {
 
 static function returnAny(): any;
 
-static function main(args: [string]): void {
+static async function main(args: [string]): void {
     var a: integer = $integer(args[0]) + 10;
     var b: string = $string(a) + args[1] + $string(returnAny());
     var c: number = $number(b) + $number(a) + $number(returnAny());

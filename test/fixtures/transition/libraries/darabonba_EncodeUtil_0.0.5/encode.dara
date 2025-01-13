@@ -1,0 +1,53 @@
+/**
+ * Encode Util for Darabonba. 
+ */
+
+/**
+ * Encode the URL
+ * @param url string
+ * @return encoded string
+ */
+static function urlEncode(url: string): string;
+
+/**
+ * Special encoding for url params.
+ * @param params string
+ * @return encoded string
+ */
+static function percentEncode(raw: string): string;
+
+/**
+ * Encode the partial path of url.
+ * @param path string
+ * @return encoded string
+ */
+static function pathEncode(path: string): string;
+
+/**
+ * Hex encode for byte array.
+ * @param raw byte array
+ * @return encoded string
+ */
+static function hexEncode(raw: bytes): string;
+
+/**
+ * Hash the raw data with signatureAlgorithm.
+ * @param raw hashing data
+ * @param signatureAlgorithm the autograph method
+ * @return hashed bytes
+ */
+static function hash(raw: bytes, signatureAlgorithm: string): bytes;
+
+/**
+ * Base64 encoder for byte array.
+ * @param raw byte array
+ * @return encoded string
+ */
+static function base64EncodeToString(raw: bytes): string;
+
+/**
+ * Base64 dncoder for string.
+ * @param src string
+ * @return dncoded byte array
+ */
+static function base64Decode(src: string): bytes;

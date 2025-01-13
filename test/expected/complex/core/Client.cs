@@ -5,13 +5,12 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Darabonba;
-using Darabonba.Utils;
+using Tea;
+using Tea.Utils;
 using SourceClient = Darabonba.import.Client;
 using Darabonba.import.Models;
 using Darabonba.RetryPolicy;
 using Darabonba.Test.Models;
-using Darabonba.Exceptions;
 
 namespace Darabonba.Test
 {
@@ -109,7 +108,7 @@ namespace Darabonba.Test
                     });
                     Hello(null, null);
                     Complex3(null);
-                    return DaraModel.ToObject<RuntimeObject>(new Dictionary<string, object>(){});
+                    return TeaModel.ToObject<RuntimeObject>(new Dictionary<string, object>(){});
                 }
                 catch (Exception e)
                 {
@@ -205,7 +204,7 @@ namespace Darabonba.Test
                     });
                     await HelloAsync(null, null);
                     await Complex3Async(null);
-                    return DaraModel.ToObject<RuntimeObject>(new Dictionary<string, object>(){});
+                    return TeaModel.ToObject<RuntimeObject>(new Dictionary<string, object>(){});
                 }
                 catch (Exception e)
                 {
@@ -324,7 +323,7 @@ namespace Darabonba.Test
             req.Accesskey = request.AccessKey;
             PrintNull(typeof(Config));
             SourceClient.Array(request.ToMap(), "1");
-            return DaraModel.ToObject<Darabonba.Test.Models.ComplexRequest>(ConverterUtil.Merge<string>
+            return TeaModel.ToObject<Darabonba.Test.Models.ComplexRequest>(ConverterUtil.Merge<string>
             (
                 request_.Query
             ));
@@ -360,7 +359,7 @@ namespace Darabonba.Test
             req.Accesskey = request.AccessKey;
             await PrintNullAsync(typeof(Config));
             SourceClient.Array(request.ToMap(), "1");
-            return DaraModel.ToObject<Darabonba.Test.Models.ComplexRequest>(ConverterUtil.Merge<string>
+            return TeaModel.ToObject<Darabonba.Test.Models.ComplexRequest>(ConverterUtil.Merge<string>
             (
                 request_.Query
             ));
@@ -523,7 +522,7 @@ namespace Darabonba.Test
             {
                 string str = TemplateString();
             }
-            catch (DaraException e)
+            catch (TeaException e)
             {
                 string errStr = e.Message;
             }
@@ -547,7 +546,7 @@ namespace Darabonba.Test
             {
                 string str = await TemplateStringAsync();
             }
-            catch (DaraException e)
+            catch (TeaException e)
             {
                 string errStr = e.Message;
             }

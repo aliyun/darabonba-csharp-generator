@@ -1,0 +1,71 @@
+{
+  "scope": "darabonba",
+  "name": "Map",
+  "version": "0.0.5",
+  "main": "./main.tea",
+  "releases": {
+    "go": "github.com/alibabacloud-go/darabonba-map/client:v0.0.2",
+    "ts": "@alicloud/darabonba-map:^0.0.1",
+    "java": "com.aliyun:darabonba-map:0.0.1",
+    "python": "alibabacloud_darabonba_map:0.0.1",
+    "python2": "alibabacloud_darabonba_map_py2:0.0.2",
+    "csharp": "AlibabaCloud.DarabonbaMap:0.0.2",
+    "php": "alibabacloud/darabonba-map:^0.0.1"
+  },
+  "java": {
+    "package": "com.aliyun.darabonba.map"
+  },
+  "python": {
+    "package": "alibabacloud_darabonba_map",
+    "clientName": "client",
+    "packageInfo": {
+      "name": "alibabacloud_darabonba_map",
+      "desc": "Alibaba Cloud Darabonba Map SDK Library for Python",
+      "github": "https://github.com/aliyun/darabonba-map",
+      "author": "Alibaba Cloud SDK",
+      "email": "sdk-team@alibabacloud.com"
+    }
+  },
+  "python2": {
+    "package": "alibabacloud_darabonba_map",
+    "clientName": "client",
+    "packageInfo": {
+      "name": "alibabacloud_darabonba_map_py2",
+      "desc": "Alibaba Cloud Darabonba Map SDK Library for Python2",
+      "github": "https://github.com/aliyun/darabonba-map",
+      "author": "Alibaba Cloud SDK",
+      "email": "sdk-team@alibabacloud.com"
+    }
+  },
+  "csharp": {
+    "namespace": "AlibabaCloud.DarabonbaMap",
+    "className": "MapUtil",
+    "packageInfo": {
+      "name": "mapUtil",
+      "title": "darabonba-map",
+      "description": "Alibaba Cloud Darabonba Map SDK Library for .NET",
+      "company": "Alibaba Cloud",
+      "property": {
+        "PackageTags": "Alibaba Aliyun Darabonba Map SDK",
+        "Copyright": "©2009-present Alibaba Cloud",
+        "PackageProjectUrl": "https://github.com/aliyun/darabonba-map",
+        "PackageIconUrl": "https://www.alibabacloud.com/favicon.ico"
+      }
+    }
+  },
+  "php": {
+    "package": "AlibabaCloud.Darabonba.MapUtil",
+    "clientName": "MapUtil",
+    "packageInfo": {
+      "name": "alibabacloud/darabonba-map",
+      "desc": "Alibaba Cloud Darabonba Map Library for PHP",
+      "github": "https://github.com/aliyun/darabonba-map"
+    }
+  },
+  "releaselog": {
+    "changelog": [
+      "[python2]fix type error"
+    ],
+    "compatible": true
+  }
+}

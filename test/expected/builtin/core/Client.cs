@@ -3,11 +3,14 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Darabonba;
+using Tea;
+using Tea.Utils;
 using Darabonba.Utils;
+using Darabonba;
 using Darabonba.Streams;
 using System.Linq;
 using System.Globalization;
+using System.Threading;
 using Newtonsoft.Json;
 using System.Text;
 
@@ -475,8 +478,8 @@ namespace Darabonba.Test
                     {"key6", "321"},
                 }},
             };
-            DaraCore.Sleep(10);
-            string ms = JSONUtil.SerializeObject(m);
+            Thread.Sleep(10);
+            string ms = Common.ToJSONString(m);
             object ma = JsonConvert.DeserializeObject(ms);
             string arrStr = "[1,2,3,4]";
             object arr = JsonConvert.DeserializeObject(arrStr);
@@ -495,8 +498,8 @@ namespace Darabonba.Test
                     {"key6", "321"},
                 }},
             };
-            await DaraCore.SleepAsync(10);
-            string ms = JSONUtil.SerializeObject(m);
+            await Task.Delay(10);
+            string ms = Common.ToJSONString(m);
             object ma = JsonConvert.DeserializeObject(ms);
             string arrStr = "[1,2,3,4]";
             object arr = JsonConvert.DeserializeObject(arrStr);
@@ -509,21 +512,21 @@ namespace Darabonba.Test
 
         public static void Main(string[] args)
         {
-            int? a = ConverterUtil.ParseInt(args[0]) + 10;
+            int? a = (int)args[0] + 10;
             string b = (string)a + args[1] + (string)ReturnAny();
-            int? c = ConverterUtil.ParseInt(b) + ConverterUtil.ParseInt(a) + ConverterUtil.ParseInt(ReturnAny());
-            int? d = ConverterUtil.ParseInt(b) + ConverterUtil.ParseInt(a) + ConverterUtil.ParseInt(ReturnAny());
-            int? e = ConverterUtil.ParseInt(b) + ConverterUtil.ParseInt(a) + ConverterUtil.ParseInt(ReturnAny());
-            int? f = ConverterUtil.ParseInt(b) + ConverterUtil.ParseInt(a) + ConverterUtil.ParseInt(ReturnAny());
-            long? g = ConverterUtil.ParseLong(b) + ConverterUtil.ParseLong(a) + ConverterUtil.ParseLong(ReturnAny());
-            long? h = ConverterUtil.ParseLong(b) + ConverterUtil.ParseLong(a) + ConverterUtil.ParseLong(ReturnAny());
-            ulong? i = ConverterUtil.ParseLong(b) + ConverterUtil.ParseLong(a) + ConverterUtil.ParseLong(ReturnAny());
-            uint? j = ConverterUtil.ParseInt(b) + ConverterUtil.ParseInt(a) + ConverterUtil.ParseInt(ReturnAny());
-            uint? k = ConverterUtil.ParseInt(b) + ConverterUtil.ParseInt(a) + ConverterUtil.ParseInt(ReturnAny());
-            uint? l = ConverterUtil.ParseInt(b) + ConverterUtil.ParseInt(a) + ConverterUtil.ParseInt(ReturnAny());
-            ulong? m = ConverterUtil.ParseLong(b) + ConverterUtil.ParseLong(a) + ConverterUtil.ParseLong(ReturnAny());
-            float? n = ConverterUtil.ParseFloat(b) + ConverterUtil.ParseFloat(a) + ConverterUtil.ParseFloat(ReturnAny());
-            double? o = Double.Parse(b.ToString()) + Double.Parse(a.ToString()) + Double.Parse(ReturnAny().ToString());
+            int? c = (int)b + (int)a + (int)ReturnAny();
+            int? d = (int)b + (int)a + (int)ReturnAny();
+            int? e = (int)b + (int)a + (int)ReturnAny();
+            int? f = (int)b + (int)a + (int)ReturnAny();
+            long? g = (int)b + (int)a + (int)ReturnAny();
+            long? h = (int)b + (int)a + (int)ReturnAny();
+            ulong? i = (int)b + (int)a + (int)ReturnAny();
+            uint? j = (int)b + (int)a + (int)ReturnAny();
+            uint? k = (int)b + (int)a + (int)ReturnAny();
+            uint? l = (int)b + (int)a + (int)ReturnAny();
+            ulong? m = (int)b + (int)a + (int)ReturnAny();
+            float? n = (int)b + (int)a + (int)ReturnAny();
+            double? o = (double)(b) + (double)(a) + (double)(ReturnAny());
             if ((bool)(args[2]))
             {
                 // bytes 强转只允许传字符串
@@ -543,13 +546,14 @@ namespace Darabonba.Test
                     ws.Write(data, 0, data.Length);
                 }
             }
-            DaraCore.Sleep(a.Value);
+            Thread.Sleep(a.Value);
             string defaultVal = (string)(args[0] ?? args[1]);
             if (defaultVal == b)
             {
                 return ;
             }
         }
+
 
         public static void BytesTest(List<string> args)
         {

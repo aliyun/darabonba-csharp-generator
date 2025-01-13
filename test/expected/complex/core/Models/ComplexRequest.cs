@@ -4,12 +4,12 @@ using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using Darabonba;
+using Tea;
 using SourceClient = Darabonba.import.Client;
 
 namespace Darabonba.Test.Models
 {
-    public class ComplexRequest : DaraModel {
+    public class ComplexRequest : TeaModel {
         [NameInMap("duplicatName")]
         [Validation(Required=true)]
         public Darabonba.import.Models.ComplexRequest DuplicatName { get; set; }
@@ -44,7 +44,7 @@ namespace Darabonba.Test.Models
         [NameInMap("header")]
         [Validation(Required=true)]
         public ComplexRequestHeader Header { get; set; }
-        public class ComplexRequestHeader : DaraModel {
+        public class ComplexRequestHeader : TeaModel {
             /// <summary>
             /// <para>The ID of the security group to which you want to assign the instance. Instances in the same security group can communicate with each other. The maximum number of instances that a security group can contain depends on the type of the security group. For more information, see the &quot;Security group limits&quot; section in <a href="https://help.aliyun.com/document_detail/25412.html#SecurityGroupQuota">Limits</a>.</para>
             /// <remarks>
@@ -75,7 +75,7 @@ namespace Darabonba.Test.Models
             [NameInMap("listSub")]
             [Validation(Required=true)]
             public List<ComplexRequestHeaderListSub> ListSub { get; set; }
-            public class ComplexRequestHeaderListSub : DaraModel {
+            public class ComplexRequestHeaderListSub : TeaModel {
                 [NameInMap("listSubItemName")]
                 [Validation(Required=true)]
                 public string ListSubItem { get; set; }
@@ -145,7 +145,7 @@ namespace Darabonba.Test.Models
             [NameInMap("subModel")]
             [Validation(Required=true)]
             public ComplexRequestHeaderSubModel SubModel { get; set; }
-            public class ComplexRequestHeaderSubModel : DaraModel {
+            public class ComplexRequestHeaderSubModel : TeaModel {
                 [NameInMap("subModelStr")]
                 [Validation(Required=true)]
                 public string SubModelStr { get; set; }
@@ -403,7 +403,7 @@ namespace Darabonba.Test.Models
         [Validation(Required=false)]
         [Obsolete]
         public List<ComplexRequestPart> Part { get; set; }
-        public class ComplexRequestPart : DaraModel {
+        public class ComplexRequestPart : TeaModel {
             /// <summary>
             /// <para>PartNumber</para>
             /// </summary>
@@ -449,7 +449,7 @@ namespace Darabonba.Test.Models
         [NameInMap("configs")]
         [Validation(Required=true)]
         public ComplexRequestConfigs Configs { get; set; }
-        public class ComplexRequestConfigs : DaraModel {
+        public class ComplexRequestConfigs : TeaModel {
             [NameInMap("key")]
             [Validation(Required=true)]
             public string Key { get; set; }
@@ -558,7 +558,7 @@ namespace Darabonba.Test.Models
         [NameInMap("array")]
         [Validation(Required=false)]
         public List<List<ComplexRequestArray>> Array { get; set; }
-        public class ComplexRequestArray : DaraModel {
+        public class ComplexRequestArray : TeaModel {
             [NameInMap("type")]
             [Validation(Required=false)]
             public string Type { get; set; }

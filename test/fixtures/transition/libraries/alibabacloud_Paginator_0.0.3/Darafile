@@ -1,0 +1,90 @@
+{
+  "scope": "alibabacloud",
+  "name": "Paginator",
+  "version": "0.0.3",
+  "main": "./main.dara",
+  "maintainers": [
+    {
+      "name": "Alibaba Cloud SDK",
+      "email": "sdk-team@alibabacloud.com"
+    }
+  ],
+  "libraries": {
+    "OpenApi": "alibabacloud:OpenApi:*",
+    "Util": "darabonba:Util:*"
+  },
+  "releases": {
+    "python": "alibabacloud_openapi_paginator:1.0.1"
+  },
+  "csharp": {
+    "namespace": "AlibabaCloud.OpenApiPaginator",
+    "packageInfo": {
+      "description": "Alibaba Cloud OpenApi Paginator Library for .NET",
+      "company": "Alibaba Cloud",
+      "property": {
+        "PackageTags": "Alibaba Aliyun OpenApi Paginator",
+        "Copyright": "©2009-present Alibaba Cloud",
+        "PackageProjectUrl": "https://github.com/aliyun/alibabacloud-openapi-paginator",
+        "PackageIconUrl": "https://www.alibabacloud.com/favicon.ico"
+      }
+    }
+  },
+  "java": {
+    "package": "com.aliyun.openapi.paginator",
+    "NoException": false
+  },
+  "go": {
+    "package": [
+      "io"
+    ]
+  },
+  "php": {
+    "package": "Alibabacloud.OpenApi",
+    "clientName": "Paginator",
+    "packageInfo": {
+      "name": "alibabacloud/openapi-paginator",
+      "desc": "Alibaba Cloud OpenApi Paginator",
+      "github": "https://github.com/aliyun/alibabacloud-openapi-paginator"
+    }
+  },
+  "python": {
+    "package": "alibabacloud_openapi_paginator",
+    "clientName": "client",
+    "packageInfo": {
+      "name": "alibabacloud_openapi_paginator",
+      "desc": "Alibaba Cloud OpenAPI Paginator Library for Python",
+      "github": "https://github.com/aliyun/alibabacloud-openapi-paginator",
+      "author": "Alibaba Cloud SDK",
+      "email": "sdk-team@alibabacloud.com"
+    }
+  },
+  "python2": {
+    "package": "alibabacloud_openapi_paginator",
+    "clientName": "client",
+    "packageInfo": {
+      "name": "alibabacloud_openapi_paginator_py2",
+      "desc": "Alibaba Cloud OpenAPI Paginator Library for Python2",
+      "github": "https://github.com/aliyun/alibabacloud-openapi-paginator",
+      "author": "Alibaba Cloud SDK",
+      "email": "sdk-team@alibabacloud.com"
+    }
+  },
+  "cpp": {
+    "packageInfo": {
+      "git": {
+        "scope": "alibabacloud-sdk-cpp",
+        "project": "openapi-paginator"
+      }
+    }
+  },
+  "swift": {
+    "clientName": "Paginator",
+    "packageInfo": {
+      "name": "AlibabacloudOpenApiPaginator",
+      "desc": "Alibaba Cloud Openapi Paginator Library for Swift(5.6)",
+      "github": "https://github.com/alibabacloud-sdk-swift/openapi-paginator",
+      "author": "Alibaba Cloud SDK",
+      "email": "sdk-team@alibabacloud.com"
+    }
+  }
+}

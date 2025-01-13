@@ -4,11 +4,11 @@ using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using Darabonba;
+using Tea;
 
 namespace Darabonba.Test.Models
 {
-    public class Config : DaraModel {
+    public class Config : TeaModel {
         [NameInMap("protocol")]
         [Validation(Required=true, MaxLength=50, Pattern="pattern")]
         public string Protocol { get; set; }

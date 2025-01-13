@@ -4,11 +4,11 @@ using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using Darabonba;
+using Tea;
 
 namespace Darabonba.Test.Models
 {
-    public class Config : DaraModel {
+    public class Config : TeaModel {
         public Config Copy()
         {
             Config copy = FromMap(ToMap());
