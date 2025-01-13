@@ -1,5 +1,8 @@
 # ChangeLog
 
+## 1.2.2 - 2025-01-13
+> Adjust field name for object
+
 ## 1.2.1 - 2024-10-18
 > Support manage package in Darafile
 > Solve line-break in deprecated annotation
