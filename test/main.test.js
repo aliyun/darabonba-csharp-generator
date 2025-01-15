@@ -99,6 +99,18 @@ describe('new Generator', function () {
     });
   });
 
+  it('async only should ok', function () {
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/asynconly/Darafile'), 'utf8');
+    const pkg = JSON.parse(pkgContent);
+    check('asynconly', {
+      pkgDir: path.join(__dirname, 'fixtures/asynconly'),
+      libraries: pkg.libraries,
+      ...pkg.csharp,
+      editable: true,
+      // releaseVersion: '1.0.11',
+    });
+  });
+
   // it('typedef should ok', function () {
   //   const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/typedef/Darafile'), 'utf8');
   //   const pkg = JSON.parse(pkgContent);

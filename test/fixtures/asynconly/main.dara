@@ -1,0 +1,24 @@
+static async function jsonTest(args: [string]): void {
+    var m = {
+        key1 = 'test1',
+        key2 = 'test2',
+        key3 = 3,
+        key4 = {
+            key5 = 123,
+            key6 = '321'
+        }
+    };
+    $sleep(10);
+    var ms = $JSON.stringify(m);
+    var ma = $JSON.parseJSON(ms);
+    var arrStr = '[1,2,3,4]';
+    var arr = $JSON.parseJSON(arrStr);
+}
+
+static function returnAny(): any;
+
+static async function main(args: [string]): void {
+    returnAny();
+    jsonTest(args);
+    var a: integer = $integer(args[0]) + 10;
+}

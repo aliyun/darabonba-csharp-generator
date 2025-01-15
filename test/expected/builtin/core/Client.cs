@@ -9,7 +9,6 @@ using Darabonba.Utils;
 using Darabonba;
 using Darabonba.Streams;
 using System.Linq;
-using System.Globalization;
 using System.Threading;
 using Newtonsoft.Json;
 using System.Text;
@@ -365,10 +364,10 @@ namespace Darabonba.Test
                 return ;
             }
             string num = "32.01";
-            int? inum = StringUtil.ParseInt(num) + 3;
-            long? lnum = StringUtil.ParseLong(num);
-            float? fnum = StringUtil.ParseFloat(num) + 1f;
-            double? dnum = Double.Parse(num, NumberStyles.Float | NumberStyles.AllowThousands, NumberFormatInfo.InvariantInfo) + 1;
+            int? inum = int.Parse(num) + 3;
+            long? lnum = long.Parse(num);
+            float? fnum = float.Parse(num) + 1f;
+            double? dnum = double.Parse(num) + 1;
         }
 
         public static async Task StringTestAsync(List<string> args)
@@ -405,10 +404,10 @@ namespace Darabonba.Test
                 return ;
             }
             string num = "32.01";
-            int? inum = StringUtil.ParseInt(num) + 3;
-            long? lnum = StringUtil.ParseLong(num);
-            float? fnum = StringUtil.ParseFloat(num) + 1f;
-            double? dnum = Double.Parse(num, NumberStyles.Float | NumberStyles.AllowThousands, NumberFormatInfo.InvariantInfo) + 1;
+            int? inum = int.Parse(num) + 3;
+            long? lnum = long.Parse(num);
+            float? fnum = float.Parse(num) + 1f;
+            double? dnum = double.Parse(num) + 1;
         }
 
         public static void ArrayTest(List<string> args)
