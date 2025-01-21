@@ -32,6 +32,7 @@
   },
   "csharp": {
     "namespace": "AlibabaCloud.OpenApiClient",
+    "asyncOnly": true,
     "packageInfo": {
       "description": "Alibaba Cloud OpenApi SDK Library for .NET",
       "company": "Alibaba Cloud",
