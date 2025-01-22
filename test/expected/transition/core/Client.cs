@@ -69,8 +69,23 @@ namespace AlibabaCloud.OpenApiClient
             Log("任务\'为实例挂载磁盘\'执行完成!");
             // 等待云盘挂载完成
             Log("Step4: 等待云盘挂载完成");
+            if (!(await WaitForDiskAttachedAsync(client, diskId)).Value)
+            {
+                Log("任务\'等待云盘挂载完成\'失败。");
+                return ;
+            }
+            if ((await WaitForDiskAttachedAsync(client, diskId)).Value)
+            {
+                Log("任务\'等待云盘挂载完成\'失败。");
+                return ;
+            }
             bool? isWaitForDiskAttachedSuccess = (await WaitForDiskAttachedAsync(client, diskId)).Value;
             if (!isWaitForDiskAttachedSuccess.Value)
+            {
+                Log("任务\'等待云盘挂载完成\'失败。");
+                return ;
+            }
+            if (isWaitForDiskAttachedSuccess.Value)
             {
                 Log("任务\'等待云盘挂载完成\'失败。");
                 return ;
