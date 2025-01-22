@@ -1,221 +1,165 @@
 import Ecs20140526
 import OpenApi
-import Util
-
 
 /**
-* Initialization Initialize the Client with the AccessKey of the account
+* Initialization  初始化公共请求参数
 */
 static async function Initialization(regionId: string)throws : Ecs20140526{
-    // The project code leakage may result in the leakage of AccessKey, posing a threat to the security of all resources under the account. The following code examples are for reference only.
-    // It is recommended to use the more secure STS credential. For more credentials, please refer to: https://www.alibabacloud.com/help/en/alibaba-cloud-sdk-262060/latest/credentials-settings-2.
+    // 工程代码泄露可能会导致 AccessKey 泄露，并威胁账号下所有资源的安全性。以下代码示例仅供参考。
+    // 建议使用更安全的 STS 方式，更多鉴权访问方式请参见：https://help.aliyun.com/document_detail/378657.html。
     var config = new OpenApi.Config{
-      // Required, please ensure that the environment variables ALIBABA_CLOUD_ACCESS_KEY_ID is set.
+      // 必填，请确保代码运行环境设置了环境变量 ALIBABA_CLOUD_ACCESS_KEY_ID
       accessKeyId = $Env.get('ALIBABA_CLOUD_ACCESS_KEY_ID'),
-      // Required, please ensure that the environment variables ALIBABA_CLOUD_ACCESS_KEY_SECRET is set.
+      // 必填，请确保代码运行环境设置了环境变量 ALIBABA_CLOUD_ACCESS_KEY_SECRET
       accessKeySecret = $Env.get('ALIBABA_CLOUD_ACCESS_KEY_SECRET'),
+      // 您的可用区ID
       regionId = regionId
     };
 
     return new Ecs20140526(config);
 }
 
-
 static async function main(args: [ string ]) throws : void {
   var client = Initialization("cn-hangzhou");
 
 
-  $Logger.info("CreateSecurityGroup");
-  var createSecurityGroupResponseBody = createSecurityGroup(client);
-  if (createSecurityGroupResponseBody == null) {
-    $Logger.info("Failed to complete the task 'CreateSecurityGroup'.");
+  // 创建数据盘
+        log("Step1: 创建数据盘");
+  var createDiskResponseBody = createDisk(client);
+  if (createDiskResponseBody == null) {
+    log("任务'创建数据盘'失败。");
     return;
   }
-  var securityGroupId = createSecurityGroupResponseBody.securityGroupId;
+  var diskId = createDiskResponseBody.diskId;
+  log(`任务'创建数据盘'执行完成!`);
 
 
-  $Logger.info("AuthorizeSecurityGroup");
-  var authorizeSecurityGroupResponseBody = authorizeSecurityGroup(client, securityGroupId);
-  if (authorizeSecurityGroupResponseBody == null) {
-    $Logger.info("Failed to complete the task 'AuthorizeSecurityGroup'.");
-    return;
-  }
-  
+  // 等待云盘创建完成
+        log("Step2: 等待云盘创建完成");
+  var isWaitForDiskAvailableSuccess = waitForDiskAvailable(client, diskId);
+
+        if (!isWaitForDiskAvailableSuccess) {
+                log(`任务'等待云盘创建完成'失败。`);
+                return;
+        }
+  log(`任务'等待云盘创建完成'执行完成!`);
 
 
-  $Logger.info("RunInstances");
-  var runInstancesResponseBody = createInstance(client, securityGroupId);
-  if (runInstancesResponseBody == null) {
-    $Logger.info("Failed to complete the task 'RunInstances'.");
-    return;
-  }
-  var instanceIds = runInstancesResponseBody.instanceIdSets.instanceIdSet;
-
-
-	$Logger.info("DescribeInstances");
-  var isWaitForInstancesRunningSuccess = waitForInstancesRunning(client, instanceIds);
-
-	if (!isWaitForInstancesRunningSuccess) {
-		$Logger.info(`Failed to complete the task 'DescribeInstances' after 5 polling attempts.`);
-		return;
-	}
-
-
-  $Logger.info("log instances info");
-  var describeInstancesResponseBody = logInstancesInfo(client, instanceIds);
-  if (describeInstancesResponseBody == null) {
-    $Logger.info("Failed to complete the task 'log instances info'.");
+  // 为实例挂载磁盘
+        log("Step3: 为实例挂载磁盘");
+  var attachDiskResponseBody = attachDisk(client, diskId);
+  if (attachDiskResponseBody == null) {
+    log("任务'为实例挂载磁盘'失败。");
     return;
   }
   
+  log(`任务'为实例挂载磁盘'执行完成!`);
+
+
+  // 等待云盘挂载完成
+        log("Step4: 等待云盘挂载完成");
+  var isWaitForDiskAttachedSuccess = waitForDiskAttached(client, diskId);
+
+        if (!isWaitForDiskAttachedSuccess) {
+                log(`任务'等待云盘挂载完成'失败。`);
+                return;
+        }
+  log(`任务'等待云盘挂载完成'执行完成!`);
+
+
+  // 打印云盘信息
+        log("Step5: 打印云盘信息");
+  var describeDisksResponseBody = logDiskInfo(client, diskId);
+  if (describeDisksResponseBody == null) {
+    log("任务'打印云盘信息'失败。");
+    return;
+  }
+  
+  log(`任务'打印云盘信息'执行完成!`);
 
 }
 
 /**
- * CreateSecurityGroup
+ * 创建数据盘
  * @param client Ecs20140526
- * @return The response body of CreateSecurityGroup
+ * @return The response body of CreateDisk
  */
-static async function createSecurityGroup(client: Ecs20140526) throws: Ecs20140526.CreateSecurityGroupResponseBody {
+static async function createDisk(client: Ecs20140526) throws: Ecs20140526.CreateDiskResponseBody {
   try {
     
-      var request = new Ecs20140526.CreateSecurityGroupRequest{
-              regionId = "cn-hangzhou",
-      // The name of the security group
-      securityGroupName = "MySecurityGroup",
+      var request = new Ecs20140526.CreateDiskRequest{
+              // 所属的地域ID
+      regionId = "cn-hangzhou",
 
-      // The description of the security group
-      description = "sgDescription",
+      // 在指定可用区内创建一块按量付费磁盘
+      zoneId = "cn-hangzhou-h",
+
+      // 磁盘名称
+      diskName = "java-test",
+
+      // 磁盘描述
+      description = "",
+
+      // 容量大小
+      size = 40,
+
+      // 数据盘的磁盘种类
+      diskCategory = "cloud_auto",
+
+      // 是否开启Burst（性能突发）
+      burstingEnabled = true,
 
 
       };
-      var response = client.createSecurityGroup(request);
+      var response = client.createDisk(request);
       
       
     
     return response.body;
   } catch (error) {
-    $Logger.info(error.message);
-		return null;
+    log(`执行失败。错误信息：`);
+    log(error.message);
+                return null;
   }
 }
 
 /**
- * AuthorizeSecurityGroup
+ * 等待云盘创建完成
  * @param client Ecs20140526
- * @param securityGroupId The ID of the security group
- * @return The response body of AuthorizeSecurityGroup
- */
-static async function authorizeSecurityGroup(client: Ecs20140526, securityGroupId: string) throws: Ecs20140526.AuthorizeSecurityGroupResponseBody {
-  try {
-    
-      var request = new Ecs20140526.AuthorizeSecurityGroupRequest{
-              regionId = "cn-hangzhou",
-      // The security group rules
-      permissions =       [
-                      new Ecs20140526.AuthorizeSecurityGroupRequest.permissions {
-                      ipProtocol = "tcp",
-                      portRange = "22/22",
-                      sourceCidrIp = "0.0.0.0/0",
-                      priority = "1"
-                    },
-                    new Ecs20140526.AuthorizeSecurityGroupRequest.permissions {
-                      ipProtocol = "tcp",
-                      portRange = "22/22",
-                      sourceCidrIp = "0.0.0.0/0",
-                      priority = "1"
-                    }
-            ],
-
-            // The ID of the security group
-            
-      securityGroupId = securityGroupId,
-      };
-      var response = client.authorizeSecurityGroup(request);
-      
-      
-    
-    return response.body;
-  } catch (error) {
-    $Logger.info(error.message);
-		return null;
-  }
-}
-
-/**
- * RunInstances
- * @param client Ecs20140526
- * @param securityGroupId The ID of the security group to which you want to assign the instance
- * @return The response body of RunInstances
- */
-static async function createInstance(client: Ecs20140526, securityGroupId: string) throws: Ecs20140526.RunInstancesResponseBody {
-  try {
-    
-      var request = new Ecs20140526.RunInstancesRequest{
-              regionId = "cn-hangzhou",
-      // The ID of the image
-      imageId = "ubuntu_18_04_64_20G_alibase_20210702.vhd",
-
-      // The instance type
-      instanceType = "ecs.g5.large",
-
-      // Details about the image options
-      imageOptions =       new Ecs20140526.RunInstancesRequest.imageOptions {
-              loginAsNonRoot = true
-            },
-
-      // The desired number of ECS instances that you want to create
-      amount = 1,
-
-            // The ID of the security group to which you want to assign the instance
-            
-      securityGroupId = securityGroupId,
-      };
-      var response = client.runInstances(request);
-      
-      
-    
-    return response.body;
-  } catch (error) {
-    $Logger.info(error.message);
-		return null;
-  }
-}
-
-/**
- * DescribeInstances
- * @param client Ecs20140526
- * @param instanceIds The ID of the instance
+ * @param diskId 云盘、本地盘或弹性临时盘ID
  * @return Whether the operation was successful
  */
-static async function waitForInstancesRunning(client: Ecs20140526, instanceIds: [string]) throws: boolean {
-  var MAX_RETRY_TIMES: long = 5;
-  var retryCount: long = 0;
+static async function waitForDiskAvailable(client: Ecs20140526, diskId: string) throws: boolean {
+  // maximum retry attempts
+  var maxRetryTimes: int32 = 5;
+  // current retry attempt
+  var retryIndex: int32 = 0;
 
-  while (retryCount < MAX_RETRY_TIMES) {
+  while (retryIndex < maxRetryTimes) {
     try {
-	    
-      var request = new Ecs20140526.DescribeInstancesRequest{
-              regionId = "cn-hangzhou",
-            // The ID of the instance
             
-    //   instanceIds = $JSON.stringify(instanceIds),
-      instanceIds = Util.toJSONString(instanceIds),
+      var request = new Ecs20140526.DescribeDisksRequest{
+              regionId = "cn-hangzhou",
+            // 云盘、本地盘或弹性临时盘ID
+            
+      diskIds = $JSON.stringify([diskId]),
       };
-      var response = client.describeInstances(request);
-      var instances = response.body.instances.instance;
+      var response = client.describeDisks(request);
+      var disk = response.body.disks.disk[0];
+var diskStatus = disk.status;
       
     
 
-      if (checkInstancesRunning(instances)) {
+      if (diskStatus.equals("Available")) {
         
         return true;
       }
 
-      $sleep(3);
-      retryCount++;
+      $sleep(3000);
+      retryIndex++;
     } catch (error) {
-      $Logger.info(error.message);
+      log(`执行失败。错误信息：`);
+      log(error.message);
       return false;
     }
   }
@@ -223,47 +167,115 @@ static async function waitForInstancesRunning(client: Ecs20140526, instanceIds: 
 }
 
 /**
- * log instances info
+ * 为实例挂载磁盘
  * @param client Ecs20140526
- * @param instanceIds The ID of the instance
- * @return The response body of DescribeInstances
+ * @param diskId 待挂载的磁盘ID
+ * @return The response body of AttachDisk
  */
-static async function logInstancesInfo(client: Ecs20140526, instanceIds: [string]) throws: Ecs20140526.DescribeInstancesResponseBody {
+static async function attachDisk(client: Ecs20140526, diskId: string) throws: Ecs20140526.AttachDiskResponseBody {
   try {
     
-      var request = new Ecs20140526.DescribeInstancesRequest{
-              regionId = "cn-hangzhou",
-            // The ID of the instance
+      var request = new Ecs20140526.AttachDiskRequest{
+              // 待挂载ECS实例的ID
+      instanceId = "i-bp159d628gxsw4gks8dd",
+
+      // 释放实例时
+      deleteWithInstance = true,
+
+            // 待挂载的磁盘ID
             
-    //   instanceIds = $JSON.stringify(instanceIds),
-      instanceIds = Util.toJSONString(instanceIds),
+      diskId = diskId,
       };
-      var response = client.describeInstances(request);
-      var instances = response.body.instances.instance;
-      for (var instance: instances) {
-        $Logger.info(`Instance ID:${instance.instanceId}`);
-$Logger.info(`Status:${instance.status}`);
-$Logger.info(`CPU:${instance.cpu}`);
-$Logger.info(`Memory:${instance.memory}MB`);
-$Logger.info(`Instance Type:${instance.instanceType}`);
-$Logger.info(`OS:${instance.OSType}(${instance.OSName})`);
-      }
+      var response = client.attachDisk(request);
+      
+      
     
     return response.body;
   } catch (error) {
-    $Logger.info(error.message);
-		return null;
+    log(`执行失败。错误信息：`);
+    log(error.message);
+                return null;
   }
 }
 
-static function checkInstancesRunning(targets: [Ecs20140526.DescribeInstancesResponseBody.instances.instance]) throws: boolean {
-  for (var target: targets) {
-    var status = target.status;
-    if (status.equals("Running")) {
-      $Logger.info(`   test ${status}`);
+/**
+ * 等待云盘挂载完成
+ * @param client Ecs20140526
+ * @param diskId 云盘、本地盘或弹性临时盘ID
+ * @return Whether the operation was successful
+ */
+static async function waitForDiskAttached(client: Ecs20140526, diskId: string) throws: boolean {
+  // maximum retry attempts
+  var maxRetryTimes: int32 = 5;
+  // current retry attempt
+  var retryIndex: int32 = 0;
+
+  while (retryIndex < maxRetryTimes) {
+    try {
+            
+      var request = new Ecs20140526.DescribeDisksRequest{
+              regionId = "cn-hangzhou",
+            // 云盘、本地盘或弹性临时盘ID
+            
+      diskIds = $JSON.stringify([diskId]),
+      };
+      var response = client.describeDisks(request);
+      var disk = response.body.disks.disk[0];
+var diskStatus = disk.status;
+      
+    
+
+      if (diskStatus.equals("In_use")) {
+        
+        return true;
+      }
+
+      $sleep(3000);
+      retryIndex++;
+    } catch (error) {
+      log(`执行失败。错误信息：`);
+      log(error.message);
       return false;
     }
   }
-  return true;
+  return false;
 }
+
+/**
+ * 打印云盘信息
+ * @param client Ecs20140526
+ * @param diskId 云盘、本地盘或弹性临时盘ID
+ * @return The response body of DescribeDisks
+ */
+static async function logDiskInfo(client: Ecs20140526, diskId: string) throws: Ecs20140526.DescribeDisksResponseBody {
+  try {
     
+      var request = new Ecs20140526.DescribeDisksRequest{
+              regionId = "cn-hangzhou",
+            // 云盘、本地盘或弹性临时盘ID
+            
+      diskIds = $JSON.stringify([diskId]),
+      };
+      var response = client.describeDisks(request);
+      var disk = response.body.disks.disk[0];
+      log(`云盘ID: ${disk.diskId}信息`);
+log(`diskCategory: ${disk.category}`);
+log(`名称: ${disk.diskName}`);
+log(`状态: ${disk.status}`);
+log(`可用区: ${disk.zoneId}`);
+log(`大小: ${disk.size}GiB`);
+log(`挂载在实例 ${disk.instanceId}`);
+    
+    return response.body;
+  } catch (error) {
+    log(`执行失败。错误信息：`);
+    log(error.message);
+                return null;
+  }
+}
+
+
+// 自定义日志打印方法
+static function log(message: string) throws: void {
+        $Logger.info(message);
+}

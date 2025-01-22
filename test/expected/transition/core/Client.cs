@@ -8,7 +8,6 @@ using Tea.Utils;
 using Ecs20140526Client = AlibabaCloud.SDK.Ecs20140526.Client;
 using AlibabaCloud.OpenApiClient.Models;
 using AlibabaCloud.SDK.Ecs20140526.Models;
-using AlibabaCloud.TeaUtil;
 
 namespace AlibabaCloud.OpenApiClient
 {
@@ -18,18 +17,19 @@ namespace AlibabaCloud.OpenApiClient
 
         /// <term><b>Description:</b></term>
         /// <description>
-        /// <para>Initialization Initialize the Client with the AccessKey of the account</para>
+        /// <para>Initialization  初始化公共请求参数</para>
         /// </description>
         public static async Task<Ecs20140526Client> InitializationAsync(string regionId)
         {
-            // The project code leakage may result in the leakage of AccessKey, posing a threat to the security of all resources under the account. The following code examples are for reference only.
-            // It is recommended to use the more secure STS credential. For more credentials, please refer to: https://www.alibabacloud.com/help/en/alibaba-cloud-sdk-262060/latest/credentials-settings-2.
+            // 工程代码泄露可能会导致 AccessKey 泄露，并威胁账号下所有资源的安全性。以下代码示例仅供参考。
+            // 建议使用更安全的 STS 方式，更多鉴权访问方式请参见：https://help.aliyun.com/document_detail/378657.html。
             Config config = new Config
             {
-                // Required, please ensure that the environment variables ALIBABA_CLOUD_ACCESS_KEY_ID is set.
+                // 必填，请确保代码运行环境设置了环境变量 ALIBABA_CLOUD_ACCESS_KEY_ID
                 AccessKeyId = Environment.GetEnvironmentVariable("ALIBABA_CLOUD_ACCESS_KEY_ID"),
-                // Required, please ensure that the environment variables ALIBABA_CLOUD_ACCESS_KEY_SECRET is set.
+                // 必填，请确保代码运行环境设置了环境变量 ALIBABA_CLOUD_ACCESS_KEY_SECRET
                 AccessKeySecret = Environment.GetEnvironmentVariable("ALIBABA_CLOUD_ACCESS_KEY_SECRET"),
+                // 您的可用区ID
                 RegionId = regionId,
             };
             return new Ecs20140526Client(config);
@@ -39,49 +39,58 @@ namespace AlibabaCloud.OpenApiClient
         public static async Task Main(string[] args)
         {
             Ecs20140526Client client = await InitializationAsync("cn-hangzhou");
-            Console.WriteLine("CreateSecurityGroup");
-            CreateSecurityGroupResponseBody createSecurityGroupResponseBody = await CreateSecurityGroupAsync(client);
-            if (createSecurityGroupResponseBody == null)
+            // 创建数据盘
+            Log("Step1: 创建数据盘");
+            CreateDiskResponseBody createDiskResponseBody = await CreateDiskAsync(client);
+            if (createDiskResponseBody == null)
             {
-                Console.WriteLine("Failed to complete the task \'CreateSecurityGroup\'.");
+                Log("任务\'创建数据盘\'失败。");
                 return ;
             }
-            string securityGroupId = createSecurityGroupResponseBody.SecurityGroupId;
-            Console.WriteLine("AuthorizeSecurityGroup");
-            AuthorizeSecurityGroupResponseBody authorizeSecurityGroupResponseBody = await AuthorizeSecurityGroupAsync(client, securityGroupId);
-            if (authorizeSecurityGroupResponseBody == null)
+            string diskId = createDiskResponseBody.DiskId;
+            Log("任务\'创建数据盘\'执行完成!");
+            // 等待云盘创建完成
+            Log("Step2: 等待云盘创建完成");
+            bool? isWaitForDiskAvailableSuccess = (await WaitForDiskAvailableAsync(client, diskId)).Value;
+            if (!isWaitForDiskAvailableSuccess.Value)
             {
-                Console.WriteLine("Failed to complete the task \'AuthorizeSecurityGroup\'.");
+                Log("任务\'等待云盘创建完成\'失败。");
                 return ;
             }
-            Console.WriteLine("RunInstances");
-            RunInstancesResponseBody runInstancesResponseBody = await CreateInstanceAsync(client, securityGroupId);
-            if (runInstancesResponseBody == null)
+            Log("任务\'等待云盘创建完成\'执行完成!");
+            // 为实例挂载磁盘
+            Log("Step3: 为实例挂载磁盘");
+            AttachDiskResponseBody attachDiskResponseBody = await AttachDiskAsync(client, diskId);
+            if (attachDiskResponseBody == null)
             {
-                Console.WriteLine("Failed to complete the task \'RunInstances\'.");
+                Log("任务\'为实例挂载磁盘\'失败。");
                 return ;
             }
-            List<string> instanceIds = runInstancesResponseBody.InstanceIdSets.InstanceIdSet;
-            Console.WriteLine("DescribeInstances");
-            bool? isWaitForInstancesRunningSuccess = (await WaitForInstancesRunningAsync(client, instanceIds)).Value;
-            if (!isWaitForInstancesRunningSuccess.Value)
+            Log("任务\'为实例挂载磁盘\'执行完成!");
+            // 等待云盘挂载完成
+            Log("Step4: 等待云盘挂载完成");
+            bool? isWaitForDiskAttachedSuccess = (await WaitForDiskAttachedAsync(client, diskId)).Value;
+            if (!isWaitForDiskAttachedSuccess.Value)
             {
-                Console.WriteLine("Failed to complete the task \'DescribeInstances\' after 5 polling attempts.");
+                Log("任务\'等待云盘挂载完成\'失败。");
                 return ;
             }
-            Console.WriteLine("log instances info");
-            DescribeInstancesResponseBody describeInstancesResponseBody = await LogInstancesInfoAsync(client, instanceIds);
-            if (describeInstancesResponseBody == null)
+            Log("任务\'等待云盘挂载完成\'执行完成!");
+            // 打印云盘信息
+            Log("Step5: 打印云盘信息");
+            DescribeDisksResponseBody describeDisksResponseBody = await LogDiskInfoAsync(client, diskId);
+            if (describeDisksResponseBody == null)
             {
-                Console.WriteLine("Failed to complete the task \'log instances info\'.");
+                Log("任务\'打印云盘信息\'失败。");
                 return ;
             }
+            Log("任务\'打印云盘信息\'执行完成!");
         }
 
 
         /// <term><b>Description:</b></term>
         /// <description>
-        /// <para>CreateSecurityGroup</para>
+        /// <para>创建数据盘</para>
         /// </description>
         /// 
         /// <param name="client">
@@ -89,26 +98,36 @@ namespace AlibabaCloud.OpenApiClient
         /// </param>
         /// 
         /// <returns>
-        /// The response body of CreateSecurityGroup
+        /// The response body of CreateDisk
         /// </returns>
-        public static async Task<CreateSecurityGroupResponseBody> CreateSecurityGroupAsync(Ecs20140526Client client)
+        public static async Task<CreateDiskResponseBody> CreateDiskAsync(Ecs20140526Client client)
         {
             try
             {
-                CreateSecurityGroupRequest request = new CreateSecurityGroupRequest
+                CreateDiskRequest request = new CreateDiskRequest
                 {
+                    // 所属的地域ID
                     RegionId = "cn-hangzhou",
-                    // The name of the security group
-                    SecurityGroupName = "MySecurityGroup",
-                    // The description of the security group
-                    Description = "sgDescription",
+                    // 在指定可用区内创建一块按量付费磁盘
+                    ZoneId = "cn-hangzhou-h",
+                    // 磁盘名称
+                    DiskName = "java-test",
+                    // 磁盘描述
+                    Description = "",
+                    // 容量大小
+                    Size = 40,
+                    // 数据盘的磁盘种类
+                    DiskCategory = "cloud_auto",
+                    // 是否开启Burst（性能突发）
+                    BurstingEnabled = true,
                 };
-                CreateSecurityGroupResponse response = await client.CreateSecurityGroupAsync(request);
+                CreateDiskResponse response = await client.CreateDiskAsync(request);
                 return response.Body;
             }
             catch (TeaException error)
             {
-                Console.WriteLine(error.Message);
+                Log("执行失败。错误信息：");
+                Log(error.Message);
                 return null;
             }
         }
@@ -116,147 +135,52 @@ namespace AlibabaCloud.OpenApiClient
 
         /// <term><b>Description:</b></term>
         /// <description>
-        /// <para>AuthorizeSecurityGroup</para>
+        /// <para>等待云盘创建完成</para>
         /// </description>
         /// 
         /// <param name="client">
         /// Ecs20140526
         /// </param>
-        /// <param name="securityGroupId">
-        /// The ID of the security group
-        /// </param>
-        /// 
-        /// <returns>
-        /// The response body of AuthorizeSecurityGroup
-        /// </returns>
-        public static async Task<AuthorizeSecurityGroupResponseBody> AuthorizeSecurityGroupAsync(Ecs20140526Client client, string securityGroupId)
-        {
-            try
-            {
-                AuthorizeSecurityGroupRequest request = new AuthorizeSecurityGroupRequest
-                {
-                    RegionId = "cn-hangzhou",
-                    // The security group rules
-                    Permissions = new List<AuthorizeSecurityGroupRequest.AuthorizeSecurityGroupRequestPermissions>
-                    {
-                        new AuthorizeSecurityGroupRequest.AuthorizeSecurityGroupRequestPermissions
-                        {
-                            IpProtocol = "tcp",
-                            PortRange = "22/22",
-                            SourceCidrIp = "0.0.0.0/0",
-                            Priority = "1",
-                        },
-                        new AuthorizeSecurityGroupRequest.AuthorizeSecurityGroupRequestPermissions
-                        {
-                            IpProtocol = "tcp",
-                            PortRange = "22/22",
-                            SourceCidrIp = "0.0.0.0/0",
-                            Priority = "1",
-                        }
-                    },
-                    // The ID of the security group
-                    SecurityGroupId = securityGroupId,
-                };
-                AuthorizeSecurityGroupResponse response = await client.AuthorizeSecurityGroupAsync(request);
-                return response.Body;
-            }
-            catch (TeaException error)
-            {
-                Console.WriteLine(error.Message);
-                return null;
-            }
-        }
-
-
-        /// <term><b>Description:</b></term>
-        /// <description>
-        /// <para>RunInstances</para>
-        /// </description>
-        /// 
-        /// <param name="client">
-        /// Ecs20140526
-        /// </param>
-        /// <param name="securityGroupId">
-        /// The ID of the security group to which you want to assign the instance
-        /// </param>
-        /// 
-        /// <returns>
-        /// The response body of RunInstances
-        /// </returns>
-        public static async Task<RunInstancesResponseBody> CreateInstanceAsync(Ecs20140526Client client, string securityGroupId)
-        {
-            try
-            {
-                RunInstancesRequest request = new RunInstancesRequest
-                {
-                    RegionId = "cn-hangzhou",
-                    // The ID of the image
-                    ImageId = "ubuntu_18_04_64_20G_alibase_20210702.vhd",
-                    // The instance type
-                    InstanceType = "ecs.g5.large",
-                    // Details about the image options
-                    ImageOptions = new RunInstancesRequest.RunInstancesRequestImageOptions
-                    {
-                        LoginAsNonRoot = true,
-                    },
-                    // The desired number of ECS instances that you want to create
-                    Amount = 1,
-                    // The ID of the security group to which you want to assign the instance
-                    SecurityGroupId = securityGroupId,
-                };
-                RunInstancesResponse response = await client.RunInstancesAsync(request);
-                return response.Body;
-            }
-            catch (TeaException error)
-            {
-                Console.WriteLine(error.Message);
-                return null;
-            }
-        }
-
-
-        /// <term><b>Description:</b></term>
-        /// <description>
-        /// <para>DescribeInstances</para>
-        /// </description>
-        /// 
-        /// <param name="client">
-        /// Ecs20140526
-        /// </param>
-        /// <param name="instanceIds">
-        /// The ID of the instance
+        /// <param name="diskId">
+        /// 云盘、本地盘或弹性临时盘ID
         /// </param>
         /// 
         /// <returns>
         /// Whether the operation was successful
         /// </returns>
-        public static async Task<bool?> WaitForInstancesRunningAsync(Ecs20140526Client client, List<string> instanceIds)
+        public static async Task<bool?> WaitForDiskAvailableAsync(Ecs20140526Client client, string diskId)
         {
-            long? MAX_RETRY_TIMES = 5;
-            long? retryCount = 0;
+            // maximum retry attempts
+            int? maxRetryTimes = 5;
+            // current retry attempt
+            int? retryIndex = 0;
 
-            while (retryCount < MAX_RETRY_TIMES) {
+            while (retryIndex < maxRetryTimes) {
                 try
                 {
-                    DescribeInstancesRequest request = new DescribeInstancesRequest
+                    DescribeDisksRequest request = new DescribeDisksRequest
                     {
                         RegionId = "cn-hangzhou",
-                        // The ID of the instance
-                        //   instanceIds = $JSON.stringify(instanceIds),
-                        InstanceIds = Common.ToJSONString(instanceIds),
+                        // 云盘、本地盘或弹性临时盘ID
+                        DiskIds = Common.ToJSONString(new List<string>
+                        {
+                            diskId
+                        }),
                     };
-                    DescribeInstancesResponse response = await client.DescribeInstancesAsync(request);
-                    List<DescribeInstancesResponseBody.DescribeInstancesResponseBodyInstances.DescribeInstancesResponseBodyInstancesInstance> instances = response.Body.Instances.Instance;
-                    if ((CheckInstancesRunning(instances)).Value)
+                    DescribeDisksResponse response = await client.DescribeDisksAsync(request);
+                    DescribeDisksResponseBody.DescribeDisksResponseBodyDisks.DescribeDisksResponseBodyDisksDisk disk = response.Body.Disks.Disk[0];
+                    string diskStatus = disk.Status;
+                    if (diskStatus == "Available")
                     {
                         return true;
                     }
-                    await Task.Delay(3);
-                    retryCount++;
+                    await Task.Delay(3000);
+                    retryIndex++;
                 }
                 catch (TeaException error)
                 {
-                    Console.WriteLine(error.Message);
+                    Log("执行失败。错误信息：");
+                    Log(error.Message);
                     return false;
                 }
             }
@@ -266,62 +190,150 @@ namespace AlibabaCloud.OpenApiClient
 
         /// <term><b>Description:</b></term>
         /// <description>
-        /// <para>log instances info</para>
+        /// <para>为实例挂载磁盘</para>
         /// </description>
         /// 
         /// <param name="client">
         /// Ecs20140526
         /// </param>
-        /// <param name="instanceIds">
-        /// The ID of the instance
+        /// <param name="diskId">
+        /// 待挂载的磁盘ID
         /// </param>
         /// 
         /// <returns>
-        /// The response body of DescribeInstances
+        /// The response body of AttachDisk
         /// </returns>
-        public static async Task<DescribeInstancesResponseBody> LogInstancesInfoAsync(Ecs20140526Client client, List<string> instanceIds)
+        public static async Task<AttachDiskResponseBody> AttachDiskAsync(Ecs20140526Client client, string diskId)
         {
             try
             {
-                DescribeInstancesRequest request = new DescribeInstancesRequest
+                AttachDiskRequest request = new AttachDiskRequest
                 {
-                    RegionId = "cn-hangzhou",
-                    // The ID of the instance
-                    //   instanceIds = $JSON.stringify(instanceIds),
-                    InstanceIds = Common.ToJSONString(instanceIds),
+                    // 待挂载ECS实例的ID
+                    InstanceId = "i-bp159d628gxsw4gks8dd",
+                    // 释放实例时
+                    DeleteWithInstance = true,
+                    // 待挂载的磁盘ID
+                    DiskId = diskId,
                 };
-                DescribeInstancesResponse response = await client.DescribeInstancesAsync(request);
-                List<DescribeInstancesResponseBody.DescribeInstancesResponseBodyInstances.DescribeInstancesResponseBodyInstancesInstance> instances = response.Body.Instances.Instance;
-
-                foreach (var instance in instances) {
-                    Console.WriteLine("Instance ID:" + instance.InstanceId);
-                    Console.WriteLine("Status:" + instance.Status);
-                    Console.WriteLine("CPU:" + instance.Cpu);
-                    Console.WriteLine("Memory:" + instance.Memory + "MB");
-                    Console.WriteLine("Instance Type:" + instance.InstanceType);
-                    Console.WriteLine("OS:" + instance.OSType + "(" + instance.OSName + ")");
-                }
+                AttachDiskResponse response = await client.AttachDiskAsync(request);
                 return response.Body;
             }
             catch (TeaException error)
             {
-                Console.WriteLine(error.Message);
+                Log("执行失败。错误信息：");
+                Log(error.Message);
                 return null;
             }
         }
 
-        public static bool? CheckInstancesRunning(List<DescribeInstancesResponseBody.DescribeInstancesResponseBodyInstances.DescribeInstancesResponseBodyInstancesInstance> targets)
-        {
 
-            foreach (var target in targets) {
-                string status = target.Status;
-                if (status == "Running")
+        /// <term><b>Description:</b></term>
+        /// <description>
+        /// <para>等待云盘挂载完成</para>
+        /// </description>
+        /// 
+        /// <param name="client">
+        /// Ecs20140526
+        /// </param>
+        /// <param name="diskId">
+        /// 云盘、本地盘或弹性临时盘ID
+        /// </param>
+        /// 
+        /// <returns>
+        /// Whether the operation was successful
+        /// </returns>
+        public static async Task<bool?> WaitForDiskAttachedAsync(Ecs20140526Client client, string diskId)
+        {
+            // maximum retry attempts
+            int? maxRetryTimes = 5;
+            // current retry attempt
+            int? retryIndex = 0;
+
+            while (retryIndex < maxRetryTimes) {
+                try
                 {
-                    Console.WriteLine("   test " + status);
+                    DescribeDisksRequest request = new DescribeDisksRequest
+                    {
+                        RegionId = "cn-hangzhou",
+                        // 云盘、本地盘或弹性临时盘ID
+                        DiskIds = Common.ToJSONString(new List<string>
+                        {
+                            diskId
+                        }),
+                    };
+                    DescribeDisksResponse response = await client.DescribeDisksAsync(request);
+                    DescribeDisksResponseBody.DescribeDisksResponseBodyDisks.DescribeDisksResponseBodyDisksDisk disk = response.Body.Disks.Disk[0];
+                    string diskStatus = disk.Status;
+                    if (diskStatus == "In_use")
+                    {
+                        return true;
+                    }
+                    await Task.Delay(3000);
+                    retryIndex++;
+                }
+                catch (TeaException error)
+                {
+                    Log("执行失败。错误信息：");
+                    Log(error.Message);
                     return false;
                 }
             }
-            return true;
+            return false;
+        }
+
+
+        /// <term><b>Description:</b></term>
+        /// <description>
+        /// <para>打印云盘信息</para>
+        /// </description>
+        /// 
+        /// <param name="client">
+        /// Ecs20140526
+        /// </param>
+        /// <param name="diskId">
+        /// 云盘、本地盘或弹性临时盘ID
+        /// </param>
+        /// 
+        /// <returns>
+        /// The response body of DescribeDisks
+        /// </returns>
+        public static async Task<DescribeDisksResponseBody> LogDiskInfoAsync(Ecs20140526Client client, string diskId)
+        {
+            try
+            {
+                DescribeDisksRequest request = new DescribeDisksRequest
+                {
+                    RegionId = "cn-hangzhou",
+                    // 云盘、本地盘或弹性临时盘ID
+                    DiskIds = Common.ToJSONString(new List<string>
+                    {
+                        diskId
+                    }),
+                };
+                DescribeDisksResponse response = await client.DescribeDisksAsync(request);
+                DescribeDisksResponseBody.DescribeDisksResponseBodyDisks.DescribeDisksResponseBodyDisksDisk disk = response.Body.Disks.Disk[0];
+                Log("云盘ID: " + disk.DiskId + "信息");
+                Log("diskCategory: " + disk.Category);
+                Log("名称: " + disk.DiskName);
+                Log("状态: " + disk.Status);
+                Log("可用区: " + disk.ZoneId);
+                Log("大小: " + disk.Size + "GiB");
+                Log("挂载在实例 " + disk.InstanceId);
+                return response.Body;
+            }
+            catch (TeaException error)
+            {
+                Log("执行失败。错误信息：");
+                Log(error.Message);
+                return null;
+            }
+        }
+
+        // 自定义日志打印方法
+        public static void Log(string message)
+        {
+            Console.WriteLine(message);
         }
 
     }
