@@ -58,13 +58,25 @@ static async function main(args: [ string ]) throws : void {
 
   // 等待云盘挂载完成
         log("Step4: 等待云盘挂载完成");
+  if (!waitForDiskAttached(client, diskId)) {
+    log(`任务'等待云盘挂载完成'失败。`);
+    return;
+  }
+  if (waitForDiskAttached(client, diskId)) {
+    log(`任务'等待云盘挂载完成'失败。`);
+    return;
+  }
   var isWaitForDiskAttachedSuccess = waitForDiskAttached(client, diskId);
-
-        if (!isWaitForDiskAttachedSuccess) {
-                log(`任务'等待云盘挂载完成'失败。`);
-                return;
-        }
+  if (!isWaitForDiskAttachedSuccess) {
+    log(`任务'等待云盘挂载完成'失败。`);
+    return;
+  }
+  if (isWaitForDiskAttachedSuccess) {
+    log(`任务'等待云盘挂载完成'失败。`);
+    return;
+  }
   log(`任务'等待云盘挂载完成'执行完成!`);
+  
 
 
   // 打印云盘信息
