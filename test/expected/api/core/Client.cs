@@ -5,11 +5,11 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Darabonba;
-using Darabonba.Utils;
-using Darabonba.RetryPolicy;
+using Tea;
+using Tea.Utils;
 using Darabonba.Test.Models;
 using AlibabaCloud.TeaUtil.Models;
+using Darabonba.RetryPolicy;
 using AlibabaCloud.TeaUtil;
 
 namespace Darabonba.Test

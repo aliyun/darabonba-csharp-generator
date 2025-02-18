@@ -1,0 +1,96 @@
+{
+  "scope": "alibabacloud",
+  "name": "GatewaySPI",
+  "version": "0.0.11",
+  "main": "./main.tea",
+  "maintainers": [
+    {
+      "name": "Alibaba Cloud SDK",
+      "email": "sdk-team@alibabacloud.com"
+    }
+  ],
+  "libraries": {
+    "Credential": "alibabacloud:Credential:*"
+  },
+  "releases": {
+    "ts": "@alicloud/gateway-spi:^0.0.8",
+    "go": "github.com/alibabacloud-go/alibabacloud-gateway-spi/client:v0.0.5",
+    "java": "com.aliyun:alibabacloud-gateway-spi:0.0.2",
+    "python": "alibabacloud_gateway_spi:0.0.2",
+    "python2": "alibabacloud_gateway_spi_py2:0.0.1",
+    "csharp": "AlibabaCloud.GatewaySpi:0.0.3",
+    "php": "alibabacloud/gateway-spi:^1",
+    "swift": "alibabacloud-sdk-swift/alibabacloud-gateway-spi:0.0.1"
+  },
+  "csharp": {
+    "namespace": "AlibabaCloud.GatewaySpi",
+    "packageInfo": {
+      "description": "Alibaba Cloud Gateway SPI SDK Library for .NET",
+      "company": "Alibaba Cloud",
+      "property": {
+        "PackageTags": "Alibaba Aliyun Gateway SPI SDK",
+        "Copyright": "©2009-present Alibaba Cloud",
+        "PackageProjectUrl": "https://github.com/aliyun/alibabacloud-gateway",
+        "PackageIconUrl": "https://www.alibabacloud.com/favicon.ico"
+      }
+    }
+  },
+  "java": {
+    "package": "com.aliyun.gateway.spi"
+  },
+  "go": {
+    "package": [
+      "io"
+    ],
+    "interface": true,
+    "clientName": "Client"
+  },
+  "php": {
+    "package": "Darabonba.GatewaySpi",
+    "packageInfo": {
+      "name": "alibabacloud/gateway-spi",
+      "desc": "Alibaba Cloud Gateway SPI Client",
+      "github": "https://github.com/aliyun/alibabacloud-gateway"
+    }
+  },
+  "python": {
+    "package": "alibabacloud_gateway_spi",
+    "clientName": "client",
+    "packageInfo": {
+      "name": "alibabacloud_gateway_spi",
+      "desc": "Alibaba Cloud Gateway SPI SDK Library for Python",
+      "github": "https://github.com/aliyun/alibabacloud-gateway",
+      "author": "Alibaba Cloud SDK",
+      "email": "sdk-team@alibabacloud.com"
+    }
+  },
+  "python2": {
+    "package": "alibabacloud_gateway_spi",
+    "clientName": "client",
+    "packageInfo": {
+      "name": "alibabacloud_gateway_spi_py2",
+      "desc": "Alibaba Cloud Gateway SPI SDK Library for Python2",
+      "github": "https://github.com/aliyun/alibabacloud-gateway",
+      "author": "Alibaba Cloud SDK",
+      "email": "sdk-team@alibabacloud.com"
+    }
+  },
+  "cpp": {
+    "packageInfo": {
+      "git": {
+        "scope": "alibabacloud-sdk-cpp",
+        "project": "gateway-spi"
+      }
+    }
+  },
+  "swift": {
+    "clientName": "Client",
+    "packageInfo": {
+      "name": "AlibabacloudGatewaySPI",
+      "desc": "Alibaba Cloud Gateway SPI SDK Library for Swift",
+      "github": "https://github.com/alibabacloud-sdk-swift/alibabacloud-gateway-spi",
+      "author": "Alibaba Cloud SDK",
+      "email": "sdk-team@alibabacloud.com"
+    }
+  }
+}

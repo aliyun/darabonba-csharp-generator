@@ -1,0 +1,110 @@
+{
+  "scope": "alibabacloud",
+  "name": "GatewayPOP",
+  "version": "0.0.7",
+  "main": "./main.tea",
+  "maintainers": [
+    {
+      "name": "Alibaba Cloud SDK",
+      "email": "sdk-team@alibabacloud.com"
+    }
+  ],
+  "libraries": {
+    "SPI": "alibabacloud:GatewaySPI:*",
+    "EndpointUtil": "alibabacloud:EndpointUtil:*",
+    "Util": "darabonba:Util:*",
+    "OpenApiUtil": "alibabacloud:OpenApiUtil:*",
+    "Credential": "alibabacloud:Credential:*",
+    "EncodeUtil": "darabonba:EncodeUtil:*",
+    "SignatureUtil": "darabonba:SignatureUtil:*",
+    "String": "darabonba:String:*",
+    "Map": "darabonba:Map:*",
+    "Array": "darabonba:Array:*"
+  },
+  "releases": {
+    "ts": "@alicloud/gateway-pop:^0.0.6",
+    "go": "github.com/alibabacloud-go/alibabacloud-gateway-pop/client:v0.0.6",
+    "java": "com.aliyun:alibabacloud-gateway-pop:0.0.6",
+    "python": "alibabacloud_gateway_pop:0.0.5",
+    "python2": "alibabacloud_gateway_pop_py2:0.0.4",
+    "csharp": "AlibabaCloud.GatewayPop:0.0.5",
+    "php": "alibabacloud/gateway-pop:^0.0.5",
+    "swift": "alibabacloud-sdk-swift/alibabacloud-gateway-pop:0.0.1"
+  },
+  "csharp": {
+    "namespace": "AlibabaCloud.GatewayPop",
+    "packageInfo": {
+      "description": "Alibaba Cloud POP SDK Library for .NET",
+      "company": "Alibaba Cloud",
+      "property": {
+        "PackageTags": "Alibaba Aliyun POP SDK",
+        "Copyright": "©2009-present Alibaba Cloud",
+        "PackageProjectUrl": "https://github.com/aliyun/alibabacloud-gateway",
+        "PackageIconUrl": "https://www.alibabacloud.com/favicon.ico"
+      }
+    }
+  },
+  "java": {
+    "package": "com.aliyun.gateway.pop",
+    "className": "Client"
+  },
+  "go": {
+    "package": [
+      "io"
+    ]
+  },
+  "php": {
+    "package": "Darabonba.GatewayPop",
+    "packageInfo": {
+      "name": "alibabacloud/gateway-pop",
+      "desc": "Alibaba Cloud POP Client",
+      "github": "https://github.com/aliyun/alibabacloud-gateway"
+    }
+  },
+  "python": {
+    "package": "alibabacloud_gateway_pop",
+    "clientName": "client",
+    "packageInfo": {
+      "name": "alibabacloud_gateway_pop",
+      "desc": "Alibaba Cloud POP SDK Library for Python",
+      "github": "https://github.com/aliyun/alibabacloud-gateway",
+      "author": "Alibaba Cloud SDK",
+      "email": "sdk-team@alibabacloud.com"
+    }
+  },
+  "python2": {
+    "package": "alibabacloud_gateway_pop",
+    "clientName": "client",
+    "packageInfo": {
+      "name": "alibabacloud_gateway_pop_py2",
+      "desc": "Alibaba Cloud POP SDK Library for Python2",
+      "github": "https://github.com/aliyun/alibabacloud-gateway",
+      "author": "Alibaba Cloud SDK",
+      "email": "sdk-team@alibabacloud.com"
+    }
+  },
+  "cpp": {
+    "packageInfo": {
+      "git": {
+        "scope": "alibabacloud-sdk-cpp",
+        "project": "gateway-pop"
+      }
+    }
+  },
+  "swift": {
+    "clientName": "Client",
+    "packageInfo": {
+      "name": "AlibabacloudGatewayPOP",
+      "desc": "Alibaba Cloud Gateway SPI SDK Library for Swift",
+      "github": "https://github.com/alibabacloud-sdk-swift/alibabacloud-gateway-pop",
+      "author": "Alibaba Cloud SDK",
+      "email": "sdk-team@alibabacloud.com"
+    }
+  },
+  "releaselog": {
+    "changelog": [
+      "fix: resolve region for signature v4"
+    ],
+    "compatible": true
+  }
+}

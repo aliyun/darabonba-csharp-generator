@@ -1,0 +1,11 @@
+{
+  "scope": "darabonba",
+  "name": "main",
+  "version": "0.0.1",
+  "main": "./main.dara",
+  "csharp": {
+    "namespace": "Darabonba.Test",
+    "asyncOnly": true,
+    "exec": true
+  }
+}

@@ -1,0 +1,134 @@
+/**
+ * This is for OpenApi Util 
+ */
+
+/**
+ * Convert all params of body other than type of readable into content 
+ * @param body source Model
+ * @param content target Model
+ * @return void
+ */
+static function convert(body: $Model, content: $Model): void;
+
+/**
+ * Get the string to be signed according to request
+ * @param request  which contains signed messages
+ * @return the signed string
+ */
+static function getStringToSign(request: $Request): string;
+
+/**
+ * Get signature according to stringToSign, secret
+ * @param stringToSign  the signed string
+ * @param secret accesskey secret
+ * @return the signature
+ */
+static function getROASignature(stringToSign: string, secret: string): string;
+
+/**
+ * Parse filter into a form string
+ * @param filter object
+ * @return the string
+ */
+static function toForm(filter: object): string;
+
+/**
+ * Get timestamp
+ * @return the timestamp string
+ */
+static function getTimestamp(): string;
+
+/**
+ * Parse filter into a object which's type is map[string]string
+ * @param filter query param
+ * @return the object
+ */
+static function query(filter: object): map[string]string;
+
+/**
+ * Get signature according to signedParams, method and secret
+ * @param signedParams params which need to be signed
+ * @param method http method e.g. GET
+ * @param secret AccessKeySecret
+ * @return the signature
+ */
+static function getRPCSignature(signedParams: map[string]string, method: string, secret: string): string;
+
+/**
+ * Parse array into a string with specified style
+ * @param array the array
+ * @param prefix the prefix string
+ * @style specified style e.g. repeatList
+ * @return the string
+ */
+static function arrayToStringWithSpecifiedStyle(array: any, prefix: string, style: string): string;
+
+/**
+ * Parse map with flat style
+ *
+ * @param any the input
+ * @return any
+ */
+static function mapToFlatStyle(input: any): any;
+
+/**
+ * Transform input as map.
+ */
+static function parseToMap(input: any): map[string]any;
+
+/**
+ * If endpointType is internal, use internal endpoint
+ * If serverUse is true and endpointType is accelerate, use accelerate endpoint
+ * Default return endpoint
+ * @param serverUse whether use accelerate endpoint
+ * @param endpointType value must be internal or accelerate
+ * @return the final endpoint
+ */
+static function getEndpoint(endpoint: string, serverUse: boolean, endpointType: string): string;
+
+/**
+ * Encode raw with base16
+ * @param raw encoding data
+ * @return encoded string
+ */
+static function hexEncode(raw: bytes): string;
+
+/**
+ * Hash the raw data with signatureAlgorithm
+ * @param raw hashing data
+ * @param signatureAlgorithm the autograph method
+ * @return hashed bytes
+ */
+static function hash(raw: bytes, signatureAlgorithm: string): bytes;
+
+/**
+ * Get the authorization 
+ * @param request request params
+ * @param signatureAlgorithm the autograph method
+ * @param payload the hashed request
+ * @param acesskey the acesskey string
+ * @param accessKeySecret the accessKeySecret string
+ * @return authorization string
+ */
+static function getAuthorization(request: $Request, signatureAlgorithm: string, payload: string, acesskey: string, accessKeySecret: string): string;
+
+/**
+ * Get encoded path
+ * @param path the raw path
+ * @return encoded path
+ */
+static function getEncodePath(path: string): string;
+
+/**
+ * Get encoded param
+ * @param param the raw param
+ * @return encoded param
+ */
+static function getEncodeParam(param: string): string;
+
+/**
+ * Get throttling param
+ * @param the response headers
+ * @return time left
+ */
+static function getThrottlingTimeLeft(headers: map[string]string): long;

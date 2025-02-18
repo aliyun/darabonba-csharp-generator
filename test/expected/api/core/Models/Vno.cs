@@ -4,11 +4,11 @@ using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using Darabonba;
+using Tea;
 
 namespace Darabonba.Test.Models
 {
-    public class Vno : DaraModel {
+    public class Vno : TeaModel {
         public Vno Copy()
         {
             Vno copy = FromMap(ToMap());
