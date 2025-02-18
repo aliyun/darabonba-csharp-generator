@@ -61,16 +61,16 @@ function check(moduleName, options = {}) {
 }
 
 describe('new Generator', function () {
-  // it('complex should ok', function () {
-  //   const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/complex/Darafile'), 'utf8');
-  //   const pkg = JSON.parse(pkgContent);
-  //   check('complex', {
-  //     pkgDir: path.join(__dirname, 'fixtures/complex'),
-  //     libraries: pkg.libraries,
-  //     ...pkg.csharp,
-  //     editable: 1
-  //   });
-  // });
+  it('complex should ok', function () {
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/complex/Darafile'), 'utf8');
+    const pkg = JSON.parse(pkgContent);
+    check('complex', {
+      pkgDir: path.join(__dirname, 'fixtures/complex'),
+      libraries: pkg.libraries,
+      ...pkg.csharp,
+      editable: 1
+    });
+  });
 
   // it('multi dara should ok', function () {
   //   const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/multi/tea/Darafile'), 'utf8');

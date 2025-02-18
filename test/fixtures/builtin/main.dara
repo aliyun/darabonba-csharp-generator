@@ -138,6 +138,8 @@ static async function numberTest(args: [string]): void {
     dnum = dnum.parseDouble();
 
     lnum = inum.itol();
+    // TODO: not support
+    // lnum = testReturnInt("123").itol();
     inum = lnum.ltoi();
 
     var randomNum = $Number.random();
@@ -145,6 +147,10 @@ static async function numberTest(args: [string]): void {
     inum = $Number.round(inum);
     // var min = $Number.min(inum, fnum);
     // var max = $Number.max(inum, fnum);
+}
+
+static async function testReturnInt(test: string): int32 {
+    return test.parseInt();
 }
 
 static async function stringTest(args: [string]): void {

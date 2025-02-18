@@ -51,8 +51,8 @@ namespace AlibabaCloud.OpenApiClient
             Log("任务\'创建数据盘\'执行完成!");
             // 等待云盘创建完成
             Log("Step2: 等待云盘创建完成");
-            bool? isWaitForDiskAvailableSuccess = (await WaitForDiskAvailableAsync(client, diskId)).Value;
-            if (!isWaitForDiskAvailableSuccess.Value)
+            bool isWaitForDiskAvailableSuccess = (await WaitForDiskAvailableAsync(client, diskId)).Value;
+            if (!isWaitForDiskAvailableSuccess)
             {
                 Log("任务\'等待云盘创建完成\'失败。");
                 return ;
@@ -79,13 +79,13 @@ namespace AlibabaCloud.OpenApiClient
                 Log("任务\'等待云盘挂载完成\'失败。");
                 return ;
             }
-            bool? isWaitForDiskAttachedSuccess = (await WaitForDiskAttachedAsync(client, diskId)).Value;
-            if (!isWaitForDiskAttachedSuccess.Value)
+            bool isWaitForDiskAttachedSuccess = (await WaitForDiskAttachedAsync(client, diskId)).Value;
+            if (!isWaitForDiskAttachedSuccess)
             {
                 Log("任务\'等待云盘挂载完成\'失败。");
                 return ;
             }
-            if (isWaitForDiskAttachedSuccess.Value)
+            if (isWaitForDiskAttachedSuccess)
             {
                 Log("任务\'等待云盘挂载完成\'失败。");
                 return ;
@@ -166,9 +166,9 @@ namespace AlibabaCloud.OpenApiClient
         public static async Task<bool?> WaitForDiskAvailableAsync(Ecs20140526Client client, string diskId)
         {
             // maximum retry attempts
-            int? maxRetryTimes = 5;
+            int maxRetryTimes = 5;
             // current retry attempt
-            int? retryIndex = 0;
+            int retryIndex = 0;
 
             while (retryIndex < maxRetryTimes) {
                 try
@@ -261,9 +261,9 @@ namespace AlibabaCloud.OpenApiClient
         public static async Task<bool?> WaitForDiskAttachedAsync(Ecs20140526Client client, string diskId)
         {
             // maximum retry attempts
-            int? maxRetryTimes = 5;
+            int maxRetryTimes = 5;
             // current retry attempt
-            int? retryIndex = 0;
+            int retryIndex = 0;
 
             while (retryIndex < maxRetryTimes) {
                 try

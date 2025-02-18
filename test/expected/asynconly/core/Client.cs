@@ -43,7 +43,7 @@ namespace Darabonba.Test
         {
             ReturnAny();
             await JsonTestAsync(args);
-            int? a = (int)args[0] + 10;
+            int a = (int)args[0] + 10;
         }
 
     }
