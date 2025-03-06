@@ -1,7 +1,0 @@
-{
-  "darabonba:Util:*": "libraries/darabonba_Util_0.2.13",
-  "alibabacloud:OpenApiUtil:*": "libraries/alibabacloud_OpenApiUtil_0.2.8",
-  "alibabacloud:Credential:*": "libraries/alibabacloud_Credential_0.5.7",
-  "alibabacloud:GatewaySPI:*": "libraries/alibabacloud_GatewaySPI_0.0.10",
-  "darabonba:XML:*": "libraries/darabonba_XML_0.1.13"
-}

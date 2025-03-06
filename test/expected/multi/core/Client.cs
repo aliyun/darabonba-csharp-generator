@@ -7,7 +7,7 @@ using Darabonba;
 using Darabonba.Utils;
 using Darabonba.Test.Model.Models;
 using System.Linq;
-using DarabonbaStringUtil = Darabonba.Utils.StringUtil;
+using DarabonbaStringUtils = Darabonba.Utils.StringUtils;
 using Darabonba.Test.Repeat;
 using Darabonba.Test.Lib;
 using TestCommonClient = Darabonba.Test.Lib.Test.CommonClient;
@@ -34,9 +34,9 @@ namespace Darabonba.Test
             args = fullStr.Split(",").ToList();
             if ((fullStr.Length > 0) && fullStr.Contains("hangzhou"))
             {
-                string newStr1 = DarabonbaStringUtil.Replace(fullStr, "/hangzhou/g", "beijing");
+                string newStr1 = DarabonbaStringUtils.Replace(fullStr, "/hangzhou/g", "beijing");
             }
-            StringUtil.TestRepeatBultin();
+            StringUtils.TestRepeatBultin();
         }
 
         public static async Task StringTestAsync(List<string> args)
@@ -45,9 +45,9 @@ namespace Darabonba.Test
             args = fullStr.Split(",").ToList();
             if ((fullStr.Length > 0) && fullStr.Contains("hangzhou"))
             {
-                string newStr1 = DarabonbaStringUtil.Replace(fullStr, "/hangzhou/g", "beijing");
+                string newStr1 = DarabonbaStringUtils.Replace(fullStr, "/hangzhou/g", "beijing");
             }
-            StringUtil.TestRepeatBultin();
+            StringUtils.TestRepeatBultin();
         }
 
         public IAsyncEnumerable<string> Test3()
@@ -76,14 +76,14 @@ namespace Darabonba.Test
 
         public int? Test4()
         {
-            ApiClient api = new ApiClient();
+            ApiAlias api = new ApiAlias();
             int? status = api.Test3();
             return status;
         }
 
         public async Task<int?> Test4Async()
         {
-            ApiClient api = new ApiClient();
+            ApiAlias api = new ApiAlias();
             int? status = await api.Test3Async();
             return status;
         }

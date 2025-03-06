@@ -21,7 +21,7 @@ namespace Darabonba.Test
         public static Dictionary<string, string> HelloMap()
         {
             Dictionary<string, string> m = new Dictionary<string, string>(){};
-            return ConverterUtil.Merge<string>
+            return ConverterUtils.Merge<string>
             (
                 new Dictionary<string, string>()
                 {

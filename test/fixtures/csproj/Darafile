@@ -40,7 +40,7 @@
       }
     },
     "packageManager": {
-      "Darabonba": "1.1.3",
+      "Darabonba": "1.0.0-preview",
       "Something-need-to-add": "[0.0.1, 1.0.0)"
     },
     "typedef": {

@@ -10,6 +10,7 @@ using Darabonba.Utils;
 using SourceClient = Darabonba.import.Client;
 using Darabonba.import.Models;
 using AlibabaCloud.import.Models;
+using Darabonba.import.Util;
 
 namespace Darabonba.Test
 {
@@ -24,6 +25,7 @@ namespace Darabonba.Test
                 Accesskey = "accesskey",
                 Region = "region",
             };
+            Dictionary<string, string> test = ApiClient.GetQuery();
             client.Print(runtime);
         }
 

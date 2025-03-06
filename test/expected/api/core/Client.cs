@@ -35,28 +35,28 @@ namespace Darabonba.Test
 
         public void Hello()
         {
-            DaraRequest request_ = new DaraRequest();
+            Darabonba.Request request_ = new Darabonba.Request();
             request_.Method = "GET";
             request_.Pathname = "/";
             request_.Headers = new Dictionary<string, string>
             {
                 {"host", "www.test.com"},
             };
-            DaraResponse response_ = DaraCore.DoAction(request_);
+            Darabonba.Response response_ = Core.DoAction(request_);
 
             return ;
         }
 
         public async Task HelloAsync()
         {
-            DaraRequest request_ = new DaraRequest();
+            Darabonba.Request request_ = new Darabonba.Request();
             request_.Method = "GET";
             request_.Pathname = "/";
             request_.Headers = new Dictionary<string, string>
             {
                 {"host", "www.test.com"},
             };
-            DaraResponse response_ = await DaraCore.DoActionAsync(request_);
+            Darabonba.Response response_ = await Core.DoActionAsync(request_);
 
             return ;
         }
@@ -81,8 +81,8 @@ namespace Darabonba.Test
             };
 
             RetryPolicyContext _retryPolicyContext = null;
-            DaraRequest _lastRequest = null;
-            DaraResponse _lastResponse = null;
+            Darabonba.Request _lastRequest = null;
+            Darabonba.Response _lastResponse = null;
             Exception _lastException = null;
             long _now = System.DateTime.Now.Millisecond;
             int _retriesAttempted = 0;
@@ -90,27 +90,28 @@ namespace Darabonba.Test
             {
                 RetriesAttempted = _retriesAttempted
             };
-            while (DaraCore.ShouldRetry((RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
+            while (Core.ShouldRetry((RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
             {
                 if (_retriesAttempted > 0)
                 {
-                    int backoffTime = DaraCore.GetBackoffDelay((RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
+                    int backoffTime = Core.GetBackoffDelay((RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
                     if (backoffTime > 0)
                     {
-                        DaraCore.Sleep(backoffTime);
+                        Core.Sleep(backoffTime);
                     }
                 }
                 try
                 {
-                    DaraRequest request_ = new DaraRequest();
+                    Darabonba.Request request_ = new Darabonba.Request();
                     request_.Method = "GET";
                     request_.Pathname = "/";
                     request_.Headers = new Dictionary<string, string>
                     {
                         {"host", "www.test.com"},
                     };
+                    Darabonba.Response response_ = Core.DoAction(request_, runtime_);
                     _lastRequest = request_;
-                    DaraResponse response_ = DaraCore.DoAction(request_, runtime_);
+                    _lastResponse = response_;
 
                     return "test";
                 }
@@ -128,7 +129,7 @@ namespace Darabonba.Test
                 }
             }
 
-            throw _lastException;
+            throw Core.ThrowException(_retryPolicyContext);
         }
 
         public async Task<string> HelloRuntimeAsync(string bodyType, RuntimeOptions runtime)
@@ -151,8 +152,8 @@ namespace Darabonba.Test
             };
 
             RetryPolicyContext _retryPolicyContext = null;
-            DaraRequest _lastRequest = null;
-            DaraResponse _lastResponse = null;
+            Darabonba.Request _lastRequest = null;
+            Darabonba.Response _lastResponse = null;
             Exception _lastException = null;
             long _now = System.DateTime.Now.Millisecond;
             int _retriesAttempted = 0;
@@ -160,27 +161,28 @@ namespace Darabonba.Test
             {
                 RetriesAttempted = _retriesAttempted
             };
-            while (DaraCore.ShouldRetry((RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
+            while (Core.ShouldRetry((RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
             {
                 if (_retriesAttempted > 0)
                 {
-                    int backoffTime = DaraCore.GetBackoffDelay((RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
+                    int backoffTime = Core.GetBackoffDelay((RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
                     if (backoffTime > 0)
                     {
-                        DaraCore.Sleep(backoffTime);
+                        Core.Sleep(backoffTime);
                     }
                 }
                 try
                 {
-                    DaraRequest request_ = new DaraRequest();
+                    Darabonba.Request request_ = new Darabonba.Request();
                     request_.Method = "GET";
                     request_.Pathname = "/";
                     request_.Headers = new Dictionary<string, string>
                     {
                         {"host", "www.test.com"},
                     };
+                    Darabonba.Response response_ = await Core.DoActionAsync(request_, runtime_);
                     _lastRequest = request_;
-                    DaraResponse response_ = await DaraCore.DoActionAsync(request_, runtime_);
+                    _lastResponse = response_;
 
                     return "test";
                 }
@@ -198,33 +200,33 @@ namespace Darabonba.Test
                 }
             }
 
-            throw _lastException;
+            throw Core.ThrowException(_retryPolicyContext);
         }
 
         public void HelloVirtualCall(M m)
         {
-            DaraRequest request_ = new DaraRequest();
+            Darabonba.Request request_ = new Darabonba.Request();
             request_.Method = "GET";
             request_.Pathname = "/";
             request_.Headers = new Dictionary<string, string>
             {
                 {"key", ""},
             };
-            DaraResponse response_ = DaraCore.DoAction(request_);
+            Darabonba.Response response_ = Core.DoAction(request_);
 
             return ;
         }
 
         public async Task HelloVirtualCallAsync(M m)
         {
-            DaraRequest request_ = new DaraRequest();
+            Darabonba.Request request_ = new Darabonba.Request();
             request_.Method = "GET";
             request_.Pathname = "/";
             request_.Headers = new Dictionary<string, string>
             {
                 {"key", ""},
             };
-            DaraResponse response_ = await DaraCore.DoActionAsync(request_);
+            Darabonba.Response response_ = await Core.DoActionAsync(request_);
 
             return ;
         }

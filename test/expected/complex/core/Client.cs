@@ -44,8 +44,8 @@ namespace Darabonba.Test
             };
 
             RetryPolicyContext _retryPolicyContext = null;
-            DaraRequest _lastRequest = null;
-            DaraResponse _lastResponse = null;
+            Darabonba.Request _lastRequest = null;
+            Darabonba.Response _lastResponse = null;
             Exception _lastException = null;
             long _now = System.DateTime.Now.Millisecond;
             int _retriesAttempted = 0;
@@ -53,19 +53,19 @@ namespace Darabonba.Test
             {
                 RetriesAttempted = _retriesAttempted
             };
-            while (DaraCore.ShouldRetry((RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
+            while (Core.ShouldRetry((RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
             {
                 if (_retriesAttempted > 0)
                 {
-                    int backoffTime = DaraCore.GetBackoffDelay((RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
+                    int backoffTime = Core.GetBackoffDelay((RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
                     if (backoffTime > 0)
                     {
-                        DaraCore.Sleep(backoffTime);
+                        Core.Sleep(backoffTime);
                     }
                 }
                 try
                 {
-                    DaraRequest request_ = new DaraRequest();
+                    Darabonba.Request request_ = new Darabonba.Request();
                     string name = "complex";
                     Darabonba.Test.Models.Config conf = new Darabonba.Test.Models.Config
                     {
@@ -84,10 +84,11 @@ namespace Darabonba.Test
                     {
                         {"date", "2019"},
                     };
-                    DaraRequest reqInstance = request_;
+                    Darabonba.Request reqInstance = request_;
                     bool? boolItem = !_boolVirtual.Value;
+                    Darabonba.Response response_ = Core.DoAction(request_, runtime_);
                     _lastRequest = request_;
-                    DaraResponse response_ = DaraCore.DoAction(request_, runtime_);
+                    _lastResponse = response_;
 
                     if (true && true)
                     {
@@ -109,7 +110,7 @@ namespace Darabonba.Test
                     });
                     Hello(null, null);
                     Complex3(null);
-                    return DaraModel.ToObject<RuntimeObject>(new Dictionary<string, object>(){});
+                    return Darabonba.Model.ToObject<RuntimeObject>(new Dictionary<string, object>(){});
                 }
                 catch (Exception e)
                 {
@@ -125,7 +126,7 @@ namespace Darabonba.Test
                 }
             }
 
-            throw _lastException;
+            throw Core.ThrowException(_retryPolicyContext);
         }
 
         public async Task<RuntimeObject> Complex1Async(Darabonba.Test.Models.ComplexRequest request, SourceClient client)
@@ -140,8 +141,8 @@ namespace Darabonba.Test
             };
 
             RetryPolicyContext _retryPolicyContext = null;
-            DaraRequest _lastRequest = null;
-            DaraResponse _lastResponse = null;
+            Darabonba.Request _lastRequest = null;
+            Darabonba.Response _lastResponse = null;
             Exception _lastException = null;
             long _now = System.DateTime.Now.Millisecond;
             int _retriesAttempted = 0;
@@ -149,19 +150,19 @@ namespace Darabonba.Test
             {
                 RetriesAttempted = _retriesAttempted
             };
-            while (DaraCore.ShouldRetry((RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
+            while (Core.ShouldRetry((RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
             {
                 if (_retriesAttempted > 0)
                 {
-                    int backoffTime = DaraCore.GetBackoffDelay((RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
+                    int backoffTime = Core.GetBackoffDelay((RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
                     if (backoffTime > 0)
                     {
-                        DaraCore.Sleep(backoffTime);
+                        Core.Sleep(backoffTime);
                     }
                 }
                 try
                 {
-                    DaraRequest request_ = new DaraRequest();
+                    Darabonba.Request request_ = new Darabonba.Request();
                     string name = "complex";
                     Darabonba.Test.Models.Config conf = new Darabonba.Test.Models.Config
                     {
@@ -180,10 +181,11 @@ namespace Darabonba.Test
                     {
                         {"date", "2019"},
                     };
-                    DaraRequest reqInstance = request_;
+                    Darabonba.Request reqInstance = request_;
                     bool? boolItem = !_boolVirtual.Value;
+                    Darabonba.Response response_ = await Core.DoActionAsync(request_, runtime_);
                     _lastRequest = request_;
-                    DaraResponse response_ = await DaraCore.DoActionAsync(request_, runtime_);
+                    _lastResponse = response_;
 
                     if (true && true)
                     {
@@ -205,7 +207,7 @@ namespace Darabonba.Test
                     });
                     await HelloAsync(null, null);
                     await Complex3Async(null);
-                    return DaraModel.ToObject<RuntimeObject>(new Dictionary<string, object>(){});
+                    return Darabonba.Model.ToObject<RuntimeObject>(new Dictionary<string, object>(){});
                 }
                 catch (Exception e)
                 {
@@ -221,12 +223,12 @@ namespace Darabonba.Test
                 }
             }
 
-            throw _lastException;
+            throw Core.ThrowException(_retryPolicyContext);
         }
 
         public Dictionary<string, object> Complex2(Darabonba.Test.Models.ComplexRequest request, List<string> str, Dictionary<string, string> val, List<List<List<string>>> complexList)
         {
-            DaraRequest request_ = new DaraRequest();
+            Darabonba.Request request_ = new Darabonba.Request();
             string name = "complex";
             Darabonba.import.Models.Config config = new Darabonba.import.Models.Config();
             SourceClient client = new SourceClient(config, "testSecond");
@@ -254,14 +256,14 @@ namespace Darabonba.Test
                 {"protocol", request_.Protocol},
             };
             return new Dictionary<string, object>(){};
-            DaraResponse response_ = DaraCore.DoAction(request_);
+            Darabonba.Response response_ = Core.DoAction(request_);
 
             return;
         }
 
         public async Task<Dictionary<string, object>> Complex2Async(Darabonba.Test.Models.ComplexRequest request, List<string> str, Dictionary<string, string> val, List<List<List<string>>> complexList)
         {
-            DaraRequest request_ = new DaraRequest();
+            Darabonba.Request request_ = new Darabonba.Request();
             string name = "complex";
             Darabonba.import.Models.Config config = new Darabonba.import.Models.Config();
             SourceClient client = new SourceClient(config, "testSecond");
@@ -289,31 +291,31 @@ namespace Darabonba.Test
                 {"protocol", request_.Protocol},
             };
             return new Dictionary<string, object>(){};
-            DaraResponse response_ = await DaraCore.DoActionAsync(request_);
+            Darabonba.Response response_ = await Core.DoActionAsync(request_);
 
             return;
         }
 
         public Darabonba.Test.Models.ComplexRequest Complex3(Darabonba.Test.Models.ComplexRequest request)
         {
-            DaraRequest request_ = new DaraRequest();
+            Darabonba.Request request_ = new Darabonba.Request();
             string name = "complex";
             request_.Protocol = TemplateString();
             request_.Port = 80;
             request_.Method = "GET";
             request_.Pathname = "/";
-            request_.Body = DaraCore.BytesReadable("body");
+            request_.Body = StreamUtils.BytesReadable("body");
             request_.Query = new Dictionary<string, string>
             {
                 {"date", "2019"},
             };
-            DaraResponse response_ = DaraCore.DoAction(request_);
+            Darabonba.Response response_ = Core.DoAction(request_);
 
             if (true)
             {
                 throw new DaraRetryableException(request_, response_);
             }
-            DaraResponse resp = response_;
+            Darabonba.Response resp = response_;
             Request req = new Request
             {
                 Accesskey = request.AccessKey,
@@ -324,7 +326,7 @@ namespace Darabonba.Test
             req.Accesskey = request.AccessKey;
             PrintNull(typeof(Config));
             SourceClient.Array(request.ToMap(), "1");
-            return DaraModel.ToObject<Darabonba.Test.Models.ComplexRequest>(ConverterUtil.Merge<string>
+            return Darabonba.Model.ToObject<Darabonba.Test.Models.ComplexRequest>(ConverterUtils.Merge<string>
             (
                 request_.Query
             ));
@@ -332,24 +334,24 @@ namespace Darabonba.Test
 
         public async Task<Darabonba.Test.Models.ComplexRequest> Complex3Async(Darabonba.Test.Models.ComplexRequest request)
         {
-            DaraRequest request_ = new DaraRequest();
+            Darabonba.Request request_ = new Darabonba.Request();
             string name = "complex";
             request_.Protocol = await TemplateStringAsync();
             request_.Port = 80;
             request_.Method = "GET";
             request_.Pathname = "/";
-            request_.Body = DaraCore.BytesReadable("body");
+            request_.Body = StreamUtils.BytesReadable("body");
             request_.Query = new Dictionary<string, string>
             {
                 {"date", "2019"},
             };
-            DaraResponse response_ = await DaraCore.DoActionAsync(request_);
+            Darabonba.Response response_ = await Core.DoActionAsync(request_);
 
             if (true)
             {
                 throw new DaraRetryableException(request_, response_);
             }
-            DaraResponse resp = response_;
+            Darabonba.Response resp = response_;
             Request req = new Request
             {
                 Accesskey = request.AccessKey,
@@ -360,7 +362,7 @@ namespace Darabonba.Test
             req.Accesskey = request.AccessKey;
             await PrintNullAsync(typeof(Config));
             SourceClient.Array(request.ToMap(), "1");
-            return DaraModel.ToObject<Darabonba.Test.Models.ComplexRequest>(ConverterUtil.Merge<string>
+            return Darabonba.Model.ToObject<Darabonba.Test.Models.ComplexRequest>(ConverterUtils.Merge<string>
             (
                 request_.Query
             ));
@@ -507,12 +509,12 @@ namespace Darabonba.Test
             return Array1();
         }
 
-        public static Request Print(DaraRequest reqeust, List<Darabonba.Test.Models.ComplexRequest> reqs, DaraResponse response, Dictionary<string, string> val)
+        public static Request Print(Darabonba.Request reqeust, List<Darabonba.Test.Models.ComplexRequest> reqs, Darabonba.Response response, Dictionary<string, string> val)
         {
             return new Request();
         }
 
-        public static async Task<Request> PrintAsync(DaraRequest reqeust, List<Darabonba.Test.Models.ComplexRequest> reqs, DaraResponse response, Dictionary<string, string> val)
+        public static async Task<Request> PrintAsync(Darabonba.Request reqeust, List<Darabonba.Test.Models.ComplexRequest> reqs, Darabonba.Response response, Dictionary<string, string> val)
         {
             return new Request();
         }

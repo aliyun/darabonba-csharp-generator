@@ -6,6 +6,6 @@
     <RootNamespace>Darabonba.Test</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Darabonba" Version="1.1.3"/>
+    <PackageReference Include="Darabonba" Version="1.0.0"/>
   </ItemGroup>
 </Project>
