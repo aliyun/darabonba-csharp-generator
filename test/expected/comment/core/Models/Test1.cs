@@ -17,7 +17,7 @@ namespace Darabonba.Test.Models
     /// <description>
     /// <para>TestModel</para>
     /// </description>
-    public class Test1 : DaraModel {
+    public class Test1 : Darabonba.Model {
         /// <term><b>Obsolete</b></term>
         /// 
         /// <summary>
@@ -46,49 +46,6 @@ namespace Darabonba.Test.Models
         public string Test2 { get; set; }
 
         //model的test2 back comment
-        public Test1 Copy()
-        {
-            Test1 copy = FromMap(ToMap());
-            return copy;
-        }
-
-        public Test1 CopyWithoutStream()
-        {
-            Test1 copy = FromMap(ToMap(true));
-            return copy;
-        }
-
-        public Dictionary<string, object> ToMap(bool noStream = false)
-        {
-            var map = new Dictionary<string, object>();
-            if (Test != null)
-            {
-                map["test"] = Test;
-            }
-
-            if (Test2 != null)
-            {
-                map["test2"] = Test2;
-            }
-
-            return map;
-        }
-
-        public static Test1 FromMap(Dictionary<string, object> map)
-        {
-            var model = new Test1();
-            if (map.ContainsKey("test"))
-            {
-                model.Test = (string)map["test"];
-            }
-
-            if (map.ContainsKey("test2"))
-            {
-                model.Test2 = (string)map["test2"];
-            }
-
-            return model;
-        }
     }
 
 }

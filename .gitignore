@@ -7,3 +7,4 @@ output/
 
 test/**/obj
 test/**/bin
+.history

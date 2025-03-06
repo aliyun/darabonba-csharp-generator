@@ -1,3 +1,4 @@
+@clientName("ApiAlias");
 import "./model/user" User;
 import "./lib/util" Util;
 import Console;

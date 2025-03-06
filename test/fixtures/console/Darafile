@@ -5,6 +5,13 @@
   "main": "./main.dara",
   "editable": true,
   "csharp":{
-    "namespace":"Darabonba.Test"
+    "namespace":"Darabonba.Test",
+    "typedef": {
+      "HttpResponse": {
+        "import": "System.Net.Http",
+        "type": "HttpResponseMessage",
+        "package": "System.Net.Http:4.3.4"
+      }
+    }
   }
 }

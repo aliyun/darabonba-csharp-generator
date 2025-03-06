@@ -8,30 +8,7 @@ using Darabonba;
 
 namespace Darabonba.Test.Models
 {
-    public class Config : DaraModel {
-        public Config Copy()
-        {
-            Config copy = FromMap(ToMap());
-            return copy;
-        }
-
-        public Config CopyWithoutStream()
-        {
-            Config copy = FromMap(ToMap(true));
-            return copy;
-        }
-
-        public Dictionary<string, object> ToMap(bool noStream = false)
-        {
-            var map = new Dictionary<string, object>();
-            return map;
-        }
-
-        public static Config FromMap(Dictionary<string, object> map)
-        {
-            var model = new Config();
-            return model;
-        }
+    public class Config : Darabonba.Model {
     }
 
 }

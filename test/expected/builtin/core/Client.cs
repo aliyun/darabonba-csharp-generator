@@ -5,11 +5,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Darabonba;
 using Darabonba.Utils;
-using Darabonba.Streams;
 using System.Linq;
-using System.Globalization;
+using System.Threading;
 using Newtonsoft.Json;
 using System.Text;
+using Darabonba.Test.Models;
 
 namespace Darabonba.Test
 {
@@ -29,9 +29,9 @@ namespace Darabonba.Test
                     {"key6", "321"},
                 }},
             };
-            string form = FormUtil.ToFormString(m);
-            form = form + "&key7=23233&key8=" + FormUtil.GetBoundary();
-            Stream r = FormUtil.ToFileForm(m, FormUtil.GetBoundary());
+            string form = FormUtils.ToFormString(m);
+            form = form + "&key7=23233&key8=" + FormUtils.GetBoundary();
+            Stream r = FormUtils.ToFileForm(m, FormUtils.GetBoundary());
         }
 
         public static async Task FormTestAsync(List<string> args)
@@ -47,53 +47,53 @@ namespace Darabonba.Test
                     {"key6", "321"},
                 }},
             };
-            string form = FormUtil.ToFormString(m);
-            form = form + "&key7=23233&key8=" + FormUtil.GetBoundary();
-            Stream r = FormUtil.ToFileForm(m, FormUtil.GetBoundary());
+            string form = FormUtils.ToFormString(m);
+            form = form + "&key7=23233&key8=" + FormUtils.GetBoundary();
+            Stream r = FormUtils.ToFileForm(m, FormUtils.GetBoundary());
         }
 
         public static void FileTest(List<string> args)
         {
-            if (DaraFile.Exists("/tmp/test"))
+            if (File.Exists("/tmp/test"))
             {
-                DaraFile file = new DaraFile("/tmp/test");
+                File file = new File("/tmp/test");
                 string path = file.Path();
                 int? length = file.Length() + 10;
-                DaraDate createTime = file.CreateTime();
-                DaraDate modifyTime = file.ModifyTime();
+                Date createTime = file.CreateTime();
+                Date modifyTime = file.ModifyTime();
                 int? timeLong = modifyTime.Diff("minute", createTime);
                 byte[] data = file.Read(300);
-                file.Write(BytesUtil.From("test", "utf8"));
-                Stream rs = DaraFile.CreateReadStream("/tmp/test");
-                Stream ws = DaraFile.CreateWriteStream("/tmp/test");
+                file.Write(BytesUtils.From("test", "utf8"));
+                Stream rs = File.CreateReadStream("/tmp/test");
+                Stream ws = File.CreateWriteStream("/tmp/test");
             }
         }
 
         public static async Task FileTestAsync(List<string> args)
         {
-            if (DaraFile.Exists("/tmp/test"))
+            if (File.Exists("/tmp/test"))
             {
-                DaraFile file = new DaraFile("/tmp/test");
+                File file = new File("/tmp/test");
                 string path = file.Path();
                 int? length = await file.LengthAsync() + 10;
-                DaraDate createTime = await file.CreateTimeAsync();
-                DaraDate modifyTime = await file.ModifyTimeAsync();
+                Date createTime = await file.CreateTimeAsync();
+                Date modifyTime = await file.ModifyTimeAsync();
                 int? timeLong = modifyTime.Diff("minute", createTime);
                 byte[] data = await file.ReadAsync(300);
-                await file.WriteAsync(BytesUtil.From("test", "utf8"));
-                Stream rs = DaraFile.CreateReadStream("/tmp/test");
-                Stream ws = DaraFile.CreateWriteStream("/tmp/test");
+                await file.WriteAsync(BytesUtils.From("test", "utf8"));
+                Stream rs = File.CreateReadStream("/tmp/test");
+                Stream ws = File.CreateWriteStream("/tmp/test");
             }
         }
 
         public static void DateTest(List<string> args)
         {
-            DaraDate date = new DaraDate("2023-09-12 17:47:31.916000 +0800 UTC");
+            Date date = new Date("2023-09-12 17:47:31.916000 +0800 UTC");
             string dateStr = date.Format("YYYY-MM-DD HH:mm:ss");
             int? timestamp = date.Unix();
-            DaraDate yesterday = date.Sub("day", 1);
+            Date yesterday = date.Sub("day", 1);
             int? oneDay = date.Diff("day", yesterday);
-            DaraDate tomorrow = date.Add("day", 1);
+            Date tomorrow = date.Add("day", 1);
             int? twoDay = tomorrow.Diff("day", date) + oneDay;
             int? hour = date.Hour();
             int? minute = date.Minute();
@@ -108,12 +108,12 @@ namespace Darabonba.Test
 
         public static async Task DateTestAsync(List<string> args)
         {
-            DaraDate date = new DaraDate("2023-09-12 17:47:31.916000 +0800 UTC");
+            Date date = new Date("2023-09-12 17:47:31.916000 +0800 UTC");
             string dateStr = date.Format("YYYY-MM-DD HH:mm:ss");
             int? timestamp = date.Unix();
-            DaraDate yesterday = date.Sub("day", 1);
+            Date yesterday = date.Sub("day", 1);
             int? oneDay = date.Diff("day", yesterday);
-            DaraDate tomorrow = date.Add("day", 1);
+            Date tomorrow = date.Add("day", 1);
             int? twoDay = tomorrow.Diff("day", date) + oneDay;
             int? hour = date.Hour();
             int? minute = date.Minute();
@@ -128,7 +128,7 @@ namespace Darabonba.Test
 
         public static void UrlTest(List<string> args)
         {
-            DaraURL url = new DaraURL(args[0]);
+            URL url = new URL(args[0]);
             string path = url.Path();
             string pathname = url.Pathname();
             string protocol = url.Protocol();
@@ -139,17 +139,17 @@ namespace Darabonba.Test
             string search = url.Search();
             string href = url.Href();
             string auth = url.Auth();
-            DaraURL url2 = DaraURL.Parse(args[1]);
+            URL url2 = URL.Parse(args[1]);
             path = url2.Path();
-            string newUrl = DaraURL.UrlEncode(args[2]);
-            string newSearch = DaraURL.PercentEncode(search);
-            string newPath = DaraURL.PathEncode(pathname);
+            string newUrl = URL.UrlEncode(args[2]);
+            string newSearch = URL.PercentEncode(search);
+            string newPath = URL.PathEncode(pathname);
             string all = "test" + path + protocol + hostname + hash + search + href + auth + newUrl + newSearch + newPath;
         }
 
         public static async Task UrlTestAsync(List<string> args)
         {
-            DaraURL url = new DaraURL(args[0]);
+            URL url = new URL(args[0]);
             string path = url.Path();
             string pathname = url.Pathname();
             string protocol = url.Protocol();
@@ -160,41 +160,41 @@ namespace Darabonba.Test
             string search = url.Search();
             string href = url.Href();
             string auth = url.Auth();
-            DaraURL url2 = DaraURL.Parse(args[1]);
+            URL url2 = URL.Parse(args[1]);
             path = url2.Path();
-            string newUrl = DaraURL.UrlEncode(args[2]);
-            string newSearch = DaraURL.PercentEncode(search);
-            string newPath = DaraURL.PathEncode(pathname);
+            string newUrl = URL.UrlEncode(args[2]);
+            string newSearch = URL.PercentEncode(search);
+            string newPath = URL.PathEncode(pathname);
             string all = "test" + path + protocol + hostname + hash + search + href + auth + newUrl + newSearch + newPath;
         }
 
         public static void StreamTest(List<string> args)
         {
-            if (DaraFile.Exists("/tmp/test"))
+            if (File.Exists("/tmp/test"))
             {
-                Stream rs = DaraFile.CreateReadStream("/tmp/test");
-                Stream ws = DaraFile.CreateWriteStream("/tmp/test");
-                byte[] data = StreamUtil.Read(rs, 30);
+                Stream rs = File.CreateReadStream("/tmp/test");
+                Stream ws = File.CreateWriteStream("/tmp/test");
+                byte[] data = StreamUtils.Read(rs, 30);
                 ws.Write(data, 0, data.Length);
-                StreamUtil.Pipe(rs, ws);
-                data = StreamUtil.ReadAsBytes(rs);
-                object obj = StreamUtil.ReadAsJSON(rs);
-                string jsonStr = StreamUtil.ReadAsString(rs);
+                StreamUtils.Pipe(rs, ws);
+                data = StreamUtils.ReadAsBytes(rs);
+                object obj = StreamUtils.ReadAsJSON(rs);
+                string jsonStr = StreamUtils.ReadAsString(rs);
             }
         }
 
         public static async Task StreamTestAsync(List<string> args)
         {
-            if (DaraFile.Exists("/tmp/test"))
+            if (File.Exists("/tmp/test"))
             {
-                Stream rs = DaraFile.CreateReadStream("/tmp/test");
-                Stream ws = DaraFile.CreateWriteStream("/tmp/test");
-                byte[] data = StreamUtil.Read(rs, 30);
+                Stream rs = File.CreateReadStream("/tmp/test");
+                Stream ws = File.CreateWriteStream("/tmp/test");
+                byte[] data = StreamUtils.Read(rs, 30);
                 ws.Write(data, 0, data.Length);
-                StreamUtil.Pipe(rs, ws);
-                data = StreamUtil.ReadAsBytes(rs);
-                object obj = StreamUtil.ReadAsJSON(rs);
-                string jsonStr = StreamUtil.ReadAsString(rs);
+                StreamUtils.Pipe(rs, ws);
+                data = StreamUtils.ReadAsBytes(rs);
+                object obj = StreamUtils.ReadAsJSON(rs);
+                string jsonStr = StreamUtils.ReadAsString(rs);
             }
         }
 
@@ -211,9 +211,9 @@ namespace Darabonba.Test
                     {"key6", "321"},
                 }},
             };
-            string xml = XmlUtil.ToXML(m);
+            string xml = XmlUtils.ToXML(m);
             xml = xml + "<key7>132</key7>";
-            Dictionary<string, object> respMap = XmlUtil.ParseXml(xml, null);
+            Dictionary<string, object> respMap = XmlUtils.ParseXml(xml, null);
         }
 
         public static async Task XmlTestAsync(List<string> args)
@@ -229,9 +229,9 @@ namespace Darabonba.Test
                     {"key6", "321"},
                 }},
             };
-            string xml = XmlUtil.ToXML(m);
+            string xml = XmlUtils.ToXML(m);
             xml = xml + "<key7>132</key7>";
-            Dictionary<string, object> respMap = XmlUtil.ParseXml(xml, null);
+            Dictionary<string, object> respMap = XmlUtils.ParseXml(xml, null);
         }
 
         public static void LoggerTest(List<string> args)
@@ -267,31 +267,31 @@ namespace Darabonba.Test
         public static void NumberTest(List<string> args)
         {
             float? num = 3.2f;
-            int? inum = MathUtil.ParseInt(num);
-            long? lnum = MathUtil.ParseLong(num);
-            float? fnum = MathUtil.ParseFloat(num);
-            double? dnum = Double.Parse(num.Value.ToString());
-            inum = MathUtil.ParseInt(inum);
-            lnum = MathUtil.ParseLong(inum);
-            fnum = MathUtil.ParseFloat(inum);
-            dnum = Double.Parse(inum.Value.ToString());
-            inum = MathUtil.ParseInt(lnum);
-            lnum = MathUtil.ParseLong(lnum);
-            fnum = MathUtil.ParseFloat(lnum);
-            dnum = Double.Parse(lnum.Value.ToString());
-            inum = MathUtil.ParseInt(fnum);
-            lnum = MathUtil.ParseLong(fnum);
-            fnum = MathUtil.ParseFloat(fnum);
-            dnum = Double.Parse(fnum.Value.ToString());
-            inum = MathUtil.ParseInt(dnum);
-            lnum = MathUtil.ParseLong(dnum);
-            fnum = MathUtil.ParseFloat(dnum);
-            dnum = Double.Parse(dnum.Value.ToString());
+            int? inum = MathUtils.ParseInt(num);
+            long? lnum = MathUtils.ParseLong(num);
+            float? fnum = MathUtils.ParseFloat(num);
+            double? dnum = double.Parse(num.Value.ToString());
+            inum = MathUtils.ParseInt(inum);
+            lnum = MathUtils.ParseLong(inum);
+            fnum = MathUtils.ParseFloat(inum);
+            dnum = double.Parse(inum.Value.ToString());
+            inum = MathUtils.ParseInt(lnum);
+            lnum = MathUtils.ParseLong(lnum);
+            fnum = MathUtils.ParseFloat(lnum);
+            dnum = double.Parse(lnum.Value.ToString());
+            inum = MathUtils.ParseInt(fnum);
+            lnum = MathUtils.ParseLong(fnum);
+            fnum = MathUtils.ParseFloat(fnum);
+            dnum = double.Parse(fnum.Value.ToString());
+            inum = MathUtils.ParseInt(dnum);
+            lnum = MathUtils.ParseLong(dnum);
+            fnum = MathUtils.ParseFloat(dnum);
+            dnum = double.Parse(dnum.Value.ToString());
             lnum = inum;
-            inum = (int)lnum.Value;
+            inum = (int?)lnum.Value;
             double randomNum = new Random().NextDouble();
-            inum = MathUtil.Floor(inum);
-            inum = MathUtil.Round(inum);
+            inum = MathUtils.Floor(inum);
+            inum = MathUtils.Round(inum);
             // var min = $Number.min(inum, fnum);
             // var max = $Number.max(inum, fnum);
         }
@@ -299,31 +299,31 @@ namespace Darabonba.Test
         public static async Task NumberTestAsync(List<string> args)
         {
             float? num = 3.2f;
-            int? inum = MathUtil.ParseInt(num);
-            long? lnum = MathUtil.ParseLong(num);
-            float? fnum = MathUtil.ParseFloat(num);
-            double? dnum = Double.Parse(num.Value.ToString());
-            inum = MathUtil.ParseInt(inum);
-            lnum = MathUtil.ParseLong(inum);
-            fnum = MathUtil.ParseFloat(inum);
-            dnum = Double.Parse(inum.Value.ToString());
-            inum = MathUtil.ParseInt(lnum);
-            lnum = MathUtil.ParseLong(lnum);
-            fnum = MathUtil.ParseFloat(lnum);
-            dnum = Double.Parse(lnum.Value.ToString());
-            inum = MathUtil.ParseInt(fnum);
-            lnum = MathUtil.ParseLong(fnum);
-            fnum = MathUtil.ParseFloat(fnum);
-            dnum = Double.Parse(fnum.Value.ToString());
-            inum = MathUtil.ParseInt(dnum);
-            lnum = MathUtil.ParseLong(dnum);
-            fnum = MathUtil.ParseFloat(dnum);
-            dnum = Double.Parse(dnum.Value.ToString());
+            int? inum = MathUtils.ParseInt(num);
+            long? lnum = MathUtils.ParseLong(num);
+            float? fnum = MathUtils.ParseFloat(num);
+            double? dnum = double.Parse(num.Value.ToString());
+            inum = MathUtils.ParseInt(inum);
+            lnum = MathUtils.ParseLong(inum);
+            fnum = MathUtils.ParseFloat(inum);
+            dnum = double.Parse(inum.Value.ToString());
+            inum = MathUtils.ParseInt(lnum);
+            lnum = MathUtils.ParseLong(lnum);
+            fnum = MathUtils.ParseFloat(lnum);
+            dnum = double.Parse(lnum.Value.ToString());
+            inum = MathUtils.ParseInt(fnum);
+            lnum = MathUtils.ParseLong(fnum);
+            fnum = MathUtils.ParseFloat(fnum);
+            dnum = double.Parse(fnum.Value.ToString());
+            inum = MathUtils.ParseInt(dnum);
+            lnum = MathUtils.ParseLong(dnum);
+            fnum = MathUtils.ParseFloat(dnum);
+            dnum = double.Parse(dnum.Value.ToString());
             lnum = inum;
-            inum = (int)lnum.Value;
+            inum = (int?)lnum.Value;
             double randomNum = new Random().NextDouble();
-            inum = MathUtil.Floor(inum);
-            inum = MathUtil.Round(inum);
+            inum = MathUtils.Floor(inum);
+            inum = MathUtils.Round(inum);
             // var min = $Number.min(inum, fnum);
             // var max = $Number.max(inum, fnum);
         }
@@ -334,20 +334,20 @@ namespace Darabonba.Test
             args = fullStr.Split(",").ToList();
             if ((fullStr.Length > 0) && fullStr.Contains("hangzhou"))
             {
-                string newStr1 = StringUtil.Replace(fullStr, "/hangzhou/g", "beijing");
+                string newStr1 = StringUtils.Replace(fullStr, "/hangzhou/g", "beijing");
             }
             if (fullStr.StartsWith("cn"))
             {
-                string newStr2 = StringUtil.Replace(fullStr, "/cn/gi", "zh");
+                string newStr2 = StringUtils.Replace(fullStr, "/cn/gi", "zh");
             }
-            if (fullStr.StartsWith("beijing"))
+            if (fullStr.EndsWith("beijing"))
             {
-                string newStr3 = StringUtil.Replace(fullStr, "/beijing/", "chengdu");
+                string newStr3 = StringUtils.Replace(fullStr, "/beijing/", "chengdu");
             }
             int? start = fullStr.IndexOf("beijing");
             int? end = start + 7;
-            string region = StringUtil.SubString(fullStr, start, end);
-            string region1 = StringUtil.SubString(fullStr, 2, 10);
+            string region = StringUtils.SubString(fullStr, start, end);
+            string region1 = StringUtils.SubString(fullStr, 2, 10);
             string lowerRegion = region.ToLower();
             string upperRegion = region.ToUpper();
             if (region == "beijing")
@@ -355,17 +355,17 @@ namespace Darabonba.Test
                 region = region + " ";
                 region = region.Trim();
             }
-            byte[] tb = StringUtil.ToBytes(fullStr, "utf8");
+            byte[] tb = StringUtils.ToBytes(fullStr, "utf8");
             string em = "xxx";
             if (String.IsNullOrEmpty(em))
             {
                 return ;
             }
             string num = "32.01";
-            int? inum = StringUtil.ParseInt(num) + 3;
-            long? lnum = StringUtil.ParseLong(num);
-            float? fnum = StringUtil.ParseFloat(num) + 1f;
-            double? dnum = Double.Parse(num, NumberStyles.Float | NumberStyles.AllowThousands, NumberFormatInfo.InvariantInfo) + 1;
+            int? inum = int.Parse(num) + 3;
+            long? lnum = long.Parse(num);
+            float? fnum = float.Parse(num) + 1f;
+            double? dnum = double.Parse(num) + 1;
         }
 
         public static async Task StringTestAsync(List<string> args)
@@ -374,20 +374,20 @@ namespace Darabonba.Test
             args = fullStr.Split(",").ToList();
             if ((fullStr.Length > 0) && fullStr.Contains("hangzhou"))
             {
-                string newStr1 = StringUtil.Replace(fullStr, "/hangzhou/g", "beijing");
+                string newStr1 = StringUtils.Replace(fullStr, "/hangzhou/g", "beijing");
             }
             if (fullStr.StartsWith("cn"))
             {
-                string newStr2 = StringUtil.Replace(fullStr, "/cn/gi", "zh");
+                string newStr2 = StringUtils.Replace(fullStr, "/cn/gi", "zh");
             }
-            if (fullStr.StartsWith("beijing"))
+            if (fullStr.EndsWith("beijing"))
             {
-                string newStr3 = StringUtil.Replace(fullStr, "/beijing/", "chengdu");
+                string newStr3 = StringUtils.Replace(fullStr, "/beijing/", "chengdu");
             }
             int? start = fullStr.IndexOf("beijing");
             int? end = start + 7;
-            string region = StringUtil.SubString(fullStr, start, end);
-            string region1 = StringUtil.SubString(fullStr, 2, 10);
+            string region = StringUtils.SubString(fullStr, start, end);
+            string region1 = StringUtils.SubString(fullStr, 2, 10);
             string lowerRegion = region.ToLower();
             string upperRegion = region.ToUpper();
             if (region == "beijing")
@@ -395,17 +395,17 @@ namespace Darabonba.Test
                 region = region + " ";
                 region = region.Trim();
             }
-            byte[] tb = StringUtil.ToBytes(fullStr, "utf8");
+            byte[] tb = StringUtils.ToBytes(fullStr, "utf8");
             string em = "xxx";
             if (String.IsNullOrEmpty(em))
             {
                 return ;
             }
             string num = "32.01";
-            int? inum = StringUtil.ParseInt(num) + 3;
-            long? lnum = StringUtil.ParseLong(num);
-            float? fnum = StringUtil.ParseFloat(num) + 1f;
-            double? dnum = Double.Parse(num, NumberStyles.Float | NumberStyles.AllowThousands, NumberFormatInfo.InvariantInfo) + 1;
+            int? inum = int.Parse(num) + 3;
+            long? lnum = long.Parse(num);
+            float? fnum = float.Parse(num) + 1f;
+            double? dnum = double.Parse(num) + 1;
         }
 
         public static void ArrayTest(List<string> args)
@@ -415,10 +415,10 @@ namespace Darabonba.Test
                 int? index = args.IndexOf("cn-hanghzou");
                 string regionId = args[index.Value];
                 string all = string.Join(",", args);
-                string first = ListUtil.Shift(args);
-                string last = ListUtil.Pop(args);
-                int? length1 = ListUtil.Unshift(args, first);
-                int? length2 = ListUtil.Push(args, last);
+                string first = ListUtils.Shift(args);
+                string last = ListUtils.Pop(args);
+                int? length1 = ListUtils.Unshift(args, first);
+                int? length2 = ListUtils.Push(args, last);
                 int? length3 = length1 + length2;
                 string longStr = "long" + first + last;
                 string fullStr = string.Join(",", args);
@@ -426,10 +426,10 @@ namespace Darabonba.Test
                 {
                     "test"
                 };
-                List<string> cArr = ListUtil.Concat(newArr, args);
-                List<string> acsArr = ListUtil.Sort(newArr, "acs");
-                List<string> descArr = ListUtil.Sort(newArr, "desc");
-                List<string> llArr = ListUtil.Concat(acsArr, descArr);
+                List<string> cArr = ListUtils.Concat(newArr, args);
+                List<string> acsArr = ListUtils.Sort(newArr, "acs");
+                List<string> descArr = ListUtils.Sort(newArr, "desc");
+                List<string> llArr = ListUtils.Concat(acsArr, descArr);
                 llArr.Insert(10, "test");
                 llArr.RemoveAt(llArr.IndexOf("test"));
             }
@@ -442,10 +442,10 @@ namespace Darabonba.Test
                 int? index = args.IndexOf("cn-hanghzou");
                 string regionId = args[index.Value];
                 string all = string.Join(",", args);
-                string first = ListUtil.Shift(args);
-                string last = ListUtil.Pop(args);
-                int? length1 = ListUtil.Unshift(args, first);
-                int? length2 = ListUtil.Push(args, last);
+                string first = ListUtils.Shift(args);
+                string last = ListUtils.Pop(args);
+                int? length1 = ListUtils.Unshift(args, first);
+                int? length2 = ListUtils.Push(args, last);
                 int? length3 = length1 + length2;
                 string longStr = "long" + first + last;
                 string fullStr = string.Join(",", args);
@@ -453,10 +453,10 @@ namespace Darabonba.Test
                 {
                     "test"
                 };
-                List<string> cArr = ListUtil.Concat(newArr, args);
-                List<string> acsArr = ListUtil.Sort(newArr, "acs");
-                List<string> descArr = ListUtil.Sort(newArr, "desc");
-                List<string> llArr = ListUtil.Concat(acsArr, descArr);
+                List<string> cArr = ListUtils.Concat(newArr, args);
+                List<string> acsArr = ListUtils.Sort(newArr, "acs");
+                List<string> descArr = ListUtils.Sort(newArr, "desc");
+                List<string> llArr = ListUtils.Concat(acsArr, descArr);
                 llArr.Insert(10, "test");
                 llArr.RemoveAt(llArr.IndexOf("test"));
             }
@@ -475,11 +475,12 @@ namespace Darabonba.Test
                     {"key6", "321"},
                 }},
             };
-            DaraCore.Sleep(10);
-            string ms = JSONUtil.SerializeObject(m);
+            Thread.Sleep(10);
+            string ms = JSONUtils.SerializeObject(m);
             object ma = JsonConvert.DeserializeObject(ms);
             string arrStr = "[1,2,3,4]";
             object arr = JsonConvert.DeserializeObject(arrStr);
+            object res = JSONUtils.readPath(m, "$.key4.key5");
         }
 
         public static async Task JsonTestAsync(List<string> args)
@@ -495,11 +496,12 @@ namespace Darabonba.Test
                     {"key6", "321"},
                 }},
             };
-            await DaraCore.SleepAsync(10);
-            string ms = JSONUtil.SerializeObject(m);
+            await Task.Delay(10);
+            string ms = JSONUtils.SerializeObject(m);
             object ma = JsonConvert.DeserializeObject(ms);
             string arrStr = "[1,2,3,4]";
             object arr = JsonConvert.DeserializeObject(arrStr);
+            object res = JSONUtils.readPath(m, "$.key4.key5");
         }
 
         public static object ReturnAny()
@@ -507,24 +509,24 @@ namespace Darabonba.Test
             throw new NotImplementedException();
         }
 
-        public static void Main(string[] args)
+        public static void Main(List<string> args)
         {
-            int? a = ConverterUtil.ParseInt(args[0]) + 10;
+            int? a = (int?)(args[0]) + 10;
             string b = (string)a + args[1] + (string)ReturnAny();
-            int? c = ConverterUtil.ParseInt(b) + ConverterUtil.ParseInt(a) + ConverterUtil.ParseInt(ReturnAny());
-            int? d = ConverterUtil.ParseInt(b) + ConverterUtil.ParseInt(a) + ConverterUtil.ParseInt(ReturnAny());
-            int? e = ConverterUtil.ParseInt(b) + ConverterUtil.ParseInt(a) + ConverterUtil.ParseInt(ReturnAny());
-            int? f = ConverterUtil.ParseInt(b) + ConverterUtil.ParseInt(a) + ConverterUtil.ParseInt(ReturnAny());
-            long? g = ConverterUtil.ParseLong(b) + ConverterUtil.ParseLong(a) + ConverterUtil.ParseLong(ReturnAny());
-            long? h = ConverterUtil.ParseLong(b) + ConverterUtil.ParseLong(a) + ConverterUtil.ParseLong(ReturnAny());
-            ulong? i = ConverterUtil.ParseLong(b) + ConverterUtil.ParseLong(a) + ConverterUtil.ParseLong(ReturnAny());
-            uint? j = ConverterUtil.ParseInt(b) + ConverterUtil.ParseInt(a) + ConverterUtil.ParseInt(ReturnAny());
-            uint? k = ConverterUtil.ParseInt(b) + ConverterUtil.ParseInt(a) + ConverterUtil.ParseInt(ReturnAny());
-            uint? l = ConverterUtil.ParseInt(b) + ConverterUtil.ParseInt(a) + ConverterUtil.ParseInt(ReturnAny());
-            ulong? m = ConverterUtil.ParseLong(b) + ConverterUtil.ParseLong(a) + ConverterUtil.ParseLong(ReturnAny());
-            float? n = ConverterUtil.ParseFloat(b) + ConverterUtil.ParseFloat(a) + ConverterUtil.ParseFloat(ReturnAny());
-            double? o = Double.Parse(b.ToString()) + Double.Parse(a.ToString()) + Double.Parse(ReturnAny().ToString());
-            if ((bool)(args[2]))
+            int? c = (int?)(b) + (int?)(a) + (int?)(ReturnAny());
+            sbyte? d = (sbyte?)b + (sbyte?)a + (sbyte?)ReturnAny();
+            short? e = (short?)b + (short?)a + (short?)ReturnAny();
+            int? f = (int?)(b) + (int?)(a) + (int?)(ReturnAny());
+            long? g = (long?)b + (long?)a + (long?)ReturnAny();
+            long? h = (long?)b + (long?)a + (long?)ReturnAny();
+            ulong? i = (ulong?)b + (ulong?)a + (ulong?)ReturnAny();
+            byte? j = (byte?)b + (byte?)a + (byte?)ReturnAny();
+            ushort? k = (ushort?)b + (ushort?)a + (ushort?)ReturnAny();
+            uint? l = (uint?)b + (uint?)a + (uint?)ReturnAny();
+            ulong? m = (ulong?)b + (ulong?)a + (ulong?)ReturnAny();
+            float? n = (float?)b + (float?)a + (float?)ReturnAny();
+            double? o = (double?)b + (double?)a + (double?)ReturnAny();
+            if ((bool?)args[2])
             {
                 // bytes 强转只允许传字符串
                 byte[] data = (byte[])(b);
@@ -534,53 +536,98 @@ namespace Darabonba.Test
                 {
                     {"key", "value"},
                 };
-                Dictionary<string, object> obj = DaraCore.ToObject(maps);
+                Dictionary<string, object> obj = Core.ToObject(maps);
                 Stream ws = (Stream)obj;
-                Stream rs = ConverterUtil.ToStream(maps);
-                data = StreamUtil.Read(rs, 30);
+                Stream rs = StreamUtils.BytesReadable(maps);
+                data = StreamUtils.Read(rs, 30);
                 if (!data.IsNull())
                 {
                     ws.Write(data, 0, data.Length);
                 }
             }
-            DaraCore.Sleep(a.Value);
-            string defaultVal = (string)(args[0] ?? args[1]);
+            string defaultVal = (string)Core.GetDefaultValue(args[0], args[1]);
             if (defaultVal == b)
             {
                 return ;
+            }
+            // test binaryOp
+            if ((string)(d > 0))
+            {
+            }
+            if (!((bool?)args[2] || (bool?)args[0]).IsNull())
+            {
+            }
+            if ((sbyte?)(c + d) > 0)
+            {
+            }
+            if ((short?)(c + d) > 0)
+            {
+            }
+            if ((int?)(c + d) > 0)
+            {
+            }
+            if ((long?)(c + d) > 0)
+            {
+            }
+            if ((byte?)(c + d) > 0)
+            {
+            }
+            if ((ushort?)(c + d) > 0)
+            {
+            }
+            if ((uint?)(c + d) > 0)
+            {
+            }
+            if ((ulong?)(c + d) > 0)
+            {
+            }
+            if ((long?)(c + d) > 0)
+            {
+            }
+            if ((ulong?)(c + d) > 0)
+            {
+            }
+            if ((float?)(n + n) > 0f)
+            {
+            }
+            if ((double?)(o + o) > 0)
+            {
+            }
+            if ((bool?)(c + d))
+            {
             }
         }
 
         public static void BytesTest(List<string> args)
         {
             string fullStr = string.Join(",", args);
-            byte[] data = StringUtil.ToBytes(fullStr, "utf8");
+            byte[] data = StringUtils.ToBytes(fullStr, "utf8");
             string newFullStr = Encoding.UTF8.GetString(data);
             if (fullStr != newFullStr)
             {
                 return ;
             }
-            string hexStr = BytesUtil.ToHex(data);
+            string hexStr = BytesUtils.ToHex(data);
             string base64Str = Convert.ToBase64String(data);
             int? length = data.Length;
             string obj = Encoding.UTF8.GetString(data);
-            byte[] data2 = BytesUtil.From(base64Str, "base64");
+            byte[] data2 = BytesUtils.From(base64Str, "base64");
         }
 
         public static async Task BytesTestAsync(List<string> args)
         {
             string fullStr = string.Join(",", args);
-            byte[] data = StringUtil.ToBytes(fullStr, "utf8");
+            byte[] data = StringUtils.ToBytes(fullStr, "utf8");
             string newFullStr = Encoding.UTF8.GetString(data);
             if (fullStr != newFullStr)
             {
                 return ;
             }
-            string hexStr = BytesUtil.ToHex(data);
+            string hexStr = BytesUtils.ToHex(data);
             string base64Str = Convert.ToBase64String(data);
             int? length = data.Length;
             string obj = Encoding.UTF8.GetString(data);
-            byte[] data2 = BytesUtil.From(base64Str, "base64");
+            byte[] data2 = BytesUtils.From(base64Str, "base64");
         }
 
         public static void MapTestCase(List<string> args)
@@ -613,7 +660,7 @@ namespace Darabonba.Test
                 {"key1", "value4"},
                 {"key4", "value5"},
             };
-            Dictionary<string, object> mapTest3 = ConverterUtil.Merge(mapTest , mapTest2);
+            Dictionary<string, object> mapTest3 = ConverterUtils.Merge(mapTest , mapTest2);
             if (mapTest3.Get("key1") == "value4")
             {
                 return ;
@@ -650,11 +697,31 @@ namespace Darabonba.Test
                 {"key1", "value4"},
                 {"key4", "value5"},
             };
-            Dictionary<string, object> mapTest3 = ConverterUtil.Merge(mapTest , mapTest2);
+            Dictionary<string, object> mapTest3 = ConverterUtils.Merge(mapTest , mapTest2);
             if (mapTest3.Get("key1") == "value4")
             {
                 return ;
             }
+        }
+
+        public static void ModelTestCase(List<string> args)
+        {
+            Test test = new Test
+            {
+                Name = "test",
+            };
+            Dictionary<string, object> testMap = test.ToMap();
+            int? len = testMap.Count;
+        }
+
+        public static async Task ModelTestCaseAsync(List<string> args)
+        {
+            Test test = new Test
+            {
+                Name = "test",
+            };
+            Dictionary<string, object> testMap = test.ToMap();
+            int? len = testMap.Count;
         }
 
     }

@@ -7,13 +7,11 @@ using System.Collections.Generic;
 
 namespace Darabonba.Test.Exceptions
 {
-    public class ExtendFileException : FileException {
+    public class ExtendFileException : FileException
+    {
         public string Key1 { get; set; }
         public string Key2 { get; set; }
 
-        public ExtendFileException() : base()
-        {
-        }
     }
 
 }

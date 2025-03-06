@@ -159,7 +159,7 @@ static async function stringTest(args: [string]): void {
         var newStr2 = fullStr.replace('/cn/gi', 'zh');
     }
 
-    if (fullStr.hasPrefix('beijing')) {
+    if (fullStr.hasSuffix('beijing')) {
         var newStr3 = fullStr.replace('/beijing/', 'chengdu');
     }
 
@@ -229,6 +229,7 @@ static async function jsonTest(args: [string]): void {
     var ma = $JSON.parseJSON(ms);
     var arrStr = '[1,2,3,4]';
     var arr = $JSON.parseJSON(arrStr);
+    var res = $JSON.readPath(m, '$.key4.key5');
 }
 
 static function returnAny(): any;
@@ -266,12 +267,28 @@ static function main(args: [string]): void {
         }
     }
 
-    $sleep(a);
     var defaultVal = $string($default(args[0], args[1]));
 
     if ($equal(defaultVal, b)) {
         return;
     }
+
+    // test binaryOp
+    if ($string(d > 0)) {}
+    if (!$isNull($boolean(args[2]) || $boolean(args[0]))) {}
+    if ($int8(c + d) > 0) {}
+    if ($int16(c + d) > 0) {}
+    if ($int32(c + d) > 0) {}
+    if ($int64(c + d) > 0) {}
+    if ($uint8(c + d) > 0) {}
+    if ($uint16(c + d) > 0) {}
+    if ($uint32(c + d) > 0) {}
+    if ($uint64(c + d) > 0) {}
+    if ($long(c + d) > 0) {}
+    if ($ulong(c + d) > 0) {}
+    if ($float(n + n) > 0f) {}
+    if ($double(o + o) > 0d) {}
+    if ($boolean(c + d)) {}
 }
 
 static async function bytesTest(args: [string]): void {
@@ -326,3 +343,15 @@ static async function mapTestCase(args: [string]): void {
         return;
     }
 }
+
+static async function modelTestCase(args: [string]): void {
+    var test = new Test {
+        name = 'test',
+    };
+    var testMap = test.toMap();
+    var len = testMap.length();
+}
+
+model Test = {
+  name: string
+};

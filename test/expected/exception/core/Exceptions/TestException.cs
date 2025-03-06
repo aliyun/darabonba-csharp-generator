@@ -7,12 +7,10 @@ using System.Collections.Generic;
 
 namespace Darabonba.Test.Exceptions
 {
-    public class TestException : FileException {
+    public class TestException : FileException
+    {
         public long? RetryAfter { get; set; }
 
-        public TestException() : base()
-        {
-        }
     }
 
 }

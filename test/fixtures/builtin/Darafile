@@ -4,6 +4,17 @@
   "version": "0.0.1",
   "main": "./main.dara",
   "csharp": {
-    "namespace": "Darabonba.Test"
+    "namespace": "Darabonba.Test",
+    "version": "2.0.0",
+    "packageManager": {
+      "Darabonba": "1.0.0-preview"
+    },
+    "packageInfo": {
+      "name": "builtin",
+      "version": "2.0.0"
+    },
+    "maintainers": {
+      "name": "Alibaba Cloud"
+    }
   }
 }

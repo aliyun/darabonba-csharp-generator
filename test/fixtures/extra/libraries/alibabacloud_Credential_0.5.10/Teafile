@@ -1,0 +1,66 @@
+{
+  "scope": "alibabacloud",
+  "version": "0.5.10",
+  "name": "Credential",
+  "main": "./credential.tea",
+  "libraries": {},
+  "manual": 1,
+  "releases": {
+    "java": "com.aliyun:credentials-java:0.3.10",
+    "go": "github.com/aliyun/credentials-go/credentials:v1.3.10",
+    "ts": "@alicloud/credentials:^2.3.1",
+    "csharp": "Aliyun.Credentials:1.4.2",
+    "php": "alibabacloud/credentials:^1.1",
+    "python": "alibabacloud_credentials:0.3.5",
+    "python2": "alibabacloud_credentials_py2:0.1.1",
+    "swift": "aliyun/credentials-swift:1.0.1",
+    "cpp": "aliyun/credentials-cpp:master"
+  },
+  "go": {
+    "clientName": "Credential"
+  },
+  "java": {
+    "package": "com.aliyun.credentials"
+  },
+  "python": {
+    "package": "alibabacloud_credentials",
+    "clientName": "client"
+  },
+  "python2": {
+    "package": "alibabacloud_credentials",
+    "clientName": "client"
+  },
+  "csharp": {
+    "namespace": "Aliyun.Credentials"
+  },
+  "php": {
+    "package": "AlibabaCloud.Credentials",
+    "clientName": "Credential",
+    "modelDirName": "Credential"
+  },
+  "swift": {
+    "clientName": "Client",
+    "packageInfo": {
+      "name": "AlibabaCloudCredentials",
+      "desc": "Alibaba Cloud Credentials for Swift(5.6)",
+      "github": "https://github.com/aliyun/credentials-swift",
+      "author": "Alibaba Cloud SDK",
+      "email": "sdk-team@alibabacloud.com"
+    }
+  },
+  "cpp": {
+    "withTest": 1,
+    "packageInfo": {
+      "git": {
+        "scope": "aliyun",
+        "project": "credentials-cpp"
+      }
+    }
+  },
+  "releaselog": {
+    "changelog": [
+      "[go]support external id for ram role arn credential."
+    ],
+    "compatible": true
+  }
+}
