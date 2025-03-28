@@ -8,6 +8,9 @@
       "LocalSource": "./localLib"
     },
     "csharp":{
-      "namespace":"Darabonba.Test"
+      "namespace":"Darabonba.Test",
+      "packageInfo": {
+        "version": "1.0.0"
+      }
     }
 }
