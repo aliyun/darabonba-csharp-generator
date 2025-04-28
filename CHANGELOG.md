@@ -1,5 +1,8 @@
 # ChangeLog
 
+## 2.0.0 - 2025-04-28
+> Upgrade the generator by darbonba v2.
+
 ## 1.2.1 - 2024-10-18
 > Support manage package in Darafile
 > Solve line-break in deprecated annotation
