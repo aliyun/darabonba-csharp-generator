@@ -249,7 +249,7 @@ namespace AlibabaCloud.OpenApiClient
                     Dictionary<string, string> headers = GetRpcHeaders();
                     if (headers.IsNull())
                     {
-                        // endpoint is set in product client
+                        // endpoint is setted in product client
                         request_.Headers = ConverterUtils.Merge<string>
                         (
                             new Dictionary<string, string>()
@@ -348,6 +348,7 @@ namespace AlibabaCloud.OpenApiClient
                                 Message = "code: " + response_.StatusCode + ", " + Core.GetDefaultValue(err.Get("Message"), err.Get("message")) + " request id: " + requestId,
                                 Description = "" + Core.GetDefaultValue(err.Get("Description"), err.Get("description")),
                                 RetryAfter = Utils.GetThrottlingTimeLeft(response_.Headers),
+                                Data = err,
                                 RequestId = "" + requestId,
                             };
                         }
@@ -359,6 +360,7 @@ namespace AlibabaCloud.OpenApiClient
                                 Code = "" + code,
                                 Message = "code: " + response_.StatusCode + ", " + Core.GetDefaultValue(err.Get("Message"), err.Get("message")) + " request id: " + requestId,
                                 Description = "" + Core.GetDefaultValue(err.Get("Description"), err.Get("description")),
+                                Data = err,
                                 AccessDeniedDetail = GetAccessDeniedDetail(err),
                                 RequestId = "" + requestId,
                             };
@@ -371,6 +373,7 @@ namespace AlibabaCloud.OpenApiClient
                                 Code = "" + code,
                                 Message = "code: " + response_.StatusCode + ", " + Core.GetDefaultValue(err.Get("Message"), err.Get("message")) + " request id: " + requestId,
                                 Description = "" + Core.GetDefaultValue(err.Get("Description"), err.Get("description")),
+                                Data = err,
                                 RequestId = "" + requestId,
                             };
                         }
@@ -397,10 +400,10 @@ namespace AlibabaCloud.OpenApiClient
                     }
                     else if (bodyType == "string")
                     {
-                        string str = StreamUtils.ReadAsString(response_.Body);
+                        string _str = StreamUtils.ReadAsString(response_.Body);
                         return new Dictionary<string, object>
                         {
-                            {"body", str},
+                            {"body", _str},
                             {"headers", response_.Headers},
                             {"statusCode", response_.StatusCode},
                         };
@@ -575,7 +578,7 @@ namespace AlibabaCloud.OpenApiClient
                     Dictionary<string, string> headers = GetRpcHeaders();
                     if (headers.IsNull())
                     {
-                        // endpoint is set in product client
+                        // endpoint is setted in product client
                         request_.Headers = ConverterUtils.Merge<string>
                         (
                             new Dictionary<string, string>()
@@ -674,6 +677,7 @@ namespace AlibabaCloud.OpenApiClient
                                 Message = "code: " + response_.StatusCode + ", " + Core.GetDefaultValue(err.Get("Message"), err.Get("message")) + " request id: " + requestId,
                                 Description = "" + Core.GetDefaultValue(err.Get("Description"), err.Get("description")),
                                 RetryAfter = Utils.GetThrottlingTimeLeft(response_.Headers),
+                                Data = err,
                                 RequestId = "" + requestId,
                             };
                         }
@@ -685,6 +689,7 @@ namespace AlibabaCloud.OpenApiClient
                                 Code = "" + code,
                                 Message = "code: " + response_.StatusCode + ", " + Core.GetDefaultValue(err.Get("Message"), err.Get("message")) + " request id: " + requestId,
                                 Description = "" + Core.GetDefaultValue(err.Get("Description"), err.Get("description")),
+                                Data = err,
                                 AccessDeniedDetail = GetAccessDeniedDetail(err),
                                 RequestId = "" + requestId,
                             };
@@ -697,6 +702,7 @@ namespace AlibabaCloud.OpenApiClient
                                 Code = "" + code,
                                 Message = "code: " + response_.StatusCode + ", " + Core.GetDefaultValue(err.Get("Message"), err.Get("message")) + " request id: " + requestId,
                                 Description = "" + Core.GetDefaultValue(err.Get("Description"), err.Get("description")),
+                                Data = err,
                                 RequestId = "" + requestId,
                             };
                         }
@@ -723,10 +729,10 @@ namespace AlibabaCloud.OpenApiClient
                     }
                     else if (bodyType == "string")
                     {
-                        string str = StreamUtils.ReadAsString(response_.Body);
+                        string _str = StreamUtils.ReadAsString(response_.Body);
                         return new Dictionary<string, object>
                         {
-                            {"body", str},
+                            {"body", _str},
                             {"headers", response_.Headers},
                             {"statusCode", response_.StatusCode},
                         };
@@ -982,6 +988,7 @@ namespace AlibabaCloud.OpenApiClient
                                 Message = "code: " + response_.StatusCode + ", " + Core.GetDefaultValue(err.Get("Message"), err.Get("message")) + " request id: " + requestId,
                                 Description = "" + Core.GetDefaultValue(err.Get("Description"), err.Get("description")),
                                 RetryAfter = Utils.GetThrottlingTimeLeft(response_.Headers),
+                                Data = err,
                                 RequestId = "" + requestId,
                             };
                         }
@@ -993,6 +1000,7 @@ namespace AlibabaCloud.OpenApiClient
                                 Code = "" + code,
                                 Message = "code: " + response_.StatusCode + ", " + Core.GetDefaultValue(err.Get("Message"), err.Get("message")) + " request id: " + requestId,
                                 Description = "" + Core.GetDefaultValue(err.Get("Description"), err.Get("description")),
+                                Data = err,
                                 AccessDeniedDetail = GetAccessDeniedDetail(err),
                                 RequestId = "" + requestId,
                             };
@@ -1005,6 +1013,7 @@ namespace AlibabaCloud.OpenApiClient
                                 Code = "" + code,
                                 Message = "code: " + response_.StatusCode + ", " + Core.GetDefaultValue(err.Get("Message"), err.Get("message")) + " request id: " + requestId,
                                 Description = "" + Core.GetDefaultValue(err.Get("Description"), err.Get("description")),
+                                Data = err,
                                 RequestId = "" + requestId,
                             };
                         }
@@ -1031,10 +1040,10 @@ namespace AlibabaCloud.OpenApiClient
                     }
                     else if (bodyType == "string")
                     {
-                        string str = StreamUtils.ReadAsString(response_.Body);
+                        string _str = StreamUtils.ReadAsString(response_.Body);
                         return new Dictionary<string, object>
                         {
-                            {"body", str},
+                            {"body", _str},
                             {"headers", response_.Headers},
                             {"statusCode", response_.StatusCode},
                         };
@@ -1290,6 +1299,7 @@ namespace AlibabaCloud.OpenApiClient
                                 Message = "code: " + response_.StatusCode + ", " + Core.GetDefaultValue(err.Get("Message"), err.Get("message")) + " request id: " + requestId,
                                 Description = "" + Core.GetDefaultValue(err.Get("Description"), err.Get("description")),
                                 RetryAfter = Utils.GetThrottlingTimeLeft(response_.Headers),
+                                Data = err,
                                 RequestId = "" + requestId,
                             };
                         }
@@ -1301,6 +1311,7 @@ namespace AlibabaCloud.OpenApiClient
                                 Code = "" + code,
                                 Message = "code: " + response_.StatusCode + ", " + Core.GetDefaultValue(err.Get("Message"), err.Get("message")) + " request id: " + requestId,
                                 Description = "" + Core.GetDefaultValue(err.Get("Description"), err.Get("description")),
+                                Data = err,
                                 AccessDeniedDetail = GetAccessDeniedDetail(err),
                                 RequestId = "" + requestId,
                             };
@@ -1313,6 +1324,7 @@ namespace AlibabaCloud.OpenApiClient
                                 Code = "" + code,
                                 Message = "code: " + response_.StatusCode + ", " + Core.GetDefaultValue(err.Get("Message"), err.Get("message")) + " request id: " + requestId,
                                 Description = "" + Core.GetDefaultValue(err.Get("Description"), err.Get("description")),
+                                Data = err,
                                 RequestId = "" + requestId,
                             };
                         }
@@ -1339,10 +1351,10 @@ namespace AlibabaCloud.OpenApiClient
                     }
                     else if (bodyType == "string")
                     {
-                        string str = StreamUtils.ReadAsString(response_.Body);
+                        string _str = StreamUtils.ReadAsString(response_.Body);
                         return new Dictionary<string, object>
                         {
-                            {"body", str},
+                            {"body", _str},
                             {"headers", response_.Headers},
                             {"statusCode", response_.StatusCode},
                         };
@@ -1598,6 +1610,7 @@ namespace AlibabaCloud.OpenApiClient
                                 Message = "code: " + response_.StatusCode + ", " + Core.GetDefaultValue(err.Get("Message"), err.Get("message")) + " request id: " + requestId,
                                 Description = "" + Core.GetDefaultValue(err.Get("Description"), err.Get("description")),
                                 RetryAfter = Utils.GetThrottlingTimeLeft(response_.Headers),
+                                Data = err,
                                 RequestId = "" + requestId,
                             };
                         }
@@ -1609,6 +1622,7 @@ namespace AlibabaCloud.OpenApiClient
                                 Code = "" + code,
                                 Message = "code: " + response_.StatusCode + ", " + Core.GetDefaultValue(err.Get("Message"), err.Get("message")) + " request id: " + requestId,
                                 Description = "" + Core.GetDefaultValue(err.Get("Description"), err.Get("description")),
+                                Data = err,
                                 AccessDeniedDetail = GetAccessDeniedDetail(err),
                                 RequestId = "" + requestId,
                             };
@@ -1621,6 +1635,7 @@ namespace AlibabaCloud.OpenApiClient
                                 Code = "" + code,
                                 Message = "code: " + response_.StatusCode + ", " + Core.GetDefaultValue(err.Get("Message"), err.Get("message")) + " request id: " + requestId,
                                 Description = "" + Core.GetDefaultValue(err.Get("Description"), err.Get("description")),
+                                Data = err,
                                 RequestId = "" + requestId,
                             };
                         }
@@ -1647,10 +1662,10 @@ namespace AlibabaCloud.OpenApiClient
                     }
                     else if (bodyType == "string")
                     {
-                        string str = StreamUtils.ReadAsString(response_.Body);
+                        string _str = StreamUtils.ReadAsString(response_.Body);
                         return new Dictionary<string, object>
                         {
-                            {"body", str},
+                            {"body", _str},
                             {"headers", response_.Headers},
                             {"statusCode", response_.StatusCode},
                         };
@@ -1906,6 +1921,7 @@ namespace AlibabaCloud.OpenApiClient
                                 Message = "code: " + response_.StatusCode + ", " + Core.GetDefaultValue(err.Get("Message"), err.Get("message")) + " request id: " + requestId,
                                 Description = "" + Core.GetDefaultValue(err.Get("Description"), err.Get("description")),
                                 RetryAfter = Utils.GetThrottlingTimeLeft(response_.Headers),
+                                Data = err,
                                 RequestId = "" + requestId,
                             };
                         }
@@ -1917,6 +1933,7 @@ namespace AlibabaCloud.OpenApiClient
                                 Code = "" + code,
                                 Message = "code: " + response_.StatusCode + ", " + Core.GetDefaultValue(err.Get("Message"), err.Get("message")) + " request id: " + requestId,
                                 Description = "" + Core.GetDefaultValue(err.Get("Description"), err.Get("description")),
+                                Data = err,
                                 AccessDeniedDetail = GetAccessDeniedDetail(err),
                                 RequestId = "" + requestId,
                             };
@@ -1929,6 +1946,7 @@ namespace AlibabaCloud.OpenApiClient
                                 Code = "" + code,
                                 Message = "code: " + response_.StatusCode + ", " + Core.GetDefaultValue(err.Get("Message"), err.Get("message")) + " request id: " + requestId,
                                 Description = "" + Core.GetDefaultValue(err.Get("Description"), err.Get("description")),
+                                Data = err,
                                 RequestId = "" + requestId,
                             };
                         }
@@ -1955,10 +1973,10 @@ namespace AlibabaCloud.OpenApiClient
                     }
                     else if (bodyType == "string")
                     {
-                        string str = StreamUtils.ReadAsString(response_.Body);
+                        string _str = StreamUtils.ReadAsString(response_.Body);
                         return new Dictionary<string, object>
                         {
-                            {"body", str},
+                            {"body", _str},
                             {"headers", response_.Headers},
                             {"statusCode", response_.StatusCode},
                         };
@@ -2255,6 +2273,7 @@ namespace AlibabaCloud.OpenApiClient
                                 Message = "code: " + response_.StatusCode + ", " + Core.GetDefaultValue(err.Get("Message"), err.Get("message")) + " request id: " + requestId,
                                 Description = "" + Core.GetDefaultValue(err.Get("Description"), err.Get("description")),
                                 RetryAfter = Utils.GetThrottlingTimeLeft(response_.Headers),
+                                Data = err,
                                 RequestId = "" + requestId,
                             };
                         }
@@ -2266,6 +2285,7 @@ namespace AlibabaCloud.OpenApiClient
                                 Code = "" + code,
                                 Message = "code: " + response_.StatusCode + ", " + Core.GetDefaultValue(err.Get("Message"), err.Get("message")) + " request id: " + requestId,
                                 Description = "" + Core.GetDefaultValue(err.Get("Description"), err.Get("description")),
+                                Data = err,
                                 AccessDeniedDetail = GetAccessDeniedDetail(err),
                                 RequestId = "" + requestId,
                             };
@@ -2278,6 +2298,7 @@ namespace AlibabaCloud.OpenApiClient
                                 Code = "" + code,
                                 Message = "code: " + response_.StatusCode + ", " + Core.GetDefaultValue(err.Get("Message"), err.Get("message")) + " request id: " + requestId,
                                 Description = "" + Core.GetDefaultValue(err.Get("Description"), err.Get("description")),
+                                Data = err,
                                 RequestId = "" + requestId,
                             };
                         }
@@ -2304,10 +2325,10 @@ namespace AlibabaCloud.OpenApiClient
                     }
                     else if (params_.BodyType == "string")
                     {
-                        string str = StreamUtils.ReadAsString(response_.Body);
+                        string respStr = StreamUtils.ReadAsString(response_.Body);
                         return new Dictionary<string, object>
                         {
-                            {"body", str},
+                            {"body", respStr},
                             {"headers", response_.Headers},
                             {"statusCode", response_.StatusCode},
                         };
@@ -2606,6 +2627,7 @@ namespace AlibabaCloud.OpenApiClient
                                 Message = "code: " + response_.StatusCode + ", " + Core.GetDefaultValue(err.Get("Message"), err.Get("message")) + " request id: " + requestId,
                                 Description = "" + Core.GetDefaultValue(err.Get("Description"), err.Get("description")),
                                 RetryAfter = Utils.GetThrottlingTimeLeft(response_.Headers),
+                                Data = err,
                                 RequestId = "" + requestId,
                             };
                         }
@@ -2617,6 +2639,7 @@ namespace AlibabaCloud.OpenApiClient
                                 Code = "" + code,
                                 Message = "code: " + response_.StatusCode + ", " + Core.GetDefaultValue(err.Get("Message"), err.Get("message")) + " request id: " + requestId,
                                 Description = "" + Core.GetDefaultValue(err.Get("Description"), err.Get("description")),
+                                Data = err,
                                 AccessDeniedDetail = GetAccessDeniedDetail(err),
                                 RequestId = "" + requestId,
                             };
@@ -2629,6 +2652,7 @@ namespace AlibabaCloud.OpenApiClient
                                 Code = "" + code,
                                 Message = "code: " + response_.StatusCode + ", " + Core.GetDefaultValue(err.Get("Message"), err.Get("message")) + " request id: " + requestId,
                                 Description = "" + Core.GetDefaultValue(err.Get("Description"), err.Get("description")),
+                                Data = err,
                                 RequestId = "" + requestId,
                             };
                         }
@@ -2655,10 +2679,10 @@ namespace AlibabaCloud.OpenApiClient
                     }
                     else if (params_.BodyType == "string")
                     {
-                        string str = StreamUtils.ReadAsString(response_.Body);
+                        string respStr = StreamUtils.ReadAsString(response_.Body);
                         return new Dictionary<string, object>
                         {
-                            {"body", str},
+                            {"body", respStr},
                             {"headers", response_.Headers},
                             {"statusCode", response_.StatusCode},
                         };
