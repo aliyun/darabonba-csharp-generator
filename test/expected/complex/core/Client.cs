@@ -85,7 +85,7 @@ namespace Darabonba.Test
                         {"date", "2019"},
                     };
                     Darabonba.Request reqInstance = request_;
-                    bool? boolItem = !_boolVirtual.Value;
+                    bool? boolItem = !_boolVirtual;
                     Darabonba.Response response_ = Core.DoAction(request_, runtime_);
                     _lastRequest = request_;
                     _lastResponse = response_;
@@ -182,7 +182,7 @@ namespace Darabonba.Test
                         {"date", "2019"},
                     };
                     Darabonba.Request reqInstance = request_;
-                    bool? boolItem = !_boolVirtual.Value;
+                    bool? boolItem = !_boolVirtual;
                     Darabonba.Response response_ = await Core.DoActionAsync(request_, runtime_);
                     _lastRequest = request_;
                     _lastResponse = response_;
