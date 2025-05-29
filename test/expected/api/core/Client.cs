@@ -28,6 +28,7 @@ namespace Darabonba.Test
         protected string _cert;
         protected string _ca;
         protected RetryOptions _retryOptions;
+        protected bool? _disableHttp2;
 
         public Client(Config config)
         {
@@ -229,6 +230,21 @@ namespace Darabonba.Test
             Darabonba.Response response_ = await Core.DoActionAsync(request_);
 
             return ;
+        }
+
+        public static object DefaultAny(object inputValue, object defaultValue)
+        {
+            return inputValue;
+        }
+
+        public object Execute(bool? param)
+        {
+            bool? test = !_disableHttp2;
+            if (_disableHttp2.Value)
+            {
+                return true;
+            }
+            return DefaultAny(_disableHttp2, false);
         }
 
         public Vno VnoPayCallBackNotifyEx()

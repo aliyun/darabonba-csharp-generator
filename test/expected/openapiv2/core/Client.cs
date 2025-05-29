@@ -2786,7 +2786,7 @@ namespace AlibabaCloud.OpenApiClient
                 {"maxIdleConns", (int?)(Core.GetDefaultValue(runtime.MaxIdleConns, _maxIdleConns))},
                 {"retryOptions", _retryOptions},
                 {"ignoreSSL", runtime.IgnoreSSL},
-                {"disableHttp2", (bool?)Core.GetDefaultValue(_disableHttp2.Value, false)},
+                {"disableHttp2", (bool?)Core.GetDefaultValue(_disableHttp2, false)},
             };
 
             RetryPolicyContext _retryPolicyContext = null;
@@ -2988,7 +2988,7 @@ namespace AlibabaCloud.OpenApiClient
                 {"maxIdleConns", (int?)(Core.GetDefaultValue(runtime.MaxIdleConns, _maxIdleConns))},
                 {"retryOptions", _retryOptions},
                 {"ignoreSSL", runtime.IgnoreSSL},
-                {"disableHttp2", (bool?)Core.GetDefaultValue(_disableHttp2.Value, false)},
+                {"disableHttp2", (bool?)Core.GetDefaultValue(_disableHttp2, false)},
             };
 
             RetryPolicyContext _retryPolicyContext = null;

@@ -12,6 +12,19 @@ type @key = string
 type @cert = string
 type @ca = string
 type @retryOptions = $RetryOptions
+type @disableHttp2 = boolean
+
+static function defaultAny(inputValue: any, defaultValue: any): any {
+  return inputValue;
+}
+
+function execute(param: boolean): any {
+  var test = !@disableHttp2;
+  if (@disableHttp2) {
+    return true;
+  }
+  return defaultAny(@disableHttp2, false);
+}
 
 model Config {
 }
