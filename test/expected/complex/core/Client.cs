@@ -76,7 +76,7 @@ namespace Darabonba.Test
                         {"date", "2019"},
                     };
                     TeaRequest reqInstance = request_;
-                    bool? boolItem = !_boolVirtual.Value;
+                    bool? boolItem = !_boolVirtual;
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -162,7 +162,7 @@ namespace Darabonba.Test
                         {"date", "2019"},
                     };
                     TeaRequest reqInstance = request_;
-                    bool? boolItem = !_boolVirtual.Value;
+                    bool? boolItem = !_boolVirtual;
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 

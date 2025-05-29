@@ -15,9 +15,11 @@ namespace Darabonba.Test
 {
     public class Client 
     {
+        protected bool? _disableHttp2;
 
         public Client(Config config)
         {
+            this._disableHttp2 = config.DisableHttp2;
         }
 
         public void Hello()
@@ -180,6 +182,21 @@ namespace Darabonba.Test
         public async Task<Vno> VnoPayCallBackNotifyExAsync()
         {
             return null;
+        }
+
+        public static object DefaultAny(object inputValue, object defaultValue)
+        {
+            return inputValue;
+        }
+
+        public object Execute(bool? param)
+        {
+            bool? test = !_disableHttp2;
+            if (_disableHttp2.Value)
+            {
+                return true;
+            }
+            return DefaultAny(_disableHttp2, false);
         }
 
     }
