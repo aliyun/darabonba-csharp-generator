@@ -20,7 +20,7 @@
   "devDependencies": {
     "eslint": "^8.55.0",
     "mocha": "^10.2.0",
-    "nyc": "^15.0.0",
+    "nyc": "^17.0.0",
     "expect.js": "^0.3.1",
     "marked": "6.0.0"
   },
