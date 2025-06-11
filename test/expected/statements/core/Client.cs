@@ -5,10 +5,8 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Darabonba;
 using Darabonba.Utils;
 using Darabonba.Test.Models;
-using Darabonba.Exceptions;
 
 namespace Darabonba.Test
 {
@@ -33,7 +31,7 @@ namespace Darabonba.Test
             {
                 request_.Headers["host"] = "www.test2.com";
             }
-            Darabonba.Response response_ = Core.DoAction(request_);
+            Darabonba.Response response_ = Darabonba.Core.DoAction(request_);
 
             HelloIf();
             return ;
@@ -53,7 +51,7 @@ namespace Darabonba.Test
             {
                 request_.Headers["host"] = "www.test2.com";
             }
-            Darabonba.Response response_ = await Core.DoActionAsync(request_);
+            Darabonba.Response response_ = await Darabonba.Core.DoActionAsync(request_);
 
             HelloIf();
             return ;
@@ -77,7 +75,7 @@ namespace Darabonba.Test
 
         public static void HelloThrow()
         {
-            throw new DaraException(new Dictionary<string, object>(){});
+            throw new Darabonba.Exceptions.DaraException(new Dictionary<string, object>(){});
         }
 
         public static void HelloForBreak()

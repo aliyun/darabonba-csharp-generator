@@ -4,11 +4,11 @@ using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using Darabonba.Exceptions;
+using Darabonba.Utils;
 
 namespace Darabonba.Test.Exceptions
 {
-    public class MainFileException : DaraException
+    public class MainFileException : Darabonba.Exceptions.DaraException
     {
         public int? Size { get; set; }
         public MainFileExceptionModel Model { get; set; }

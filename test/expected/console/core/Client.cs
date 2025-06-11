@@ -3,7 +3,6 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Darabonba;
 using Darabonba.Utils;
 using System.Net.Http;
 using System.Threading;
@@ -41,7 +40,7 @@ namespace Darabonba.Test
                 }},
             };
             Thread.Sleep(10);
-            string ms = JSONUtils.SerializeObject(m);
+            string ms = Darabonba.Utils.JSONUtils.SerializeObject(m);
             object ma = JsonConvert.DeserializeObject(ms);
             if (WaitForDiskAttached("test").Value)
             {
@@ -63,7 +62,7 @@ namespace Darabonba.Test
                 }},
             };
             await Task.Delay(10);
-            string ms = JSONUtils.SerializeObject(m);
+            string ms = Darabonba.Utils.JSONUtils.SerializeObject(m);
             object ma = JsonConvert.DeserializeObject(ms);
             if (WaitForDiskAttached("test").Value)
             {

@@ -5,9 +5,7 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Darabonba;
 using Darabonba.Utils;
-using Darabonba.RetryPolicy;
 using Darabonba.Test.Models;
 using AlibabaCloud.TeaUtil.Models;
 using AlibabaCloud.TeaUtil;
@@ -27,7 +25,7 @@ namespace Darabonba.Test
         protected string _key;
         protected string _cert;
         protected string _ca;
-        protected RetryOptions _retryOptions;
+        protected Darabonba.RetryPolicy.RetryOptions _retryOptions;
         protected bool? _disableHttp2;
 
         public Client(Config config)
@@ -43,7 +41,7 @@ namespace Darabonba.Test
             {
                 {"host", "www.test.com"},
             };
-            Darabonba.Response response_ = Core.DoAction(request_);
+            Darabonba.Response response_ = Darabonba.Core.DoAction(request_);
 
             return ;
         }
@@ -57,7 +55,7 @@ namespace Darabonba.Test
             {
                 {"host", "www.test.com"},
             };
-            Darabonba.Response response_ = await Core.DoActionAsync(request_);
+            Darabonba.Response response_ = await Darabonba.Core.DoActionAsync(request_);
 
             return ;
         }
@@ -81,24 +79,24 @@ namespace Darabonba.Test
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
 
-            RetryPolicyContext _retryPolicyContext = null;
+            Darabonba.RetryPolicy.RetryPolicyContext _retryPolicyContext = null;
             Darabonba.Request _lastRequest = null;
             Darabonba.Response _lastResponse = null;
             Exception _lastException = null;
             long _now = System.DateTime.Now.Millisecond;
             int _retriesAttempted = 0;
-            _retryPolicyContext = new RetryPolicyContext
+            _retryPolicyContext = new Darabonba.RetryPolicy.RetryPolicyContext
             {
                 RetriesAttempted = _retriesAttempted
             };
-            while (Core.ShouldRetry((RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
+            while (Darabonba.Core.ShouldRetry((Darabonba.RetryPolicy.RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
             {
                 if (_retriesAttempted > 0)
                 {
-                    int backoffTime = Core.GetBackoffDelay((RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
+                    int backoffTime = Darabonba.Core.GetBackoffDelay((Darabonba.RetryPolicy.RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
                     if (backoffTime > 0)
                     {
-                        Core.Sleep(backoffTime);
+                        Darabonba.Core.Sleep(backoffTime);
                     }
                 }
                 try
@@ -110,7 +108,7 @@ namespace Darabonba.Test
                     {
                         {"host", "www.test.com"},
                     };
-                    Darabonba.Response response_ = Core.DoAction(request_, runtime_);
+                    Darabonba.Response response_ = Darabonba.Core.DoAction(request_, runtime_);
                     _lastRequest = request_;
                     _lastResponse = response_;
 
@@ -120,7 +118,7 @@ namespace Darabonba.Test
                 {
                     _retriesAttempted++;
                     _lastException = e;
-                    _retryPolicyContext = new RetryPolicyContext
+                    _retryPolicyContext = new Darabonba.RetryPolicy.RetryPolicyContext
                     {
                         RetriesAttempted = _retriesAttempted,
                         Request = _lastRequest,
@@ -130,7 +128,7 @@ namespace Darabonba.Test
                 }
             }
 
-            throw Core.ThrowException(_retryPolicyContext);
+            throw Darabonba.Core.ThrowException(_retryPolicyContext);
         }
 
         public async Task<string> HelloRuntimeAsync(string bodyType, RuntimeOptions runtime)
@@ -152,24 +150,24 @@ namespace Darabonba.Test
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
 
-            RetryPolicyContext _retryPolicyContext = null;
+            Darabonba.RetryPolicy.RetryPolicyContext _retryPolicyContext = null;
             Darabonba.Request _lastRequest = null;
             Darabonba.Response _lastResponse = null;
             Exception _lastException = null;
             long _now = System.DateTime.Now.Millisecond;
             int _retriesAttempted = 0;
-            _retryPolicyContext = new RetryPolicyContext
+            _retryPolicyContext = new Darabonba.RetryPolicy.RetryPolicyContext
             {
                 RetriesAttempted = _retriesAttempted
             };
-            while (Core.ShouldRetry((RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
+            while (Darabonba.Core.ShouldRetry((Darabonba.RetryPolicy.RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
             {
                 if (_retriesAttempted > 0)
                 {
-                    int backoffTime = Core.GetBackoffDelay((RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
+                    int backoffTime = Darabonba.Core.GetBackoffDelay((Darabonba.RetryPolicy.RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
                     if (backoffTime > 0)
                     {
-                        Core.Sleep(backoffTime);
+                        Darabonba.Core.Sleep(backoffTime);
                     }
                 }
                 try
@@ -181,7 +179,7 @@ namespace Darabonba.Test
                     {
                         {"host", "www.test.com"},
                     };
-                    Darabonba.Response response_ = await Core.DoActionAsync(request_, runtime_);
+                    Darabonba.Response response_ = await Darabonba.Core.DoActionAsync(request_, runtime_);
                     _lastRequest = request_;
                     _lastResponse = response_;
 
@@ -191,7 +189,7 @@ namespace Darabonba.Test
                 {
                     _retriesAttempted++;
                     _lastException = e;
-                    _retryPolicyContext = new RetryPolicyContext
+                    _retryPolicyContext = new Darabonba.RetryPolicy.RetryPolicyContext
                     {
                         RetriesAttempted = _retriesAttempted,
                         Request = _lastRequest,
@@ -201,7 +199,7 @@ namespace Darabonba.Test
                 }
             }
 
-            throw Core.ThrowException(_retryPolicyContext);
+            throw Darabonba.Core.ThrowException(_retryPolicyContext);
         }
 
         public void HelloVirtualCall(M m)
@@ -213,7 +211,7 @@ namespace Darabonba.Test
             {
                 {"key", ""},
             };
-            Darabonba.Response response_ = Core.DoAction(request_);
+            Darabonba.Response response_ = Darabonba.Core.DoAction(request_);
 
             return ;
         }
@@ -227,7 +225,7 @@ namespace Darabonba.Test
             {
                 {"key", ""},
             };
-            Darabonba.Response response_ = await Core.DoActionAsync(request_);
+            Darabonba.Response response_ = await Darabonba.Core.DoActionAsync(request_);
 
             return ;
         }

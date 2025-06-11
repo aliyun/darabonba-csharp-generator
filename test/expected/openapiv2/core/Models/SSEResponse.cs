@@ -3,7 +3,7 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using Darabonba;
-using Darabonba.Models;
+using Darabonba.Utils;
 
 namespace AlibabaCloud.OpenApiClient.Models
 {
@@ -25,7 +25,7 @@ namespace AlibabaCloud.OpenApiClient.Models
 
         [NameInMap("event")]
         [Validation(Required=true)]
-        public SSEEvent Event { get; set; }
+        public Darabonba.Models.SSEEvent Event { get; set; }
 
     }
 

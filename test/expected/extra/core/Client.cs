@@ -3,12 +3,10 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Darabonba;
 using Darabonba.Utils;
 using Ecs20140526Client = AlibabaCloud.SDK.Ecs20140526.Client;
 using AlibabaCloud.OpenApiClient.Models;
 using AlibabaCloud.SDK.Ecs20140526.Models;
-using Darabonba.Exceptions;
 
 namespace AlibabaCloud.OpenApiClient
 {
@@ -34,6 +32,83 @@ namespace AlibabaCloud.OpenApiClient
                 RegionId = regionId,
             };
             return new Ecs20140526Client(config);
+        }
+
+        public static bool? TestReturnBool(string str)
+        {
+            if (str == "true")
+            {
+                return true;
+            }
+            return false;
+        }
+
+
+        public static async Task<bool?> TestReturnBool1Async(string str)
+        {
+            if (str == "true")
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public static int? TestReturnInt(string str)
+        {
+            if (str == "true")
+            {
+                return 0;
+            }
+            return 1;
+        }
+
+
+        public static async Task AaaAsync()
+        {
+            string costAcknowledged = Environment.GetEnvironmentVariable("COST_ACK");
+            int? a = 0;
+            int? b = 1;
+            if ((a + b) > 1)
+            {
+                return ;
+            }
+            if (costAcknowledged.IsNull() || !(costAcknowledged == "true"))
+            {
+                Console.WriteLine("代码中的 PurchaseRatePlan,CreateSite 接口涉及到费用，请谨慎操作！");
+                return ;
+            }
+            if (TestReturnBool(costAcknowledged).Value || (await TestReturnBool1Async("true")).Value)
+            {
+                Console.WriteLine("代码中的 PurchaseRatePlan,CreateSite 接口涉及到费用，请谨慎操作！");
+                return ;
+            }
+            if (TestReturnBool(costAcknowledged).Value && (await TestReturnBool1Async("true")).Value)
+            {
+                Console.WriteLine("代码中的 PurchaseRatePlan,CreateSite 接口涉及到费用，请谨慎操作！");
+                return ;
+            }
+            bool? test = TestReturnBool(costAcknowledged).Value && (await TestReturnBool1Async("true")).Value;
+            if (test.Value)
+            {
+                return ;
+            }
+            bool? test1 = TestReturnBool(costAcknowledged).Value || (await TestReturnBool1Async("true")).Value;
+            if (test1.Value)
+            {
+                return ;
+            }
+            if (TestReturnBool("true").Value)
+            {
+                return ;
+            }
+            if (TestReturnBool("true").Value || (await TestReturnBool1Async(costAcknowledged)).Value || TestReturnBool(costAcknowledged).Value)
+            {
+                return ;
+            }
+            if ((TestReturnInt("true") + TestReturnInt("false")) > 2)
+            {
+                return ;
+            }
         }
 
 
@@ -142,7 +217,7 @@ namespace AlibabaCloud.OpenApiClient
                 CreateDiskResponse response = await client.CreateDiskAsync(request);
                 return response.Body;
             }
-            catch (DaraException error)
+            catch (Darabonba.Exceptions.DaraException error)
             {
                 Log("执行失败。错误信息：");
                 Log(error.Message);
@@ -180,7 +255,7 @@ namespace AlibabaCloud.OpenApiClient
                     {
                         RegionId = "cn-hangzhou",
                         // 云盘、本地盘或弹性临时盘ID
-                        DiskIds = JSONUtils.SerializeObject(new List<string>
+                        DiskIds = Darabonba.Utils.JSONUtils.SerializeObject(new List<string>
                         {
                             diskId
                         }),
@@ -195,7 +270,7 @@ namespace AlibabaCloud.OpenApiClient
                     await Task.Delay(3000);
                     retryIndex++;
                 }
-                catch (DaraException error)
+                catch (Darabonba.Exceptions.DaraException error)
                 {
                     Log("执行失败。错误信息：");
                     Log(error.Message);
@@ -237,7 +312,7 @@ namespace AlibabaCloud.OpenApiClient
                 AttachDiskResponse response = await client.AttachDiskAsync(request);
                 return response.Body;
             }
-            catch (DaraException error)
+            catch (Darabonba.Exceptions.DaraException error)
             {
                 Log("执行失败。错误信息：");
                 Log(error.Message);
@@ -275,7 +350,7 @@ namespace AlibabaCloud.OpenApiClient
                     {
                         RegionId = "cn-hangzhou",
                         // 云盘、本地盘或弹性临时盘ID
-                        DiskIds = JSONUtils.SerializeObject(new List<string>
+                        DiskIds = Darabonba.Utils.JSONUtils.SerializeObject(new List<string>
                         {
                             diskId
                         }),
@@ -290,7 +365,7 @@ namespace AlibabaCloud.OpenApiClient
                     await Task.Delay(3000);
                     retryIndex++;
                 }
-                catch (DaraException error)
+                catch (Darabonba.Exceptions.DaraException error)
                 {
                     Log("执行失败。错误信息：");
                     Log(error.Message);
@@ -324,7 +399,7 @@ namespace AlibabaCloud.OpenApiClient
                 {
                     RegionId = "cn-hangzhou",
                     // 云盘、本地盘或弹性临时盘ID
-                    DiskIds = JSONUtils.SerializeObject(new List<string>
+                    DiskIds = Darabonba.Utils.JSONUtils.SerializeObject(new List<string>
                     {
                         diskId
                     }),
@@ -340,7 +415,7 @@ namespace AlibabaCloud.OpenApiClient
                 Log("挂载在实例 " + disk.InstanceId);
                 return response.Body;
             }
-            catch (DaraException error)
+            catch (Darabonba.Exceptions.DaraException error)
             {
                 Log("执行失败。错误信息：");
                 Log(error.Message);
@@ -356,7 +431,7 @@ namespace AlibabaCloud.OpenApiClient
 
         public static void TestMultiLines()
         {
-            string certificate = "-----BEGIN CERTIFICATE-----\nMIIDlTCCAn2gAwIBAgIRALq6ehQjtveDrqiUoDu8088wDQYJKoZIhvcNAQELBQAw\ngYsxCzAJBgNVBAYTAkNOMRYwFAYDVQQKEw1BbGliYWJhIENsb3VkMTcwNQYDVQQL\nEy5BbGliYWJhIENsb3VkIENsaWVudCBTU0wgQ2VydGlmaWNhdGUgQXV0aG9yaXR5\nMSswKQYDVQQDEyJBbGl5dW4gRVNBIFJTQSBDQSAxMTExMDM0NDA0NjE4NjQ2MB4X\nDTI1MDMxMzExMDY1NFoXDTI2MDMxMzExMDY1NFowLjELMAkGA1UEBhMCQ04xHzAd\nBgNVBAMTFkVTQSBDbGllbnQgQ2VydGlmaWNhdGUwggEiMA0GCSqGSIb3DQEBAQUA\nA4IBDwAwggEKAoIBAQC5NK/ZpIHntyeWArDMHUG8biRBtj5MoVKvIuNANcaTDN9b\nmnEpLpc9Jw9TdTryY95h4U43C+SQ0mYiqAvgWQUSO3SGIPXLjVEEQKUz0+l5Sqpn\nGv+dc+/sDutRW5Qj0VfvcFtqniwCKNtmhLPUr5jtArIcpz2+bgWqTTF7biUHtFH1\nygRSgADpvC8OWv4CJL97g9TEn2bBcem/7L+bhDWZTA4ljmfsNF5S66d5kpD2YyoR\n6Ll7pWspVl0BfenDizK/bG166HhYTjf1lLKtdEaotZZBbx4UGO67LCpBgv4oMX/Q\n4ttio3oznmKKjmY44gBGYHGbAFKByYlOjSOcvj+DAgMBAAGjUDBOMB0GA1UdJQQW\nMBQGCCsGAQUFBwMBBggrBgEFBQcDAjAMBgNVHRMBAf8EAjAAMB8GA1UdIwQYMBaA\nFK8eYb/M6Hp3ZcGmoRJ3TLJuvyKdMA0GCSqGSIb3DQEBCwUAA4IBAQB5pOJ4DAm3\nQbKE4cdw4LSknu29XoOQSB4KcMfD7zdeBw5dAKtQlP1cWNXX0rlmPBRxFo6qRXGW\n+uu/mOj0waU+7O/LbLGTOHG/APEN/1pqs5g3jFjS0zqtby3FXvnhVjBOV5skbq2q\nOpT2u8gCgvssx2bCue4mJ9uO2JNO/Nel4yneBevpvxKTKUnX5akXDIY612RPQjtJ\nX74jlLepOgIn/PYeKiwQFs0YoGXAjaUp7wFlIAfW+ufqPOc2nMUnBsw7Dtr6IpEX\n9RZLKzcYBpP4ieP8Sl07CUKoM94cC75rwLI/RVmatly6SlBzx2G8qh7T3MDYAeT4\nSAVHJpmH3me9\n-----END CERTIFICATE-----\n";
+            string certificate = "-----BEGIN xxx-----\nMIQAw\ngYsxCzAJBkMTcwNQYDVQQL\nEy5BU0wgQ2VydGlmDEyJBzAd\nBgN9\n-----END xxx-----\n";
         }
 
     }

@@ -3,11 +3,9 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Darabonba;
 using Darabonba.Utils;
 using Darabonba.Test.Model.Models;
 using System.Linq;
-using DarabonbaStringUtils = Darabonba.Utils.StringUtils;
 using Darabonba.Test.Repeat;
 using Darabonba.Test.Lib;
 using TestCommonClient = Darabonba.Test.Lib.Test.CommonClient;
@@ -34,7 +32,7 @@ namespace Darabonba.Test
             args = fullStr.Split(",").ToList();
             if ((fullStr.Length > 0) && fullStr.Contains("hangzhou"))
             {
-                string newStr1 = DarabonbaStringUtils.Replace(fullStr, "/hangzhou/g", "beijing");
+                string newStr1 = Darabonba.Utils.StringUtils.Replace(fullStr, "/hangzhou/g", "beijing");
             }
             StringUtils.TestRepeatBultin();
         }
@@ -45,7 +43,7 @@ namespace Darabonba.Test
             args = fullStr.Split(",").ToList();
             if ((fullStr.Length > 0) && fullStr.Contains("hangzhou"))
             {
-                string newStr1 = DarabonbaStringUtils.Replace(fullStr, "/hangzhou/g", "beijing");
+                string newStr1 = Darabonba.Utils.StringUtils.Replace(fullStr, "/hangzhou/g", "beijing");
             }
             StringUtils.TestRepeatBultin();
         }

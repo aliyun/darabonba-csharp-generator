@@ -5,10 +5,8 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Darabonba;
 using Darabonba.Utils;
 using Darabonba.Test.Models;
-using Darabonba.RetryPolicy;
 
 namespace Darabonba.Test
 {
@@ -58,24 +56,24 @@ namespace Darabonba.Test
                 // another runtime comment
             };
 
-            RetryPolicyContext _retryPolicyContext = null;
+            Darabonba.RetryPolicy.RetryPolicyContext _retryPolicyContext = null;
             Darabonba.Request _lastRequest = null;
             Darabonba.Response _lastResponse = null;
             Exception _lastException = null;
             long _now = System.DateTime.Now.Millisecond;
             int _retriesAttempted = 0;
-            _retryPolicyContext = new RetryPolicyContext
+            _retryPolicyContext = new Darabonba.RetryPolicy.RetryPolicyContext
             {
                 RetriesAttempted = _retriesAttempted
             };
-            while (Core.ShouldRetry((RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
+            while (Darabonba.Core.ShouldRetry((Darabonba.RetryPolicy.RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
             {
                 if (_retriesAttempted > 0)
                 {
-                    int backoffTime = Core.GetBackoffDelay((RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
+                    int backoffTime = Darabonba.Core.GetBackoffDelay((Darabonba.RetryPolicy.RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
                     if (backoffTime > 0)
                     {
-                        Core.Sleep(backoffTime);
+                        Darabonba.Core.Sleep(backoffTime);
                     }
                 }
                 try
@@ -93,7 +91,7 @@ namespace Darabonba.Test
                     int? num = 123;
                     // static function call comment
                     StaticFunc();
-                    Darabonba.Response response_ = Core.DoAction(request_, runtime_);
+                    Darabonba.Response response_ = Darabonba.Core.DoAction(request_, runtime_);
                     _lastRequest = request_;
                     _lastResponse = response_;
 
@@ -106,7 +104,7 @@ namespace Darabonba.Test
                 {
                     _retriesAttempted++;
                     _lastException = e;
-                    _retryPolicyContext = new RetryPolicyContext
+                    _retryPolicyContext = new Darabonba.RetryPolicy.RetryPolicyContext
                     {
                         RetriesAttempted = _retriesAttempted,
                         Request = _lastRequest,
@@ -116,7 +114,7 @@ namespace Darabonba.Test
                 }
             }
 
-            throw Core.ThrowException(_retryPolicyContext);
+            throw Darabonba.Core.ThrowException(_retryPolicyContext);
         }
 
         /// <term><b>Description:</b></term>
@@ -133,24 +131,24 @@ namespace Darabonba.Test
                 // another runtime comment
             };
 
-            RetryPolicyContext _retryPolicyContext = null;
+            Darabonba.RetryPolicy.RetryPolicyContext _retryPolicyContext = null;
             Darabonba.Request _lastRequest = null;
             Darabonba.Response _lastResponse = null;
             Exception _lastException = null;
             long _now = System.DateTime.Now.Millisecond;
             int _retriesAttempted = 0;
-            _retryPolicyContext = new RetryPolicyContext
+            _retryPolicyContext = new Darabonba.RetryPolicy.RetryPolicyContext
             {
                 RetriesAttempted = _retriesAttempted
             };
-            while (Core.ShouldRetry((RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
+            while (Darabonba.Core.ShouldRetry((Darabonba.RetryPolicy.RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
             {
                 if (_retriesAttempted > 0)
                 {
-                    int backoffTime = Core.GetBackoffDelay((RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
+                    int backoffTime = Darabonba.Core.GetBackoffDelay((Darabonba.RetryPolicy.RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
                     if (backoffTime > 0)
                     {
-                        Core.Sleep(backoffTime);
+                        Darabonba.Core.Sleep(backoffTime);
                     }
                 }
                 try
@@ -168,7 +166,7 @@ namespace Darabonba.Test
                     int? num = 123;
                     // static function call comment
                     StaticFunc();
-                    Darabonba.Response response_ = await Core.DoActionAsync(request_, runtime_);
+                    Darabonba.Response response_ = await Darabonba.Core.DoActionAsync(request_, runtime_);
                     _lastRequest = request_;
                     _lastResponse = response_;
 
@@ -181,7 +179,7 @@ namespace Darabonba.Test
                 {
                     _retriesAttempted++;
                     _lastException = e;
-                    _retryPolicyContext = new RetryPolicyContext
+                    _retryPolicyContext = new Darabonba.RetryPolicy.RetryPolicyContext
                     {
                         RetriesAttempted = _retriesAttempted,
                         Request = _lastRequest,
@@ -191,7 +189,7 @@ namespace Darabonba.Test
                 }
             }
 
-            throw Core.ThrowException(_retryPolicyContext);
+            throw Darabonba.Core.ThrowException(_retryPolicyContext);
         }
 
         // testAPI2 comment
@@ -205,24 +203,24 @@ namespace Darabonba.Test
                 // runtime back comment two
             };
 
-            RetryPolicyContext _retryPolicyContext = null;
+            Darabonba.RetryPolicy.RetryPolicyContext _retryPolicyContext = null;
             Darabonba.Request _lastRequest = null;
             Darabonba.Response _lastResponse = null;
             Exception _lastException = null;
             long _now = System.DateTime.Now.Millisecond;
             int _retriesAttempted = 0;
-            _retryPolicyContext = new RetryPolicyContext
+            _retryPolicyContext = new Darabonba.RetryPolicy.RetryPolicyContext
             {
                 RetriesAttempted = _retriesAttempted
             };
-            while (Core.ShouldRetry((RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
+            while (Darabonba.Core.ShouldRetry((Darabonba.RetryPolicy.RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
             {
                 if (_retriesAttempted > 0)
                 {
-                    int backoffTime = Core.GetBackoffDelay((RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
+                    int backoffTime = Darabonba.Core.GetBackoffDelay((Darabonba.RetryPolicy.RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
                     if (backoffTime > 0)
                     {
-                        Core.Sleep(backoffTime);
+                        Darabonba.Core.Sleep(backoffTime);
                     }
                 }
                 try
@@ -243,7 +241,7 @@ namespace Darabonba.Test
                     // api function call comment
                     TestAPI();
                     // back comment
-                    Darabonba.Response response_ = Core.DoAction(request_, runtime_);
+                    Darabonba.Response response_ = Darabonba.Core.DoAction(request_, runtime_);
                     _lastRequest = request_;
                     _lastResponse = response_;
 
@@ -254,7 +252,7 @@ namespace Darabonba.Test
                 {
                     _retriesAttempted++;
                     _lastException = e;
-                    _retryPolicyContext = new RetryPolicyContext
+                    _retryPolicyContext = new Darabonba.RetryPolicy.RetryPolicyContext
                     {
                         RetriesAttempted = _retriesAttempted,
                         Request = _lastRequest,
@@ -264,7 +262,7 @@ namespace Darabonba.Test
                 }
             }
 
-            throw Core.ThrowException(_retryPolicyContext);
+            throw Darabonba.Core.ThrowException(_retryPolicyContext);
         }
 
         // testAPI2 comment
@@ -278,24 +276,24 @@ namespace Darabonba.Test
                 // runtime back comment two
             };
 
-            RetryPolicyContext _retryPolicyContext = null;
+            Darabonba.RetryPolicy.RetryPolicyContext _retryPolicyContext = null;
             Darabonba.Request _lastRequest = null;
             Darabonba.Response _lastResponse = null;
             Exception _lastException = null;
             long _now = System.DateTime.Now.Millisecond;
             int _retriesAttempted = 0;
-            _retryPolicyContext = new RetryPolicyContext
+            _retryPolicyContext = new Darabonba.RetryPolicy.RetryPolicyContext
             {
                 RetriesAttempted = _retriesAttempted
             };
-            while (Core.ShouldRetry((RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
+            while (Darabonba.Core.ShouldRetry((Darabonba.RetryPolicy.RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
             {
                 if (_retriesAttempted > 0)
                 {
-                    int backoffTime = Core.GetBackoffDelay((RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
+                    int backoffTime = Darabonba.Core.GetBackoffDelay((Darabonba.RetryPolicy.RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
                     if (backoffTime > 0)
                     {
-                        Core.Sleep(backoffTime);
+                        Darabonba.Core.Sleep(backoffTime);
                     }
                 }
                 try
@@ -316,7 +314,7 @@ namespace Darabonba.Test
                     // api function call comment
                     await TestAPIAsync();
                     // back comment
-                    Darabonba.Response response_ = await Core.DoActionAsync(request_, runtime_);
+                    Darabonba.Response response_ = await Darabonba.Core.DoActionAsync(request_, runtime_);
                     _lastRequest = request_;
                     _lastResponse = response_;
 
@@ -327,7 +325,7 @@ namespace Darabonba.Test
                 {
                     _retriesAttempted++;
                     _lastException = e;
-                    _retryPolicyContext = new RetryPolicyContext
+                    _retryPolicyContext = new Darabonba.RetryPolicy.RetryPolicyContext
                     {
                         RetriesAttempted = _retriesAttempted,
                         Request = _lastRequest,
@@ -337,7 +335,7 @@ namespace Darabonba.Test
                 }
             }
 
-            throw Core.ThrowException(_retryPolicyContext);
+            throw Darabonba.Core.ThrowException(_retryPolicyContext);
         }
 
         public static void StaticFunc()

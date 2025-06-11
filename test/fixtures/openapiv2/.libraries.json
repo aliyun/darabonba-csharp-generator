@@ -1,4 +1,0 @@
-{
-  "alibabacloud:GatewaySPI:*": "libraries/alibabacloud_GatewaySPI_0.0.11",
-  "alibabacloud:Credential:*": "libraries/alibabacloud_Credential_0.5.10"
-}
