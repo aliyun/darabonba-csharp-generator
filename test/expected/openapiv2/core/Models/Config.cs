@@ -3,8 +3,8 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using Darabonba;
+using Darabonba.Utils;
 using CredentialClient = Aliyun.Credentials.Client;
-using Darabonba.RetryPolicy;
 
 namespace AlibabaCloud.OpenApiClient.Models
 {
@@ -305,7 +305,17 @@ namespace AlibabaCloud.OpenApiClient.Models
         /// </summary>
         [NameInMap("retryOptions")]
         [Validation(Required=false)]
-        public RetryOptions RetryOptions { get; set; }
+        public Darabonba.RetryPolicy.RetryOptions RetryOptions { get; set; }
+
+        /// <summary>
+        /// <para>TLS Minimum Version</para>
+        /// 
+        /// <b>Example:</b>
+        /// <para>TLSv1, TLSv1.1, TLSv1.2, TLSv1.3</para>
+        /// </summary>
+        [NameInMap("tlsMinVersion")]
+        [Validation(Required=false)]
+        public string TlsMinVersion { get; set; }
 
     }
 

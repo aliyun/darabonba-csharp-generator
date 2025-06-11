@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using Darabonba;
+using Darabonba.Utils;
 
 namespace AlibabaCloud.OpenApiClient.Models
 {

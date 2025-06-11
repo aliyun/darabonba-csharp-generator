@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using Darabonba.Utils;
 
 namespace Darabonba.Test.Exceptions
 {

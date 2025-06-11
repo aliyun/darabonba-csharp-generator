@@ -5,13 +5,10 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Darabonba;
 using Darabonba.Utils;
 using SourceClient = Darabonba.import.Client;
 using Darabonba.import.Models;
-using Darabonba.RetryPolicy;
 using Darabonba.Test.Models;
-using Darabonba.Exceptions;
 
 namespace Darabonba.Test
 {
@@ -43,24 +40,24 @@ namespace Darabonba.Test
                 }},
             };
 
-            RetryPolicyContext _retryPolicyContext = null;
+            Darabonba.RetryPolicy.RetryPolicyContext _retryPolicyContext = null;
             Darabonba.Request _lastRequest = null;
             Darabonba.Response _lastResponse = null;
             Exception _lastException = null;
             long _now = System.DateTime.Now.Millisecond;
             int _retriesAttempted = 0;
-            _retryPolicyContext = new RetryPolicyContext
+            _retryPolicyContext = new Darabonba.RetryPolicy.RetryPolicyContext
             {
                 RetriesAttempted = _retriesAttempted
             };
-            while (Core.ShouldRetry((RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
+            while (Darabonba.Core.ShouldRetry((Darabonba.RetryPolicy.RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
             {
                 if (_retriesAttempted > 0)
                 {
-                    int backoffTime = Core.GetBackoffDelay((RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
+                    int backoffTime = Darabonba.Core.GetBackoffDelay((Darabonba.RetryPolicy.RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
                     if (backoffTime > 0)
                     {
-                        Core.Sleep(backoffTime);
+                        Darabonba.Core.Sleep(backoffTime);
                     }
                 }
                 try
@@ -86,7 +83,7 @@ namespace Darabonba.Test
                     };
                     Darabonba.Request reqInstance = request_;
                     bool? boolItem = !_boolVirtual;
-                    Darabonba.Response response_ = Core.DoAction(request_, runtime_);
+                    Darabonba.Response response_ = Darabonba.Core.DoAction(request_, runtime_);
                     _lastRequest = request_;
                     _lastResponse = response_;
 
@@ -116,7 +113,7 @@ namespace Darabonba.Test
                 {
                     _retriesAttempted++;
                     _lastException = e;
-                    _retryPolicyContext = new RetryPolicyContext
+                    _retryPolicyContext = new Darabonba.RetryPolicy.RetryPolicyContext
                     {
                         RetriesAttempted = _retriesAttempted,
                         Request = _lastRequest,
@@ -126,7 +123,7 @@ namespace Darabonba.Test
                 }
             }
 
-            throw Core.ThrowException(_retryPolicyContext);
+            throw Darabonba.Core.ThrowException(_retryPolicyContext);
         }
 
         public async Task<RuntimeObject> Complex1Async(Darabonba.Test.Models.ComplexRequest request, SourceClient client)
@@ -140,24 +137,24 @@ namespace Darabonba.Test
                 }},
             };
 
-            RetryPolicyContext _retryPolicyContext = null;
+            Darabonba.RetryPolicy.RetryPolicyContext _retryPolicyContext = null;
             Darabonba.Request _lastRequest = null;
             Darabonba.Response _lastResponse = null;
             Exception _lastException = null;
             long _now = System.DateTime.Now.Millisecond;
             int _retriesAttempted = 0;
-            _retryPolicyContext = new RetryPolicyContext
+            _retryPolicyContext = new Darabonba.RetryPolicy.RetryPolicyContext
             {
                 RetriesAttempted = _retriesAttempted
             };
-            while (Core.ShouldRetry((RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
+            while (Darabonba.Core.ShouldRetry((Darabonba.RetryPolicy.RetryOptions)runtime_["retryOptions"], _retryPolicyContext))
             {
                 if (_retriesAttempted > 0)
                 {
-                    int backoffTime = Core.GetBackoffDelay((RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
+                    int backoffTime = Darabonba.Core.GetBackoffDelay((Darabonba.RetryPolicy.RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
                     if (backoffTime > 0)
                     {
-                        Core.Sleep(backoffTime);
+                        Darabonba.Core.Sleep(backoffTime);
                     }
                 }
                 try
@@ -183,7 +180,7 @@ namespace Darabonba.Test
                     };
                     Darabonba.Request reqInstance = request_;
                     bool? boolItem = !_boolVirtual;
-                    Darabonba.Response response_ = await Core.DoActionAsync(request_, runtime_);
+                    Darabonba.Response response_ = await Darabonba.Core.DoActionAsync(request_, runtime_);
                     _lastRequest = request_;
                     _lastResponse = response_;
 
@@ -213,7 +210,7 @@ namespace Darabonba.Test
                 {
                     _retriesAttempted++;
                     _lastException = e;
-                    _retryPolicyContext = new RetryPolicyContext
+                    _retryPolicyContext = new Darabonba.RetryPolicy.RetryPolicyContext
                     {
                         RetriesAttempted = _retriesAttempted,
                         Request = _lastRequest,
@@ -223,7 +220,7 @@ namespace Darabonba.Test
                 }
             }
 
-            throw Core.ThrowException(_retryPolicyContext);
+            throw Darabonba.Core.ThrowException(_retryPolicyContext);
         }
 
         public Dictionary<string, object> Complex2(Darabonba.Test.Models.ComplexRequest request, List<string> str, Dictionary<string, string> val, List<List<List<string>>> complexList)
@@ -256,7 +253,7 @@ namespace Darabonba.Test
                 {"protocol", request_.Protocol},
             };
             return new Dictionary<string, object>(){};
-            Darabonba.Response response_ = Core.DoAction(request_);
+            Darabonba.Response response_ = Darabonba.Core.DoAction(request_);
 
             return;
         }
@@ -291,7 +288,7 @@ namespace Darabonba.Test
                 {"protocol", request_.Protocol},
             };
             return new Dictionary<string, object>(){};
-            Darabonba.Response response_ = await Core.DoActionAsync(request_);
+            Darabonba.Response response_ = await Darabonba.Core.DoActionAsync(request_);
 
             return;
         }
@@ -304,12 +301,12 @@ namespace Darabonba.Test
             request_.Port = 80;
             request_.Method = "GET";
             request_.Pathname = "/";
-            request_.Body = StreamUtils.BytesReadable("body");
+            request_.Body = Darabonba.Utils.StreamUtils.BytesReadable("body");
             request_.Query = new Dictionary<string, string>
             {
                 {"date", "2019"},
             };
-            Darabonba.Response response_ = Core.DoAction(request_);
+            Darabonba.Response response_ = Darabonba.Core.DoAction(request_);
 
             if (true)
             {
@@ -326,7 +323,7 @@ namespace Darabonba.Test
             req.Accesskey = request.AccessKey;
             PrintNull(typeof(Config));
             SourceClient.Array(request.ToMap(), "1");
-            return Darabonba.Model.ToObject<Darabonba.Test.Models.ComplexRequest>(ConverterUtils.Merge<string>
+            return Darabonba.Model.ToObject<Darabonba.Test.Models.ComplexRequest>(Darabonba.Utils.ConverterUtils.Merge<string>
             (
                 request_.Query
             ));
@@ -340,12 +337,12 @@ namespace Darabonba.Test
             request_.Port = 80;
             request_.Method = "GET";
             request_.Pathname = "/";
-            request_.Body = StreamUtils.BytesReadable("body");
+            request_.Body = Darabonba.Utils.StreamUtils.BytesReadable("body");
             request_.Query = new Dictionary<string, string>
             {
                 {"date", "2019"},
             };
-            Darabonba.Response response_ = await Core.DoActionAsync(request_);
+            Darabonba.Response response_ = await Darabonba.Core.DoActionAsync(request_);
 
             if (true)
             {
@@ -362,7 +359,7 @@ namespace Darabonba.Test
             req.Accesskey = request.AccessKey;
             await PrintNullAsync(typeof(Config));
             SourceClient.Array(request.ToMap(), "1");
-            return Darabonba.Model.ToObject<Darabonba.Test.Models.ComplexRequest>(ConverterUtils.Merge<string>
+            return Darabonba.Model.ToObject<Darabonba.Test.Models.ComplexRequest>(Darabonba.Utils.ConverterUtils.Merge<string>
             (
                 request_.Query
             ));
@@ -525,7 +522,7 @@ namespace Darabonba.Test
             {
                 string str = TemplateString();
             }
-            catch (DaraException e)
+            catch (Darabonba.Exceptions.DaraException e)
             {
                 string errStr = e.Message;
             }
@@ -549,7 +546,7 @@ namespace Darabonba.Test
             {
                 string str = await TemplateStringAsync();
             }
-            catch (DaraException e)
+            catch (Darabonba.Exceptions.DaraException e)
             {
                 string errStr = e.Message;
             }

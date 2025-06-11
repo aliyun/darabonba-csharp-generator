@@ -5,11 +5,9 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Darabonba;
 using Darabonba.Utils;
 using Darabonba.Test.Exceptions;
 using Darabonba.import.Exceptions;
-using Darabonba.Exceptions;
 
 namespace Darabonba.Test
 {
@@ -85,7 +83,7 @@ namespace Darabonba.Test
                 }
                 else
                 {
-                    throw new DaraException
+                    throw new Darabonba.Exceptions.DaraException
                     {
                         Name = "str",
                         Code = "str",
@@ -104,7 +102,7 @@ namespace Darabonba.Test
             {
                 Console.WriteLine(err.Name);
             }
-            catch (DaraException err)
+            catch (Darabonba.Exceptions.DaraException err)
             {
                 Console.WriteLine(err.Name);
             }
@@ -149,7 +147,7 @@ namespace Darabonba.Test
                 }
                 else
                 {
-                    throw new DaraException
+                    throw new Darabonba.Exceptions.DaraException
                     {
                         Name = "str",
                         Code = "str",
@@ -168,7 +166,7 @@ namespace Darabonba.Test
             {
                 Console.WriteLine(err.Name);
             }
-            catch (DaraException err)
+            catch (Darabonba.Exceptions.DaraException err)
             {
                 Console.WriteLine(err.Name);
             }

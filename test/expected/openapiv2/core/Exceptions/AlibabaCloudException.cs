@@ -2,11 +2,11 @@ using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using Darabonba.Exceptions;
+using Darabonba.Utils;
 
 namespace AlibabaCloud.OpenApiClient.Exceptions
 {
-    public class AlibabaCloudException : DaraResponseException
+    public class AlibabaCloudException : Darabonba.Exceptions.DaraResponseException
     {
         public string RequestId { get; set; }
 
