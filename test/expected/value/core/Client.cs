@@ -19,6 +19,14 @@ namespace Test.OpenApiClient
             return false;
         }
 
+        public static bool? TestReturnBool1(string str)
+        {
+            if (str == "true")
+            {
+                return true;
+            }
+            return false;
+        }
 
         public static async Task<bool?> TestReturnBool1Async(string str)
         {
@@ -38,6 +46,97 @@ namespace Test.OpenApiClient
             return 1;
         }
 
+        public static void Aaa()
+        {
+            string costAcknowledged = Environment.GetEnvironmentVariable("COST_ACK");
+            int? a = 0;
+            int? b = 1;
+            if ((a + b) > 1)
+            {
+                return ;
+            }
+            if (costAcknowledged == "true")
+            {
+                Console.WriteLine("000");
+                return ;
+            }
+            if (!(costAcknowledged == "true"))
+            {
+                Console.WriteLine("111");
+                return ;
+            }
+            if (costAcknowledged.IsNull() || costAcknowledged == "true")
+            {
+                Console.WriteLine("222");
+                return ;
+            }
+            if (costAcknowledged.IsNull() || !(costAcknowledged == "true"))
+            {
+                Console.WriteLine("333");
+                return ;
+            }
+            if (costAcknowledged.IsNull() || costAcknowledged != "true")
+            {
+                Console.WriteLine("444");
+                return ;
+            }
+            if (costAcknowledged.IsNull() || !costAcknowledged.Contains("true"))
+            {
+                Console.WriteLine("555");
+                return ;
+            }
+            if (!costAcknowledged.IsNull() || costAcknowledged.Contains("true"))
+            {
+                Console.WriteLine("666");
+                return ;
+            }
+            if (TestReturnBool(costAcknowledged).Value || TestReturnBool1("true").Value)
+            {
+                Console.WriteLine("777");
+                return ;
+            }
+            if (TestReturnBool(costAcknowledged).Value && TestReturnBool1("true").Value)
+            {
+                Console.WriteLine("888");
+                return ;
+            }
+            bool? test = TestReturnBool(costAcknowledged).Value && TestReturnBool1("true").Value;
+            if (test.Value)
+            {
+                return ;
+            }
+            bool? test1 = TestReturnBool(costAcknowledged).Value || TestReturnBool1("true").Value;
+            if (test1.Value)
+            {
+                return ;
+            }
+            if (TestReturnBool("true").Value)
+            {
+                return ;
+            }
+            if (!(TestReturnBool("true").Value || TestReturnBool1(costAcknowledged).Value || TestReturnBool(costAcknowledged).Value))
+            {
+                return ;
+            }
+            if (TestReturnBool("true").Value || TestReturnBool1(costAcknowledged).Value || TestReturnBool(costAcknowledged).Value)
+            {
+                return ;
+            }
+            if ((TestReturnInt("true") + TestReturnInt("false")) > 2)
+            {
+                return ;
+            }
+            Dictionary<string, string> testMap = new Dictionary<string, string>
+            {
+                {"key1", "value1"},
+                {"key2", "value2"},
+            };
+            string testStr = "xxx";
+            if ((testMap.Count < 0) || testStr.Contains("x"))
+            {
+                return ;
+            }
+        }
 
         public static async Task AaaAsync()
         {
@@ -48,19 +147,49 @@ namespace Test.OpenApiClient
             {
                 return ;
             }
+            if (costAcknowledged == "true")
+            {
+                Console.WriteLine("000");
+                return ;
+            }
+            if (!(costAcknowledged == "true"))
+            {
+                Console.WriteLine("111");
+                return ;
+            }
+            if (costAcknowledged.IsNull() || costAcknowledged == "true")
+            {
+                Console.WriteLine("222");
+                return ;
+            }
             if (costAcknowledged.IsNull() || !(costAcknowledged == "true"))
             {
-                Console.WriteLine("代码中的 PurchaseRatePlan,CreateSite 接口涉及到费用，请谨慎操作！");
+                Console.WriteLine("333");
+                return ;
+            }
+            if (costAcknowledged.IsNull() || costAcknowledged != "true")
+            {
+                Console.WriteLine("444");
+                return ;
+            }
+            if (costAcknowledged.IsNull() || !costAcknowledged.Contains("true"))
+            {
+                Console.WriteLine("555");
+                return ;
+            }
+            if (!costAcknowledged.IsNull() || costAcknowledged.Contains("true"))
+            {
+                Console.WriteLine("666");
                 return ;
             }
             if (TestReturnBool(costAcknowledged).Value || (await TestReturnBool1Async("true")).Value)
             {
-                Console.WriteLine("代码中的 PurchaseRatePlan,CreateSite 接口涉及到费用，请谨慎操作！");
+                Console.WriteLine("777");
                 return ;
             }
             if (TestReturnBool(costAcknowledged).Value && (await TestReturnBool1Async("true")).Value)
             {
-                Console.WriteLine("代码中的 PurchaseRatePlan,CreateSite 接口涉及到费用，请谨慎操作！");
+                Console.WriteLine("888");
                 return ;
             }
             bool? test = TestReturnBool(costAcknowledged).Value && (await TestReturnBool1Async("true")).Value;
@@ -77,6 +206,10 @@ namespace Test.OpenApiClient
             {
                 return ;
             }
+            if (!(TestReturnBool("true").Value || (await TestReturnBool1Async(costAcknowledged)).Value || TestReturnBool(costAcknowledged).Value))
+            {
+                return ;
+            }
             if (TestReturnBool("true").Value || (await TestReturnBool1Async(costAcknowledged)).Value || TestReturnBool(costAcknowledged).Value)
             {
                 return ;
@@ -85,12 +218,21 @@ namespace Test.OpenApiClient
             {
                 return ;
             }
+            Dictionary<string, string> testMap = new Dictionary<string, string>
+            {
+                {"key1", "value1"},
+                {"key2", "value2"},
+            };
+            string testStr = "xxx";
+            if ((testMap.Count < 0) || testStr.Contains("x"))
+            {
+                return ;
+            }
         }
 
-
-        public static async Task Main(string[] args)
+        public static void Main(string[] args)
         {
-            bool? isWaitForDiskAvailableSuccess = await WaitForDiskAvailableAsync("diskId");
+            bool? isWaitForDiskAvailableSuccess = WaitForDiskAvailable("diskId");
             if (!isWaitForDiskAvailableSuccess.Value)
             {
                 Log("任务'等待云盘创建完成'失败。");
@@ -101,17 +243,17 @@ namespace Test.OpenApiClient
             Log("\"\"");
             // 等待云盘挂载完成
             Log("Step4: 等待云盘挂载完成");
-            if (!(await WaitForDiskAttachedAsync("diskId")).Value)
+            if (!(WaitForDiskAttached("diskId")).Value)
             {
                 Log("任务'等待云盘挂载完成'失败。");
                 return ;
             }
-            if ((await WaitForDiskAttachedAsync("diskId")).Value)
+            if ((WaitForDiskAttached("diskId")).Value)
             {
                 Log("任务'等待云盘挂载完成'失败。");
                 return ;
             }
-            bool? isWaitForDiskAttachedSuccess = await WaitForDiskAttachedAsync("diskId");
+            bool? isWaitForDiskAttachedSuccess = WaitForDiskAttached("diskId");
             if (!isWaitForDiskAttachedSuccess.Value)
             {
                 Log("任务'等待云盘挂载完成'失败。");
@@ -126,11 +268,20 @@ namespace Test.OpenApiClient
         }
 
 
+        public static bool? WaitForDiskAvailable(string diskId)
+        {
+            return false;
+        }
+
         public static async Task<bool?> WaitForDiskAvailableAsync(string diskId)
         {
             return false;
         }
 
+        public static bool? WaitForDiskAttached(string diskId)
+        {
+            return false;
+        }
 
         public static async Task<bool?> WaitForDiskAttachedAsync(string diskId)
         {
