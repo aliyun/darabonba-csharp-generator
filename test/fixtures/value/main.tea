@@ -29,18 +29,49 @@ static async function aaa(): void {
     return;
   }
   
+  if (costAcknowledged.equals("true")) {
+      $Logger.warning("000");
+      return;
+  }
+
+  if (!costAcknowledged.equals("true")) {
+      $Logger.warning("111");
+      return;
+  }
+
+
+  if ($isNull(costAcknowledged) || costAcknowledged.equals("true")) {
+      $Logger.warning("222");
+      return;
+  }
+
   if ($isNull(costAcknowledged) || !costAcknowledged.equals("true")) {
-      $Logger.warning("代码中的 PurchaseRatePlan,CreateSite 接口涉及到费用，请谨慎操作！");
+      $Logger.warning("333");
+      return;
+  }
+
+  if ($isNull(costAcknowledged) || costAcknowledged != "true") {
+    $Logger.warning("444");
+      return;
+  }
+
+  if ($isNull(costAcknowledged) || !costAcknowledged.contains("true")) {
+      $Logger.warning("555");
+      return;
+  }
+
+  if (!$isNull(costAcknowledged) || costAcknowledged.contains("true")) {
+      $Logger.warning("666");
       return;
   }
 
   if (testReturnBool(costAcknowledged) || testReturnBool1("true")) {
-    $Logger.warning("代码中的 PurchaseRatePlan,CreateSite 接口涉及到费用，请谨慎操作！");
+    $Logger.warning("777");
     return;
   }
 
   if (testReturnBool(costAcknowledged) && testReturnBool1("true")) {
-    $Logger.warning("代码中的 PurchaseRatePlan,CreateSite 接口涉及到费用，请谨慎操作！");
+    $Logger.warning("888");
     return;
   }
   var test = testReturnBool(costAcknowledged) && testReturnBool1("true");
@@ -57,6 +88,9 @@ static async function aaa(): void {
     return;
   }
 
+  if (!(testReturnBool("true") || testReturnBool1(costAcknowledged) ||testReturnBool(costAcknowledged))) {
+    return;
+  }
   if (testReturnBool("true") || testReturnBool1(costAcknowledged) ||testReturnBool(costAcknowledged)) {
     return;
   }
@@ -65,7 +99,15 @@ static async function aaa(): void {
     return;
   }
 
-  
+  var testMap : map[string]string = {
+    "key1" = "value1",
+    "key2" = "value2",
+  };
+
+  var testStr = "xxx";
+  if ((testMap.length() < 0) || testStr.contains("x")) {
+    return;
+  }
 }
 
 static async function main(args: [ string ]) throws : void {

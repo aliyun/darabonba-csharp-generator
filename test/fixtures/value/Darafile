@@ -5,7 +5,7 @@
   "main": "./main.tea",
   "csharp": {
     "namespace": "Test.OpenApiClient",
-    "asyncOnly": true,
+    "asyncOnly": false,
     "packageInfo": {
       "company": "CCC"
     },
