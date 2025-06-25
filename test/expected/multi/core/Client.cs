@@ -9,7 +9,7 @@ using System.Linq;
 using Darabonba.Test.Repeat;
 using Darabonba.Test.Lib;
 using TestCommonClient = Darabonba.Test.Lib.Test.CommonClient;
-using DARAUtilCommonClient = AlibabaCloud.TeaUtil.CommonClient;
+using DARAUtilCommonClient = Test.TeaUtil.CommonClient;
 
 namespace Darabonba.Test
 {

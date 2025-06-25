@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Darabonba.Utils;
 using Darabonba.Test.Lib;
-using ConsoleClient = AlibabaCloud.TeaConsole.Client;
+using ConsoleClient = Test.TeaConsole.Client;
 
 namespace Darabonba.Test
 {

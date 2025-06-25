@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Darabonba.Utils;
 using SourceClient = Darabonba.import.Client;
 using Darabonba.import.Models;
-using AlibabaCloud.import.Models;
+using Test.import.Models;
 using Darabonba.import.Util;
 
 namespace Darabonba.Test
