@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Darabonba;
 using Darabonba.Utils;
-using AlibabaCloud.TeaUtil.Models;
+using Test.TeaUtil.Models;
 
 namespace Darabonba.Test.Model.Models
 {

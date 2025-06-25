@@ -1,0 +1,20 @@
+{
+  "scope": "test",
+  "name": "OpenApi",
+  "version": "0.3.10",
+  "main": "./main.tea",
+  "csharp": {
+    "namespace": "Test.OpenApiClient",
+    "asyncOnly": true,
+    "packageInfo": {
+      "company": "CCC"
+    },
+    "typedef": {
+      "HttpResponse": {
+        "import": "Darabonba.RetryPolicy",
+        "type": "RetryOptions",
+        "package": "Darabonba:0.0.1"
+      }
+    }
+  }
+}

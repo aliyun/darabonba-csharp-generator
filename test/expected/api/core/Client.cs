@@ -7,8 +7,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Darabonba.Utils;
 using Darabonba.Test.Models;
-using AlibabaCloud.TeaUtil.Models;
-using AlibabaCloud.TeaUtil;
 
 namespace Darabonba.Test
 {
@@ -60,21 +58,21 @@ namespace Darabonba.Test
             return ;
         }
 
-        public string HelloRuntime(string bodyType, RuntimeOptions runtime)
+        public string HelloRuntime(string bodyType, Darabonba.Models.RuntimeOptions runtime)
         {
             Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
-                {"key", Common.DefaultString(runtime.Key, _key)},
-                {"cert", Common.DefaultString(runtime.Cert, _cert)},
-                {"ca", Common.DefaultString(runtime.Ca, _ca)},
-                {"readTimeout", Common.DefaultNumber(runtime.ReadTimeout, _readTimeout)},
-                {"connectTimeout", Common.DefaultNumber(runtime.ConnectTimeout, _connectTimeout)},
-                {"httpProxy", Common.DefaultString(runtime.HttpProxy, _httpProxy)},
-                {"httpsProxy", Common.DefaultString(runtime.HttpsProxy, _httpsProxy)},
-                {"noProxy", Common.DefaultString(runtime.NoProxy, _noProxy)},
-                {"socks5Proxy", Common.DefaultString(runtime.Socks5Proxy, _socks5Proxy)},
-                {"socks5NetWork", Common.DefaultString(runtime.Socks5NetWork, _socks5NetWork)},
-                {"maxIdleConns", Common.DefaultNumber(runtime.MaxIdleConns, _maxIdleConns)},
+                {"key", runtime.Key},
+                {"cert", runtime.Cert},
+                {"ca", runtime.Ca},
+                {"readTimeout", runtime.ReadTimeout},
+                {"connectTimeout", runtime.ConnectTimeout},
+                {"httpProxy", runtime.HttpProxy},
+                {"httpsProxy", runtime.HttpsProxy},
+                {"noProxy", runtime.NoProxy},
+                {"socks5Proxy", runtime.Socks5Proxy},
+                {"socks5NetWork", runtime.Socks5NetWork},
+                {"maxIdleConns", runtime.MaxIdleConns},
                 {"retryOptions", _retryOptions},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -131,21 +129,21 @@ namespace Darabonba.Test
             throw Darabonba.Core.ThrowException(_retryPolicyContext);
         }
 
-        public async Task<string> HelloRuntimeAsync(string bodyType, RuntimeOptions runtime)
+        public async Task<string> HelloRuntimeAsync(string bodyType, Darabonba.Models.RuntimeOptions runtime)
         {
             Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
-                {"key", Common.DefaultString(runtime.Key, _key)},
-                {"cert", Common.DefaultString(runtime.Cert, _cert)},
-                {"ca", Common.DefaultString(runtime.Ca, _ca)},
-                {"readTimeout", Common.DefaultNumber(runtime.ReadTimeout, _readTimeout)},
-                {"connectTimeout", Common.DefaultNumber(runtime.ConnectTimeout, _connectTimeout)},
-                {"httpProxy", Common.DefaultString(runtime.HttpProxy, _httpProxy)},
-                {"httpsProxy", Common.DefaultString(runtime.HttpsProxy, _httpsProxy)},
-                {"noProxy", Common.DefaultString(runtime.NoProxy, _noProxy)},
-                {"socks5Proxy", Common.DefaultString(runtime.Socks5Proxy, _socks5Proxy)},
-                {"socks5NetWork", Common.DefaultString(runtime.Socks5NetWork, _socks5NetWork)},
-                {"maxIdleConns", Common.DefaultNumber(runtime.MaxIdleConns, _maxIdleConns)},
+                {"key", runtime.Key},
+                {"cert", runtime.Cert},
+                {"ca", runtime.Ca},
+                {"readTimeout", runtime.ReadTimeout},
+                {"connectTimeout", runtime.ConnectTimeout},
+                {"httpProxy", runtime.HttpProxy},
+                {"httpsProxy", runtime.HttpsProxy},
+                {"noProxy", runtime.NoProxy},
+                {"socks5Proxy", runtime.Socks5Proxy},
+                {"socks5NetWork", runtime.Socks5NetWork},
+                {"maxIdleConns", runtime.MaxIdleConns},
                 {"retryOptions", _retryOptions},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };

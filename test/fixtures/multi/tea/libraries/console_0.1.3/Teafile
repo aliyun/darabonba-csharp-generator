@@ -1,0 +1,19 @@
+{
+	"scope": "darabonba",
+	"name": "Console",
+	"version": "0.1.3",
+	"main": "./main.tea",
+	"releases": {
+		"csharp": "Test.TeaConsole:0.1.0"
+	},
+	"csharp": {
+		"namespace": "Test.TeaConsole",
+		"className": "Client",
+		"packageInfo": {
+			"name": "console",
+			"title": "test-console",
+			"description": "xxx",
+			"company": "xxx"
+		}
+	}
+}

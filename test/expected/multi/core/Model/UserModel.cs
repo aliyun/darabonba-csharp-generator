@@ -4,8 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Darabonba.Utils;
-using ConsoleClient = AlibabaCloud.TeaConsole.Client;
-using AlibabaCloud.TeaUtil;
+using ConsoleClient = Test.TeaConsole.Client;
+using Test.TeaUtil;
 using Darabonba.Test.Lib;
 using CommonCommonClient = Darabonba.Test.Repeat.CommonClient;
 

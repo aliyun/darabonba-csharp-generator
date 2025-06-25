@@ -1,0 +1,13 @@
+{
+	"scope": "darabonba",
+	"name": "Util",
+	"version": "0.2.13",
+	"main": "./main.tea",
+	"releases": {
+		"csharp": "Test.TeaUtil:0.1.18"
+	},
+	"csharp": {
+		"namespace": "Test.TeaUtil",
+		"className": "CommonClient"
+	}
+}

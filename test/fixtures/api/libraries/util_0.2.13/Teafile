@@ -1,0 +1,10 @@
+{
+	"scope": "darabonba",
+	"name": "Util",
+	"version": "0.2.13",
+	"main": "./main.tea",
+	"csharp": {
+		"namespace": "Test.TeaUtil",
+		"className": "Common"
+	}
+}

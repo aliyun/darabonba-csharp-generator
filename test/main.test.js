@@ -272,26 +272,15 @@ describe('new Generator', function () {
   });
   
   // .Value \n model 重名等测试
-  it('extra should ok', function () {
-    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/extra/Darafile'), 'utf8');
+  it('value should ok', function () {
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/value/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
-    check('extra', {
-      pkgDir: path.join(__dirname, 'fixtures/extra'),
+    check('value', {
+      pkgDir: path.join(__dirname, 'fixtures/value'),
       libraries: pkg.libraries,
       exec: true,
       ...pkg.csharp,
       editable: true
     });
   });
-
-  // it('openapiv2 should ok', function () {
-  //   const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/openapiv2/Teafile'), 'utf8');
-  //   const pkg = JSON.parse(pkgContent);
-  //   check('openapiv2', {
-  //     pkgDir: path.join(__dirname, 'fixtures/openapiv2'),
-  //     libraries: pkg.libraries,
-  //     ...pkg.csharp,
-  //     editable: true
-  //   });
-  // });
 });
