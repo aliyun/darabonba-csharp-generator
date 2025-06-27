@@ -1,4 +1,7 @@
 # ChangeLog
+## 2.0.1 - 2025-06-27
+> Fix: delete extra .Value of virtualVariable.
+> Fix: use fully qualified name for builtin class in darabonba to avoid conflict.
 
 ## 2.0.0 - 2025-04-28
 > Upgrade the generator by darbonba v2.
