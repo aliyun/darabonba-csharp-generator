@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Darabonba.Utils;
 using SourceClient = Darabonba.import.Client;
 using Darabonba.import.Models;
+using System.Threading;
 using Darabonba.Test.Models;
 
 namespace Darabonba.Test
@@ -57,7 +58,7 @@ namespace Darabonba.Test
                     int backoffTime = Darabonba.Core.GetBackoffDelay((Darabonba.RetryPolicy.RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
                     if (backoffTime > 0)
                     {
-                        Darabonba.Core.Sleep(backoffTime);
+                        Thread.Sleep(backoffTime);
                     }
                 }
                 try
@@ -83,8 +84,8 @@ namespace Darabonba.Test
                     };
                     Darabonba.Request reqInstance = request_;
                     bool? boolItem = !_boolVirtual;
-                    Darabonba.Response response_ = Darabonba.Core.DoAction(request_, runtime_);
                     _lastRequest = request_;
+                    Darabonba.Response response_ = Darabonba.Core.DoAction(request_, runtime_);
                     _lastResponse = response_;
 
                     if (true && true)
@@ -154,7 +155,7 @@ namespace Darabonba.Test
                     int backoffTime = Darabonba.Core.GetBackoffDelay((Darabonba.RetryPolicy.RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
                     if (backoffTime > 0)
                     {
-                        Darabonba.Core.Sleep(backoffTime);
+                        await Task.Delay(backoffTime);
                     }
                 }
                 try
@@ -180,8 +181,8 @@ namespace Darabonba.Test
                     };
                     Darabonba.Request reqInstance = request_;
                     bool? boolItem = !_boolVirtual;
-                    Darabonba.Response response_ = await Darabonba.Core.DoActionAsync(request_, runtime_);
                     _lastRequest = request_;
+                    Darabonba.Response response_ = await Darabonba.Core.DoActionAsync(request_, runtime_);
                     _lastResponse = response_;
 
                     if (true && true)

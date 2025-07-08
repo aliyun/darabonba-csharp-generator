@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Darabonba.Utils;
 using Darabonba.Test.Models;
+using System.Threading;
 
 namespace Darabonba.Test
 {
@@ -73,7 +74,7 @@ namespace Darabonba.Test
                     int backoffTime = Darabonba.Core.GetBackoffDelay((Darabonba.RetryPolicy.RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
                     if (backoffTime > 0)
                     {
-                        Darabonba.Core.Sleep(backoffTime);
+                        Thread.Sleep(backoffTime);
                     }
                 }
                 try
@@ -91,8 +92,8 @@ namespace Darabonba.Test
                     int? num = 123;
                     // static function call comment
                     StaticFunc();
-                    Darabonba.Response response_ = Darabonba.Core.DoAction(request_, runtime_);
                     _lastRequest = request_;
+                    Darabonba.Response response_ = Darabonba.Core.DoAction(request_, runtime_);
                     _lastResponse = response_;
 
                     // static async function call
@@ -148,7 +149,7 @@ namespace Darabonba.Test
                     int backoffTime = Darabonba.Core.GetBackoffDelay((Darabonba.RetryPolicy.RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
                     if (backoffTime > 0)
                     {
-                        Darabonba.Core.Sleep(backoffTime);
+                        await Task.Delay(backoffTime);
                     }
                 }
                 try
@@ -166,8 +167,8 @@ namespace Darabonba.Test
                     int? num = 123;
                     // static function call comment
                     StaticFunc();
-                    Darabonba.Response response_ = await Darabonba.Core.DoActionAsync(request_, runtime_);
                     _lastRequest = request_;
+                    Darabonba.Response response_ = await Darabonba.Core.DoActionAsync(request_, runtime_);
                     _lastResponse = response_;
 
                     // static async function call
@@ -220,7 +221,7 @@ namespace Darabonba.Test
                     int backoffTime = Darabonba.Core.GetBackoffDelay((Darabonba.RetryPolicy.RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
                     if (backoffTime > 0)
                     {
-                        Darabonba.Core.Sleep(backoffTime);
+                        Thread.Sleep(backoffTime);
                     }
                 }
                 try
@@ -241,8 +242,8 @@ namespace Darabonba.Test
                     // api function call comment
                     TestAPI();
                     // back comment
-                    Darabonba.Response response_ = Darabonba.Core.DoAction(request_, runtime_);
                     _lastRequest = request_;
+                    Darabonba.Response response_ = Darabonba.Core.DoAction(request_, runtime_);
                     _lastResponse = response_;
 
                     // empty return comment
@@ -293,7 +294,7 @@ namespace Darabonba.Test
                     int backoffTime = Darabonba.Core.GetBackoffDelay((Darabonba.RetryPolicy.RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
                     if (backoffTime > 0)
                     {
-                        Darabonba.Core.Sleep(backoffTime);
+                        await Task.Delay(backoffTime);
                     }
                 }
                 try
@@ -314,8 +315,8 @@ namespace Darabonba.Test
                     // api function call comment
                     await TestAPIAsync();
                     // back comment
-                    Darabonba.Response response_ = await Darabonba.Core.DoActionAsync(request_, runtime_);
                     _lastRequest = request_;
+                    Darabonba.Response response_ = await Darabonba.Core.DoActionAsync(request_, runtime_);
                     _lastResponse = response_;
 
                     // empty return comment
