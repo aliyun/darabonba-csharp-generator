@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Darabonba.Utils;
+using System.Threading;
 using Darabonba.Test.Lib;
 using ConsoleClient = Test.TeaConsole.Client;
 
@@ -40,7 +41,7 @@ namespace Darabonba.Test
                     int backoffTime = Darabonba.Core.GetBackoffDelay((Darabonba.RetryPolicy.RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
                     if (backoffTime > 0)
                     {
-                        Darabonba.Core.Sleep(backoffTime);
+                        Thread.Sleep(backoffTime);
                     }
                 }
                 try
@@ -56,8 +57,8 @@ namespace Darabonba.Test
                     };
                     request_.Query = UtilClient.GetQuery();
                     ConsoleClient.Log("test");
-                    Darabonba.Response response_ = Darabonba.Core.DoAction(request_, runtime_);
                     _lastRequest = request_;
+                    Darabonba.Response response_ = Darabonba.Core.DoAction(request_, runtime_);
                     _lastResponse = response_;
 
                     return response_.StatusCode;
@@ -103,7 +104,7 @@ namespace Darabonba.Test
                     int backoffTime = Darabonba.Core.GetBackoffDelay((Darabonba.RetryPolicy.RetryOptions)runtime_["retryOptions"], _retryPolicyContext);
                     if (backoffTime > 0)
                     {
-                        Darabonba.Core.Sleep(backoffTime);
+                        await Task.Delay(backoffTime);
                     }
                 }
                 try
@@ -119,8 +120,8 @@ namespace Darabonba.Test
                     };
                     request_.Query = UtilClient.GetQuery();
                     ConsoleClient.Log("test");
-                    Darabonba.Response response_ = await Darabonba.Core.DoActionAsync(request_, runtime_);
                     _lastRequest = request_;
+                    Darabonba.Response response_ = await Darabonba.Core.DoActionAsync(request_, runtime_);
                     _lastResponse = response_;
 
                     return response_.StatusCode;
