@@ -1,4 +1,7 @@
 # ChangeLog
+## 2.0.2 - 2025-10-21
+> Fix: set lastReuqest after doaction.
+
 ## 2.0.1 - 2025-06-27
 > Fix: delete extra .Value of virtualVariable.
 > Fix: use fully qualified name for builtin class in darabonba to avoid conflict.
