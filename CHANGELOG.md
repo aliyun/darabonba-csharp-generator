@@ -1,4 +1,6 @@
 # ChangeLog
+## 1.2.3 - 2025-10-31
+> Fix: move dependency marked to dependencies.
 
 ## 1.2.2 - 2025-01-13
 > Adjust field name for object
