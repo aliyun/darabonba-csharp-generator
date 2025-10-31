@@ -1,4 +1,7 @@
 # ChangeLog
+## 2.0.3 - 2025-10-31
+> Fix: move dependency marked to dependencies.
+
 ## 2.0.2 - 2025-10-21
 > Fix: set lastReuqest after doaction.
 
