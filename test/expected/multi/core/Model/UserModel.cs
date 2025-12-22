@@ -14,7 +14,7 @@ namespace Darabonba.Test.Model
     public class UserModel 
     {
 
-        public static IAsyncEnumerable<string> Test()
+        public static IEnumerable<string> Test()
         {
             ConsoleClient.Log("test");
             string a = CommonClient.GetNonce();

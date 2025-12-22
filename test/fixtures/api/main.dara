@@ -81,3 +81,63 @@ model vno = {}
 async function vnoPayCallBackNotifyEx(): vno {
   return null;
 }
+
+model SSEResponse {
+  headers: map[string]string,
+  statusCode: number(description='HTTP Status Code'),
+  event: $SSEEvent
+}
+
+
+@sse(true)
+@context('callSSEApiWithCtx')
+api callSSEApi(runtime: $RuntimeOptions): asyncIterator[SSEResponse] {
+  __request.method = 'GET';
+  __request.pathname = '/';
+  __request.headers = {
+    host = 'www.test.com',
+  };
+} returns {
+  if ((__response.statusCode >= 400) && (__response.statusCode < 600)) {
+    var err : map[string]any = {};
+    if (!$isNull(__response.headers.content-type) && __response.headers.content-type == 'text/xml;charset=utf-8') {
+      var _str = $Stream.readAsString(__response.body);
+      var respMap = $XML.parseXml(_str, null);
+      err = $object(respMap.Error);
+    } else {
+      var _res = $Stream.readAsJSON(__response.body);
+      err = $object(_res);
+    }
+    err.statusCode = __response.statusCode;
+    throw {
+      code = `${$default(err.Code, err.code)}`,
+      message = `code: ${__response.statusCode}, ${$default(err.Message, err.message)} request id: ${$default(err.RequestId, err.requestId)}`,
+      data = err,
+      description = `${$default(err.Description, err.description)}`,
+      accessDeniedDetail = $default(err.AccessDeniedDetail, err.accessDeniedDetail),
+    };
+  }
+  var events = $Stream.readAsSSE(__response.body);
+  for(var event : events) {
+    yield new SSEResponse{
+      statusCode = __response.statusCode,
+      headers = __response.headers,
+      event = event,
+    };
+  }
+  return null;
+} runtime {
+  key = runtime.key,
+  cert = runtime.cert,
+  ca = runtime.ca,
+  readTimeout = runtime.readTimeout,
+  connectTimeout = runtime.connectTimeout,
+  httpProxy = runtime.httpProxy,
+  httpsProxy = runtime.httpsProxy,
+  noProxy = runtime.noProxy,
+  socks5Proxy = runtime.socks5Proxy,
+  socks5NetWork = runtime.socks5NetWork,
+  maxIdleConns = runtime.maxIdleConns,
+  retryOptions = @retryOptions,
+  ignoreSSL = runtime.ignoreSSL
+}
