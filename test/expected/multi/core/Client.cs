@@ -48,7 +48,7 @@ namespace Darabonba.Test
             StringUtils.TestRepeatBultin();
         }
 
-        public IAsyncEnumerable<string> Test3()
+        public IEnumerable<string> Test3()
         {
             IEnumerable<string> it = UtilClient.Test1();
             IEnumerable<string> it1 = CommonClient.Test2();
