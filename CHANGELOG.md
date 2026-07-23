@@ -1,12 +1,4 @@
 # ChangeLog
-## 2.0.4 - 2026-07-20
-> Fix: skip generating async methods for @sse product functions (IAsyncEnumerable not on netstandard2.0/net45).
-> Fix: map callSSEApi async call to CallAsyncSSEApi.
-> Fix: null-safe moduleDir lookup in eachImport.
-> Fix: builtin construct ($RuntimeOptions) double namespace prefix.
-> Fix: add using Darabonba for Model.Validate extension.
-> Fix: bump Newtonsoft.Json to 13.0.3.
-
 ## 2.0.3 - 2025-10-31
 > Fix: move dependency marked to dependencies.
 
