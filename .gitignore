@@ -7,4 +7,5 @@ output/
 
 test/**/obj
 test/**/bin
-.historypackage-lock.json
+.history
+package-lock.json
