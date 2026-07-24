@@ -11,12 +11,19 @@
     <LangVersion>5</LangVersion>
     <Authors>company</Authors>
   </PropertyGroup>
+  <PropertyGroup Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) != '.NETFramework'">
+    <DefineConstants>$(DefineConstants);DARA_ASYNC_ENUMERABLES_API</DefineConstants>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
-    <DefineConstants>NETSTANDARD2_0</DefineConstants>
+    <DefineConstants>$(DefineConstants);NETSTANDARD2_0</DefineConstants>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net45' ">
     <DefineConstants>NET45</DefineConstants>
   </PropertyGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="8.0.0"/>
+  </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
     <Reference Include="mscorlib"/>
     <Reference Include="System"/>
@@ -36,6 +43,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Darabonba" Version="1.0.0-preview"/>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1"/>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
   </ItemGroup>
 </Project>
