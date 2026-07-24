@@ -294,6 +294,71 @@ namespace Darabonba.Test
             }
         }
 
+        #if DARA_ASYNC_ENUMERABLES_API
+        public async IAsyncEnumerable<SSEResponse> CallSSEApiAsync(Darabonba.Models.RuntimeOptions runtime)
+        {
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
+            {
+                {"key", runtime.Key},
+                {"cert", runtime.Cert},
+                {"ca", runtime.Ca},
+                {"readTimeout", runtime.ReadTimeout},
+                {"connectTimeout", runtime.ConnectTimeout},
+                {"httpProxy", runtime.HttpProxy},
+                {"httpsProxy", runtime.HttpsProxy},
+                {"noProxy", runtime.NoProxy},
+                {"socks5Proxy", runtime.Socks5Proxy},
+                {"socks5NetWork", runtime.Socks5NetWork},
+                {"maxIdleConns", runtime.MaxIdleConns},
+                {"retryOptions", _retryOptions},
+                {"ignoreSSL", runtime.IgnoreSSL},
+            };
+
+            Darabonba.Request request_ = new Darabonba.Request();
+            request_.Method = "GET";
+            request_.Pathname = "/";
+            request_.Headers = new Dictionary<string, string>
+            {
+                {"host", "www.test.com"},
+            };
+            Darabonba.Response response_ = await Darabonba.Core.DoSSEActionAsync(request_, runtime_);
+
+            if ((response_.StatusCode >= 400) && (response_.StatusCode < 600))
+            {
+                Dictionary<string, object> err = new Dictionary<string, object>(){};
+                if (!response_.Headers.Get("content-type").IsNull() && response_.Headers.Get("content-type") == "text/xml;charset=utf-8")
+                {
+                    string _str = Darabonba.Utils.StreamUtils.ReadAsString(response_.Body);
+                    Dictionary<string, object> respMap = Darabonba.Utils.XmlUtils.ParseXml(_str, null);
+                    err = (Dictionary<string, object>)(respMap.Get("Error"));
+                }
+                else
+                {
+                    object _res = Darabonba.Utils.StreamUtils.ReadAsJSON(response_.Body);
+                    err = (Dictionary<string, object>)(_res);
+                }
+                err["statusCode"] = response_.StatusCode;
+                throw new Darabonba.Exceptions.DaraException(new Dictionary<string, object>
+                {
+                    {"code", "" + Darabonba.Core.GetDefaultValue(err.Get("Code"), err.Get("code"))},
+                    {"message", "code: " + response_.StatusCode + ", " + Darabonba.Core.GetDefaultValue(err.Get("Message"), err.Get("message")) + " request id: " + Darabonba.Core.GetDefaultValue(err.Get("RequestId"), err.Get("requestId"))},
+                    {"data", err},
+                    {"description", "" + Darabonba.Core.GetDefaultValue(err.Get("Description"), err.Get("description"))},
+                    {"accessDeniedDetail", Darabonba.Core.GetDefaultValue(err.Get("AccessDeniedDetail"), err.Get("accessDeniedDetail"))},
+                });
+            }
+            IAsyncEnumerable<Darabonba.Models.SSEEvent> events = Darabonba.Utils.StreamUtils.ReadAsSSEAsync(response_.Body);
+
+            await foreach (var event_ in events) {
+                yield return new SSEResponse
+                {
+                    StatusCode = response_.StatusCode,
+                    Headers = response_.Headers,
+                    Event = event_,
+                };
+            }
+        }
+        #endif
 
         public static object DefaultAny(object inputValue, object defaultValue)
         {
