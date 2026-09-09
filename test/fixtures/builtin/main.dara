@@ -355,3 +355,26 @@ static async function modelTestCase(args: [string]): void {
 model Test = {
   name: string
 };
+
+model Request = {
+    name: string
+};
+
+static async function createFile(content: readable): $FileField {
+    var file = new $FileField {};
+    file = new $FileField {
+        filename = 'upload.txt',
+        content = content,
+        contentType = 'text/plain'
+    };
+    return file;
+}
+
+static function runtime(): $RuntimeOptions {
+    return new $RuntimeOptions {};
+}
+
+static function check(request: Request): map[string]any {
+    request.validate();
+    return request.toMap();
+}

@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using Darabonba;
 using Darabonba.Utils;
 using SourceClient = Darabonba.import.Client;
-using Darabonba.import.Models;
 
 namespace Darabonba.Test.Models
 {
@@ -100,7 +99,7 @@ namespace Darabonba.Test.Models
 
         [NameInMap("ssubmmarray")]
         [Validation(Required=true)]
-        public List<List<Request>> Ssubmmarray { get; set; }
+        public List<List<Darabonba.import.Models.Request>> Ssubmmarray { get; set; }
 
         [NameInMap("maparray")]
         [Validation(Required=true)]
@@ -112,7 +111,7 @@ namespace Darabonba.Test.Models
 
         [NameInMap("moduleModelMap")]
         [Validation(Required=true)]
-        public Dictionary<string, Request> ModuleModelMap { get; set; }
+        public Dictionary<string, Darabonba.import.Models.Request> ModuleModelMap { get; set; }
 
         [NameInMap("subModelMap")]
         [Validation(Required=true)]
