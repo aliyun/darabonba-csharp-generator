@@ -9,7 +9,7 @@ using Darabonba.Utils;
 using SourceClient = Darabonba.import.Client;
 using Darabonba.import.Models;
 using System.Threading;
-using Darabonba.Test.Models;
+using Darabonba;
 
 namespace Darabonba.Test
 {
@@ -230,7 +230,7 @@ namespace Darabonba.Test
             string name = "complex";
             Darabonba.import.Models.Config config = new Darabonba.import.Models.Config();
             SourceClient client = new SourceClient(config, "testSecond");
-            Request.RequestSubmodel subModel = new Request.RequestSubmodel();
+            Darabonba.import.Models.Request.RequestSubmodel subModel = new Darabonba.import.Models.Request.RequestSubmodel();
             List<List<List<List<string>>>> nestingList = new List<List<List<List<string>>>>
             {
                 new List<List<List<string>>>
@@ -265,7 +265,7 @@ namespace Darabonba.Test
             string name = "complex";
             Darabonba.import.Models.Config config = new Darabonba.import.Models.Config();
             SourceClient client = new SourceClient(config, "testSecond");
-            Request.RequestSubmodel subModel = new Request.RequestSubmodel();
+            Darabonba.import.Models.Request.RequestSubmodel subModel = new Darabonba.import.Models.Request.RequestSubmodel();
             List<List<List<List<string>>>> nestingList = new List<List<List<List<string>>>>
             {
                 new List<List<List<string>>>
@@ -314,7 +314,7 @@ namespace Darabonba.Test
                 throw new DaraRetryableException(request_, response_);
             }
             Darabonba.Response resp = response_;
-            Request req = new Request
+            Darabonba.import.Models.Request req = new Darabonba.import.Models.Request
             {
                 Accesskey = request.AccessKey,
                 Region = resp.StatusMessage,
@@ -350,7 +350,7 @@ namespace Darabonba.Test
                 throw new DaraRetryableException(request_, response_);
             }
             Darabonba.Response resp = response_;
-            Request req = new Request
+            Darabonba.import.Models.Request req = new Darabonba.import.Models.Request
             {
                 Accesskey = request.AccessKey,
                 Region = resp.StatusMessage,
@@ -379,7 +379,7 @@ namespace Darabonba.Test
             return configInfo;
         }
 
-        public static string MapAccess2(Request request)
+        public static string MapAccess2(Darabonba.import.Models.Request request)
         {
             string configInfo = request.Configs.Extra.Get("name");
             return configInfo;
@@ -507,14 +507,14 @@ namespace Darabonba.Test
             return Array1();
         }
 
-        public static Request Print(Darabonba.Request reqeust, List<Darabonba.Test.Models.ComplexRequest> reqs, Darabonba.Response response, Dictionary<string, string> val)
+        public static Darabonba.import.Models.Request Print(Darabonba.Request reqeust, List<Darabonba.Test.Models.ComplexRequest> reqs, Darabonba.Response response, Dictionary<string, string> val)
         {
-            return new Request();
+            return new Darabonba.import.Models.Request();
         }
 
-        public static async Task<Request> PrintAsync(Darabonba.Request reqeust, List<Darabonba.Test.Models.ComplexRequest> reqs, Darabonba.Response response, Dictionary<string, string> val)
+        public static async Task<Darabonba.import.Models.Request> PrintAsync(Darabonba.Request reqeust, List<Darabonba.Test.Models.ComplexRequest> reqs, Darabonba.Response response, Dictionary<string, string> val)
         {
-            return new Request();
+            return new Darabonba.import.Models.Request();
         }
 
         public static void PrintNull(Type cls)

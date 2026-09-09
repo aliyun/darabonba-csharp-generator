@@ -7,8 +7,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Darabonba.Utils;
 using SourceClient = Darabonba.import.Client;
-using Darabonba.import.Models;
-using Test.import.Models;
 
 namespace Darabonba.Test
 {
@@ -17,8 +15,8 @@ namespace Darabonba.Test
 
         public static void Sample(SourceClient client)
         {
-            RuntimeObject runtime = new RuntimeObject();
-            Request request = new Request
+            Darabonba.import.Models.RuntimeObject runtime = new Darabonba.import.Models.RuntimeObject();
+            Test.import.Models.Request request = new Test.import.Models.Request
             {
                 Accesskey = "accesskey",
                 Region = "region",

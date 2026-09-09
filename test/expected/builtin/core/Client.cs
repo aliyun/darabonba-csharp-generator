@@ -9,6 +9,7 @@ using System.Threading;
 using Newtonsoft.Json;
 using System.Text;
 using Darabonba.Test.Models;
+using Darabonba;
 
 namespace Darabonba.Test
 {
@@ -721,6 +722,41 @@ namespace Darabonba.Test
             };
             Dictionary<string, object> testMap = test.ToMap();
             int? len = testMap.Count;
+        }
+
+        public static Darabonba.Models.FileField CreateFile(Stream content)
+        {
+            Darabonba.Models.FileField file = new Darabonba.Models.FileField();
+            file = new Darabonba.Models.FileField
+            {
+                Filename = "upload.txt",
+                Content = content,
+                ContentType = "text/plain",
+            };
+            return file;
+        }
+
+        public static async Task<Darabonba.Models.FileField> CreateFileAsync(Stream content)
+        {
+            Darabonba.Models.FileField file = new Darabonba.Models.FileField();
+            file = new Darabonba.Models.FileField
+            {
+                Filename = "upload.txt",
+                Content = content,
+                ContentType = "text/plain",
+            };
+            return file;
+        }
+
+        public static Darabonba.Models.RuntimeOptions Runtime()
+        {
+            return new Darabonba.Models.RuntimeOptions();
+        }
+
+        public static Dictionary<string, object> Check(Darabonba.Test.Models.Request request)
+        {
+            request.Validate();
+            return request.ToMap();
         }
 
     }
