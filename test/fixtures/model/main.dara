@@ -38,9 +38,68 @@ model multiLayerModel = {
 }
 
 model Parent = {
-  name: string
+  name: string,
+  details: {
+    value: string
+  }
 };
 
 model Extend extends Parent = {
   size: integer
+};
+
+model Mapping = {
+  nestedLists: [[[lowerModel]]],
+  listMaps: [map[string]lowerModel],
+  mapLists: map[string][lowerModel],
+  nestedMaps: map[string]map[string]lowerModel,
+  mapListMaps: map[string][map[string][lowerModel]],
+  listMapLists: [map[string][[lowerModel]]],
+  numbers: [integer],
+  booleans: map[string]boolean,
+  bytes: bytes,
+  int8Value: int8,
+  uint8Value: uint8,
+  int16Value: int16,
+  uint16Value: uint16,
+  int32Value: int32,
+  uint32Value: uint32,
+  int64Value: int64,
+  uint64Value: uint64,
+  floatValue: float,
+  doubleValue: double,
+};
+
+static function convertModel(value: map[string]any): MyModel {
+  return value;
+}
+
+model Tree = {
+  name: string,
+  children: [Tree],
+  branches: map[string]Tree,
+  next: Tree,
+};
+
+model InlineLists = {
+  values: [[{
+    name: string,
+    children: [Tree]
+  }]]
+};
+
+model Left = {
+  right: Right
+};
+
+model Right = {
+  left: Left
+};
+
+model BuiltinChild extends $SSEEvent = {
+  name: string
+};
+
+model RequestChild extends $Request = {
+  count: integer
 };

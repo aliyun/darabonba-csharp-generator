@@ -108,7 +108,7 @@ namespace Darabonba.Test
                     });
                     Hello(null, null);
                     Complex3(null);
-                    return Darabonba.Model.ToObject<RuntimeObject>(new Dictionary<string, object>(){});
+                    return RuntimeObject.FromMap(new Dictionary<string, object>(){});
                 }
                 catch (Exception e)
                 {
@@ -205,7 +205,7 @@ namespace Darabonba.Test
                     });
                     await HelloAsync(null, null);
                     await Complex3Async(null);
-                    return Darabonba.Model.ToObject<RuntimeObject>(new Dictionary<string, object>(){});
+                    return RuntimeObject.FromMap(new Dictionary<string, object>(){});
                 }
                 catch (Exception e)
                 {
@@ -324,7 +324,7 @@ namespace Darabonba.Test
             req.Accesskey = request.AccessKey;
             PrintNull(typeof(Config));
             SourceClient.Array(request.ToMap(), "1");
-            return Darabonba.Model.ToObject<Darabonba.Test.Models.ComplexRequest>(Darabonba.Utils.ConverterUtils.Merge<string>
+            return Darabonba.Test.Models.ComplexRequest.FromMap(Darabonba.Utils.ConverterUtils.Merge<string>
             (
                 request_.Query
             ));
@@ -360,7 +360,7 @@ namespace Darabonba.Test
             req.Accesskey = request.AccessKey;
             await PrintNullAsync(typeof(Config));
             SourceClient.Array(request.ToMap(), "1");
-            return Darabonba.Model.ToObject<Darabonba.Test.Models.ComplexRequest>(Darabonba.Utils.ConverterUtils.Merge<string>
+            return Darabonba.Test.Models.ComplexRequest.FromMap(Darabonba.Utils.ConverterUtils.Merge<string>
             (
                 request_.Query
             ));

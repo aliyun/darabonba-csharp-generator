@@ -12,6 +12,11 @@ namespace Darabonba.Test
     public class Client 
     {
 
+        public static Darabonba.import.Models.Request ImportedModel(Dictionary<string, object> value)
+        {
+            return Darabonba.import.Models.Request.FromMap(value);
+        }
+
     }
 }
 

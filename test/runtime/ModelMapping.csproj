@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;netstandard2.0;net45</TargetFrameworks>
+    <LangVersion>5</LangVersion>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <MappingFixture Condition="'$(MappingFixture)' == ''">model</MappingFixture>
+    <OutputType Condition="'$(TargetFramework)' == 'net8.0'">Exe</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../output/$(MappingFixture)/core/**/*.cs" Exclude="../output/$(MappingFixture)/core/obj/**/*.cs;../output/$(MappingFixture)/core/Properties/**/*.cs" />
+    <Compile Include="ModelMapping.cs" Condition="'$(MappingFixture)' == 'model'" />
+    <Compile Include="ImportedMapping.cs;ImportedModels.cs" Condition="'$(MappingFixture)' == 'complexModel'" />
+    <ProjectReference Include="../../../tea-csharp/Darabonba/Darabonba.csproj" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+</Project>

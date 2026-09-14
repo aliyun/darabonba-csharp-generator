@@ -10,6 +10,21 @@ using Darabonba.Utils;
 namespace Darabonba.Test.Models
 {
     public class Class : Darabonba.Model {
+        public override Dictionary<string, object> ToMapCore(bool noStream = false)
+        {
+            var map = new Dictionary<string, object>();
+            return map;
+        }
+
+        public new static Class FromMap(IDictionary map)
+        {
+            if (map == null)
+            {
+                return null;
+            }
+            var model = new Class();
+            return model;
+        }
     }
 
 }

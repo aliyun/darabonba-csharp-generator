@@ -14,6 +14,26 @@ namespace Darabonba.Test.Models
         [Validation(Required=true)]
         public string Stringfield { get; set; }
 
+        public override Dictionary<string, object> ToMapCore(bool noStream = false)
+        {
+            var map = new Dictionary<string, object>();
+            map["stringfield"] = this.Stringfield;
+            return map;
+        }
+
+        public new static LowerModel FromMap(IDictionary map)
+        {
+            if (map == null)
+            {
+                return null;
+            }
+            var model = new LowerModel();
+            if (map.Contains("stringfield"))
+            {
+                model.Stringfield = (string)map["stringfield"];
+            }
+            return model;
+        }
     }
 
 }

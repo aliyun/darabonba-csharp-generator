@@ -47,6 +47,31 @@ namespace Darabonba.Test.Models
         public string Test2 { get; set; }
 
         //model的test2 back comment
+        public override Dictionary<string, object> ToMapCore(bool noStream = false)
+        {
+            var map = new Dictionary<string, object>();
+            map["test"] = this.Test;
+            map["test2"] = this.Test2;
+            return map;
+        }
+
+        public new static Test1 FromMap(IDictionary map)
+        {
+            if (map == null)
+            {
+                return null;
+            }
+            var model = new Test1();
+            if (map.Contains("test"))
+            {
+                model.Test = (string)map["test"];
+            }
+            if (map.Contains("test2"))
+            {
+                model.Test2 = (string)map["test2"];
+            }
+            return model;
+        }
     }
 
 }

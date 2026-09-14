@@ -6,11 +6,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Darabonba.Utils;
+using Darabonba.Test.Models;
 
 namespace Darabonba.Test
 {
     public class Client 
     {
+
+        public static MyModel ConvertModel(Dictionary<string, object> value)
+        {
+            return MyModel.FromMap(value);
+        }
 
     }
 }

@@ -30,6 +30,31 @@ namespace Darabonba.Test.Models
         [Validation(Required=true)]
         public string Test2_ { get; set; }
 
+        public override Dictionary<string, object> ToMapCore(bool noStream = false)
+        {
+            var map = new Dictionary<string, object>();
+            map["test"] = this.Test;
+            map["test2"] = this.Test2_;
+            return map;
+        }
+
+        public new static Test2 FromMap(IDictionary map)
+        {
+            if (map == null)
+            {
+                return null;
+            }
+            var model = new Test2();
+            if (map.Contains("test"))
+            {
+                model.Test = (string)map["test"];
+            }
+            if (map.Contains("test2"))
+            {
+                model.Test2_ = (string)map["test2"];
+            }
+            return model;
+        }
     }
 
 }

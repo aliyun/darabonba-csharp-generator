@@ -78,3 +78,15 @@ model MyModel = {
   link?: string(name='link', example='http://*/*.png'),
 };
 
+
+model LegacyChild extends Source.Request = {
+  count: integer
+};
+
+model ImportedGrandchild extends LegacyChild = {
+  values: [Source.Request]
+};
+
+static function importedModel(value: map[string]any): Source.Request {
+  return value;
+}

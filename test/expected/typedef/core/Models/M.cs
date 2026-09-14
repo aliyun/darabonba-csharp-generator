@@ -23,6 +23,36 @@ namespace Darabonba.Test.Models
         [Validation(Required=false)]
         public TeaModel C { get; set; }
 
+        public override Dictionary<string, object> ToMapCore(bool noStream = false)
+        {
+            var map = new Dictionary<string, object>();
+            map["a"] = this.A;
+            map["b"] = this.B;
+            map["c"] = this.C;
+            return map;
+        }
+
+        public new static M FromMap(IDictionary map)
+        {
+            if (map == null)
+            {
+                return null;
+            }
+            var model = new M();
+            if (map.Contains("a"))
+            {
+                model.A = (HttpRequestMessage)map["a"];
+            }
+            if (map.Contains("b"))
+            {
+                model.B = (HttpRequestHeaders)map["b"];
+            }
+            if (map.Contains("c"))
+            {
+                model.C = (TeaModel)map["c"];
+            }
+            return model;
+        }
     }
 
 }
